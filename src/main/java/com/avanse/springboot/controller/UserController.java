@@ -29,6 +29,7 @@ public class UserController {
 		log.error("This is error");
 		log.fatal("This is fatal");
 		log.warn("This is warn");
+		log.fatal("All was fine until this");
 
 		return this.userRepository.findAll();
 	}
