@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,12 +30,21 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	private String password;
+
+//	temporarily using string for dates and will change later to date object...
+//	Trying: dateTimeFormat annotation
+//	**REASON: To speed up the build process
 	
+	@DateTimeFormat
+	private String dateOfBirth; 
 	
+	private String maritalStatus;
+	private String gender;
 	private String firstName;
-	
 	private String lastName;
-	
+	private String phoneNumber;
+	private String  city;
 	private String email;
 	
 	

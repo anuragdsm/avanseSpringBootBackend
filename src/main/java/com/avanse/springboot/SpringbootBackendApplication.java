@@ -25,6 +25,7 @@ public class SpringbootBackendApplication implements CommandLineRunner {
 		this.userRepository.save(new User ("Anuragdf", "Kumar", "anurag@digistreetmedia.in" ));
 		this.userRepository.save(new User ("Anuj", "Jain", "anuj@digistreetmedia.in" ));
 		this.userRepository.save(new User ("Abhi", "Gupta", "abhi@digistreetmedia.in" ));
+		this.userRepository.save(new User ("Amit", "Singh", "amit@digistreetmedia.in" ));
 		
 		
 	}
