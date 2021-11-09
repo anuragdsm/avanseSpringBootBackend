@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.avanse.springboot.DTO.CourseDTO;
 import com.avanse.springboot.DTO.UniversityDTO;
+import com.avanse.springboot.model.Course;
 import com.avanse.springboot.model.University;
 import com.avanse.springboot.service.CourseService;
 import com.avanse.springboot.service.UniversityService;
@@ -26,21 +27,26 @@ import com.avanse.springboot.service.UniversityService;
 @Controller
 
 public class AdminController {
-	
-	public static String uploadDir = System.getProperty("user.dir")+"/src/main/resources/static/images";
-	public static String universityUploadDir = System.getProperty("user.dir")+"/src/main/resources/static/images/universityImages";
-	
-	
-	
-//	Variable of date type to rename the image to the current time stamp
+
+	public static String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/images";
+	public static String universityUploadDir = System.getProperty("user.dir")
+			+ "/src/main/resources/static/images/universityImages";
+
+	/*
+	 * Variable of date type to rename the image to the current time stamp
+	 */
 	private Date date = new Date();
-	
-//	Get the milliseconds using the date object since 1970
+
+	/*
+	 * Get the milliseconds using the date object since 1970
+	 */
 	private long millisecsFrom1970 = date.getTime();
-	
-//	Convert the millisecs to String that can be pushed into the database
+
+	/*
+	 * Convert the millisecs to String that can be pushed into the database
+	 */
 	private String modifiedFileNameByDate = String.valueOf(millisecsFrom1970);
-	
+
 //	public static String courseUploadDir = System.getProperty("user.dir")+"/src/main/resources/static/images";
 
 	@Autowired
@@ -49,44 +55,57 @@ public class AdminController {
 	@Autowired
 	CourseService courseService;
 
-//	Function to show the admin home page.
+	/*
+	 * Function to show the admin home page.
+	 */
 	@GetMapping("/admin")
 	public String adminHome() {
 		return "adminHome";
 	}
 
+	/*================================================
+	 * All function below are related to universities
+	 ===============================================*/
 	
-//	All function below are related to universities
-	
-//	Function to show the universities
+	/*
+	 * Function to show the universities
+	 */
 	@GetMapping("/admin/universities")
 	public String getUniversities(Model model) {
 		model.addAttribute("universities", universityService.getAllUniversity());
 		return "universities";
 	}
-	
-//	Function to add a university
-//	Need both get and post mapping for adding the university because the request could be of any type...
-	
+
+	/*
+	 * Function to add a university Need both get and post mapping for adding the
+	 * university because the request could be of any type...
+	 */
 	@GetMapping("/admin/universities/add")
 	public String universitiesAddGet(Model model) {
 		model.addAttribute("universityDTO", new UniversityDTO());
 //		model.addAttribute("university", new University());
 		return "universitiesAdd";
 	}
-	
-	
-//	On writing the post mapping you will be able to upload images to the server.
+
+	/*
+	 * On writing the post mapping you will be able to upload images to the server.
+	 */
 	@PostMapping("/admin/universities/add")
-	public String universitiesAddPost(@ModelAttribute("universityDTO")UniversityDTO universityDTO,
-									@RequestParam("universityImage")MultipartFile file,
-									@RequestParam("imgName") String imgName) throws IOException {
+	public String universitiesAddPost(@ModelAttribute("universityDTO") UniversityDTO universityDTO,
+			@RequestParam("universityImage") MultipartFile file, @RequestParam("imgName") String imgName)
+			throws IOException {
 //		universityService.addUniversity(university);
-		
-//		Creating a new university object and a university dto object so that we can transfer the data from the dto to the main university model.
+
+		/*
+		 * Creating a new university object and a university dto object so that we can
+		 * transfer the data from the dto to the main university model.
+		 */
 		University university = new University();
+
 		
-//		Passing data into the main university
+		/*
+		 * Passing data into the main university
+		 */
 		university.setId(universityDTO.getId());
 		university.setName(universityDTO.getName());
 		university.setLocation(universityDTO.getLocation());
@@ -97,86 +116,89 @@ public class AdminController {
 		university.setDescription(universityDTO.getDescription());
 		university.setImageName(universityDTO.getImageName());
 		university.setUniversitySlug(universityDTO.getUniversitySlug());
-				
-//		Create the imageUUID and using the neo package get the filename and 
+
+		/*
+		 * Create the imageUUID and using the neo package get the filename and
+		 */
 		String imageUUID;
 		if (!file.isEmpty()) {
-			
-			imageUUID=file.getOriginalFilename();
-			Path fileNameAndPath = Paths.get(universityUploadDir,imageUUID);
+
+			imageUUID = file.getOriginalFilename();
+			Path fileNameAndPath = Paths.get(universityUploadDir, imageUUID);
 			Files.write(fileNameAndPath, file.getBytes());
-		}
-		else {
+		} else {
 			imageUUID = imgName;
-			
+
 		}
-		
-//		Pass the UUID into the imagename of the university...
-		
+
+		/*
+		 * Pass the UUID into the imagename of the university...
+		 */
 		university.setImageName(imageUUID);
-		
-//		Use the university Service to actually add and save the university.
+
+		/*
+		 * Use the university Service to actually add and save the university.
+		 */
 		universityService.addUniversity(university);
-		
-		
+
 		return "redirect:/admin/universities";
-	}	
-	
-	
-//	Function to delete a university by id
+	}
+
+	/*
+	 * Function to delete a university by id
+	 */
 	@GetMapping("/admin/university/delete/{id}")
 	public String deleteUniversity(@PathVariable long id) {
-//		Need to create university object for this method so that we can use DTO object and pass the file name
-		
-		
-		
+
+		/*
+		 * Need to create university object for this method so that we can use DTO
+		 * object and pass the file name
+		 */
+
 //		String existingImageName=universityService.getUniversityById(id).filter(temp->temp.getId())
 //		System.out.println(existingImageName);
-		
-		
-		
+
 //		deleteImageFromTemplate(id);
-		
+
 		/*
 		 * Give the exact path where the file is located followed by a slash and then
 		 * use the service method of get University by ID
-		 */		
-		
-		
-		File file = new File(universityUploadDir+"/"+universityService.getUniversityById(id));
+		 */
+
+		File file = new File(universityUploadDir + "/" + universityService.getUniversityById(id));
 		System.out.println(file.getAbsolutePath());
-		
-//		Check if the file exist before deleting and after deleting, just redirect to the universities page
-		if(file.exists()) {
+
+		/*
+		 * Check if the file exist before deleting and after deleting, just redirect to
+		 * the universities page
+		 */
+		if (file.exists()) {
 			file.delete();
 		}
-		
+
 		universityService.removeUniversityById(id);
 		return "redirect:/admin/universities";
 	}
-	
-	
-	
+
 	/*
-	Trying to define the deleteImage function and pass a id and model into it...
-	*/
-	
+	 * Trying to define the deleteImage function and pass a id and model into it...
+	 */
+
 //	public void deleteImageFromTemplate(@PathVariable long id, Model model) {
 //		model.addAttribute()
 //	}
 //	
-	
+
 	/*
 	 * Here I have defined the update method for universities
-		
-	*/	
-	
-	
+	 * 
+	 */
+
 	@GetMapping("/admin/university/update/{id}")
 	public String updateUniversity(@PathVariable long id, Model model) {
 		University university = universityService.getUniversityById(id).get();
 		UniversityDTO universityDTO = new UniversityDTO();
-		
+
 		universityDTO.setId(university.getId());
 		universityDTO.setName(university.getName());
 		universityDTO.setLocation(university.getLocation());
@@ -187,49 +209,63 @@ public class AdminController {
 		universityDTO.setDescription(university.getDescription());
 		universityDTO.setImageName(university.getImageName());
 		universityDTO.setUniversitySlug(university.getUniversitySlug());
-		
-		
-		
-		/*
-		 * university.setId(universityDTO.getId());
-		 * university.setName(universityDTO.getName());
-		 * university.setLocation(universityDTO.getLocation());
-		 * university.setEstablishedYear(universityDTO.getEstablishedYear());
-		 * university.setIntakePeriod(universityDTO.getIntakePeriod());
-		 * university.setAccomodation(universityDTO.getAccomodation());
-		 * university.setApplicationProcess(universityDTO.getApplicationProcess());
-		 * university.setDescription(universityDTO.getDescription());
-		 * university.setImageName(universityDTO.getImageName());
-		 * university.setUniversitySlug(universityDTO.getUniversitySlug());
-		 */
+
 		model.addAttribute("universityDTO", universityDTO);
 		return "universitiesAdd";
 	}
-	
+
+	/*==========================================
+	 * All Function below are related to courses 
+	 ===========================================*/
 	
 	/*
-	 * All Function below are related to courses Function to show the courses
+	 * Function to show the courses
 	 */
-	
 	@GetMapping("/admin/courses")
 	public String getCourses(Model model) {
 		model.addAttribute("courses", courseService.getAllCourses());
 		return "courses";
 	}
-	
 
 	/*
-	 * Function to add a course
-	 * Again we will need to create both get and post mapping
+	 * Function to add a course Again we will need to create both get and post
+	 * mapping
 	 * 
-	*/
-	
+	 */
+
 	@GetMapping("/admin/courses/add")
 	public String coursesAddGet(Model model) {
-		model.addAttribute("courseDTO",new CourseDTO());
+		model.addAttribute("courseDTO", new CourseDTO());
 		return "coursesAdd";
 	}
-	
+
+	/*
+	 * Here implementing the post mapping for courses add
+	 */
+
+	@PostMapping("/admin/courses/add")
+	public String coursesAddPost(@ModelAttribute("courseDTO") CourseDTO courseDTO) {
+
+		/*
+		 * Use the model attribute to transfer the data from course DTO to course object
+		 */
+		Course course = new Course();
+		course.setId(courseDTO.getId());
+		course.setTitle(courseDTO.getTitle());
+		course.setDescription(courseDTO.getDescription());
+		course.setDuration(courseDTO.getDuration());
+		course.setDocumentsRequired(courseDTO.getDocumentsRequired());
+		course.setExams(courseDTO.getExams());
+		course.setFees(courseDTO.getFees());
+		course.setWriteup(courseDTO.getWriteup());
+
+		/*
+		 * Now use the courseService to add the course
+		 */
+
+		courseService.addCourse(course);
+
+		return "redirect:/admin/courses";
+	}
+
 }
-
-
