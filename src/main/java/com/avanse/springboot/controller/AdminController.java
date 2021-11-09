@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,17 +34,17 @@ public class AdminController {
 	/*
 	 * Variable of date type to rename the image to the current time stamp
 	 */
-	private Date date = new Date();
+//	private Date date = new Date();
 
 	/*
 	 * Get the milliseconds using the date object since 1970
 	 */
-	private long millisecsFrom1970 = date.getTime();
+//	private long millisecsFrom1970 = date.getTime();
 
 	/*
 	 * Convert the millisecs to String that can be pushed into the database
 	 */
-	private String modifiedFileNameByDate = String.valueOf(millisecsFrom1970);
+//	private String modifiedFileNameByDate = String.valueOf(millisecsFrom1970);
 
 //	public static String courseUploadDir = System.getProperty("user.dir")+"/src/main/resources/static/images";
 
@@ -56,19 +55,21 @@ public class AdminController {
 	CourseService courseService;
 
 	/*
-	 * Function to show the admin home page.
+	 * Method to show the admin home page.
 	 */
 	@GetMapping("/admin")
 	public String adminHome() {
 		return "adminHome";
 	}
 
-	/*================================================
-	 * All function below are related to universities
-	 ===============================================*/
-	
 	/*
-	 * Function to show the universities
+	 * ================================================ 
+	 * All methods below are related to universities 
+	 * ================================================
+	 */
+
+	/*
+	 * Method to show the universities.html
 	 */
 	@GetMapping("/admin/universities")
 	public String getUniversities(Model model) {
@@ -77,7 +78,7 @@ public class AdminController {
 	}
 
 	/*
-	 * Function to add a university Need both get and post mapping for adding the
+	 * Method to add a university Need both get and post mapping for adding the
 	 * university because the request could be of any type...
 	 */
 	@GetMapping("/admin/universities/add")
@@ -102,7 +103,6 @@ public class AdminController {
 		 */
 		University university = new University();
 
-		
 		/*
 		 * Passing data into the main university
 		 */
@@ -118,7 +118,7 @@ public class AdminController {
 		university.setUniversitySlug(universityDTO.getUniversitySlug());
 
 		/*
-		 * Create the imageUUID and using the neo package get the filename and
+		 * Create the imageUUID and using the nio package get the filename and the path
 		 */
 		String imageUUID;
 		if (!file.isEmpty()) {
@@ -151,53 +151,55 @@ public class AdminController {
 	public String deleteUniversity(@PathVariable long id) {
 
 		/*
-		 * Need to create university object for this method so that we can use DTO
-		 * object and pass the file name
-		 */
+		 * Calling the delete Image function before this record can be deleted from the database, 
+		 * otherwise we will never be able to access its name in future
+		*/
+		deleteImageFromStaticFolder(id);
+		universityService.removeUniversityById(id);
+		return "redirect:/admin/universities";
+	}
 
-//		String existingImageName=universityService.getUniversityById(id).filter(temp->temp.getId())
-//		System.out.println(existingImageName);
+	
+	
+	/*
+	 * Function to delete the image from the server before it can be deleted from
+	 * the database...
+	 */
 
-//		deleteImageFromTemplate(id);
+	public void deleteImageFromStaticFolder(@PathVariable long id) {
+
+		University universityImageToBeDeleted = universityService.getUniversityById(id).get();
+//		UniversityDTO universityDTO = new UniversityDTO();
+
+		String myFile = universityImageToBeDeleted.getImageName();
 
 		/*
 		 * Give the exact path where the file is located followed by a slash and then
 		 * use the service method of get University by ID
 		 */
 
-		File file = new File(universityUploadDir + "/" + universityService.getUniversityById(id));
-		System.out.println(file.getAbsolutePath());
+		File file = new File(universityUploadDir + "/" + myFile);
+//		System.out.println(file.getAbsolutePath());
 
 		/*
-		 * Check if the file exist before deleting and after deleting, just redirect to
-		 * the universities page
+		 * Check if the file exist before deleting and after deleting
 		 */
 		if (file.exists()) {
 			file.delete();
 		}
 
-		universityService.removeUniversityById(id);
-		return "redirect:/admin/universities";
+		
 	}
 
 	/*
-	 * Trying to define the deleteImage function and pass a id and model into it...
-	 */
-
-//	public void deleteImageFromTemplate(@PathVariable long id, Model model) {
-//		model.addAttribute()
-//	}
-//	
-
-	/*
-	 * Here I have defined the update method for universities
-	 * we have to set the dto and pass the model
-	 * 
+	 * Here I have defined the update method.
+	 * For universities we have to set the dto and pass the model
 	 */
 
 	@GetMapping("/admin/university/update/{id}")
 	public String updateUniversity(@PathVariable long id, Model model) {
-		University university = universityService.getUniversityById(id).get(); //Check out this line to implement the image delete... May get some idea
+		University university = universityService.getUniversityById(id).get(); // Check out this line to implement the
+																				// image delete... May get some idea
 		UniversityDTO universityDTO = new UniversityDTO();
 
 		universityDTO.setId(university.getId());
@@ -215,10 +217,11 @@ public class AdminController {
 		return "universitiesAdd";
 	}
 
-	/*==========================================
-	 * All Function below are related to courses 
-	 ===========================================*/
-	
+	/*
+	 * ========================================== All Function below are related to
+	 * courses ===========================================
+	 */
+
 	/*
 	 * Function to show the courses
 	 */
@@ -268,27 +271,26 @@ public class AdminController {
 
 		return "redirect:/admin/courses";
 	}
-	
+
 	/*
 	 * Function to delete a course by its id
-	*/
+	 */
 	@GetMapping("/admin/course/delete/{id}")
 	public String deleteCourse(@PathVariable long id) {
 		courseService.deleteCourse(id);
 		return "redirect:/admin/courses";
 	}
-	
-	
+
 	/*
-	 * Functino to update a course by its id
-	 * Set DTO and pass the model as an argument
-	*/
-	
+	 * Functino to update a course by its id Set DTO and pass the model as an
+	 * argument
+	 */
+
 	@GetMapping("/admin/course/update/{id}")
 	public String updateCourse(@PathVariable long id, Model model) {
 		Course course = courseService.getCourseById(id).get();
 		CourseDTO courseDTO = new CourseDTO();
-		
+
 		courseDTO.setId(course.getId());
 		courseDTO.setTitle(course.getTitle());
 		courseDTO.setDescription(course.getDescription());
@@ -297,7 +299,7 @@ public class AdminController {
 		courseDTO.setExams(course.getExams());
 		courseDTO.setFees(course.getFees());
 		courseDTO.setWriteup(course.getWriteup());
-		
+
 		model.addAttribute("courseDTO", courseDTO);
 		return "coursesAdd";
 	}

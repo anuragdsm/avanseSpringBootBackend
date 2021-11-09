@@ -60,7 +60,6 @@
             <td th:text="${course.fees}">INR 20,0000</td>
             <td th:text="${course.documentsRequired}">Degree</td>
             <td th:text="${course.description}">Description</td>
-
             <td><a href="" th:href="@{/admin/course/delete/{id}(id=${course.id})}" class="btn btn-danger">Delete</a></td>
             <td><a href="" th:href="@{/admin/course/update/{id}(id=${course.id})}" class="btn btn-warning">Update</a></td>
 
@@ -68,8 +67,6 @@
         </tbody>
     </table>
 </div>
-
-
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

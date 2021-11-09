@@ -69,13 +69,9 @@
                     </select>
                 </div> -->
                 
-                
-
-
-
                 <div class="form-group">
                     <label for="establishedYear">Established Year</label>
-                    <input type="number" class="form-control" required th:field="*{establishedYear}" name="establishedYear" id="establishedYear"
+                    <input type="text" class="form-control" required th:field="*{establishedYear}" name="establishedYear" id="establishedYear"
                            placeholder="Year">
                 </div>
                 <div class="form-group">
@@ -87,12 +83,12 @@
                 
                 <div class="form-group">
                     <label for="accomodation">Accommodation Available</label>
-                    <input type="number" class="form-control" required th:field="*{accomodation}" name="accomodation" id="accomodation"
+                    <input type="text" class="form-control" required th:field="*{accomodation}" name="accomodation" id="accomodation"
                            placeholder="">
                 </div>
                 <div class="form-group">
                     <label for="intakePeriod">Intake Period</label>
-                    <input type="number" class="form-control" required th:field="*{intakePeriod}" name="intakePeriod" id="intakePeriod"
+                    <input type="text" class="form-control" required th:field="*{intakePeriod}" name="intakePeriod" id="intakePeriod"
                            placeholder="intakePeriod">
                 </div>
                 <div class="form-group">
@@ -106,7 +102,7 @@
                     <label class="custom-file-label" for="universityImage">Choose file</label>
                 </div>
                 <div class="form-group">
-                    <img src="#" id="imgPreview" height="100px" width="100px" th:src="@{${'/universityImages/' + universityDTO.imageName}}" style="margin-top: 20px" alt=" ">
+                    <img type="hidden" src="#" id="imgPreview" height="100px" width="100px" th:src="@{${'/universityImages/' + universityDTO.imageName}}" style="margin-top: 20px" alt=" ">
                 </div>
                 <input type="hidden" name="imgName" th:value="${universityDTO.imageName}">
                 <button type="submit" class="btn btn-primary">Submit</button>
