@@ -36,9 +36,9 @@ public class UniversityService {
 		return universityRepository.findById(id);
 	}
 	
-	
-	public University getUniversity(String id) {
-		return getAllUniversity().stream().filter(u -> u.getId().equals(id)).findFirst().get();
-	}
+//	
+//	public University getUniversity(String id) {
+//		return getAllUniversity().stream().filter(u -> u.getId().equals(id)).findFirst().get();
+//	}
 	
 }

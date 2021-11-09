@@ -21,12 +21,13 @@ public class Course {
 	
 	private String title;
 	private String duration;
+	private String description;
 	
 	private String writeup;
 	
 	private double fees;
 	
 	private String exams;
-	private String documentsReqired;
+	private String documentsRequired;
 	
 }

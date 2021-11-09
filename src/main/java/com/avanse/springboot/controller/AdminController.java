@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.avanse.springboot.DTO.CourseDTO;
 import com.avanse.springboot.DTO.UniversityDTO;
 import com.avanse.springboot.model.University;
 import com.avanse.springboot.service.CourseService;
@@ -134,8 +135,14 @@ public class AdminController {
 		
 		
 		
+//		deleteImageFromTemplate(id);
 		
-//		Give the exact path where the file is located followed by a slash and then use the service method of get University by ID
+		/*
+		 * Give the exact path where the file is located followed by a slash and then
+		 * use the service method of get University by ID
+		 */		
+		
+		
 		File file = new File(universityUploadDir+"/"+universityService.getUniversityById(id));
 		System.out.println(file.getAbsolutePath());
 		
@@ -150,14 +157,79 @@ public class AdminController {
 	
 	
 	
-//	All Function below are related to courses
-//	 Function to show the courses
+	/*
+	Trying to define the deleteImage function and pass a id and model into it...
+	*/
+	
+//	public void deleteImageFromTemplate(@PathVariable long id, Model model) {
+//		model.addAttribute()
+//	}
+//	
+	
+	/*
+	 * Here I have defined the update method for universities
+		
+	*/	
+	
+	
+	@GetMapping("/admin/university/update/{id}")
+	public String updateUniversity(@PathVariable long id, Model model) {
+		University university = universityService.getUniversityById(id).get();
+		UniversityDTO universityDTO = new UniversityDTO();
+		
+		universityDTO.setId(university.getId());
+		universityDTO.setName(university.getName());
+		universityDTO.setLocation(university.getLocation());
+		universityDTO.setEstablishedYear(university.getEstablishedYear());
+		universityDTO.setIntakePeriod(university.getIntakePeriod());
+		universityDTO.setAccomodation(university.getAccomodation());
+		universityDTO.setApplicationProcess(university.getApplicationProcess());
+		universityDTO.setDescription(university.getDescription());
+		universityDTO.setImageName(university.getImageName());
+		universityDTO.setUniversitySlug(university.getUniversitySlug());
+		
+		
+		
+		/*
+		 * university.setId(universityDTO.getId());
+		 * university.setName(universityDTO.getName());
+		 * university.setLocation(universityDTO.getLocation());
+		 * university.setEstablishedYear(universityDTO.getEstablishedYear());
+		 * university.setIntakePeriod(universityDTO.getIntakePeriod());
+		 * university.setAccomodation(universityDTO.getAccomodation());
+		 * university.setApplicationProcess(universityDTO.getApplicationProcess());
+		 * university.setDescription(universityDTO.getDescription());
+		 * university.setImageName(universityDTO.getImageName());
+		 * university.setUniversitySlug(universityDTO.getUniversitySlug());
+		 */
+		model.addAttribute("universityDTO", universityDTO);
+		return "universitiesAdd";
+	}
+	
+	
+	/*
+	 * All Function below are related to courses Function to show the courses
+	 */
 	
 	@GetMapping("/admin/courses")
 	public String getCourses(Model model) {
 		model.addAttribute("courses", courseService.getAllCourses());
 		return "courses";
 	}
+	
+
+	/*
+	 * Function to add a course
+	 * Again we will need to create both get and post mapping
+	 * 
+	*/
+	
+	@GetMapping("/admin/courses/add")
+	public String coursesAddGet(Model model) {
+		model.addAttribute("courseDTO",new CourseDTO());
+		return "coursesAdd";
+	}
+	
 }
 
 
