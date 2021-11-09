@@ -191,12 +191,13 @@ public class AdminController {
 
 	/*
 	 * Here I have defined the update method for universities
+	 * we have to set the dto and pass the model
 	 * 
 	 */
 
 	@GetMapping("/admin/university/update/{id}")
 	public String updateUniversity(@PathVariable long id, Model model) {
-		University university = universityService.getUniversityById(id).get();
+		University university = universityService.getUniversityById(id).get(); //Check out this line to implement the image delete... May get some idea
 		UniversityDTO universityDTO = new UniversityDTO();
 
 		universityDTO.setId(university.getId());
@@ -267,5 +268,37 @@ public class AdminController {
 
 		return "redirect:/admin/courses";
 	}
-
+	
+	/*
+	 * Function to delete a course by its id
+	*/
+	@GetMapping("/admin/course/delete/{id}")
+	public String deleteCourse(@PathVariable long id) {
+		courseService.deleteCourse(id);
+		return "redirect:/admin/courses";
+	}
+	
+	
+	/*
+	 * Functino to update a course by its id
+	 * Set DTO and pass the model as an argument
+	*/
+	
+	@GetMapping("/admin/course/update/{id}")
+	public String updateCourse(@PathVariable long id, Model model) {
+		Course course = courseService.getCourseById(id).get();
+		CourseDTO courseDTO = new CourseDTO();
+		
+		courseDTO.setId(course.getId());
+		courseDTO.setTitle(course.getTitle());
+		courseDTO.setDescription(course.getDescription());
+		courseDTO.setDocumentsRequired(course.getDocumentsRequired());
+		courseDTO.setDuration(course.getDuration());
+		courseDTO.setExams(course.getExams());
+		courseDTO.setFees(course.getFees());
+		courseDTO.setWriteup(course.getWriteup());
+		
+		model.addAttribute("courseDTO", courseDTO);
+		return "coursesAdd";
+	}
 }

@@ -46,6 +46,7 @@
             <th scope="col">Duration</th>
             <th scope="col">Fees</th>
             <th scope="col">Documents Required</th>
+            <th scope="col">Description</th>
             <th scope="col">Delete</th>
             <th scope="col">Update</th>
         </tr>
@@ -58,6 +59,7 @@
             <td th:text="${course.duration}">1 year</td>
             <td th:text="${course.fees}">INR 20,0000</td>
             <td th:text="${course.documentsRequired}">Degree</td>
+            <td th:text="${course.description}">Description</td>
 
             <td><a href="" th:href="@{/admin/course/delete/{id}(id=${course.id})}" class="btn btn-danger">Delete</a></td>
             <td><a href="" th:href="@{/admin/course/update/{id}(id=${course.id})}" class="btn btn-warning">Update</a></td>
