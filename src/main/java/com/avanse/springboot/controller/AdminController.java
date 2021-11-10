@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,19 +36,7 @@ public class AdminController {
 	/*
 	 * Variable of date type to rename the image to the current time stamp
 	 */
-//	private Date date = new Date();
-
-	/*
-	 * Get the milliseconds using the date object since 1970
-	 */
-//	private long millisecsFrom1970 = date.getTime();
-
-	/*
-	 * Convert the millisecs to String that can be pushed into the database
-	 */
-//	private String modifiedFileNameByDate = String.valueOf(millisecsFrom1970);
-
-//	public static String courseUploadDir = System.getProperty("user.dir")+"/src/main/resources/static/images";
+	
 
 	@Autowired
 	UniversityService universityService;
@@ -104,6 +94,27 @@ public class AdminController {
 		University university = new University();
 
 		/*
+		 * Just after the university object is create, initialise the date object
+		 * and then get the milliseconds in long
+		 * Now convert this milliseconds in the String format and store it in the variable
+		 * which can be used further
+		*/
+		Date date = new Date();
+
+		/*
+		 * Get the milliseconds using the date object since 1970
+		 */
+
+		long millisecsFrom1970 = date.getTime();
+
+		/*
+		 * Convert the millisecs to String that can be pushed into the database
+		 */
+		
+		String modifiedFileNameByDate = String.valueOf(millisecsFrom1970);
+	
+		
+		/*
 		 * Passing data into the main university
 		 */
 		university.setId(universityDTO.getId());
@@ -122,10 +133,23 @@ public class AdminController {
 		 */
 		String imageUUID;
 		if (!file.isEmpty()) {
-
-			imageUUID = file.getOriginalFilename();
+			
+			/*
+			 * Extract The file extention using get Extention method and store in the ext variable.			
+			*/			
+			String ext = FilenameUtils.getExtension(file.getOriginalFilename());
+			
+			/*
+			 * Generate the complete file name with extention
+			*/
+			imageUUID = modifiedFileNameByDate+'.'+ext;
+			
+			/*
+			 * Use the nio library to do the stream operations. Paas the universal Unique ID and the university upload Directory
+			*/
 			Path fileNameAndPath = Paths.get(universityUploadDir, imageUUID);
-			Files.write(fileNameAndPath, file.getBytes());
+			Files.write(fileNameAndPath, file.getBytes());	
+			
 		} else {
 			imageUUID = imgName;
 
@@ -137,13 +161,13 @@ public class AdminController {
 		university.setImageName(imageUUID);
 
 		/*
-		 * Use the university Service to actually add and save the university.
+		 * Use the university Service to finally add and save the university.
 		 */
 		universityService.addUniversity(university);
 
 		return "redirect:/admin/universities";
 	}
-
+	
 	/*
 	 * Function to delete a university by id
 	 */
@@ -184,11 +208,7 @@ public class AdminController {
 		/*
 		 * Check if the file exist before deleting and after deleting
 		 */
-		if (file.exists()) {
-			file.delete();
-		}
-
-		
+		if (file.exists())file.delete();
 	}
 
 	/*
@@ -198,9 +218,13 @@ public class AdminController {
 
 	@GetMapping("/admin/university/update/{id}")
 	public String updateUniversity(@PathVariable long id, Model model) {
-		University university = universityService.getUniversityById(id).get(); // Check out this line to implement the
-																				// image delete... May get some idea
+		University university = universityService.getUniversityById(id).get(); 
 		UniversityDTO universityDTO = new UniversityDTO();
+		
+		/*
+		 * While update, the old image is to be removed... Hence calling deleteimage from static method
+		*/
+		deleteImageFromStaticFolder(id);
 
 		universityDTO.setId(university.getId());
 		universityDTO.setName(university.getName());
@@ -282,7 +306,7 @@ public class AdminController {
 	}
 
 	/*
-	 * Functino to update a course by its id Set DTO and pass the model as an
+	 * Method to update a course by its id Set DTO and pass the model as an
 	 * argument
 	 */
 
