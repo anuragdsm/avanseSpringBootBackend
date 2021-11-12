@@ -90,6 +90,20 @@
                            placeholder="Documents Required">
                 </div>
                 
+                 
+                <div class="form-group" th:object="${university}">
+                    <label for="university">University:</label>
+                    <select  class="form-control" name="universities" th:field="*{id}">
+                    <option value = "">--</option>
+					<option th:each="university : ${universities}" th:value="${university.id}" th:utext="${university.name}"/>
+					</select>
+                </div>
+                 
+                
+                
+                
+
+                
                 
                 
                 <!-- 

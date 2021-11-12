@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.avanse.springboot.model.Course;
 import com.avanse.springboot.repository.CourseRepository;
@@ -22,13 +23,16 @@ public class CourseService {
 	}
 	
 //	Function to add a course
+	
+	@Transactional
 	public void addCourse(Course course) {
 		
 		courseRepository.save(course);
 	}
 	
 	
-//	Delete a course 
+//	Delete a course
+	@Transactional
 	public void deleteCourse(long id) {
 		courseRepository.deleteById(id);
 	}
@@ -39,6 +43,17 @@ public class CourseService {
 	public Optional<Course> getCourseById(long id){
 		return courseRepository.findById(id);
 	}
+	
+	
+	/*
+	 * Creating a service to get the list of all the courses according to
+	 * the university id... 
+	*/
+	public List<Course> getUniversityByCourseId(long id){
+	
+		return courseRepository.findAllByUniversity_Id(id);
+	}
+	
 	
 	
 }

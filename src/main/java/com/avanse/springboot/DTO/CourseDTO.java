@@ -1,5 +1,7 @@
 package com.avanse.springboot.DTO;
 
+import com.avanse.springboot.model.University;
+
 import lombok.Data;
 
 @Data
@@ -19,4 +21,5 @@ public class CourseDTO {
 
 	private String exams;
 	private String documentsRequired;
+	private University university;
 }

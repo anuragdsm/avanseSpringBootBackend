@@ -3,13 +3,22 @@ package com.avanse.springboot;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+
+import com.avanse.springboot.repository.CourseRepository;
+import com.avanse.springboot.repository.UniversityRepository;
 
 
 @SpringBootApplication
 public class SpringbootBackendApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
+		
+		ConfigurableApplicationContext configurableApplicationContext =
 		SpringApplication.run(SpringbootBackendApplication.class, args);
+		
+		UniversityRepository universityRepository = configurableApplicationContext.getBean(UniversityRepository.class);
+		CourseRepository courseRepository = configurableApplicationContext.getBean(CourseRepository.class);
 	}
 
 	@Override

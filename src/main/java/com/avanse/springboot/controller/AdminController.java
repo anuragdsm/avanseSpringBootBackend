@@ -5,7 +5,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +25,15 @@ import com.avanse.springboot.DTO.CourseDTO;
 import com.avanse.springboot.DTO.UniversityDTO;
 import com.avanse.springboot.model.Course;
 import com.avanse.springboot.model.University;
+import com.avanse.springboot.repository.CourseRepository;
+import com.avanse.springboot.repository.UniversityRepository;
 import com.avanse.springboot.service.CourseService;
 import com.avanse.springboot.service.UniversityService;
 
-@Controller
+import lombok.AllArgsConstructor;
 
+@Controller
+@AllArgsConstructor
 public class AdminController {
 
 	public static String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/images";
@@ -43,6 +50,12 @@ public class AdminController {
 
 	@Autowired
 	CourseService courseService;
+	
+	@Autowired
+	UniversityRepository universityRepository;
+	
+	@Autowired
+	CourseRepository courseRepository;
 
 	/*
 	 * Method to show the admin home page.
@@ -127,7 +140,9 @@ public class AdminController {
 		university.setDescription(universityDTO.getDescription());
 		university.setImageName(universityDTO.getImageName());
 		university.setUniversitySlug(universityDTO.getUniversitySlug());
-
+//		university.setCourses(universityDTO.getCourses().addAll(new ArrayList<Course>(Arrays.asList(null))));
+//		university.setCourses(universityDTO.getCourse();
+//;
 		/*
 		 * Create the imageUUID and using the nio package get the filename and the path
 		 */
@@ -175,11 +190,24 @@ public class AdminController {
 	public String deleteUniversity(@PathVariable long id) {
 
 		/*
+		 * Before deleting the object, check if the university exist or not 
+		 * and for that you will need university repository.
+		 * 
 		 * Calling the delete Image function before this record can be deleted from the database, 
 		 * otherwise we will never be able to access its name in future
+		 * 
 		*/
-		deleteImageFromStaticFolder(id);
-		universityService.removeUniversityById(id);
+		
+		if(universityRepository.findById(id).isPresent()) {
+			deleteImageFromStaticFolder(id);
+			universityService.removeUniversityById(id);
+		}
+		
+		else{
+			System.out.println("Cannot Delete the object, Later to be displayed over the page");
+			
+		}
+		
 		return "redirect:/admin/universities";
 	}
 
@@ -240,6 +268,34 @@ public class AdminController {
 		model.addAttribute("universityDTO", universityDTO);
 		return "universitiesAdd";
 	}
+	
+	
+	/*
+	 * Show university mapped courses
+	*/
+	
+	@GetMapping("/admin/university/courses/{id}")
+	public String getUniversityMappedCourses(Model model) {
+		model.addAttribute("courses", courseService.getAllCourses());
+		return "courses";
+	}
+	
+	
+	
+	/*
+	 * Function to populate university list in drop down...
+	*/
+	
+
+
+	//	@ModelAttribute("universityDTO") UniversityDTO universityDTO
+
+	public void preLoadUniversity(Model model) {
+		List<University> myUniversityList = universityService.getAllUniversity();
+		model.addAttribute("universities", myUniversityList);
+	}
+	
+	
 
 	/*
 	 * ========================================== All Function below are related to
@@ -264,6 +320,29 @@ public class AdminController {
 	@GetMapping("/admin/courses/add")
 	public String coursesAddGet(Model model) {
 		model.addAttribute("courseDTO", new CourseDTO());
+		Course course = new Course();
+		
+		
+		/*
+		 * Pass the university list to the dropdown on courseAdd.html
+		 */
+		
+		University university = new University();
+		model.addAttribute("university", university);
+
+		List<University> universities = universityService.getAllUniversity();
+		
+		System.out.println(universities.toString());
+		
+		model.addAttribute("universities", universities);
+		
+
+		/*
+		 * Now use the  courseservice to actually add the object
+		*/
+		
+//		courseService.addCourse(course);
+		
 		return "coursesAdd";
 	}
 
@@ -272,7 +351,7 @@ public class AdminController {
 	 */
 
 	@PostMapping("/admin/courses/add")
-	public String coursesAddPost(@ModelAttribute("courseDTO") CourseDTO courseDTO) {
+	public String coursesAddPost(Model model, @ModelAttribute("courseDTO") CourseDTO courseDTO) {
 
 		/*
 		 * Use the model attribute to transfer the data from course DTO to course object
@@ -286,12 +365,12 @@ public class AdminController {
 		course.setExams(courseDTO.getExams());
 		course.setFees(courseDTO.getFees());
 		course.setWriteup(courseDTO.getWriteup());
-
-		/*
-		 * Now use the courseService to add the course
-		 */
-
+		course.setUniversity(courseDTO.getUniversity());
+		
 		courseService.addCourse(course);
+		
+		System.out.println(course.toString());
+		
 
 		return "redirect:/admin/courses";
 	}

@@ -50,10 +50,13 @@
 
 					<th scope="col">Location</th>
 					<th scope="col">Established Year</th>
+
 					<th scope="col">Description</th>
-					<th scope="col">accomodation </th>
-					<th scope="col">Delete</th>
+					<th scope="col">accomodation</th>
+					<th scope="col">Courses</th>
 					<th scope="col">Update</th>
+					<th scope="col">Delete</th>
+
 				</tr>
 			</thead>
 			<tbody>
@@ -66,17 +69,26 @@
 
 					<td th:text="${university.location}">Delhi</td>
 					<td th:text="${university.establishedYear}">2002</td>
+
 					<td th:text="${university.description}">University Description</td>
 					<td th:text="${university.accomodation}">Accomodadtion</td>
 
 					<td><a href=""
 						th:href="@{/admin/university/delete/{id}(id=${university.id})}"
-						class="btn btn-danger">Delete</a></td>
+						class="btn btn-primary">Edit Courses</a></td>
+
+
 					<td><a href=""
 						th:href="@{/admin/university/update/{id}(id=${university.id})}"
 						class="btn btn-warning">Update</a></td>
 
+					<td><a href=""
+						th:href="@{/admin/university/delete/{id}(id=${university.id})}"
+						class="btn btn-danger">Delete</a></td>
 				</tr>
+
+
+
 			</tbody>
 		</table>
 	</div>

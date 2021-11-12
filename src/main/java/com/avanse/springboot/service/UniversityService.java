@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.avanse.springboot.model.University;
 import com.avanse.springboot.repository.UniversityRepository;
@@ -21,11 +22,13 @@ public class UniversityService {
 	}
 
 //	Function to delete the university from the database
+	@Transactional
 	public void removeUniversityById(long id) {
 		universityRepository.deleteById(id); 
 	}
 
 //	Function to save the university in the database
+	@Transactional
 	public void addUniversity(University university) {
 		universityRepository.save(university);
 	}
@@ -36,9 +39,5 @@ public class UniversityService {
 		return universityRepository.findById(id);
 	}
 	
-//	
-//	public University getUniversity(String id) {
-//		return getAllUniversity().stream().filter(u -> u.getId().equals(id)).findFirst().get();
-//	}
 	
 }

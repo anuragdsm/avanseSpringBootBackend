@@ -1,5 +1,10 @@
 package com.avanse.springboot.DTO;
 
+
+import java.util.Date;
+
+import com.avanse.springboot.model.Course;
+
 import lombok.Data;
 
 @Data
@@ -15,4 +20,8 @@ public class UniversityDTO {
 	private String intakePeriod;
 	private String applicationProcess;
 	private String universitySlug;
+
+	private Date dateOfCreation;
+
+	private Course course;
 }
