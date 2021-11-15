@@ -1,32 +1,23 @@
 package com.avanse.springboot;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 
-import com.avanse.springboot.repository.CourseRepository;
-import com.avanse.springboot.repository.UniversityRepository;
-
-
+@EnableAutoConfiguration
 @SpringBootApplication
-public class SpringbootBackendApplication implements CommandLineRunner {
+public class SpringbootBackendApplication {
 
 	public static void main(String[] args) {
 		
-		ConfigurableApplicationContext configurableApplicationContext =
+//		ConfigurableApplicationContext configurableApplicationContext =
 		SpringApplication.run(SpringbootBackendApplication.class, args);
-		
-		UniversityRepository universityRepository = configurableApplicationContext.getBean(UniversityRepository.class);
-		CourseRepository courseRepository = configurableApplicationContext.getBean(CourseRepository.class);
+//		
+//		UniversityRepository universityRepository = configurableApplicationContext.getBean(UniversityRepository.class);
+//		CourseRepository courseRepository = configurableApplicationContext.getBean(CourseRepository.class);
 	}
 
-	@Override
-	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
 		
-	}
-	
 	/*
 	 * Initial test
 	*/

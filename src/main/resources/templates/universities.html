@@ -55,6 +55,7 @@
 					<th scope="col">accomodation</th>
 					<th scope="col">Courses</th>
 					<th scope="col">Update</th>
+					<th scope="col">Status</th>
 					<th scope="col">Delete</th>
 
 				</tr>
@@ -77,23 +78,85 @@
 						th:href="@{/admin/university/delete/{id}(id=${university.id})}"
 						class="btn btn-primary">Edit Courses</a></td>
 
-
 					<td><a href=""
 						th:href="@{/admin/university/update/{id}(id=${university.id})}"
 						class="btn btn-warning">Update</a></td>
+
+
+					<td>
+						<div class="custom-control custom-switch">
+							<input th:inline="text" type="checkbox"
+							
+							
+								th:onchange="'toggleUniversityStatus('+${university.id}+')'"
+								th:if="${university.isUniversityActive==true}" checked
+								class="custom-control-input" id="customSwitch1"> 
+								
+								<input type="checkbox" th:onchange="'toggleUniversityStatus('+${university.id}+')'"
+								th:if="${university.isUniversityActive==false}"
+								class="custom-control-input" id="customSwitch1"> <label
+								class="custom-control-label" for="customSwitch1"><span
+								id="universityStatus"
+								th:text="${university.isUniversityActive==true ?'Activated':'Deactivated'}"></span></label>
+						</div>
+					</td>
+
 
 					<td><a href=""
 						th:href="@{/admin/university/delete/{id}(id=${university.id})}"
 						class="btn btn-danger">Delete</a></td>
 				</tr>
 
-
-
 			</tbody>
 		</table>
 	</div>
+	
+	
+	
+	<script th:inline="javascript" type="text/javascript">
 
+	let contextPath= 'http://localhost:8080';
 
+	
+	function toggleUniversityStatus(id) {
+		console.log('toggling id = '+id);
+		console.log(document.getElementById('customSwitch1').checked);
+		if(document.getElementById('customSwitch1').checked==true){
+			let http=new XMLHttpRequest();
+			let url=contextPath+'/admin/'+'activateDeactivateUniversity'+'/'+id+'/'+'ActivateUniversity';
+		
+			console.log('Activating..')
+			console.log(url)
+
+			 http.open("GET",url,false);
+			 http.send(null);
+			 console.log(http.responseText);
+			 document.getElementById('universityStatus').innerHTML='Activated';
+		}
+		else
+		{
+			/* deactivate in controller */
+			console.log('Deactivating..');
+			let http=new XMLHttpRequest();
+			let url=contextPath+'/admin/'+'activateDeactivateUniversity'+'/'+id+'/'+'DeactivateUniversity';
+			console.log("Deactivating");
+			console.log(url)
+			 http.open("GET",url,false);
+			 http.send(null);
+			 console.log(http.responseText);
+			 document.getElementById('universityStatus').innerHTML='Deactivated';
+			}	
+	}
+	
+</script>
+	
+	
+	
+	
+	
+	
+	
+	
 
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
 		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

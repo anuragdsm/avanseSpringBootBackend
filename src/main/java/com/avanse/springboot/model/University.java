@@ -2,7 +2,9 @@ package com.avanse.springboot.model;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,12 +13,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -30,7 +34,7 @@ import lombok.ToString;
 @Data
 @Entity
 @Table(name="universities")
-//@AllArgsConstructor
+@AllArgsConstructor
 
 public class University implements Serializable {
 	
@@ -53,30 +57,55 @@ public class University implements Serializable {
 	private String applicationProcess;
 	private String universitySlug;
 	
+	private Boolean isUniversityActive = true;
+	
 	@CreationTimestamp
 	private Date dateOfCreation;
 	
 	@ToString.Exclude
-	@OneToOne(targetEntity = Course.class ,fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy ="university") 
-	private Course course;
+	@OneToMany(mappedBy = "university", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},fetch = FetchType.EAGER)
+//	@JoinTable(name="university_course", 
+//				joinColumns = {@JoinColumn(name="UNIVERSITY_ID", referencedColumnName = "UNIVERSITY_ID")},
+//				inverseJoinColumns = {@JoinColumn(name="COURSE_ID", referencedColumnName = "COURSE_ID")})
+	private List<Course> courses;
+	
+	
+	/*Function to create a bidirectional link between the two tables.
+	 * We will have to use the this keyword to pass it as the argument.
+	 * 
+	*/
+	public void addTheCourse(Course tempCourse) {
+		if(courses == null) {
+		
+			courses = new ArrayList<Course>();
+		}
+		
+		courses.add(tempCourse);
+		tempCourse.setUniversity(this);
+		
+	}
+	
+	
+
+	public University(University university) {
+//		super();
+		this.name = university.getName();
+		this.location = university.getLocation();
+		this.imageName = university.getImageName();
+		this.description = university.getDescription();
+		this.establishedYear = university.getEstablishedYear();
+		this.accomodation = university.getAccomodation();
+		this.intakePeriod = university.getIntakePeriod();
+		this.applicationProcess = university.getApplicationProcess();
+		this.universitySlug = university.getUniversitySlug();
+		this.isUniversityActive = university.getIsUniversityActive();
+		this.dateOfCreation = university.getDateOfCreation();
+		this.courses = university.getCourses(); 
+	}
 
 	/*
 	 * Default constructor is created using lombok
 	 * Constructor using field created ommiting the id, course object and creation timestamp
 	*/
-	public University(Course course, String name, String location, String imageName, String description, String establishedYear,
-			String accomodation, String intakePeriod, String applicationProcess, String universitySlug) {
-		super();
-		this.name = name;
-		this.location = location;
-		this.imageName = imageName;
-		this.description = description;
-		this.establishedYear = establishedYear;
-		this.accomodation = accomodation;
-		this.intakePeriod = intakePeriod;
-		this.applicationProcess = applicationProcess;
-		this.universitySlug = universitySlug;
-		this.course=course;
-	}
-	
+		
 }

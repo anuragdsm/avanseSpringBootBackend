@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -14,11 +12,13 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.avanse.springboot.DTO.CourseDTO;
@@ -294,8 +294,29 @@ public class AdminController {
 		List<University> myUniversityList = universityService.getAllUniversity();
 		model.addAttribute("universities", myUniversityList);
 	}
-	
-	
+		
+	//Activate Deactivate university
+		@GetMapping("/admin/activateDeactivateUniversity/{id}/{action}")
+		@ResponseBody
+		@CrossOrigin("*")
+		public String activateDeactivateUniversity(@PathVariable(name = "id") long id, @PathVariable String action) {
+			System.out.println("Requested for University action = "+action+" for University id= "+id);
+			
+			if(action.equals("ActivateUniversity")) {
+				University university = universityService.getUniversityById(id).get();
+				university.setIsUniversityActive(true);
+				universityService.addUniversity(university);
+				return "University Activated!!";
+			} 
+			
+			else {
+				University university = universityService.getUniversityById(id).get();
+				university.setIsUniversityActive(false);
+				universityService.addUniversity(university);
+				return "University De-Activated!!";
+			}
+		}
+		
 
 	/*
 	 * ========================================== All Function below are related to
@@ -320,7 +341,7 @@ public class AdminController {
 	@GetMapping("/admin/courses/add")
 	public String coursesAddGet(Model model) {
 		model.addAttribute("courseDTO", new CourseDTO());
-		Course course = new Course();
+//		Course course = new Course();
 		
 		
 		/*
@@ -356,6 +377,8 @@ public class AdminController {
 		/*
 		 * Use the model attribute to transfer the data from course DTO to course object
 		 */
+		
+		University university = new University();
 		Course course = new Course();
 		course.setId(courseDTO.getId());
 		course.setTitle(courseDTO.getTitle());
@@ -365,7 +388,11 @@ public class AdminController {
 		course.setExams(courseDTO.getExams());
 		course.setFees(courseDTO.getFees());
 		course.setWriteup(courseDTO.getWriteup());
+		university.addTheCourse(course);
 		course.setUniversity(courseDTO.getUniversity());
+		
+		
+		
 		
 		courseService.addCourse(course);
 		
@@ -374,6 +401,7 @@ public class AdminController {
 
 		return "redirect:/admin/courses";
 	}
+	
 
 	/*
 	 * Function to delete a course by its id
