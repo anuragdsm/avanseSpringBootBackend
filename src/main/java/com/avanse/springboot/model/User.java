@@ -68,6 +68,11 @@ public class User {
 	
 	private List<Role> roles;
 	
+	
+	/*
+	 * Default Constructor very much needed in order to log in
+	 * Without this, hibernate doesn't allow to enter
+	*/
 	public User() {
 
 	}
@@ -84,6 +89,5 @@ public class User {
 		this.phoneNumber = user.getPhoneNumber();
 		this.city = user.getCity();
 		this.roles = user.getRoles();
-	}
-		
+	}		
 }
