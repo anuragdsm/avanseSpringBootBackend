@@ -25,8 +25,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.authorizeRequests()
 		.antMatchers("/admin/**").hasRole("ADMIN")
 		.antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
-		.antMatchers("/", "register").permitAll()
-		.antMatchers("/resources/**", "/static/**", "/images/**", "/css/**", "/js/**").permitAll()
+		.antMatchers("/","/index",  "/register").permitAll()
+		.antMatchers("/resources/**", "/static/**", "/images/**","/css/**","/scss/**","/vendor/**", "/js/**").permitAll()
 		.antMatchers("/addManualUser").permitAll() //this on to be deleted later, Only for testing
 		.anyRequest()
 		.authenticated()
@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.loginPage("/login")
 		.permitAll()
 		.failureUrl("/login?error= true")
-		.defaultSuccessUrl("/")
+		.defaultSuccessUrl("/admin")
 		.usernameParameter("email")
 		.passwordParameter("password")
 		.and()
@@ -56,8 +56,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
-	
 
 	/*
 	 * Need to override the default configure method because
@@ -66,8 +64,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception{
 		auth.userDetailsService(customUserDetailService);
-	}
-	
-	
-	
+	}	
 }

@@ -40,11 +40,6 @@ public class AdminController {
 	public static String universityUploadDir = System.getProperty("user.dir")
 			+ "/src/main/resources/static/images/universityImages";
 
-	/*
-	 * Variable of date type to rename the image to the current time stamp
-	 */
-	
-
 	@Autowired
 	UniversityService universityService;
 
@@ -61,6 +56,12 @@ public class AdminController {
 	 * Method to show the admin home page.
 	 */
 	@GetMapping("/admin")
+	public String adminDashboard() {
+		return "adminDashboard";
+	}
+	
+	
+	@GetMapping("/admin/manage")
 	public String adminHome() {
 		return "adminHome";
 	}
@@ -388,12 +389,9 @@ public class AdminController {
 		course.setExams(courseDTO.getExams());
 		course.setFees(courseDTO.getFees());
 		course.setWriteup(courseDTO.getWriteup());
-		university.addTheCourse(course);
-		course.setUniversity(courseDTO.getUniversity());
-		
-		
-		
-		
+//		university.addTheCourse(course);
+//		course.setUniversity(courseDTO.getUniversity());
+			
 		courseService.addCourse(course);
 		
 		System.out.println(course.toString());
@@ -430,6 +428,7 @@ public class AdminController {
 		courseDTO.setExams(course.getExams());
 		courseDTO.setFees(course.getFees());
 		courseDTO.setWriteup(course.getWriteup());
+//		course.setUniversity(courseDTO.getUniversity());
 
 		model.addAttribute("courseDTO", courseDTO);
 		return "coursesAdd";
