@@ -26,7 +26,7 @@ public class CourseService {
 	
 	@Transactional
 	public void addCourse(Course course) {
-		
+
 		courseRepository.save(course);
 	}
 	
