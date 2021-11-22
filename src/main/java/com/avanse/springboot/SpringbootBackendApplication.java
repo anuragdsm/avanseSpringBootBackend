@@ -16,8 +16,8 @@ public class SpringbootBackendApplication {
 //		UniversityRepository universityRepository = configurableApplicationContext.getBean(UniversityRepository.class);
 //		CourseRepository courseRepository = configurableApplicationContext.getBean(CourseRepository.class);
 	}
-
-		
+	
+//	Is github connected via mac?	
 	/*
 	 * Initial test
 	*/
