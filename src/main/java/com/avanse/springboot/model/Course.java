@@ -1,5 +1,6 @@
 package com.avanse.springboot.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -23,7 +24,9 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "courses")
-public class Course {
+public class Course implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
