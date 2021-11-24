@@ -44,7 +44,6 @@ public class CourseService {
 		return courseRepository.findById(id);
 	}
 	
-	
 	/*
 	 * Creating a service to get the list of all the courses according to
 	 * the university id... 
@@ -54,6 +53,12 @@ public class CourseService {
 		return courseRepository.findAllByUniversity_Id(id);
 	}
 	
+	/*
+	 * Returns the number of courses in the database
+	*/
+	public long numberOfCourses() {
+		return courseRepository.count();
+	}
 	
 	
 }

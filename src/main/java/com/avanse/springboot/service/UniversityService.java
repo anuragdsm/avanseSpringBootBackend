@@ -41,6 +41,12 @@ public class UniversityService {
 		return universityRepository.findById(id);
 	}
 	
+	/*
+	 * Returns the number of universities in the database
+	*/
+	public long numberOfUniversities() {
+		return universityRepository.count();
+	}
 	
 	
 	

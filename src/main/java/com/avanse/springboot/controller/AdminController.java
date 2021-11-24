@@ -433,4 +433,20 @@ public class AdminController {
 		model.addAttribute("courseDTO", courseDTO);
 		return "coursesAdd";
 	}
+	
+	
+	/*
+	 * ========================================== 
+	 * All Function below are related to pages 
+	 * ===========================================
+	 */
+
+	
+	
+	
+	
+	
+	
+	
+	
 }
