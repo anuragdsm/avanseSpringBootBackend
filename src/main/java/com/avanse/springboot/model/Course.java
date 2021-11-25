@@ -3,6 +3,7 @@ package com.avanse.springboot.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -31,20 +33,22 @@ public class Course implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "course_id")
-	private long id;
+	private Long id;
 
 	@CreationTimestamp
 	private Date dateOfCreation;
 
 	private String title;
 	private String duration;
+	
+	@Lob
+	@Basic
 	private String description;
 
-	private String writeup;
-
-	private double fees;
+	private Double fees;
 
 	private String exams;
+	
 	private String documentsRequired;
 
 	@ManyToOne

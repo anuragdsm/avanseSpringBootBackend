@@ -1,6 +1,5 @@
 package com.avanse.springboot.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.avanse.springboot.model.Course;
 import com.avanse.springboot.model.University;
 import com.avanse.springboot.repository.UniversityRepository;
 

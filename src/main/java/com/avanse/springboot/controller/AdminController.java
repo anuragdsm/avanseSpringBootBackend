@@ -140,7 +140,6 @@ public class AdminController {
 		university.setApplicationProcess(universityDTO.getApplicationProcess());
 		university.setDescription(universityDTO.getDescription());
 		university.setImageName(universityDTO.getImageName());
-		university.setUniversitySlug(universityDTO.getUniversitySlug());
 //		university.setCourses(universityDTO.getCourses().addAll(new ArrayList<Course>(Arrays.asList(null))));
 //		university.setCourses(universityDTO.getCourse();
 //;
@@ -264,7 +263,6 @@ public class AdminController {
 		universityDTO.setApplicationProcess(university.getApplicationProcess());
 		universityDTO.setDescription(university.getDescription());
 		universityDTO.setImageName(university.getImageName());
-		universityDTO.setUniversitySlug(university.getUniversitySlug());
 
 		model.addAttribute("universityDTO", universityDTO);
 		return "universitiesAdd";
@@ -388,7 +386,6 @@ public class AdminController {
 		course.setDocumentsRequired(courseDTO.getDocumentsRequired());
 		course.setExams(courseDTO.getExams());
 		course.setFees(courseDTO.getFees());
-		course.setWriteup(courseDTO.getWriteup());
 //		university.addTheCourse(course);
 //		course.setUniversity(courseDTO.getUniversity());
 			
@@ -427,7 +424,6 @@ public class AdminController {
 		courseDTO.setDuration(course.getDuration());
 		courseDTO.setExams(course.getExams());
 		courseDTO.setFees(course.getFees());
-		courseDTO.setWriteup(course.getWriteup());
 //		course.setUniversity(courseDTO.getUniversity());
 
 		model.addAttribute("courseDTO", courseDTO);
@@ -440,6 +436,17 @@ public class AdminController {
 	 * All Function below are related to pages 
 	 * ===========================================
 	 */
+	
+	@GetMapping("/admin/pagesAdd")
+	public String pagesAddGet() {
+		return "pagesAdd";
+	}
+	
+	/*
+	 * @PostMapping("/admin/pagesAdd") public String pagesAddPost() { return
+	 * "pagesAdd"; }
+	 */
+	
 
 	
 	

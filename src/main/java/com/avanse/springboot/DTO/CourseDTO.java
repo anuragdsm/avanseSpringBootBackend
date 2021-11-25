@@ -7,17 +7,16 @@ import lombok.Data;
 @Data
 public class CourseDTO {
 
-	private long id;
+	private Long id;
 
 	private String title;
 	private String duration;
 
-	private String writeup;
 	
 	private String description;
 
 
-	private double fees;
+	private Double fees;
 
 	private String exams;
 	private String documentsRequired;
