@@ -1,5 +1,7 @@
 package com.avanse.springboot.DTO;
 
+import java.util.Date;
+
 import com.avanse.springboot.model.University;
 
 import lombok.Data;
@@ -11,6 +13,9 @@ public class CourseDTO {
 
 	private String title;
 	private String duration;
+	
+	private Date dateOfCreation;
+
 
 	
 	private String description;

@@ -19,6 +19,8 @@ public class UniversityDTO {
 	private String accomodation;
 	private String intakePeriod;
 	private String applicationProcess;
+	
+	private Boolean isUniversityActive;
 
 	private Date dateOfCreation;
 
