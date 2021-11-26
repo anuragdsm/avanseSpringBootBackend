@@ -140,9 +140,7 @@ public class AdminController {
 		university.setApplicationProcess(universityDTO.getApplicationProcess());
 		university.setDescription(universityDTO.getDescription());
 		university.setImageName(universityDTO.getImageName());
-//		university.setCourses(universityDTO.getCourses().addAll(new ArrayList<Course>(Arrays.asList(null))));
-//		university.setCourses(universityDTO.getCourse();
-//;
+
 		/*
 		 * Create the imageUUID and using the nio package get the filename and the path
 		 */
@@ -358,7 +356,7 @@ public class AdminController {
 		
 
 		/*
-		 * Now use the  courseservice to actually add the object
+		 * Now use the  course service to actually add the object
 		*/
 		
 //		courseService.addCourse(course);
@@ -371,13 +369,13 @@ public class AdminController {
 	 */
 
 	@PostMapping("/admin/courses/add")
-	public String coursesAddPost(Model model, @ModelAttribute("courseDTO") CourseDTO courseDTO) {
+	public String coursesAddPost(@ModelAttribute("courseDTO") CourseDTO courseDTO) {
 
 		/*
 		 * Use the model attribute to transfer the data from course DTO to course object
 		 */
 		
-		University university = new University();
+//		University university = new University();
 		Course course = new Course();
 		course.setId(courseDTO.getId());
 		course.setTitle(courseDTO.getTitle());
@@ -387,7 +385,7 @@ public class AdminController {
 		course.setExams(courseDTO.getExams());
 		course.setFees(courseDTO.getFees());
 //		university.addTheCourse(course);
-//		course.setUniversity(courseDTO.getUniversity());
+		course.setUniversity(courseDTO.getUniversity());
 			
 		courseService.addCourse(course);
 		
