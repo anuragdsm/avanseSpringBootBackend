@@ -70,6 +70,10 @@ public class AdminController {
 	 */
 	@GetMapping("/admin")
 	public String adminDashboard() {
+
+		Long noOfUniversities = universityService.numberOfUniversities();
+		System.out.println("Number of University is " + noOfUniversities);
+
 		return "adminDashboard";
 	}
 
@@ -89,6 +93,7 @@ public class AdminController {
 	@GetMapping("/admin/universities")
 	public String getUniversities(Model model) {
 		model.addAttribute("universities", universityService.getAllUniversity());
+
 		return "universities";
 	}
 
@@ -432,41 +437,34 @@ public class AdminController {
 	 * ========================================== All Function below are related to
 	 * pages ===========================================
 	 */
-	
-	
-	
-	
+
 	/*
 	 * Method to show the pages.html
-	
-	*/
-	
+	 * 
+	 */
+
 	@GetMapping("/admin/pages")
 	public String getPages(Model model) {
 		model.addAttribute("pages", pageService.getAllPages());
 		return "pages";
 	}
-	
-	
-	
-	
+
 	/*
-	 * Method to add a page but need implement both get and post
-	 * mapping for adding the university
-	 *  
-	*/
+	 * Method to add a page but need implement both get and post mapping for adding
+	 * the university
+	 * 
+	 */
 
 	@GetMapping("/admin/pages/add")
 	public String pagesAddGet(Model model) {
 		model.addAttribute("pageDTO", new PageDTO());
 		return "pagesAdd";
 	}
-	
-	
+
 	/*
 	 * The post mapping will be able to create a new file at the run time
 	 * 
-	*/
+	 */
 
 	@ResponseBody
 	@PostMapping("/admin/pages/add")
@@ -476,7 +474,9 @@ public class AdminController {
 
 		page.setId(pageDTO.getId());
 		page.setPageTitle(pageDTO.getPageTitle());
-		page.setSubTitle(pageDTO.getSubTitle());
+		page.setBannerHeading(pageDTO.getBannerHeading());
+		page.setBannerSubHeading(pageDTO.getBannerSubHeading());
+		
 //		page.setPageLayout(pageDTO.getPageLayout());
 		page.setMainSection(pageDTO.getMainSection());
 		page.setContent1(pageDTO.getContent1());
@@ -484,7 +484,6 @@ public class AdminController {
 
 		page.setBannerImageName(pageDTO.getBannerImageName());
 		page.setBannerImageAlt(pageDTO.getBannerImageAlt());
-		page.setHeaderTitle(pageDTO.getHeaderTitle());
 		page.setCssCode(pageDTO.getCssCode());
 		page.setJsCode(pageDTO.getJsCode());
 
@@ -496,49 +495,105 @@ public class AdminController {
 		/*
 		 * Creating a new html template
 		 */
-		
+
 		String extention = ".html";
 
 		/*
-		 * Before creating the html file, we have to ensure that two files 
-		 * do not get 
-		*/
-		
-		String htmlFileName = pageDTO.getPageTitle();
-		List<Page> allPages = pageRepository.findAll();
+		 * Before creating the html file, we have to ensure that two files do not get
+		 */
 
+		String htmlFileName = pageDTO.getPageTitle().replaceAll(" ","-").toLowerCase();
+		List<Page> allPages = pageRepository.findAll();
 		Iterator<Page> iterator = allPages.iterator();
 
+		/*
+		 * Rename the file if the file with the same name already exist
+		 */
+		
 		int count = 0;
-		
-		
-		
-		
 		while (iterator.hasNext()) {
 			Page pageUnderEvaluation = iterator.next();
-			if (pageUnderEvaluation.getPageTitle().equalsIgnoreCase(htmlFileName)) {
+			if (pageUnderEvaluation.getMetaTitle().equalsIgnoreCase(htmlFileName)) {
 				htmlFileName += ++count;
 			}
-
-			htmlFileName += extention;
-			
-			try {
-				Path fileNameAndPath = Paths.get(newPageAddDir, htmlFileName);
-				Files.createFile(fileNameAndPath);
-							
-			}catch (IOException e) {
-				// TODO: handle exception
-				
-			}
+		} //Problem will occur when user will enter 3 the same name for more than 2 times...
+		// Some code will have to be written to handle this problem using string and regex manipulation
 		
-		}
+//		htmlFileName.
 
+		htmlFileName += extention;
+
+		try {
+			Path fileNameAndPath = Paths.get(newPageAddDir, htmlFileName);
+			Files.createFile(fileNameAndPath);
+
+		} catch (IOException e) {
+			// TODO: handle exception
+
+		}
+		
+		/*
+		 * Now save the file name in the database so as to access the 
+		 * file in the future while updating...
+		 * Searching with the exact file name will be required.
+		*/
+		pageDTO.setFileName(htmlFileName);
+		page.setFileName(pageDTO.getFileName());
+	
 //		htmlPage
 
 		pageService.addPage(page);
-		return "page Added sucessfully";
-//		  return "redirect:/admin/universities";
+		
+		
+		/*
+		 * Logic for adding the content in the file to be over here
+		 * It the end publish the page...
+		*/
+		
+		String codeInFile = htmlBoilerPlate(pageDTO.getMetaTitle(),
+											pageDTO.getBannerHeading(), 
+											pageDTO.getBannerSubHeading(),
+											pageDTO.getMetaDescription(),
+											pageDTO.getMainSection(),
+											pageDTO.getCssCode());
+		
+		System.out.println("The following code will be there in the file "+codeInFile);
+		
+		
+			
+		return "page Added sucessfully" + codeInFile;
+//		  return "redirect:/admin/pages";
 
+	}
+
+	private String htmlBoilerPlate(String metaTitle, String bannerHeading, String bannerSubheading, String metaDescription, String mainSection, String cSSCode) {
+		// TODO Auto-generated method stub
+		
+		/*
+		 * initial code
+		*/
+		String initCode;
+		initCode = "<!DOCTYPE html>\r\n"
+				+ "<html lang=\"en\">\r\n"
+				+ "  <head>\r\n"
+				+ "    <meta charset=\"UTF-8\">\r\n"
+				+ "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n"
+				+ "    <meta name=\"description\" content=\"+metaDescription+\">\r\n"
+				+ "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\r\n"
+				+ "    <title>"+metaTitle+"</title>\r\n"
+				+ "    <h1>"+bannerHeading+"</h1>\r\n"
+				+ "    <h2>"+bannerSubheading+"</h2>\r\n"
+				+ "    <link rel=\"stylesheet\" href=\"css/sb-admin-2.min.css\">\r\n"
+				+ "    <style>\r\n"+cSSCode+"\r\n"+"</style>"
+				+ "  </head>\r\n"
+				+ "  <body>\r\n"
+				+ mainSection 
+				+ "  \r\n"
+				+ "  </body>\r\n"
+				+ "  </html>";
+		
+		return initCode;
+		
 	}
 
 }

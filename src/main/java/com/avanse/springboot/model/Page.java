@@ -30,10 +30,22 @@ public class Page implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String fileName;
+	private String pageTitle;
 	
-//	@NotEmpty
-	private String pageTitle; 
-	private String subTitle;
+	
+	/*
+	 * Banner variables
+	*/
+	private String bannerHeading; 
+	private String bannerSubHeading;
+	
+	/*
+	 * image variables
+	*/
+	private String bannerImageName;
+	private String bannerImageAlt;
+	
 	
 	/*
 	 * The value of 1 will represent Full page
@@ -53,17 +65,7 @@ public class Page implements Serializable {
 	@Lob
 	@Basic
 	private String content2;
-	
-	
-	
-	/*
-	 * image variables
-	*/
-	private String bannerImageName;
-	private String bannerImageAlt;
-	
-	private String headerTitle;
-	
+		
 	/*
 	 * Codes by the admin
 	*/
@@ -89,18 +91,18 @@ public class Page implements Serializable {
 	 * public Page() { // TODO Auto-generated constructor stub }
 	 */
 
-	public Page(String pageTitle, String subTitle, String mainSection, String content1,
-			String content2, String bannerImageName, String bannerImageAlt, String headerTitle, String cssCode,
-			String jsCode, String metaTitle, String metaKeyword, String metaDescription) {
-		super();
+	public Page(String pageTitle, String bannerHeading, String bannerSubHeading, String bannerImageName,
+			String bannerImageAlt, String mainSection, String content1, String content2, String cssCode, String jsCode,
+			String metaTitle, String metaKeyword, String metaDescription) {
+//		super();
 		this.pageTitle = pageTitle;
-		this.subTitle = subTitle;
+		this.bannerHeading = bannerHeading;
+		this.bannerSubHeading = bannerSubHeading;
+		this.bannerImageName = bannerImageName;
+		this.bannerImageAlt = bannerImageAlt;
 		this.mainSection = mainSection;
 		this.content1 = content1;
 		this.content2 = content2;
-		this.bannerImageName = bannerImageName;
-		this.bannerImageAlt = bannerImageAlt;
-		this.headerTitle = headerTitle;
 		this.cssCode = cssCode;
 		this.jsCode = jsCode;
 		this.metaTitle = metaTitle;
@@ -112,6 +114,5 @@ public class Page implements Serializable {
 	
 	
 
-	
 
 }
