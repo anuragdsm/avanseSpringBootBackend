@@ -4,10 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.avanse.springboot.model.CustomUserDetail;
 import com.avanse.springboot.model.Page;
+import com.avanse.springboot.model.User;
 import com.avanse.springboot.repository.PageRepository;
 
 @Service
@@ -33,8 +37,6 @@ public class PageService {
 		pageRepository.deleteById(id);	
 	}
 	
-	
-	
 	/*
 	 * Save the page object details into the database
 	*/
@@ -44,7 +46,6 @@ public class PageService {
 		pageRepository.save(page);
 		
 	}
-	
 	
 	/*
 	 * Return a page on requesting an id
@@ -61,14 +62,5 @@ public class PageService {
 	public long numberOfPages() {
 		return pageRepository.count();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

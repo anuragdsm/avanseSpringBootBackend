@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 @Table(name = "pages")
 public class Page implements Serializable {
 	
@@ -31,7 +31,7 @@ public class Page implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotEmpty
+//	@NotEmpty
 	private String pageTitle; 
 	private String subTitle;
 	
@@ -39,7 +39,8 @@ public class Page implements Serializable {
 	 * The value of 1 will represent Full page
 	 * The value of 2 will represent Box Container
 	*/
-	private Integer pageLayout; 
+	
+//	private Integer pageLayout; 
 	
 	@Lob
 	@Basic
@@ -84,6 +85,30 @@ public class Page implements Serializable {
 	@Lob
 	@Basic
 	private String metaDescription;
+	/*
+	 * public Page() { // TODO Auto-generated constructor stub }
+	 */
+
+	public Page(String pageTitle, String subTitle, String mainSection, String content1,
+			String content2, String bannerImageName, String bannerImageAlt, String headerTitle, String cssCode,
+			String jsCode, String metaTitle, String metaKeyword, String metaDescription) {
+		super();
+		this.pageTitle = pageTitle;
+		this.subTitle = subTitle;
+		this.mainSection = mainSection;
+		this.content1 = content1;
+		this.content2 = content2;
+		this.bannerImageName = bannerImageName;
+		this.bannerImageAlt = bannerImageAlt;
+		this.headerTitle = headerTitle;
+		this.cssCode = cssCode;
+		this.jsCode = jsCode;
+		this.metaTitle = metaTitle;
+		this.metaKeyword = metaKeyword;
+		this.metaDescription = metaDescription;
+	}
+	
+	
 	
 	
 

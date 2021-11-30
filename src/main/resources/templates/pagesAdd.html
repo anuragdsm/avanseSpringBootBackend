@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>University Add</title>
+<title>Page Add</title>
 
 <!-- Custom fonts for this template-->
 <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -374,43 +374,33 @@
 							</h6>
 						</div>
 
-
-
-
 						<div class="card-body">
-							<form class="form-horizontal" method="POST" action=""
+							<form th:action="@{/admin/pages/add}" class="form-horizontal" method="post" th:object="${pageDTO}" 
 								enctype="multipart/form-data">
 
-								<input type="hidden" required="" name="id" value=""> <input
+								<input type="hidden" name="id" th:field="*{id}"> <input
 									type="hidden" required="" name="old_slug" value="">
 
 								<div class="card-header py-3 mb-4">
 									<h6 class="m-0 font-weight-bold text-primary">Page Details</h6>
 								</div>
-
-
-
-
-
-
 								​
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">Page
 										Title (Required)</label>
 									<div class="col-sm-10">
-										<input type="text" required=""
+										<input type="text" required th:field="*{pageTitle}"
 											class="form-control get_url_name" id="page_title"
-											name="page_title" value="">
+											name="page_title" >
 									</div>
 								</div>
 								​
-
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">Sub
 										Title</label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control " id="sub_title"
-											name="sub_title" value="">
+											name="sub_title" value="" th:field="*{subTitle}">
 									</div>
 								</div>
 
@@ -418,6 +408,10 @@
 								<div class="card-header py-3 mb-4">
 									<h6 class="m-0 font-weight-bold text-primary">Content</h6>
 								</div>
+								
+								
+								
+<!-- Layout temporarily omitted 
 
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-6 control-label">Page
@@ -427,27 +421,27 @@
 										<div class="form-check-inline">
 											<label class="form-check-label" for="full_page"> <input
 												type="radio" class="form-check-input" id="full_page"
-												name="page_layout" value="Full Page" checked>Full
+												name="page_layout" value="Full Page" th:field="*{pageLayout}" checked>Full
 												Page
 											</label>
 										</div>
 										<div class="form-check-inline">
 											<label class="form-check-label" for="box_container">
 												<input type="radio" class="form-check-input"
-												id="box_container" name="page_layout" value="Box Container">Box
+												id="box_container" name="page_layout" value="Box Container" th:field="*{pageLayout}">Box
 												Container
 											</label>
 										</div>
 									</div>
 								</div>
 
-								​
+ -->								​
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">Main
 										Section (Required)</label> ​
 									<div class="col-sm-10">
 										<textarea class="form-control summernote" id="summernote"
-											name="main_section"></textarea>
+											name="main_section" th:field="*{mainSection}" ></textarea>
 
 										​
 									</div>
@@ -458,7 +452,7 @@
 										1</label> ​
 									<div class="col-sm-10">
 										<textarea class="form-control summernote" id="summernote"
-											name="content1"></textarea>
+											name="content1" th:field="*{content1}" ></textarea>
 
 										​
 									</div>
@@ -469,7 +463,7 @@
 										2</label> ​
 									<div class="col-sm-10">
 										<textarea class="form-control summernote" id="summernote"
-											name="content2"></textarea>
+											name="content2" th:field="*{content2}"></textarea>
 
 										​
 									</div>
@@ -486,7 +480,7 @@
 									<div class="col-sm-10">
 
 
-										<img src="" height="100px"> <br /> Delete <input
+										<img src="" height="100px"> <br /> Delete <input th:field="*{bannerImageName}"
 											type="checkbox" name="image_delete" value="1"> <input
 											type="file" name="image" id="image"
 											accept="image/jpeg,image/gif,image/x-png,video/*">
@@ -500,7 +494,7 @@
 										Image Alt</label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control" id="image_alt"
-											name="image_alt" value="">
+											name="image_alt" value="" th:field="*{bannerImageAlt}">
 									</div>
 								</div>
 								​
@@ -509,7 +503,7 @@
 										Title</label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control" id="header_title"
-											name="header_title" value="">
+											name="header_title" value="" th:field="*{headerTitle}">
 									</div>
 								</div>
 
@@ -523,7 +517,7 @@
 										Code</label>
 
 									<div class="col-sm-10">
-										<textarea class="form-control" id="css_code" name="css_code"></textarea>
+										<textarea class="form-control" id="css_code" name="css_code" th:field="*{cssCode}"></textarea>
 
 
 									</div>
@@ -534,7 +528,7 @@
 										Code</label>
 
 									<div class="col-sm-10">
-										<textarea class="form-control" id="js_code" name="js_code"></textarea>
+										<textarea class="form-control" id="js_code" name="js_code" th:field="*{jsCode}"></textarea>
 
 
 									</div>
@@ -549,7 +543,7 @@
 										Title</label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control " id="meta_title"
-											name="meta_title" value="">
+											name="meta_title" value="" th:field="*{metaTitle}">
 									</div>
 								</div>
 
@@ -560,7 +554,7 @@
 
 									<div class="col-sm-10">
 										<textarea class="form-control" id="meta_keywords"
-											name="meta_keywords"></textarea>
+											name="meta_keywords" th:field="*{metaKeyword}"></textarea>
 
 
 									</div>
@@ -572,7 +566,7 @@
 
 									<div class="col-sm-10">
 										<textarea class="form-control" id="meta_description"
-											name="meta_description"></textarea>
+											name="meta_description" th:field="*{metaDescription}"></textarea>
 
 									</div>
 								</div>

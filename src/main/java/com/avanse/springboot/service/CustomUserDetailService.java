@@ -26,5 +26,4 @@ public class CustomUserDetailService implements UserDetailsService{
 		return user.map(CustomUserDetail::new).get();
 	}
 	
-
 }

@@ -16,7 +16,7 @@ public class PageDTO {
 	 * The value of 1 will represent Full page
 	 * The value of 2 will represent Box Container
 	*/
-	private Integer pageLayout; 
+//	private Integer pageLayout; 
 	private String mainSection;
 	
 		private String content1;
