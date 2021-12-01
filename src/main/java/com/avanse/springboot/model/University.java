@@ -92,37 +92,6 @@ public class University implements Serializable {
 	}
 	
 	
-	
-	//	@JoinTable(name="university_course", 
-//				joinColumns = {@JoinColumn(name="UNIVERSITY_ID", referencedColumnName = "UNIVERSITY_ID")},
-//				inverseJoinColumns = {@JoinColumn(name="COURSE_ID", referencedColumnName = "COURSE_ID")})
-//	private List<Course> courses;
-	
-	
-	/*Function to create a bidirectional link between the two tables.
-	 * We will have to use the this keyword to pass it as the argument.
-	 * 
-	*/
-	/*
-	 * public void addTheCourse(Course tempCourse) {
-	 * 
-	 * if(courses == null) { courses = new ArrayList<Course>(); }
-	 * 
-	 * courses.add(tempCourse); tempCourse.setUniversity(this); }
-	 */
-	
-	/*
-	 * public University(University university) { super(); this.name =
-	 * university.getName(); this.location = university.getLocation();
-	 * this.imageName = university.getImageName(); this.description =
-	 * university.getDescription(); this.establishedYear =
-	 * university.getEstablishedYear(); this.accomodation =
-	 * university.getAccomodation(); this.intakePeriod =
-	 * university.getIntakePeriod(); this.applicationProcess =
-	 * university.getApplicationProcess(); this.isUniversityActive =
-	 * university.getIsUniversityActive(); this.dateOfCreation =
-	 * university.getDateOfCreation(); this.courses = university.getCourses(); }
-	 */
 	/*
 	 * Default constructor is created using lombok
 	 * Constructor using field created ommiting the id, course object and creation timestamp

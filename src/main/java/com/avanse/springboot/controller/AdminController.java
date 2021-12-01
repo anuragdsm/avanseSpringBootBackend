@@ -539,10 +539,14 @@ public class AdminController {
 		*/
 		pageDTO.setFileName(htmlFileName);
 		page.setFileName(pageDTO.getFileName());
+		
+		pageService.addPage(page);
+		
+		
+
 	
 //		htmlPage
 
-		pageService.addPage(page);
 		
 		
 		/*
@@ -559,8 +563,17 @@ public class AdminController {
 		
 		System.out.println("The following code will be there in the file "+codeInFile);
 		
+		pageDTO.setConsolidatedHTMLCode(codeInFile);
+		page.setConsolidatedHTMLCode(pageDTO.getConsolidatedHTMLCode());
 		
-			
+		Date lastModifiedDate = new Date();
+		
+		pageDTO.setLastModified(lastModifiedDate);
+		page.setLastModified(pageDTO.getLastModified());
+		
+		pageService.addPage(page);
+
+		
 		return "page Added sucessfully" + codeInFile;
 //		  return "redirect:/admin/pages";
 
@@ -591,9 +604,41 @@ public class AdminController {
 				+ "  \r\n"
 				+ "  </body>\r\n"
 				+ "  </html>";
-		
 		return initCode;
+	}
+	
+	/*
+	 * Funtion to delete a page from the database and the server
+	 * 
+	*/
+	
+	@GetMapping("/admin/page/delete/{id}")
+	public String deletePage(@PathVariable long id) {
+		
+		/*
+		 * Basic check if the page already exist or not
+		*/
+		
+		if(pageRepository.findById(id).isPresent()) {
+			deleteHtmlFileFromAddedPagesFolder(id);
+			pageService.removePageById(id);
+		}
+		
+		else {
+			System.out.println("Cannot delete the object");
+		}
+		return "redirect:/admin/pages";
 		
 	}
 
+	private void deleteHtmlFileFromAddedPagesFolder(@PathVariable long id) {
+		// TODO Auto-generated method stub
+		Page htmlFileToBeDeleted = pageService.getPageById(id).get();
+		String theFile = htmlFileToBeDeleted.getFileName();	
+		File file = new File(newPageAddDir + "/" + theFile);		
+		if(file.exists())file.delete();
+	}
+	
+	
+//	End of class
 }

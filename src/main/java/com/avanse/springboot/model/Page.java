@@ -1,6 +1,7 @@
 package com.avanse.springboot.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -9,9 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 
-import lombok.AllArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -30,6 +31,15 @@ public class Page implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@CreationTimestamp
+	private Date dateOfCreation;
+	
+	private Date lastModified;
+	
+	private Boolean isPageActive=false;
+	
+	
 	private String fileName;
 	private String pageTitle;
 	
@@ -76,6 +86,10 @@ public class Page implements Serializable {
 	@Lob
 	@Basic
 	private String jsCode;
+	
+	@Lob
+	@Basic
+	private String consolidatedHTMLCode;
 	
 	/*
 	 * SEO variables

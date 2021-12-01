@@ -1,11 +1,16 @@
 package com.avanse.springboot.DTO;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
 public class PageDTO {
 
 	private Long id;
+	private Date dateOfCreation;
+	private Date lastModified;
+	private Boolean isPageActive;
 
 	private String fileName;
 	private String pageTitle;
@@ -24,7 +29,7 @@ public class PageDTO {
 	 * Container
 	 */
 //	private Integer pageLayout; 
-	
+
 	private String mainSection;
 	private String content1;
 	private String content2;
@@ -34,6 +39,8 @@ public class PageDTO {
 	 */
 	private String cssCode;
 	private String jsCode;
+	private String consolidatedHTMLCode;
+
 
 	/*
 	 * SEO variables
