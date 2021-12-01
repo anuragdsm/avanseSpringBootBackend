@@ -74,7 +74,6 @@ public class University implements Serializable {
 	
 	/*
 	 * University constructors using the important fields
-	
 	*/	
 	
 	public University(String name, String location, String imageName, String description, Integer establishedYear,
@@ -90,11 +89,9 @@ public class University implements Serializable {
 		this.applicationProcess = applicationProcess;
 		this.isUniversityActive = isUniversityActive;
 	}
-	
-	
+		
 	/*
 	 * Default constructor is created using lombok
 	 * Constructor using field created ommiting the id, course object and creation timestamp
 	*/
-		
 }

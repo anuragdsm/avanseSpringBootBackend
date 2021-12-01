@@ -27,13 +27,28 @@ public class Lead {
 	
 	@CreationTimestamp
 	private Date leadGenerationTime;
+
+	/*
+	*/
 	
 	private String lastName;
 	private String email;	
 	private String phoneNumber;
+	private String country;
+	private String city;
+	
 	private String customMessage;
-	private String universityInterested;
+	private String countryInterested; 
+	private String universityInterested; 
 	private String courseInterested;
+	
+	private Long loanAmount;
+	private String admissionStatus;
+	
+	
+//	I authorize Avanse Financial Services to connect with me over call and Whatsapp overriding my registration with NDNC
+
+//	private Boolean userPermission; can be implemented later
 	
 	/*
 	 * default constructor

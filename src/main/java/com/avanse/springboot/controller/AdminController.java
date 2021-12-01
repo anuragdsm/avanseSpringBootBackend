@@ -266,7 +266,6 @@ public class AdminController {
 		 * While update, the old image is to be removed... Hence calling deleteimage
 		 * from static method
 		 */
-		deleteImageFromStaticFolder(id);
 
 		universityDTO.setId(university.getId());
 		universityDTO.setName(university.getName());
@@ -279,6 +278,11 @@ public class AdminController {
 		universityDTO.setImageName(university.getImageName());
 
 		model.addAttribute("universityDTO", universityDTO);
+		
+		deleteImageFromStaticFolder(id);
+
+		
+		
 		return "universitiesAdd";
 	}
 
@@ -572,11 +576,26 @@ public class AdminController {
 		page.setLastModified(pageDTO.getLastModified());
 		
 		pageService.addPage(page);
+		
+		try {
+			pushCodeInFile(codeInFile, pageDTO.getFileName());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		
 		return "page Added sucessfully" + codeInFile;
 //		  return "redirect:/admin/pages";
 
+	}
+
+	private void pushCodeInFile(String codeInFile, String fileName) throws IOException {
+		// TODO Auto-generated method stub
+				
+		Path fileNameAndPath = Paths.get(newPageAddDir, fileName);
+		Files.write(fileNameAndPath, codeInFile.getBytes());
+		
 	}
 
 	private String htmlBoilerPlate(String metaTitle, String bannerHeading, String bannerSubheading, String metaDescription, String mainSection, String cSSCode) {
@@ -638,6 +657,49 @@ public class AdminController {
 		File file = new File(newPageAddDir + "/" + theFile);		
 		if(file.exists())file.delete();
 	}
+	
+	@GetMapping("/admin/page/edit/{id}")
+	public String editPage(@PathVariable long id, Model model) {
+		Page page = pageService.getPageById(id).get();
+		PageDTO pageDTO = new PageDTO();
+		
+		
+		pageDTO.setId(page.getId());
+		pageDTO.setPageTitle(page.getPageTitle());
+		pageDTO.setBannerHeading(page.getBannerHeading());
+		pageDTO.setBannerSubHeading(page.getBannerSubHeading());
+		
+//		page.setPageLayout(pageDTO.getPageLayout());
+		pageDTO.setMainSection(page.getMainSection());
+		pageDTO.setContent1(page.getContent1());
+		pageDTO.setContent2(page.getContent2());
+
+		pageDTO.setBannerImageName(page.getBannerImageName());
+		pageDTO.setBannerImageAlt(page.getBannerImageAlt());
+		pageDTO.setCssCode(page.getCssCode());
+		pageDTO.setJsCode(page.getJsCode());
+
+		pageDTO.setMetaTitle(page.getMetaTitle());
+		pageDTO.setMetaKeyword(page.getMetaKeyword());
+
+		pageDTO.setMetaDescription(page.getMetaDescription());
+		
+		model.addAttribute("pageDTO", pageDTO);
+				
+		return "pagesAdd";
+	}
+	
+	/*
+	 * Write a function to write the code into the html file
+	 * This function will be called in both add and edit function...
+	 * We Dont need to call the write to file using edit
+	 * becuase edit will eventually be called from only pages add...
+	 * But keeping it in a function is a better idea, any day...
+	*/
+	
+
+	
+	
 	
 	
 //	End of class
