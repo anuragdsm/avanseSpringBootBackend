@@ -31,9 +31,7 @@ public class PageDTO {
 //	private Integer pageLayout; 
 
 	private String mainSection;
-	private String content1;
-	private String content2;
-
+	
 	/*
 	 * Codes by the admin
 	 */

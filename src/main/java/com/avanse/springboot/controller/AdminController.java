@@ -483,9 +483,7 @@ public class AdminController {
 		
 //		page.setPageLayout(pageDTO.getPageLayout());
 		page.setMainSection(pageDTO.getMainSection());
-		page.setContent1(pageDTO.getContent1());
-		page.setContent2(pageDTO.getContent2());
-
+		
 		page.setBannerImageName(pageDTO.getBannerImageName());
 		page.setBannerImageAlt(pageDTO.getBannerImageAlt());
 		page.setCssCode(pageDTO.getCssCode());
@@ -644,7 +642,7 @@ public class AdminController {
 		}
 		
 		else {
-			System.out.println("Cannot delete the object");
+			System.out.println("Cannot delete the page");
 		}
 		return "redirect:/admin/pages";
 		
@@ -658,6 +656,15 @@ public class AdminController {
 		if(file.exists())file.delete();
 	}
 	
+	/*
+	 * Write a function to write the code into the html file
+	 * This function will be called in both add and edit function...
+	 * We Dont need to call the write to file using edit
+	 * becuase edit will eventually be called from only pages add...
+	 * But keeping it in a function is a better idea, any day...
+	*/
+	
+	
 	@GetMapping("/admin/page/edit/{id}")
 	public String editPage(@PathVariable long id, Model model) {
 		Page page = pageService.getPageById(id).get();
@@ -668,37 +675,18 @@ public class AdminController {
 		pageDTO.setPageTitle(page.getPageTitle());
 		pageDTO.setBannerHeading(page.getBannerHeading());
 		pageDTO.setBannerSubHeading(page.getBannerSubHeading());
-		
 //		page.setPageLayout(pageDTO.getPageLayout());
 		pageDTO.setMainSection(page.getMainSection());
-		pageDTO.setContent1(page.getContent1());
-		pageDTO.setContent2(page.getContent2());
-
 		pageDTO.setBannerImageName(page.getBannerImageName());
 		pageDTO.setBannerImageAlt(page.getBannerImageAlt());
 		pageDTO.setCssCode(page.getCssCode());
 		pageDTO.setJsCode(page.getJsCode());
-
 		pageDTO.setMetaTitle(page.getMetaTitle());
 		pageDTO.setMetaKeyword(page.getMetaKeyword());
-
 		pageDTO.setMetaDescription(page.getMetaDescription());
-		
-		model.addAttribute("pageDTO", pageDTO);
-				
+		model.addAttribute("pageDTO", pageDTO);	
 		return "pagesAdd";
 	}
-	
-	/*
-	 * Write a function to write the code into the html file
-	 * This function will be called in both add and edit function...
-	 * We Dont need to call the write to file using edit
-	 * becuase edit will eventually be called from only pages add...
-	 * But keeping it in a function is a better idea, any day...
-	*/
-	
-
-	
 	
 	
 	

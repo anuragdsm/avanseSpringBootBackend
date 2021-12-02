@@ -68,13 +68,6 @@ public class Page implements Serializable {
 	@Basic
 	private String mainSection;
 	
-	@Lob
-	@Basic
-	private String content1;
-	
-	@Lob
-	@Basic
-	private String content2;
 		
 	/*
 	 * Codes by the admin
@@ -106,7 +99,7 @@ public class Page implements Serializable {
 	 */
 
 	public Page(String pageTitle, String bannerHeading, String bannerSubHeading, String bannerImageName,
-			String bannerImageAlt, String mainSection, String content1, String content2, String cssCode, String jsCode,
+			String bannerImageAlt, String mainSection, String cssCode, String jsCode,
 			String metaTitle, String metaKeyword, String metaDescription) {
 //		super();
 		this.pageTitle = pageTitle;
@@ -115,8 +108,7 @@ public class Page implements Serializable {
 		this.bannerImageName = bannerImageName;
 		this.bannerImageAlt = bannerImageAlt;
 		this.mainSection = mainSection;
-		this.content1 = content1;
-		this.content2 = content2;
+		
 		this.cssCode = cssCode;
 		this.jsCode = jsCode;
 		this.metaTitle = metaTitle;
