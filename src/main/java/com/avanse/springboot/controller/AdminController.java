@@ -30,9 +30,11 @@ import com.avanse.springboot.model.Page;
 import com.avanse.springboot.model.University;
 import com.avanse.springboot.repository.CourseRepository;
 import com.avanse.springboot.repository.PageRepository;
+import com.avanse.springboot.repository.PostRepository;
 import com.avanse.springboot.repository.UniversityRepository;
 import com.avanse.springboot.service.CourseService;
 import com.avanse.springboot.service.PageService;
+import com.avanse.springboot.service.PostService;
 import com.avanse.springboot.service.UniversityService;
 
 import lombok.AllArgsConstructor;
@@ -64,6 +66,12 @@ public class AdminController {
 
 	@Autowired
 	PageService pageService;
+	
+	@Autowired
+	PostRepository postRepository;
+	
+	@Autowired
+	PostService  postService;
 
 	/*
 	 * Method to show the admin home page.
@@ -686,6 +694,17 @@ public class AdminController {
 		pageDTO.setMetaDescription(page.getMetaDescription());
 		model.addAttribute("pageDTO", pageDTO);	
 		return "pagesAdd";
+	}
+	
+	
+	/*
+	 * Below functions will be used to create the posts 
+	*/
+	
+	@GetMapping("/admin/posts")
+	public String getPosts(/*Model model*/) {
+//		model.addAttribute("posts", postService.getAllPosts());
+		return "posts";
 	}
 	
 	

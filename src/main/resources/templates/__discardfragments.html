@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="html_head">
-<meta charset="utf-8">
+<meta charset="ISO-8859-1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,14 +11,15 @@
 <title>[[${pageTitle}]] -Dashboard</title>
 
 <!-- Custom fonts for this template-->
-<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+<link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
 	type="text/css">
+	
 <link
 	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
 	rel="stylesheet">
 
 <!-- Custom styles for this template-->
-<link href="css/sb-admin-2.min.css" rel="stylesheet">
+<link href="/css/sb-admin-2.min.css" rel="stylesheet">
 
 <style>
     #wrapper ul { 
@@ -94,9 +95,8 @@ Take help to increase tehe width of Menu and disable the scroll bar
 <body>
 
 	<!-- Page Wrapper -->
-	<div id="wrapper" th:fragment="html_sideMenu">
-	
-	
+	<div id="wrapper">
+	<div th:fragment = "html_sideMenu"></div>
 
 		<!-- Sidebar -->
 		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -125,9 +125,7 @@ Take help to increase tehe width of Menu and disable the scroll bar
                 <div class="sidebar-heading">
                     Marketing
                 </div>
-
-                
-
+              
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item active">
                     <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
@@ -201,8 +199,7 @@ Take help to increase tehe width of Menu and disable the scroll bar
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Manage Posts:</h6>
                             <a class="collapse-item" href="utilities-color.html">Add Menu</a>
-                            <a class="collapse-item" href="utilities-border.html">View Posts</a>
-                        
+                            <a class="collapse-item" href="utilities-border.html">View Posts</a>  
                         </div>
                     </div>
                 </li>
@@ -424,36 +421,10 @@ Take help to increase tehe width of Menu and disable the scroll bar
 
             </ul>		<!-- End of Sidebar -->
 		<!-- End of Sidebar -->
+		
+		</div>
 
-		<!-- Content Wrapper -->
-		<div id="content-wrapper" class="d-flex flex-column">
 
-			<!-- Main Content -->
-			<div id="content">
-
-				<!-- Topbar -->
-				<nav
-					class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-					<!-- Sidebar Toggle (Topbar) -->
-					<button id="sidebarToggleTop"
-						class="btn btn-link d-md-none rounded-circle mr-3">
-						<i class="fa fa-bars"></i>
-					</button>
-
-					<!-- Topbar Search -->
-					<form
-						class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-						<div class="input-group">
-							<input type="text" class="form-control bg-light border-0 small"
-								placeholder="Search for..." aria-label="Search"
-								aria-describedby="basic-addon2">
-							<div class="input-group-append">
-								<button class="btn btn-primary" type="button">
-									<i class="fas fa-search fa-sm"></i>
-								</button>
-							</div>
-						</div>
-					</form>
+					
 </body>
 </html>

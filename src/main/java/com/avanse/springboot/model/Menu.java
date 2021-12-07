@@ -19,12 +19,14 @@ import lombok.Setter;
 @Table(name = "Menu")
 public class Menu implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	
-	private String name;
-	
+	private Integer id;	
+	private String name;	
 	private String link;
 	
 	/*
@@ -37,12 +39,11 @@ public class Menu implements Serializable {
 		this.name = name;
 		this.link = link;
 	}
-
+	
 	public Menu(String name) {
 		super();
 		this.name = name;
 	}
-	
 }
 
 

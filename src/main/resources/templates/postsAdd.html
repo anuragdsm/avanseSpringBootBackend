@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Pages</title>
+<title>Page Add</title>
 
 <!-- Custom fonts for this template-->
 <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -21,6 +21,9 @@
 
 <!-- Custom styles for this template-->
 <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+<link href="/vendor/summernote/summernote/summernote-bs4.min.css" rel="stylesheet">
+
+
 </head>
 
 <body id="page-top">
@@ -38,6 +41,7 @@
 				class="sidebar-brand d-flex align-items-center justify-content-center"
 				href="#" th:href="@{/admin}"> <img src="/images/logo.png">
 			</a>
+
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">
 
@@ -87,8 +91,31 @@
 					</div>
 				</div></li>
 
+
+			<!-- Nav Item - Pages Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="#"
+				data-toggle="collapse" data-target="#collapsePages"
+				aria-expanded="true" aria-controls="collapsePages"> <i
+					class="fas fa-fw fa-folder"></i> <span>Pages</span>
+			</a>
+				<div id="collapsePages" class="collapse"
+					aria-labelledby="headingPages" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+
+						<a class="collapse-item" href="#">Create New Page</a> <a
+							class="collapse-item" href="#">Manage Existing Page</a>
+					</div>
+				</div></li>
+
+
 			<!-- Divider -->
-			<hr class="sidebar-divider d-none d-md-block">
+			<hr class="sidebar-divider">
+
+			<!--             
+            Divider
+            <hr class="sidebar-divider d-none d-md-block">
+            
+ -->
 
 			<!-- Sidebar Toggler (Sidebar) -->
 			<div class="text-center d-none d-md-inline">
@@ -97,8 +124,12 @@
 
 			<!-- Sidebar Message -->
 
+
 		</ul>
 		<!-- End of Sidebar -->
+
+
+
 
 		<!-- Content Wrapper -->
 		<div id="content-wrapper" class="d-flex flex-column">
@@ -132,6 +163,9 @@
 					</form>
 
 					<!-- Topbar Navbar -->
+
+
+
 
 
 
@@ -307,188 +341,376 @@
 				<!-- End of Topbar -->
 
 
+
+
+
+
+
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
 					<div
 						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Page Management</h1>
+						<h1 class="h3 mb-0 text-gray-800">Create Page</h1>
 						<a href="#"
 							class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
 							class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
 					</div>
 
-					<!-- Content Row -->
-					<div class="row">
-						<div class="container-fluid">
 
-							<a th:href="@{/admin/universities/add}" style="margin: 20px 0"
-								class="btn btn-primary">Add New Page</a>
-							<table class="table">
-								<thead class="thead-light">
-									<tr>
-										<th scope="col">SN</th>
-										<th scope="col">Page Title</th>
-										<th scope="col">Created on</th>
-										<th scope="col">Last Modified</th>
-										<th scope="col">Edit Page</th>
-										<th scope="col">Status</th>
-										<th scope="col">Delete</th>
+					<!-- Section Content Start -->
 
-									</tr>
-								</thead>
-								<tbody>
+					<!-- DataTales Example -->
+					<div class="card shadow mb-4">
+						<div class="card-header py-3">
+							<h6 class="m-0 font-weight-bold text-primary">
+								<a href="#"
+									class="btn btn-info btn-icon-split btn-sm float-right mr-3">
+									<span class="icon text-white-50"> <i
+										class="fas fa-arrow-left"></i>
+								</span> <span class="text">Back</span>
+								</a>
+							</h6>
+						</div>
 
-									<tr th:each="page, iStat : ${pages}">
-										<th scope="row" th:text="${iStat.index + 1}">1</th>
-										<td th:text="${page.pageTitle}">Home</td>
+						<div class="card-body">
+							<form th:action="@{/admin/pages/add}" class="form-horizontal" method="post" th:object="${pageDTO}" 
+								enctype="multipart/form-data">
+
+								<input type="hidden" name="id" th:field="*{id}"> <input
+									type="hidden" required="" name="old_slug" value="">
+
+								<div class="card-header py-3 mb-4">
+									<h6 class="m-0 font-weight-bold text-primary">Page Details</h6>
+								</div>
+								​
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">Page
+										Title (Required)</label>
+									<div class="col-sm-10">
+										<input type="text" required th:field="*{pageTitle}"
+											class="form-control get_url_name" id="page_title"
+											name="page_title" >
+									</div>
+								</div>
+								​
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">Heading
+									</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control " id="banner_heading"
+											name="sub_title" value="" th:field="*{bannerHeading}">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">Sub
+										Heading</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control " id="sub_title"
+											name="sub_title" value="" th:field="*{bannerSubHeading}">
+									</div>
+								</div>
+
+
+								<div class="card-header py-3 mb-4">
+									<h6 class="m-0 font-weight-bold text-primary">Content</h6>
+								</div>
+								
+								
+								
+<!-- Layout temporarily omitted 
+
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-6 control-label">Page
+										Layout</label>
+									<div class="col-sm-10">
+
+										<div class="form-check-inline">
+											<label class="form-check-label" for="full_page"> <input
+												type="radio" class="form-check-input" id="full_page"
+												name="page_layout" value="Full Page" th:field="*{pageLayout}" checked>Full
+												Page
+											</label>
+										</div>
+										<div class="form-check-inline">
+											<label class="form-check-label" for="box_container">
+												<input type="radio" class="form-check-input"
+												id="box_container" name="page_layout" value="Box Container" th:field="*{pageLayout}">Box
+												Container
+											</label>
+										</div>
+									</div>
+								</div>
+
+ -->								​
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">Main
+										Section (Required)</label> ​
+									<div class="col-sm-10">
+										<textarea class="form-control summernote" id="summernote"
+											name="main_section" th:field="*{mainSection}" ></textarea>
+
+										​
+									</div>
+								</div>
+								​
+								
+
+
+								<div class="card-header py-3 mb-4">
+									<h6 class="m-0 font-weight-bold text-primary">Banner Image
+										Desktop</h6>
+								</div>
+
+								​
+								<div class="form-group">
+									<div class="col-sm-10">
+
+
+										<img src="" height="100px"> <br /> Delete <input th:field="*{bannerImageName}"
+											type="checkbox" name="image_delete" value="1"> <input
+											type="file" name="image" id="image"
+											accept="image/jpeg,image/gif,image/x-png,video/*">
+										<p class="help-block">Size (width and height) :1920 X 500
+										</p>
+									</div>
+								</div>
+								​ ​ ​
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">Banner
+										Image Alt</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="image_alt"
+											name="image_alt" value="" th:field="*{bannerImageAlt}">
+									</div>
+								</div>
+							
+							<!-- 	​
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">Header
+										Title</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="header_title"
+											name="header_title" value="" th:field="*{headerTitle}">
+									</div>
+								</div>
+
+ -->
+								<div class="card-header py-3 mb-4">
+									<h6 class="m-0 font-weight-bold text-primary">Custom CSS
+										and JS</h6>
+								</div>
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">CSS
+										Code</label>
+
+									<div class="col-sm-10">
+										<textarea class="form-control" id="css_code" name="css_code" th:field="*{cssCode}"></textarea>
+
+
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">JS
+										Code</label>
+
+									<div class="col-sm-10">
+										<textarea class="form-control" id="js_code" name="js_code" th:field="*{jsCode}"></textarea>
+
+
+									</div>
+								</div>
+
+								<div class="card-header py-3 mb-4">
+									<h6 class="m-0 font-weight-bold text-primary">SEO</h6>
+								</div>
+
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">Meta
+										Title</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control " id="meta_title"
+											name="meta_title" value="" th:field="*{metaTitle}">
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">Meta
+										Keywords</label>
+
+									<div class="col-sm-10">
+										<textarea class="form-control" id="meta_keywords"
+											name="meta_keywords" th:field="*{metaKeyword}"></textarea>
+
+
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">Meta
+										Description</label>
+
+									<div class="col-sm-10">
+										<textarea class="form-control" id="meta_description"
+											name="meta_description" th:field="*{metaDescription}"></textarea>
+
+									</div>
+								</div>
+
+
+								<input type="hidden" name="submit_type" id="submit_type"
+									value="1">
+								<div class="box-footer pull-right">
+									<button type="submit" class="btn btn-success btn-icon-split"
+										onclick="">
+										<span class="icon text-white-50"> <i
+											class="fas fa-check"></i>
+										</span> <span class="text">Save</span>
+									</button>
+
+									<button type="reset" class="btn btn-secondary ">Reset</button>
+
+
+
+								</div>
+							</form>
+						</div>
+					</div>
+
+					<!-- Section Content End -->
+					​
+
+					<div></div>
+				</div>
+
+
+				<!-- /.container-fluid -->
+
+			</div>
+			<!-- End of Main Content -->
+
+
+
+
+			<!-- Footer -->
+
+
+			<footer class="sticky-footer bg-white">
+				<div class="container my-auto">
+					<div class="copyright text-center my-auto">
+						<span>Copyright &copy; Your Website 2021</span>
+					</div>
+				</div>
+			</footer>
+			<!-- End of Footer -->
+
+		</div>
+		<!-- End of Content Wrapper -->
+
+	</div>
+	<!-- End of Page Wrapper -->
+
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top"> <i
+		class="fas fa-angle-up"></i>
+	</a>
+
+	<!-- Logout Modal-->
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">Select "Logout" below if you are ready
+					to end your current session.</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button"
+						data-dismiss="modal">Cancel</button>
+					<a class="btn btn-primary" href="#" th:href=@{/logout}>Logout</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript-->
+	<script src="/vendor/jquery/jquery.min.js"></script>
+	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script src="/js/sb-admin-2.min.js"></script>
+
+	<!-- Page level plugins -->
+	<script src="/vendor/chart.js/Chart.min.js"></script>
+
+	<!-- Page level custom scripts -->
+	<script src="/js/demo/chart-area-demo.js"></script>
+	<script src="/js/demo/chart-pie-demo.js"></script>
+	<script src="/vendor/summernote/summernote/summernote-bs4.min.js"></script>
 	
-										<!-- 
-										<td><img src="" height="100px" width="100px"
-										th:src="@{${'/images/universityImages/' + university.imageName}}"></td>
-										
-										-->
-										
-										<td th:text="${page.dateOfCreation}">22-3-2022</td>
-										<td th:text="${page.lastModified}">22-3-2022</td> <!-- This one to be replaced by date modified -->
+	
+    <script>
+        $('.summernote').summernote({
+          placeholder: 'Hello stand alone ui',
+          tabsize: 2,
+          height: 120,
+          toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+          ]
+        });
+      </script>
 
 
-										<td><a href=""
-											th:href="@{/admin/page/update/{id}(id=${page.id})}"
-											class="btn btn-warning">Edit</a></td>
 
 
-										<td>
-											<div class="custom-control custom-switch">
-												<input th:inline="text" type="checkbox"
-													th:onchange="'togglePageStatus('+${page.id}+')'"
-													th:if="${page.isPageActive==true}" checked
-													class="custom-control-input" id="customSwitch1"> <input
-													type="checkbox"
-													th:onchange="'togglePageStatus('+${page.id}+')'"
-													th:if="${page.isPageActive==false}"
-													class="custom-control-input" id="customSwitch1"> <label
-													class="custom-control-label" for="customSwitch1"><span
-													id="pageStatus"
-													th:text="${page.isPageActive==true ?'Published':'Unpublished'}"></span></label>
-											</div>
-										</td>
+	<!-- 
+<script>
+    function readURL(input){
+        if(input.files && input.files[0]){
+            var reader = new FileReader();
+            reader.onload = function(e){
+                $('#imgPreview').attr('src', e.target.result).width(100).height(100);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $('#universityImage').change(function(){
+        readURL(this);
+    });
+    $(".custom-file-input").on("change", function() {
+    	
+    	 
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        
+        
+    });
+   
+    
+</script>
 
-										<td><a href=""
-											th:href="@{/admin/page/delete/{id}(id=${page.id})}"
-											class="btn btn-danger">Delete</a></td>
-									</tr>
-
-								</tbody>
-							</table>
-						</div>
-
-					</div>
-
-
-					<!-- Content Row -->
+ -->
 
 
-					<!-- Footer -->
-					<footer class="sticky-footer bg-white">
-						<div class="container my-auto">
-							<div class="copyright text-center my-auto">
-								<span>Copyright &copy; Your Website 2021</span>
-							</div>
-						</div>
-					</footer>
-					<!-- End of Footer -->
-
-				</div>
-				<!-- End of Content Wrapper -->
-
-			</div>
-			<!-- End of Page Wrapper -->
-
-			<!-- Scroll to Top Button-->
-			<a class="scroll-to-top rounded" href="#page-top"> <i
-				class="fas fa-angle-up"></i>
-			</a>
-
-			<!-- Logout Modal-->
-			<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
-				aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Ready to
-								Leave?</h5>
-							<button class="close" type="button" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">×</span>
-							</button>
-						</div>
-						<div class="modal-body">Select "Logout" below if you are
-							ready to end your current session.</div>
-						<div class="modal-footer">
-							<button class="btn btn-secondary" type="button"
-								data-dismiss="modal">Cancel</button>
-							<a class="btn btn-primary" href="#" th:href=@{/logout}>Logout</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Bootstrap core JavaScript-->
-			<script src="/vendor/jquery/jquery.min.js"></script>
-			<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-			<!-- Core plugin JavaScript-->
-			<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-			<!-- Custom scripts for all pages-->
-			<script src="/js/sb-admin-2.min.js"></script>
-
-			<!-- Page level plugins -->
-			<script src="/vendor/chart.js/Chart.min.js"></script>
-
-			<!-- Page level custom scripts -->
-			<script src="/js/demo/chart-area-demo.js"></script>
-			<script src="/js/demo/chart-pie-demo.js"></script>
 
 
-			<script th:inline="javascript" type="text/javascript">
-				let contextPath = 'http://localhost:8080';
-
-				function toggleUniversityStatus(id) {
-					console.log('toggling id = ' + id);
-					console
-							.log(document.getElementById('customSwitch1').checked);
-					if (document.getElementById('customSwitch1').checked == true) {
-						let http = new XMLHttpRequest();
-						let url = contextPath + '/admin/'
-								+ 'activateDeactivateUniversity' + '/' + id
-								+ '/' + 'ActivateUniversity';
-
-						console.log('Activating..')
-						console.log(url)
-
-						http.open("GET", url, false);
-						http.send(null);
-						console.log(http.responseText);
-						document.getElementById('universityStatus').innerHTML = 'Activated';
-					} else {
-						/* deactivate in controller */
-						console.log('Deactivating..');
-						let http = new XMLHttpRequest();
-						let url = contextPath + '/admin/'
-								+ 'activateDeactivateUniversity' + '/' + id
-								+ '/' + 'DeactivateUniversity';
-						console.log("Deactivating");
-						console.log(url)
-						http.open("GET", url, false);
-						http.send(null);
-						console.log(http.responseText);
-						document.getElementById('universityStatus').innerHTML = 'Deactivated';
-					}
-				}
-			</script>
 </body>
 
 </html>
