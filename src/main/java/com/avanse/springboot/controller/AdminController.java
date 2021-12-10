@@ -23,16 +23,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.avanse.springboot.DTO.CourseDTO;
+import com.avanse.springboot.DTO.JobDTO;
+import com.avanse.springboot.DTO.LocationDTO;
 import com.avanse.springboot.DTO.PageDTO;
 import com.avanse.springboot.DTO.UniversityDTO;
 import com.avanse.springboot.model.Course;
+import com.avanse.springboot.model.Job;
+import com.avanse.springboot.model.Location;
 import com.avanse.springboot.model.Page;
 import com.avanse.springboot.model.University;
 import com.avanse.springboot.repository.CourseRepository;
+import com.avanse.springboot.repository.JobRespository;
+import com.avanse.springboot.repository.LocationRepository;
 import com.avanse.springboot.repository.PageRepository;
 import com.avanse.springboot.repository.PostRepository;
 import com.avanse.springboot.repository.UniversityRepository;
 import com.avanse.springboot.service.CourseService;
+import com.avanse.springboot.service.JobService;
+import com.avanse.springboot.service.LocationService;
 import com.avanse.springboot.service.PageService;
 import com.avanse.springboot.service.PostService;
 import com.avanse.springboot.service.UniversityService;
@@ -50,16 +58,22 @@ public class AdminController {
 	public static String newPageAddDir = System.getProperty("user.dir") + "/src/main/resources/templates/addedPages";
 
 	@Autowired
-	UniversityService universityService;
+	CourseRepository courseRepository;
 
 	@Autowired
 	CourseService courseService;
-
+	
 	@Autowired
-	UniversityRepository universityRepository;
-
+	JobRespository jobRespository;
+	
 	@Autowired
-	CourseRepository courseRepository;
+	JobService jobService;
+	
+	@Autowired
+	LocationRepository locationRepository;
+	
+	@Autowired
+	LocationService locationService;
 
 	@Autowired
 	PageRepository pageRepository;
@@ -72,6 +86,13 @@ public class AdminController {
 	
 	@Autowired
 	PostService  postService;
+	
+	@Autowired
+	UniversityRepository universityRepository;
+	
+	@Autowired
+	UniversityService universityService;
+	
 
 	/*
 	 * Method to show the admin home page.
@@ -445,9 +466,79 @@ public class AdminController {
 		return "coursesAdd";
 	}
 
+	
+	
 	/*
-	 * ========================================== All Function below are related to
-	 * pages ===========================================
+	 * ===========All Function below are related to jobs ================
+	 */
+
+	/*
+	 * Method to show the jobs.html
+	 * 
+	 */
+	@GetMapping("/admin/jobs")
+	public String getJobs(Model model) {
+		model.addAttribute("jobs", jobService.getAllJobs());
+		return "jobs";
+	}
+	
+	/*
+	 * Method to add a job. For that we will need both the get and post 
+	 * mapping. Get mapping to open the form 
+	 * Post mapping to send the data from the form and process it via controller
+	*/
+	
+	@GetMapping("/admin/jobs/add")
+	public String jobsAddGet(Model model) {
+		model.addAttribute("jobDTO", new JobDTO());
+		return "jobsAdd";
+	}
+	
+	@PostMapping("/admin/jobs/add")
+	public String jobsAddPost(@ModelAttribute("jobDTO") JobDTO jobDTO) {
+		Job job = new Job();
+		job.setId(jobDTO.getId());
+
+		return "";
+	}
+	
+	/*
+	 * ===========All Function below are related to office location ==============
+	 */
+
+	/*
+	 * Method to show the locations.html
+	 * 
+	 */
+	
+	@GetMapping("/admin/locations")
+	public String getLocations(Model model) {
+		model.addAttribute("locations", locationService.getAllLocations());
+		return "locations";
+	}
+
+	/*
+	 * Add get and post mapping for showing and doing some processing after submitting the form
+	*/
+	
+	@GetMapping("/admin/locations/add")
+	public String locationAddGet(Model model) {
+		model.addAttribute("locationDTO", new LocationDTO());
+		return "locationsAdd";
+	}
+	
+	@PostMapping("/admin/locations/add")
+	public String locationAddPost(@ModelAttribute ("locationDTO") LocationDTO locationDTO, 
+			@RequestParam("locationImage") MultipartFile file, @RequestParam("locImgName") String locImgName) {
+		Location location = new Location();
+		location.setId(locationDTO.getId());
+		location.setCity(locationDTO.getCity());
+		location.setIconImageName(locationDTO.getIconImageName());
+		return "redirect:/admin/locations";
+	}
+	
+	/*
+	 * ===========All Function below are related to pages =============
 	 */
 
 	/*
@@ -488,8 +579,6 @@ public class AdminController {
 		page.setPageTitle(pageDTO.getPageTitle());
 		page.setBannerHeading(pageDTO.getBannerHeading());
 		page.setBannerSubHeading(pageDTO.getBannerSubHeading());
-		
-//		page.setPageLayout(pageDTO.getPageLayout());
 		page.setMainSection(pageDTO.getMainSection());
 		
 		page.setBannerImageName(pageDTO.getBannerImageName());
@@ -507,15 +596,14 @@ public class AdminController {
 		 */
 
 		String extention = ".html";
-
 		/*
 		 * Before creating the html file, we have to ensure that two files do not get
 		 */
-
+		
 		String htmlFileName = pageDTO.getPageTitle().replaceAll(" ","-").toLowerCase();
 		List<Page> allPages = pageRepository.findAll();
 		Iterator<Page> iterator = allPages.iterator();
-
+		
 		/*
 		 * Rename the file if the file with the same name already exist
 		 */
@@ -526,7 +614,9 @@ public class AdminController {
 			if (pageUnderEvaluation.getMetaTitle().equalsIgnoreCase(htmlFileName)) {
 				htmlFileName += ++count;
 			}
-		} //Problem will occur when user will enter 3 the same name for more than 2 times...
+		} 
+		
+		//Problem will occur when user will enter 3 the same name for more than 2 times...
 		// Some code will have to be written to handle this problem using string and regex manipulation
 		
 //		htmlFileName.
@@ -586,13 +676,12 @@ public class AdminController {
 		try {
 			pushCodeInFile(codeInFile, pageDTO.getFileName());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 
 		
 		return "page Added sucessfully" + codeInFile;
-//		  return "redirect:/admin/pages";
 
 	}
 
@@ -671,14 +760,12 @@ public class AdminController {
 	 * becuase edit will eventually be called from only pages add...
 	 * But keeping it in a function is a better idea, any day...
 	*/
-	
-	
+
 	@GetMapping("/admin/page/edit/{id}")
 	public String editPage(@PathVariable long id, Model model) {
 		Page page = pageService.getPageById(id).get();
 		PageDTO pageDTO = new PageDTO();
-		
-		
+			
 		pageDTO.setId(page.getId());
 		pageDTO.setPageTitle(page.getPageTitle());
 		pageDTO.setBannerHeading(page.getBannerHeading());
@@ -695,8 +782,7 @@ public class AdminController {
 		model.addAttribute("pageDTO", pageDTO);	
 		return "pagesAdd";
 	}
-	
-	
+		
 	/*
 	 * Below functions will be used to create the posts 
 	*/
@@ -706,8 +792,6 @@ public class AdminController {
 //		model.addAttribute("posts", postService.getAllPosts());
 		return "posts";
 	}
-	
-	
-	
+
 //	End of class
 }

@@ -2,7 +2,6 @@ package com.avanse.springboot.model;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,23 +29,19 @@ public class Job implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	private String title;
 	
 	@CreationTimestamp
 	private Date postDate; 
-	
 	private String description;
 	private String rolesAndResponsibilities;
 	private String educationQualification;
 	private String skills;
 	private Integer experience;
 	private Integer Compensation;
-	
 	private String postedBy;
-	
 	private String location;
-	
+	private String resume;
 	
 	public Job(String title, String description, String rolesAndResponsibilities, String postedBy, String location) {
 		super();
@@ -56,10 +51,4 @@ public class Job implements Serializable {
 		this.postedBy = postedBy;
 		this.location = location;
 	}
-	
-	
-	
-	
-	
-	
 }

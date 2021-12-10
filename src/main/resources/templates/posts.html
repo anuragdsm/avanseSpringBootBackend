@@ -1,13 +1,85 @@
 <!DOCTYPE html>
-<html lang="en" 
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="_layout">
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="_layout">
 <body id="page-top">
-<!-- Page Wrapper -->
-<div layout:fragment="content">
-<!--Content of the page-->
-<h1>Working?</h1>
-</div>
+	<!-- Page Wrapper -->
+	<div layout:fragment="content">
+		<!-- Begin Page Content -->
+				<div class="container-fluid">
+					<!-- Page Heading -->
+					<div
+						class="d-sm-flex align-items-center justify-content-between mb-4">
+						<h1 class="h3 mb-0 text-gray-800">Post Management</h1>						
+					</div>
+					<!-- Content Row -->
+					<div class="row">
+						<div class="container-fluid">
+							<a th:href="@{/admin/posts/add}" style="margin: 20px 0"
+								class="btn btn-primary">Add New Post</a>
+							<table class="table">
+								<thead class="thead-light">
+									<tr>
+										<th scope="col">SN</th>
+										<th scope="col">Post Title</th>
+										<th scope="col">Created on</th>
+										<th scope="col">Last Modified</th>
+										<th scope="col">Edit Page</th>
+										<th scope="col">Status</th>
+										<th scope="col">Delete</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="page, iStat : ${pages}">
+										<th scope="row" th:text="${iStat.index + 1}">1</th>
+										<td th:text="${page.pageTitle}">Home</td>
+										<!-- 
+										<td><img src="" height="100px" width="100px"
+										th:src="@{${'/images/universityImages/' + university.imageName}}"></td>
+										
+										-->
+										
+										<td th:text="${page.dateOfCreation}">22-3-2022</td>
+										<td th:text="${page.lastModified}">22-3-2022</td> <!-- This one to be replaced by date modified -->
+
+
+										<td><a href=""
+											th:href="@{/admin/page/edit/{id}(id=${page.id})}"
+											class="btn btn-warning">Edit</a></td>
+
+
+										<td>
+											<div class="custom-control custom-switch">
+												<input th:inline="text" type="checkbox"
+													th:onchange="'togglePageStatus('+${page.id}+')'"
+													th:if="${page.isPageActive==true}" checked
+													class="custom-control-input" id="customSwitch1"> <input
+													type="checkbox"
+													th:onchange="'togglePageStatus('+${page.id}+')'"
+													th:if="${page.isPageActive==false}"
+													class="custom-control-input" id="customSwitch1"> <label
+													class="custom-control-label" for="customSwitch1"><span
+													id="pageStatus"
+													th:text="${page.isPageActive==true ?'Published':'Unpublished'}"></span></label>
+											</div>
+										</td>
+
+										<td><a href=""
+											th:href="@{/admin/page/delete/{id}(id=${page.id})}"
+											class="btn btn-danger">Delete</a></td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+
+
+					<!-- Content Row -->
+
+				</div>
+				<!-- End of Content Wrapper -->
+		
+	</div>
 
 	<!-- Bootstrap core JavaScript-->
 	<script src="/vendor/jquery/jquery.min.js"></script>
