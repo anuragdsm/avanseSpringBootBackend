@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,11 +52,15 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AdminController {
 
-	public static String imageUploadDir = System.getProperty("user.dir") + "/src/main/resources/static/images";
+	public static String imageUploadDir = System.getProperty("user.dir") + "\\src\\mainresources\\static\\images";
 	public static String universityUploadDir = System.getProperty("user.dir")
 			+ "/src/main/resources/static/images/universityImages";
 
-	public static String newPageAddDir = System.getProperty("user.dir") + "/src/main/resources/templates/addedPages";
+	public static String newPageAddDir = System.getProperty("user.dir") + "\\src\\main\\resources\\templates\\addedPages";
+	
+	public static String userAddedImagesDir = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images\\pageImages";
+	
+	
 
 	@Autowired
 	CourseRepository courseRepository;
@@ -102,6 +107,8 @@ public class AdminController {
 
 		Long noOfUniversities = universityService.numberOfUniversities();
 		System.out.println("Number of University is " + noOfUniversities);
+		
+		System.out.println("User Added Image Directory is "+ userAddedImagesDir);
 
 		return "adminDashboard";
 	}
