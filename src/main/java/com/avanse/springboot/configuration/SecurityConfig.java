@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.authorizeRequests()
 		.antMatchers("/admin/**").hasRole("ADMIN")
 		.antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
-		.antMatchers("/","/index",  "/register").permitAll()
+		.antMatchers("/","/viewPages/**","/index",  "/register").permitAll()
 		.antMatchers("/resources/**", "/static/**", "/images/**","/css/**","/scss/**","/vendor/**", "/js/**").permitAll()
 		.antMatchers("/addManualUser").permitAll() //this on to be deleted later, Only for testing
 		.anyRequest()

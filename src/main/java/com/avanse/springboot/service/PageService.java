@@ -51,9 +51,7 @@ public class PageService {
 	 * Return a page on requesting an id
 	*/
 	public Optional<Page> getPageById(long id){
-		
 		return pageRepository.findById(id);
-		
 	}
 	
 	/*
@@ -61,6 +59,13 @@ public class PageService {
 	*/
 	public long numberOfPages() {
 		return pageRepository.count();
+	}
+	
+	/*
+	 * Return the page by the page name
+	*/
+	public Page findPageByFilename(String filename){
+		return pageRepository.findPageByFileName(filename);
 	}
 	
 }

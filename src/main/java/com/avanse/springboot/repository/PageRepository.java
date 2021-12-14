@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.avanse.springboot.model.Page;
 
 public interface PageRepository extends JpaRepository<Page, Long> {
-
-//	Optional<Page> findPageBytitle(String title);
 	
-
+//	Optional<Page> findPageBytitle(String title);
+	Page findPageByFileName(String fileName);
+	
 }

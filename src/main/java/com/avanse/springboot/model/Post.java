@@ -5,10 +5,13 @@ import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -24,7 +27,7 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 //@AllArgsConstructor
-@Table(name = "blogs")
+@Table(name = "posts")
 public class Post implements Serializable {
 	
 		/**
@@ -41,11 +44,15 @@ public class Post implements Serializable {
 		
 		private Date lastModified;
 		
-		private Boolean isBlogPublished=false;
+		private Boolean isPostPublished=false;
 		
 		
 		private String fileName;
 		private String postTitle;
+		
+		@ManyToOne(fetch = FetchType.LAZY)
+		@JoinColumn(name = "categoryId", referencedColumnName = "category_id")
+		private PostCategory postCategory;
 		
 		
 		/*
@@ -62,6 +69,9 @@ public class Post implements Serializable {
 		 * The value of 2 will represent Box Container
 		*/
 		
+		
+		
+		
 //		private Integer pageLayout; 
 		
 		@Lob
@@ -71,13 +81,7 @@ public class Post implements Serializable {
 		/*
 		 * Codes by the admin
 		*/
-		@Lob
-		@Basic
-		private String cssCode;
-		
-		@Lob
-		@Basic
-		private String jsCode;
+	
 		
 		@Lob
 		@Basic
