@@ -366,21 +366,22 @@
 											class="btn btn-warning">Edit</a></td>
 
 
-										<td>
-											<div class="custom-control custom-switch">
-												<input th:inline="text" type="checkbox"
-													th:onchange="'togglePageStatus('+${page.id}+')'"
-													th:if="${page.isPageActive==true}" checked
-													class="custom-control-input" id="customSwitch1"> <input
-													type="checkbox"
-													th:onchange="'togglePageStatus('+${page.id}+')'"
-													th:if="${page.isPageActive==false}"
-													class="custom-control-input" id="customSwitch1"> <label
-													class="custom-control-label" for="customSwitch1"><span
-													id="pageStatus"
-													th:text="${page.isPageActive==true ?'Published':'Unpublished'}"></span></label>
-											</div>
-										</td>
+							<td>
+								<div class="custom-control custom-switch"
+									th:onclick="'togglePageStatus('+${page.id}+')'">
+									<input th:inline="text" type="checkbox"
+										th:if="${page.isPageActive==true}" checked
+										class="custom-control-input"
+										th:id="'customSwitch'+${page.id}"> <input
+										type="checkbox" th:if="${page.isPageActive==false}"
+										class="custom-control-input"
+										th:id="'customSwitch'+${page.id}"> <label
+										class="custom-control-label"
+										th:for="'customSwitch'+${page.id}"><span
+										th:id="'pageStatus'+${page.id}"
+										th:text="${page.isPageActive==true ?'Page Active':'Page Inactive'}"></span></label>
+								</div>
+							</td>
 
 										<td><a href=""
 											th:href="@{/admin/page/delete/{id}(id=${page.id})}"
@@ -463,38 +464,54 @@
 			<script th:inline="javascript" type="text/javascript">
 				let contextPath = 'http://localhost:8080';
 
-				function toggleUniversityStatus(id) {
+				function togglePageStatus(id) {
 					console.log('toggling id = ' + id);
-					console
-							.log(document.getElementById('customSwitch1').checked);
-					if (document.getElementById('customSwitch1').checked == true) {
-						let http = new XMLHttpRequest();
-						let url = contextPath + '/admin/'
-								+ 'activateDeactivateUniversity' + '/' + id
-								+ '/' + 'ActivateUniversity';
 
-						console.log('Activating..')
-						console.log(url)
+					let customSwitch = 'customSwitch' + id;
 
-						http.open("GET", url, false);
-						http.send(null);
-						console.log(http.responseText);
-						document.getElementById('universityStatus').innerHTML = 'Activated';
-					} else {
+					console.log(document.getElementById(customSwitch));
+
+					console.log(document.getElementById(customSwitch).checked);
+
+					if (document.getElementById(customSwitch).checked == true
+							|| document.getElementById(customSwitch).checked == null) {
+
+						document.getElementById(customSwitch).checked = false;
+
 						/* deactivate in controller */
 						console.log('Deactivating..');
+						
 						let http = new XMLHttpRequest();
-						let url = contextPath + '/admin/'
-								+ 'activateDeactivateUniversity' + '/' + id
-								+ '/' + 'DeactivateUniversity';
-						console.log("Deactivating");
-						console.log(url)
+						let url = contextPath + '/' + 'admin/' 
+								+ 'activateDeactivatePage' + '/' + id + '/'
+								+ 'DeactivatePage';
+						
 						http.open("GET", url, false);
 						http.send(null);
 						console.log(http.responseText);
-						document.getElementById('universityStatus').innerHTML = 'Deactivated';
+						document.getElementById('pageStatus' + id).innerHTML = 'Page Inactive';
 					}
+
+					else {
+
+						document.getElementById(customSwitch).checked = true;
+						let http = new XMLHttpRequest();
+						let url = contextPath + '/' + 'admin/'
+								+ 'activateDeactivatePage' + '/' + id + '/'
+								+ 'ActivatePage';
+						console.log('Activating..')
+						http.open("GET", url, false);
+						http.send(null);
+						console.log(http.responseText);
+						document.getElementById('pageStatus' + id).innerHTML = 'Page Active';
+					}
+
 				}
+				
+				
+				
+				
+				
 			</script>
 </body>
 

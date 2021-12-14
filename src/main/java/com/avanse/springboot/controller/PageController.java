@@ -42,17 +42,22 @@ public class PageController {
 	public ModelAndView getAddedPagesCode(@PathVariable("pageTitle") String pageTitle) {
 		System.out.println("Into the addedPages Code get ");
 		ModelAndView modelAndView = new ModelAndView("addedPages/"+pageTitle);
-		return modelAndView;
-		
+		return modelAndView;		
+	}
+	@GetMapping("/viewDynamicPages/{pageTitle}")
+	public ModelAndView getDynamicPages(@PathVariable("pageTitle") String pageTitle) {
+		System.out.println("Into the addedPages Code get ");
+		ModelAndView modelAndView = new ModelAndView("dynamicPages/"+pageTitle);
+		return modelAndView;		
 	}
 	
 	private String code(String pageName) {
 		Page page = pageService.findPageByFilename(pageName);
-		String consolidateCode = page.getConsolidatedHTMLCode();
-		
+		String consolidateCode = page.getConsolidatedHTMLCode();	
 		System.out.println("THE CONSOLIDATED CODE IS " + consolidateCode); 
 		return consolidateCode;
 	}
+	
 	
 	
 }

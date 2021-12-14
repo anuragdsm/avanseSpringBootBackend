@@ -27,8 +27,6 @@ public class PostCategory implements Serializable {
 	private String name;
 	
 	public PostCategory() {
-
-
 	}
 	
 	public PostCategory(String name) {

@@ -67,11 +67,10 @@
 
 							<div class="form-group">
 								<label for="university">University:</label> <select
-									class="form-control" name="universities"
-									th:field="*{university}">
+									class="form-control" name="university_id">
 									<option value="">--</option>
 									<option th:each="university : ${universities}"
-										th:value="${university}" 
+										th:value="${university.id}" 
 										th:utext="${university.name}"
 										th:selected="${lastselected eq university}" />
 								</select>

@@ -103,10 +103,19 @@ public class AdminController {
 	 * Method to show the admin home page.
 	 */
 	@GetMapping("/admin")
-	public String adminDashboard() {
+	public String adminDashboard(Model model) {
 
 		Long noOfUniversities = universityService.numberOfUniversities();
+		Long noOfCourses= courseService.numberOfCourses();
 		System.out.println("Number of University is " + noOfUniversities);
+		
+		model.addAttribute("numOfUniversities",noOfUniversities);
+		model.addAttribute("numOfCourses",noOfCourses);
+		
+		
+		
+		
+		
 		
 		System.out.println("User Added Image Directory is "+ userAddedImagesDir);
 
@@ -237,7 +246,7 @@ public class AdminController {
 	 * Function to delete a university by id
 	 */
 	@GetMapping("/admin/university/delete/{id}")
-	public String deleteUniversity(@PathVariable long id) {
+	public String deleteUniversity(@PathVariable long id){
 
 		/*
 		 * Before deleting the object, check if the university exist or not and for that
@@ -314,11 +323,7 @@ public class AdminController {
 		universityDTO.setImageName(university.getImageName());
 
 		model.addAttribute("universityDTO", universityDTO);
-		
 		deleteImageFromStaticFolder(id);
-
-		
-		
 		return "universitiesAdd";
 	}
 
@@ -326,11 +331,17 @@ public class AdminController {
 	 * Show university mapped courses
 	 */
 
-	@GetMapping("/admin/university/courses/{id}")
-	public String getUniversityMappedCourses(Model model) {
-		model.addAttribute("courses", courseService.getAllCourses());
-		return "courses";
-	}
+	
+	/* 14th December 2021 -> To be adressed soon
+	 * 
+	 * 
+	 * @GetMapping("/admin/university/courses/{id}") public String
+	 * getUniversityMappedCourses(Model model, @PathVariable long id) {
+	 * model.addAttribute("courses", courseService.getCourseById(id)); return
+	 * "courses"; }
+	 * 
+	 */	
+	
 
 	/*
 	 * Function to populate university list in drop down...
@@ -340,7 +351,7 @@ public class AdminController {
 
 	public void preLoadUniversity(Model model) {
 		List<University> myUniversityList = universityService.getAllUniversity();
-		model.addAttribute("universities", myUniversityList);
+		model.addAttribute("universityList", myUniversityList);
 	}
 
 	// Activate Deactivate university
@@ -417,7 +428,7 @@ public class AdminController {
 	 */
 
 	@PostMapping("/admin/courses/add")
-	public String coursesAddPost(@ModelAttribute("courseDTO") CourseDTO courseDTO) {
+	public String coursesAddPost(@ModelAttribute("courseDTO") CourseDTO courseDTO, @PathVariable("universityDTO") UniversityDTO universityDTO) {
 
 		/*
 		 * Use the model attribute to transfer the data from course DTO to course object
@@ -467,7 +478,7 @@ public class AdminController {
 		courseDTO.setDuration(course.getDuration());
 		courseDTO.setExams(course.getExams());
 		courseDTO.setFees(course.getFees());
-//		course.setUniversity(courseDTO.getUniversity());
+		course.setUniversity(courseDTO.getUniversity());
 
 		model.addAttribute("courseDTO", courseDTO);
 		return "coursesAdd";
@@ -623,13 +634,11 @@ public class AdminController {
 			}
 		} 
 		
-		//Problem will occur when user will enter 3 the same name for more than 2 times...
-		// Some code will have to be written to handle this problem using string and regex manipulation
-		
-//		htmlFileName.
+		// Problem will occur when user will enter 3 the same name for more than 2 times...
+		// Some code will have to be written to handle this problem using string and regex manipulation	
+		// htmlFileName.
 
 		htmlFileName += extention;
-
 		try {
 			Path fileNameAndPath = Paths.get(newPageAddDir, htmlFileName);
 			Files.createFile(fileNameAndPath);
@@ -645,17 +654,11 @@ public class AdminController {
 		 * Searching with the exact file name will be required.
 		*/
 		pageDTO.setFileName(htmlFileName);
-		page.setFileName(pageDTO.getFileName());
-		
+		page.setFileName(pageDTO.getFileName());	
 		pageService.addPage(page);
-		
-		
-
 	
 //		htmlPage
-
-		
-		
+	
 		/*
 		 * Logic for adding the content in the file to be over here
 		 * It the end publish the page...
@@ -688,7 +691,10 @@ public class AdminController {
 		}
 
 		
-		return "page Added sucessfully" + codeInFile;
+		System.out.println("page Added sucessfully" + codeInFile);
+		
+		String pageToReturn = "redirect:/viewPages/"+htmlFileName;
+		return pageToReturn;
 
 	}
 
@@ -710,10 +716,13 @@ public class AdminController {
 		initCode = "<!DOCTYPE html>\r\n"
 				+ "<html lang=\"en\">\r\n"
 				+ "  <head>\r\n"
+				+ "      <link rel=\"shortcut icon\" href=\"/viewPagesAssets/img/favicon.ico\" type=\"image/x-icon\">\r\n"
+				+ "\r\n"
 				+ "    <meta charset=\"UTF-8\">\r\n"
 				+ "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n"
 				+ "    <meta name=\"description\" content=\""+metaDescription+"\">\r\n"
 				+ "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\r\n"
+				+ "    <title>"+metaTitle+"</title>\r\n"
 				+ "    <title>"+metaTitle+"</title>\r\n"
 				+ "    <h1>"+bannerHeading+"</h1>\r\n"
 				+ "    <h2>"+bannerSubheading+"</h2>\r\n"
