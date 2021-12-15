@@ -38,6 +38,17 @@ public class PageController {
 		return "about";
 	}
 	
+//	To be reslved later to publish pages only on the basis of if the page is active or not
+	
+//	@GetMapping("/viewPages/{pageTitle}")
+//	public Boolean checkIfPublished(@PathVariable String pageTitle) {
+//		Page page = pageService.getPageByPageTitle(pageTitle).get();
+//		Boolean check = page.getIsPageActive();
+//		return check;
+//	}
+//	
+	
+	
 	@GetMapping("/viewPages/{pageTitle}")
 	public ModelAndView getAddedPagesCode(@PathVariable("pageTitle") String pageTitle) {
 		System.out.println("Into the addedPages Code get ");

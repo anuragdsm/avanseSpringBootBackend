@@ -5,11 +5,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -107,10 +109,13 @@ public class AdminController {
 
 		Long noOfUniversities = universityService.numberOfUniversities();
 		Long noOfCourses= courseService.numberOfCourses();
+		Long noOfPages = pageService.numberOfPages();
+		
 		System.out.println("Number of University is " + noOfUniversities);
 		
 		model.addAttribute("numOfUniversities",noOfUniversities);
 		model.addAttribute("numOfCourses",noOfCourses);
+		model.addAttribute("numOfPages",noOfPages);
 		
 		
 		
@@ -483,8 +488,6 @@ public class AdminController {
 		model.addAttribute("courseDTO", courseDTO);
 		return "coursesAdd";
 	}
-
-	
 	
 	/*
 	 * ===========All Function below are related to jobs ================
@@ -492,7 +495,6 @@ public class AdminController {
 
 	/*
 	 * Method to show the jobs.html
-	 * 
 	 */
 	@GetMapping("/admin/jobs")
 	public String getJobs(Model model) {
@@ -587,13 +589,39 @@ public class AdminController {
 	 * 
 	 */
 
-	@ResponseBody
+//	@ResponseBody
 	@PostMapping("/admin/pages/add")
 	public String pagesAddPost(@ModelAttribute("pageDTO") PageDTO pageDTO) {
 
+		/*
+		 * Create a new time stamp and initialize the timestamp with null
+		 * Check if the entry in database is there for the date of creation...
+		 * If it is not then initialise the time stamp with a new date.
+		*/
 		Page page = new Page();
+		Date timeStamp = null;
+		boolean creatingTimeStamp = false;
+		
+		
+		
+		if(pageDTO.getDateOfCreation() == null) {
+			timeStamp= new Date();
+			creatingTimeStamp = true;
+		}
 
+		if(creatingTimeStamp) {
+			page.setDateOfCreation(timeStamp);
+		}
+		
+		else {
+			page.setDateOfCreation(pageDTO.getDateOfCreation());
+
+		}
+		
+		
+		
 		page.setId(pageDTO.getId());
+		
 		page.setPageTitle(pageDTO.getPageTitle());
 		page.setBannerHeading(pageDTO.getBannerHeading());
 		page.setBannerSubHeading(pageDTO.getBannerSubHeading());
@@ -608,6 +636,7 @@ public class AdminController {
 		page.setMetaKeyword(pageDTO.getMetaKeyword());
 
 		page.setMetaDescription(pageDTO.getMetaDescription());
+		
 
 		/*
 		 * Creating a new html template
@@ -676,12 +705,6 @@ public class AdminController {
 		pageDTO.setConsolidatedHTMLCode(codeInFile);
 		page.setConsolidatedHTMLCode(pageDTO.getConsolidatedHTMLCode());
 		
-		Date lastModifiedDate = new Date();
-		
-		pageDTO.setLastModified(lastModifiedDate);
-		page.setLastModified(pageDTO.getLastModified());
-		
-		pageService.addPage(page);
 		
 		try {
 			pushCodeInFile(codeInFile, pageDTO.getFileName());
@@ -689,12 +712,17 @@ public class AdminController {
 
 			e.printStackTrace();
 		}
+		
+		page.setLastModified(pageDTO.getLastModified());
+
 
 		
 		System.out.println("page Added sucessfully" + codeInFile);
 		
-		String pageToReturn = "redirect:/viewPages/"+htmlFileName;
-		return pageToReturn;
+		
+		pageService.addPage(page);
+//		String pageToReturn = "redirect:/viewPages/"+htmlFileName;
+		return "redirect:/viewPages/"+htmlFileName;
 
 	}
 
@@ -791,6 +819,7 @@ public class AdminController {
 		pageDTO.setBannerImageName(page.getBannerImageName());
 		pageDTO.setBannerImageAlt(page.getBannerImageAlt());
 		pageDTO.setCssCode(page.getCssCode());
+		pageDTO.setFileName(page.getFileName());
 		pageDTO.setJsCode(page.getJsCode());
 		pageDTO.setMetaTitle(page.getMetaTitle());
 		pageDTO.setMetaKeyword(page.getMetaKeyword());
@@ -798,7 +827,39 @@ public class AdminController {
 		model.addAttribute("pageDTO", pageDTO);	
 		return "pagesAdd";
 	}
-		
+	
+	// Activate Deactivate page
+	@GetMapping("/admin/activateDeactivatePage/{id}/{action}")
+	@ResponseBody
+	@CrossOrigin("*")
+	public String activateDeactivatePage(@PathVariable(name = "id") long id, @PathVariable String action) {
+		System.out.println("Requested for Page action = " + action + " for Page id= " + id);
+		Page page = pageService.getPageById(id).get();
+
+		if (action.equals("ActivatePage")) {
+			page.setIsPageActive(true);
+			pageService.addPage(page);
+			return "Page Activated/Published";
+			
+			/*
+			 * University university = universityService.getUniversityById(id).get();
+			 * university.setIsUniversityActive(true);
+			 * universityService.addUniversity(university); return "University Activated!!";
+			 */
+		}
+
+		else {
+			page.setIsPageActive(false);
+			pageService.addPage(page);
+			return "Page Deactivate/Unpublished";
+			/*
+			 * University university = universityService.getUniversityById(id).get();
+			 * university.setIsUniversityActive(false);
+			 * universityService.addUniversity(university); return
+			 * "University De-Activated!!";
+			 */
+		}
+	}
 	/*
 	 * Below functions will be used to create the posts 
 	*/
@@ -808,6 +869,5 @@ public class AdminController {
 //		model.addAttribute("posts", postService.getAllPosts());
 		return "posts";
 	}
-
 //	End of class
 }
