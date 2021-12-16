@@ -55,6 +55,18 @@ public class PageController {
 		ModelAndView modelAndView = new ModelAndView("addedPages/"+pageTitle);
 		return modelAndView;		
 	}
+	
+	
+	
+	
+	  @GetMapping("{pageLink}") public ModelAndView
+	  getAddedPage(@PathVariable("pageLink") String pageLink) {
+	  System.out.println("Into the addedPages Code get "); ModelAndView
+	  modelAndView = new ModelAndView("addedPages/"+pageLink); return modelAndView;
+	  }
+	 
+	
+	
 	@GetMapping("/viewDynamicPages/{pageTitle}")
 	public ModelAndView getDynamicPages(@PathVariable("pageTitle") String pageTitle) {
 		System.out.println("Into the addedPages Code get ");

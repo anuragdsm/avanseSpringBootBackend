@@ -14,24 +14,21 @@ public class PageDTO {
 
 	private String fileName;
 	private String pageTitle;
+	private String pageLink;
 
 	private String bannerHeading;
 	private String bannerSubHeading;
-
 	/*
 	 * image variables
 	 */
 	private String bannerImageName;
 	private String bannerImageAlt;
-
 	/*
 	 * The value of 1 will represent Full page The value of 2 will represent Box
 	 * Container
 	 */
 //	private Integer pageLayout; 
-
 	private String mainSection;
-	
 	/*
 	 * Codes by the admin
 	 */

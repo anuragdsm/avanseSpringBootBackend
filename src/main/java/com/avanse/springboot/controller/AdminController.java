@@ -10,6 +10,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.io.FilenameUtils;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.internal.build.AllowSysOut;
@@ -110,18 +112,11 @@ public class AdminController {
 		Long noOfUniversities = universityService.numberOfUniversities();
 		Long noOfCourses= courseService.numberOfCourses();
 		Long noOfPages = pageService.numberOfPages();
-		
 		System.out.println("Number of University is " + noOfUniversities);
-		
 		model.addAttribute("numOfUniversities",noOfUniversities);
 		model.addAttribute("numOfCourses",noOfCourses);
 		model.addAttribute("numOfPages",noOfPages);
-		
-		
-		
-		
-		
-		
+
 		System.out.println("User Added Image Directory is "+ userAddedImagesDir);
 
 		return "adminDashboard";
@@ -565,10 +560,41 @@ public class AdminController {
 	 * Method to show the pages.html
 	 * 
 	 */
+	
+	
+	/*
+	 * @GetMapping("/admin") public String adminDashboard(Model model) {
+	 * 
+	 * Long noOfUniversities = universityService.numberOfUniversities(); Long
+	 * noOfCourses= courseService.numberOfCourses(); Long noOfPages =
+	 * pageService.numberOfPages();
+	 * 
+	 * System.out.println("Number of University is " + noOfUniversities);
+	 * 
+	 * model.addAttribute("numOfUniversities",noOfUniversities);
+	 * model.addAttribute("numOfCourses",noOfCourses);
+	 * model.addAttribute("numOfPages",noOfPages);
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * System.out.println("User Added Image Directory is "+ userAddedImagesDir);
+	 * 
+	 * return "adminDashboard"; }
+	 */
+	
+	
+	
+	
 
 	@GetMapping("/admin/pages")
 	public String getPages(Model model) {
 		model.addAttribute("pages", pageService.getAllPages());
+//		String pageLink = 
+//		HttpServletRequest request = ;
+		
 		return "pages";
 	}
 
@@ -591,13 +617,15 @@ public class AdminController {
 
 //	@ResponseBody
 	@PostMapping("/admin/pages/add")
-	public String pagesAddPost(@ModelAttribute("pageDTO") PageDTO pageDTO) {
+	public String pagesAddPost(@ModelAttribute("pageDTO") PageDTO pageDTO, HttpServletRequest request) {
 
 		/*
 		 * Create a new time stamp and initialize the timestamp with null
 		 * Check if the entry in database is there for the date of creation...
 		 * If it is not then initialise the time stamp with a new date.
 		*/
+		
+		
 		Page page = new Page();
 		Date timeStamp = null;
 		boolean creatingTimeStamp = false;
@@ -615,39 +643,36 @@ public class AdminController {
 		
 		else {
 			page.setDateOfCreation(pageDTO.getDateOfCreation());
-
 		}
 		
 		
 		
 		page.setId(pageDTO.getId());
-		
-		page.setPageTitle(pageDTO.getPageTitle());
+		page.setPageTitle(pageDTO.getPageTitle().strip());
 		page.setBannerHeading(pageDTO.getBannerHeading());
 		page.setBannerSubHeading(pageDTO.getBannerSubHeading());
 		page.setMainSection(pageDTO.getMainSection());
-		
 		page.setBannerImageName(pageDTO.getBannerImageName());
 		page.setBannerImageAlt(pageDTO.getBannerImageAlt());
 		page.setCssCode(pageDTO.getCssCode());
 		page.setJsCode(pageDTO.getJsCode());
-
 		page.setMetaTitle(pageDTO.getMetaTitle());
 		page.setMetaKeyword(pageDTO.getMetaKeyword());
-
 		page.setMetaDescription(pageDTO.getMetaDescription());
 		
-
 		/*
 		 * Creating a new html template
 		 */
-
 		String extention = ".html";
 		/*
 		 * Before creating the html file, we have to ensure that two files do not get
 		 */
 		
-		String htmlFileName = pageDTO.getPageTitle().replaceAll(" ","-").toLowerCase();
+		String preProcessFileName = pageDTO.getPageTitle().toLowerCase().strip();
+//		preProcessFileName.toLowerCase();
+		System.out.println("The Pre Process of file name "+preProcessFileName);
+		
+		String htmlFileName = preProcessFileName.replaceAll(" ","-");
 		List<Page> allPages = pageRepository.findAll();
 		Iterator<Page> iterator = allPages.iterator();
 		
@@ -668,15 +693,29 @@ public class AdminController {
 		// htmlFileName.
 
 		htmlFileName += extention;
+		String pagesLink = htmlFileName;
 		try {
 			Path fileNameAndPath = Paths.get(newPageAddDir, htmlFileName);
 			Files.createFile(fileNameAndPath);
+			
+			
 
 		} catch (IOException e) {
 			// TODO: handle exception
-
-		}
+		} 
 		
+		String hostName = request.getHeader("host");
+		System.out.println(hostName);
+		
+		pagesLink = hostName + "/addedPages/";
+		
+		String currentPageLink = pagesLink + htmlFileName;
+		
+		/*
+		 * Write a code to create a  page link.
+		*/
+		System.out.println(pagesLink);
+			
 		/*
 		 * Now save the file name in the database so as to access the 
 		 * file in the future while updating...
@@ -684,8 +723,13 @@ public class AdminController {
 		*/
 		pageDTO.setFileName(htmlFileName);
 		page.setFileName(pageDTO.getFileName());	
+
+		/*
+		 * Lets save the link of the file in the database
+		*/
+		pageDTO.setPageLink(currentPageLink);
+		page.setPageLink(pageDTO.getPageLink());	
 		pageService.addPage(page);
-	
 //		htmlPage
 	
 		/*
@@ -699,44 +743,33 @@ public class AdminController {
 											pageDTO.getMetaDescription(),
 											pageDTO.getMainSection(),
 											pageDTO.getCssCode());
-		
 		System.out.println("The following code will be there in the file "+codeInFile);
-		
 		pageDTO.setConsolidatedHTMLCode(codeInFile);
 		page.setConsolidatedHTMLCode(pageDTO.getConsolidatedHTMLCode());
-		
 		
 		try {
 			pushCodeInFile(codeInFile, pageDTO.getFileName());
 		} catch (IOException e) {
-
 			e.printStackTrace();
 		}
 		
 		page.setLastModified(pageDTO.getLastModified());
-
-
-		
 		System.out.println("page Added sucessfully" + codeInFile);
-		
-		
 		pageService.addPage(page);
 //		String pageToReturn = "redirect:/viewPages/"+htmlFileName;
-		return "redirect:/viewPages/"+htmlFileName;
+		System.out.println(page.toString());
+		return "/addedPages/"+htmlFileName;
 
 	}
 
 	private void pushCodeInFile(String codeInFile, String fileName) throws IOException {
 		// TODO Auto-generated method stub
-				
 		Path fileNameAndPath = Paths.get(newPageAddDir, fileName);
 		Files.write(fileNameAndPath, codeInFile.getBytes());
-		
 	}
 
 	private String htmlBoilerPlate(String metaTitle, String bannerHeading, String bannerSubheading, String metaDescription, String mainSection, String cSSCode) {
 		// TODO Auto-generated method stub
-		
 		/*
 		 * initial code
 		*/
@@ -764,7 +797,6 @@ public class AdminController {
 				+ "  </html>";
 		return initCode;
 	}
-	
 	/*
 	 * Funtion to delete a page from the database and the server
 	 * 
@@ -772,21 +804,17 @@ public class AdminController {
 	
 	@GetMapping("/admin/page/delete/{id}")
 	public String deletePage(@PathVariable long id) {
-		
 		/*
 		 * Basic check if the page already exist or not
 		*/
-		
 		if(pageRepository.findById(id).isPresent()) {
 			deleteHtmlFileFromAddedPagesFolder(id);
 			pageService.removePageById(id);
 		}
-		
 		else {
 			System.out.println("Cannot delete the page");
 		}
 		return "redirect:/admin/pages";
-		
 	}
 
 	private void deleteHtmlFileFromAddedPagesFolder(@PathVariable long id) {
@@ -809,11 +837,11 @@ public class AdminController {
 	public String editPage(@PathVariable long id, Model model) {
 		Page page = pageService.getPageById(id).get();
 		PageDTO pageDTO = new PageDTO();
-			
 		pageDTO.setId(page.getId());
 		pageDTO.setPageTitle(page.getPageTitle());
 		pageDTO.setBannerHeading(page.getBannerHeading());
 		pageDTO.setBannerSubHeading(page.getBannerSubHeading());
+		pageDTO.setPageLink(page.getPageLink());
 //		page.setPageLayout(pageDTO.getPageLayout());
 		pageDTO.setMainSection(page.getMainSection());
 		pageDTO.setBannerImageName(page.getBannerImageName());
@@ -828,7 +856,6 @@ public class AdminController {
 		return "pagesAdd";
 	}
 	
-	// Activate Deactivate page
 	@GetMapping("/admin/activateDeactivatePage/{id}/{action}")
 	@ResponseBody
 	@CrossOrigin("*")
@@ -839,13 +866,12 @@ public class AdminController {
 		if (action.equals("ActivatePage")) {
 			page.setIsPageActive(true);
 			pageService.addPage(page);
-			return "Page Activated/Published";
-			
+			return "Page Activated/Published";			
 			/*
 			 * University university = universityService.getUniversityById(id).get();
 			 * university.setIsUniversityActive(true);
 			 * universityService.addUniversity(university); return "University Activated!!";
-			 */
+			 */			
 		}
 
 		else {
@@ -860,6 +886,7 @@ public class AdminController {
 			 */
 		}
 	}
+	
 	/*
 	 * Below functions will be used to create the posts 
 	*/
