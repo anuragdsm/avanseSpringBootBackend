@@ -29,7 +29,6 @@ import lombok.Setter;
 //@AllArgsConstructor
 @Table(name = "posts")
 public class Post implements Serializable {
-	
 		/**
 		 * 
 		 */
@@ -45,8 +44,6 @@ public class Post implements Serializable {
 		private Date lastModified;
 		
 		private Boolean isPostPublished=false;
-		
-		
 		private String fileName;
 		private String postTitle;
 		
@@ -58,40 +55,31 @@ public class Post implements Serializable {
 		/*
 		 * Banner fileds including image
 		*/
-		private String bannerHeading; 
-		private String bannerSubHeading;
-		private String bannerImageName;
-		private String bannerImageAlt;
-		
+		private String heading; 
+		private String subHeading;
+		private String featuredImageName;
+		private String featuredImageAltText;
 		
 		/*
 		 * The value of 1 will represent Full page
 		 * The value of 2 will represent Box Container
 		*/
-		
-		
-		
-		
-//		private Integer pageLayout; 
-		
+			
 		@Lob
 		@Basic
-		private String mainSection;
+		private String mainSection;	
 		
 		/*
 		 * Codes by the admin
 		*/
-	
 		
 		@Lob
 		@Basic
 		private String consolidatedHTMLCode;
-		
 		/*
 		 * SEO fields
 		*/
 		private String metaTitle;
-		private String metaKeyword;
 		
 		@Lob
 		@Basic

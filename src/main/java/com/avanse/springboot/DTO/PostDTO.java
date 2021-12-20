@@ -10,19 +10,19 @@ public class PostDTO {
 	private Long id;
 	private Date dateOfCreation;
 	private Date lastModified;
-	private Boolean isPageActive;
+	private Boolean isPostActive;
 
 	private String fileName;
-	private String pageTitle;
+	private String postTitle;
 
-	private String bannerHeading;
-	private String bannerSubHeading;
+	private String heading;
+	private String subHeading;
 
 	/*
 	 * image variables
 	 */
-	private String bannerImageName;
-	private String bannerImageAlt;
+	private String featuredImageName;
+	private String featuredImageAlt;
 
 	/*
 	 * The value of 1 will represent Full page The value of 2 will represent Box
@@ -39,7 +39,6 @@ public class PostDTO {
 	 * SEO variables
 	 */
 	private String metaTitle;
-	private String metaKeyword;
 	private String metaDescription;
 
 }

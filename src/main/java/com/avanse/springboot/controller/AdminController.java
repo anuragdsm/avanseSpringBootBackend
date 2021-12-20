@@ -32,11 +32,13 @@ import com.avanse.springboot.DTO.CourseDTO;
 import com.avanse.springboot.DTO.JobDTO;
 import com.avanse.springboot.DTO.LocationDTO;
 import com.avanse.springboot.DTO.PageDTO;
+import com.avanse.springboot.DTO.PostDTO;
 import com.avanse.springboot.DTO.UniversityDTO;
 import com.avanse.springboot.model.Course;
 import com.avanse.springboot.model.Job;
 import com.avanse.springboot.model.Location;
 import com.avanse.springboot.model.Page;
+import com.avanse.springboot.model.Post;
 import com.avanse.springboot.model.PostCategory;
 import com.avanse.springboot.model.University;
 import com.avanse.springboot.repository.CourseRepository;
@@ -139,8 +141,7 @@ public class AdminController {
 	}
 
 	/*
-	 * ================================================ All methods below are
-	 * related to universities ================================================
+	 * ===================All methods below are related to universities ================================================
 	 */
 
 	/*
@@ -883,9 +884,11 @@ public class AdminController {
 		}
 
 		else {
+			
 			page.setIsPageActive(false);
 			pageService.addPage(page);
 			return "Page Deactivate/Unpublished";
+			
 			/*
 			 * University university = universityService.getUniversityById(id).get();
 			 * university.setIsUniversityActive(false);
@@ -904,12 +907,20 @@ public class AdminController {
 //		model.addAttribute("posts", postService.getAllPosts());
 		return "posts";
 	}
-
+	
+	@GetMapping("/admin/posts/add")
+	public String postsGet(Model model) {
+		model.addAttribute("postDTO", new PostDTO());
+		return "postsAdd";
+	}
+	
+	@PostMapping("/admin/posts/add")
+	public String postAddPostMethod(@ModelAttribute("post") Post post) {		
+		postService.addPost(post);
+		return "redirect:/admin/postCategories";
+	}	
 	
 	/*Below functions will be used to create the post categories	*/
-	
-	
-	
 	
 	@GetMapping("/admin/postCategories")
 	public String getCategories(Model model) {
