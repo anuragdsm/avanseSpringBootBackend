@@ -82,7 +82,8 @@
 					aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Manage Posts:</h6>
-						<a class="collapse-item" href="utilities-border.html">Categories</a>
+						<a class="collapse-item" th:href="@{/admin/postCategories/add}"><strong>Add
+								New Category</strong></a>
 						<a class="collapse-item" href="utilities-color.html">New Post</a>
 						<a class="collapse-item" href="utilities-border.html">View
 							Posts</a>
@@ -410,6 +411,11 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top"> <i
+		class="fas fa-angle-up"></i>
+	</a>
 
 	<!-- Bootstrap core JavaScript-->
 	<script src="/vendor/jquery/jquery.min.js"></script>

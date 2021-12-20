@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -36,17 +37,20 @@ import com.avanse.springboot.model.Course;
 import com.avanse.springboot.model.Job;
 import com.avanse.springboot.model.Location;
 import com.avanse.springboot.model.Page;
+import com.avanse.springboot.model.PostCategory;
 import com.avanse.springboot.model.University;
 import com.avanse.springboot.repository.CourseRepository;
 import com.avanse.springboot.repository.JobRespository;
 import com.avanse.springboot.repository.LocationRepository;
 import com.avanse.springboot.repository.PageRepository;
+import com.avanse.springboot.repository.PostCategoryRepository;
 import com.avanse.springboot.repository.PostRepository;
 import com.avanse.springboot.repository.UniversityRepository;
 import com.avanse.springboot.service.CourseService;
 import com.avanse.springboot.service.JobService;
 import com.avanse.springboot.service.LocationService;
 import com.avanse.springboot.service.PageService;
+import com.avanse.springboot.service.PostCategoryService;
 import com.avanse.springboot.service.PostService;
 import com.avanse.springboot.service.UniversityService;
 
@@ -95,6 +99,13 @@ public class AdminController {
 	
 	@Autowired
 	PostService  postService;
+	
+	@Autowired
+	PostCategoryRepository postCategoryRepository;
+	
+	@Autowired
+	PostCategoryService postCategoryService;
+	
 	
 	@Autowired
 	UniversityRepository universityRepository;
@@ -513,7 +524,6 @@ public class AdminController {
 	public String jobsAddPost(@ModelAttribute("jobDTO") JobDTO jobDTO) {
 		Job job = new Job();
 		job.setId(jobDTO.getId());
-
 		return "";
 	}
 	
@@ -644,8 +654,6 @@ public class AdminController {
 		else {
 			page.setDateOfCreation(pageDTO.getDateOfCreation());
 		}
-		
-		
 		
 		page.setId(pageDTO.getId());
 		page.setPageTitle(pageDTO.getPageTitle().strip());
@@ -896,5 +904,57 @@ public class AdminController {
 //		model.addAttribute("posts", postService.getAllPosts());
 		return "posts";
 	}
+
+	
+	/*Below functions will be used to create the post categories	*/
+	
+	
+	
+	
+	@GetMapping("/admin/postCategories")
+	public String getCategories(Model model) {
+		model.addAttribute("postCategories",postCategoryService.getAllPostCategories());
+		return "postCategories";
+	}
+	@GetMapping("/admin/postCategories/add")
+	public String getCatAdd(Model model) {
+		model.addAttribute("postCategory", new PostCategory());
+		return "categoriesAdd";
+	}
+	@PostMapping("/admin/postCategories/add")
+	public String postCatAdd(@ModelAttribute("postCategory") PostCategory postCategory) {
+		
+		postCategoryService.addPostCategory(postCategory);
+		return "redirect:/admin/postCategories";
+	}	
+	
+//	Delete Method for deleting the categories by id
+	@GetMapping("/admin/postCategory/delete/{id}")
+	public String deleteCat(@PathVariable long id) {
+
+		postCategoryService.removePostCategoryById(id);
+		//		categoryService.removeCategoryById(id);
+		return "redirect:/admin/postCategories";
+	}
+	
+//	Update Method for updating the categories
+	@GetMapping("/admin/postCategory/edit/{id}")
+	public String updateCat(@PathVariable Long id, Model model) {
+//		Optional<Category> category = categoryService.getCategoryById(id);
+		Optional<PostCategory>postCategory = postCategoryService.getPostCategoryById(id);
+		if(postCategory.isPresent()) {
+			model.addAttribute("postCategory", postCategory.get());
+			return "categoriesAdd";
+		}	
+		else
+			return "404";
+	}
 //	End of class
 }
+
+
+
+
+
+
+

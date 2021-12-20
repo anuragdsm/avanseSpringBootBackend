@@ -44,9 +44,7 @@ public class Course implements Serializable{
 	@Lob
 	@Basic
 	private String description;
-
 	private Double fees;
-
 	private String exams;
 	
 	private String documentsRequired;
