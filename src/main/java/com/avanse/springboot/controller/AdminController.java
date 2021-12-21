@@ -131,7 +131,6 @@ public class AdminController {
 		model.addAttribute("numOfPages",noOfPages);
 
 		System.out.println("User Added Image Directory is "+ userAddedImagesDir);
-
 		return "adminDashboard";
 	}
 
@@ -559,7 +558,6 @@ public class AdminController {
 		Location location = new Location();
 		location.setId(locationDTO.getId());
 		location.setCity(locationDTO.getCity());
-		location.setIconImageName(locationDTO.getIconImageName());
 		return "redirect:/admin/locations";
 	}
 	
@@ -596,10 +594,6 @@ public class AdminController {
 	 * return "adminDashboard"; }
 	 */
 	
-	
-	
-	
-
 	@GetMapping("/admin/pages")
 	public String getPages(Model model) {
 		model.addAttribute("pages", pageService.getAllPages());
@@ -636,13 +630,10 @@ public class AdminController {
 		 * If it is not then initialise the time stamp with a new date.
 		*/
 		
-		
 		Page page = new Page();
 		Date timeStamp = null;
 		boolean creatingTimeStamp = false;
-		
-		
-		
+			
 		if(pageDTO.getDateOfCreation() == null) {
 			timeStamp= new Date();
 			creatingTimeStamp = true;
@@ -717,7 +708,6 @@ public class AdminController {
 		System.out.println(hostName);
 		
 		pagesLink = hostName + "/addedPages/";
-		
 		String currentPageLink = pagesLink + htmlFileName;
 		
 		/*
@@ -790,6 +780,10 @@ public class AdminController {
 				+ "<html lang=\"en\" xmlns:layout=\"http://www.ultraq.net.nz/thymeleaf/layout\"\r\n"
 				+ "	layout:decorate=\"_LivePagelayout\">\r\n"
 				+ "<head>\r\n"
+//				+ header to be implemented later
+				+ "</head>\r\n"
+				+ ""
+				
 				+ "<body id=\"page-top\">\r\n"
 				+ "\r\n"
 				+ "	<!-- Content Wrapper -->\r\n"

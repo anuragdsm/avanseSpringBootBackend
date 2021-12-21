@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="_layout">
+<body id="page-top">
+	<!-- Page Wrapper -->
+	<div layout:fragment="content">
+
+		<!-- Begin Page Content -->
+		<div class="container-fluid">
+			<div class="container">
+				<h3>Add location</h3>
+				<form th:action="@{/admin/locations/add}" method="post"
+					th:object="${locationDTO}" enctype="multipart/form-data">
+					<div class="row">
+						<div class="col-sm-5">
+
+							<input type="hidden" name="id" th:field="*{id}">
+							<div class="form-group">
+								<label for="name">City Name</label> <input type="text"
+									class="form-control" required th:field="*{city}" name="city"
+									id="city" placeholder="Enter City">
+							</div>
+						
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<!-- Content Row -->
+
+	</div>
+	<!-- End of Content Wrapper -->
+
+	</div>
+	<!-- End of Page Wrapper -->
+
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top"> <i
+		class="fas fa-angle-up"></i>
+	</a>
+
+	<!-- Bootstrap core JavaScript-->
+	<script src="/vendor/jquery/jquery.min.js"></script>
+	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script src="/js/sb-admin-2.min.js"></script>
+
+	<!-- Page level plugins -->
+	<script src="/vendor/chart.js/Chart.min.js"></script>
+
+	<!-- Page level custom scripts -->
+	<script src="/js/demo/chart-area-demo.js"></script>
+	<script src="/js/demo/chart-pie-demo.js"></script>
+
+</body>
+
+</html>
