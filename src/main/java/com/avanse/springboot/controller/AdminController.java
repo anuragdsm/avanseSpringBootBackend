@@ -746,6 +746,9 @@ public class AdminController {
 		 * It the end publish the page...
 		*/
 		
+		
+		System.out.println("\n\n\n\n\n\n Main Section preview"+pageDTO.getMainSection());
+		
 		String codeInFile = htmlBoilerPlate(pageDTO.getMetaTitle(),
 											pageDTO.getBannerHeading(), 
 											pageDTO.getBannerSubHeading(),
@@ -767,8 +770,9 @@ public class AdminController {
 		pageService.addPage(page);
 //		String pageToReturn = "redirect:/viewPages/"+htmlFileName;
 		System.out.println(page.toString());
-		return "/addedPages/"+htmlFileName;
+		return "redirect:/admin/pages";
 
+		
 	}
 
 	private void pushCodeInFile(String codeInFile, String fileName) throws IOException {
@@ -782,29 +786,146 @@ public class AdminController {
 		/*
 		 * initial code
 		*/
-		String initCode;
-		initCode = "<!DOCTYPE html>\r\n"
-				+ "<html lang=\"en\">\r\n"
-				+ "  <head>\r\n"
-				+ "      <link rel=\"shortcut icon\" href=\"/viewPagesAssets/img/favicon.ico\" type=\"image/x-icon\">\r\n"
+		String boilerPlate= " <!DOCTYPE html>\r\n"
+				+ "<html lang=\"en\" xmlns:layout=\"http://www.ultraq.net.nz/thymeleaf/layout\"\r\n"
+				+ "	layout:decorate=\"_LivePagelayout\">\r\n"
+				+ "<head>\r\n"
+				+ "<body id=\"page-top\">\r\n"
 				+ "\r\n"
-				+ "    <meta charset=\"UTF-8\">\r\n"
-				+ "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n"
-				+ "    <meta name=\"description\" content=\""+metaDescription+"\">\r\n"
-				+ "    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\r\n"
-				+ "    <title>"+metaTitle+"</title>\r\n"
-				+ "    <title>"+metaTitle+"</title>\r\n"
-				+ "    <h1>"+bannerHeading+"</h1>\r\n"
-				+ "    <h2>"+bannerSubheading+"</h2>\r\n"
-				+ "    <link rel=\"stylesheet\" href=\"css/sb-admin-2.min.css\">\r\n"
-				+ "    <style>\r\n"+cSSCode+"\r\n"+"</style>"
-				+ "  </head>\r\n"
-				+ "  <body>\r\n"
-				+ mainSection 
-				+ "  \r\n"
-				+ "  </body>\r\n"
-				+ "  </html>";
-		return initCode;
+				+ "	<!-- Content Wrapper -->\r\n"
+				+ "	<div layout:fragment=\"contentPlus\">"
+				+ mainSection
+				+ "<footer class=\"footer_area f_bg\">\r\n"
+				+ "        <div class=\"footer_cta fcta_bg\">\r\n"
+				+ "           <div class=\"container\">\r\n"
+				+ "                <div class=\"row\">\r\n"
+				+ "                    <div class=\"col-lg-3 text-lg-left text-sm-center\">\r\n"
+				+ "                        <img src=\"/viewPagesAssets/img/logo.png\">\r\n"
+				+ "                    </div>\r\n"
+				+ "                    <div class=\"col-lg-6 text-lg-center text-sm-center\">\r\n"
+				+ "                            <h2 class=\"\">Enroll to transform your Lives</h2>\r\n"
+				+ "                            <p class=\"f_size_22\"> Get a hassle free education loan is 3 days</p>\r\n"
+				+ "                    </div>\r\n"
+				+ "                    <div class=\"col-lg-3 text-lg-right text-sm-center\">\r\n"
+				+ "                        <a href=\"\" class=\"btn_yellow \">Apply Now</a>\r\n"
+				+ "                    </div>\r\n"
+				+ "                </div>\r\n"
+				+ "           </div>\r\n"
+				+ "        </div>\r\n"
+				+ "        <div class=\"footer_top\">\r\n"
+				+ "            <div class=\"container\">\r\n"
+				+ "                <div class=\"row\">\r\n"
+				+ "                    \r\n"
+				+ "                    <div class=\"col-lg-3 col-md-6\">\r\n"
+				+ "                        <div class=\"f_widget about-widget  wow fadeInLeft\" data-wow-delay=\"0.4s\"\r\n"
+				+ "                            style=\"visibility: visible; animation-delay: 0.4s; animation-name: fadeInLeft;\">\r\n"
+				+ "                            <h3 class=\"f-title f_500 text-white f_size_18 mb_40\">Education Loan </h3>\r\n"
+				+ "                            <ul class=\"list-unstyled f_list\">\r\n"
+				+ "                                <li><a href=\"#\">Avanse Education Loans</a></li>\r\n"
+				+ "                                <li><a href=\"#\">Study in India Education Loan</a></li>\r\n"
+				+ "                                <li><a href=\"#\">Study Abroad Education Loan</a></li>\r\n"
+				+ "                                <li><a href=\"#\">Executive Education Loan</a></li>\r\n"
+				+ "                                <li><a href=\"#\">Student Loan Refinancing</a></li>\r\n"
+				+ "                            </ul>\r\n"
+				+ "                        </div>\r\n"
+				+ "                    </div>\r\n"
+				+ "                    <div class=\"col-lg-3 col-md-6\">\r\n"
+				+ "                        <div class=\"f_widget about-widget  wow fadeInLeft\" data-wow-delay=\"0.4s\"\r\n"
+				+ "                            style=\"visibility: visible; animation-delay: 0.4s; animation-name: fadeInLeft;\">\r\n"
+				+ "                            <h3 class=\"f-title f_500 text-white f_size_18 mb_40\">Calculator</h3>\r\n"
+				+ "                            <ul class=\"list-unstyled f_list\">\r\n"
+				+ "                                <li><a href=\"#\">Course Expense Calculator</a></li>\r\n"
+				+ "                                <li><a href=\"#\">Eligibility Calculator</a></li>\r\n"
+				+ "                                <li><a href=\"#\">Eligibility Calculator</a></li>\r\n"
+				+ "                                <li><a href=\"#\">Education Loan Repayment Calculator</a></li>\r\n"
+				+ "                            </ul>\r\n"
+				+ "                        </div>\r\n"
+				+ "                    </div>\r\n"
+				+ "                    <div class=\"col-lg-3 col-md-6\">\r\n"
+				+ "                        <div class=\"f_widget about-widget  wow fadeInLeft\" data-wow-delay=\"0.6s\"\r\n"
+				+ "                            style=\"visibility: visible; animation-delay: 0.6s; animation-name: fadeInLeft;\">\r\n"
+				+ "                            <h3 class=\"f-title f_500 text-white f_size_18 mb_40\">Company</h3>\r\n"
+				+ "                            <ul class=\"list-unstyled f_list\">\r\n"
+				+ "                                    <li><a href=\"#\">About Avanse</a></li>\r\n"
+				+ "                                    <li><a href=\"#\">Career</a></li>\r\n"
+				+ "                                    <li><a href=\"#\">Investors</a></li>\r\n"
+				+ "                                    <li><a href=\"#\">Media Room</a></li>\r\n"
+				+ "                                    <li><a href=\"#\">Responsible Lending</a></li>\r\n"
+				+ "                                    <li><a href=\"#\">Sitemap</a></li>\r\n"
+				+ "                            </ul>\r\n"
+				+ "                        </div>\r\n"
+				+ "                    </div>\r\n"
+				+ "                    <div class=\"col-lg-3 col-md-6\">\r\n"
+				+ "                        <div class=\"f_widget about-widget  wow fadeInLeft\" data-wow-delay=\"0.8s\"\r\n"
+				+ "                            style=\"visibility: visible; animation-delay: 0.8s; animation-name: fadeInLeft;\">\r\n"
+				+ "                            <h3 class=\"f-title f_500 text-white f_size_18 mb_40\">Resources </h3>\r\n"
+				+ "                            <ul class=\"list-unstyled f_list\">\r\n"
+				+ "                                <li><a href=\"#\">Blog</a></li>\r\n"
+				+ "                                <li><a href=\"#\">Good Credit</a></li>\r\n"
+				+ "                                <li><a href=\"#\">FAQ</a></li>\r\n"
+				+ "                                <li><a href=\"#\">Pay Online</a></li>\r\n"
+				+ "                                <li><a href=\"#\">WhatsApp Communication</a></li>\r\n"
+				+ "                                <li><a href=\"#\">Ex-gratia FAQs</a></li>\r\n"
+				+ "                                <li><a href=\"#\">Sarfaesi Notice</a></li>\r\n"
+				+ "                            </ul>\r\n"
+				+ "                        </div>\r\n"
+				+ "                    </div>\r\n"
+				+ "                </div>\r\n"
+				+ "            </div>\r\n"
+				+ "        </div>\r\n"
+				+ "        <div class=\"footer_bottom\">\r\n"
+				+ "            <div class=\"container\">\r\n"
+				+ "                <div class=\"row align-items-center\">\r\n"
+				+ "                    <div class=\"col-lg-8 col-md-8 col-sm-12\">\r\n"
+				+ "                        <p class=\"mb-2 f_300\">Copyright © 2021 Avanse Financial Services Ltd. All Rights Reserved .       <a class=\"ml-4\" href=\"https://www.digistreetmedia.com/\" target=\"_blank\">Site Credits</a></p>\r\n"
+				+ "                        <p class=\"mb-2 f_300\">CIN : U67120MH1992PLC068060</p>\r\n"
+				+ "                    </div>\r\n"
+				+ "                    \r\n"
+				+ "                    <div class=\"col-lg-4 col-md-4 col-sm-12\">\r\n"
+				+ "                        <div class=\"f_social_icon_two text-right mb-2\">\r\n"
+				+ "                            <a href=\"#\"><i class=\"ti-facebook\"></i></a>\r\n"
+				+ "                            <a href=\"#\"><i class=\"ti-twitter-alt\"></i></a>\r\n"
+				+ "                            <a href=\"#\"><i class=\"ti-linkedin\"></i></a>\r\n"
+				+ "                            <a href=\"#\"><i class=\"ti-instagram\"></i></a>\r\n"
+				+ "                        </div>\r\n"
+				+ "                        <p class=\"mb-2 f_300 text-lg-right\">Phone support: 1800-266-0200</p>\r\n"
+				+ "                    </div>\r\n"
+				+ "                    <div class=\"col-lg-12\">\r\n"
+				+ "                        <p>Disclaimer | Base Lending Rate | Privacy Policy | Terms & Conditions | Ombudsman Scheme | Customer Complaints | Moratorium Policy | WhatsApp T&C | Communication Policy | Digital Partners</p>\r\n"
+				+ "                    </div>\r\n"
+				+ "                </div>\r\n"
+				+ "            </div>\r\n"
+				+ "        </div>\r\n"
+				+ "    </footer>\r\n"
+				+ "    "
+				
+				
+				+ "    <!-- Optional JavaScript -->\r\n"
+				
+				+ "    <!-- jQuery first, then Popper.js, then Bootstrap JS -->\r\n"
+				+ "    <script src=\"/viewPagesAssets/js/jquery-3.6.0.min.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/js/propper.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/js/bootstrap.min.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/vendors/wow/wow.min.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/vendors/sckroller/jquery.parallax-scroll.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/vendors/owl-carousel/owl.carousel.min.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/vendors/imagesloaded/imagesloaded.pkgd.min.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssetsvendors/isotope/isotope-min.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/vendors/magnify-pop/jquery.magnific-popup.min.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/vendors/counterup/jquery.counterup.min.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/vendors/counterup/jquery.waypoints.min.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/vendors/counterup/appear.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/vendors/circle-progress/circle-progress.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/vendors/scroll/jquery.mCustomScrollbar.concat.min.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/js/plugins.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/js/main.js\"></script>\r\n"
+				+ " 	</body> ";
+		
+		
+		
+		
+		
+		return boilerPlate;
 	}
 	/*
 	 * Funtion to delete a page from the database and the server
