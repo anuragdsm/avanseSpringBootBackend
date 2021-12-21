@@ -97,7 +97,6 @@ body {
   z-index: 20;
   overflow: hidden;
 }
-
 a, .btn, button {
   text-decoration: none;
   outline: none;
@@ -490,10 +489,10 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .btn_three {
   font: 500 14px "Futura Bk BT", sans-serif;
   color: #fff;
-  background: #7444fd;
+  background: #1cb1b1;
   border-radius: 3px;
   padding: 15px 30px;
-  border: 1px solid #7444fd;
+  border: 1px solid #1cb1b1;
   margin-top: 50px;
   -webkit-transition: all 0.3s linear;
   -o-transition: all 0.3s linear;
@@ -502,7 +501,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   display: inline-block;
 }
 .btn_three:hover {
-  color: #7444fd;
+  color: #1cb1b1;
   background: transparent;
 }
 
@@ -558,7 +557,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .software_banner_btn {
   font: 500 14px "Futura Bk BT", sans-serif;
   color: #fff;
-  background: #3d64f4;
+  background: #fdc119;
   -webkit-box-shadow: 0px 20px 30px 0px rgba(12, 0, 46, 0.1);
           box-shadow: 0px 20px 30px 0px rgba(12, 0, 46, 0.1);
   display: inline-block;
@@ -570,7 +569,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   transition: all 0.2s linear;
 }
 .software_banner_btn:hover {
-  color: #3d64f4;
+  color: #fdc119;
   background: #fff;
 }
 
@@ -585,7 +584,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   border-radius: 50%;
   background: #fff;
   display: inline-block;
-  color: #3d64f4;
+  color: #fdc119;
   text-align: center;
   line-height: 46px;
   font-size: 18px;
@@ -615,12 +614,12 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   padding: 16px 40px;
   border-radius: 45px;
   color: #fff;
-  border: 1px solid #3d64f4;
-  background: #3d64f4;
+  border: 1px solid #fdc119;
+  background: #fdc119;
   cursor: pointer;
 }
 .btn_four:hover {
-  color: #3d64f4;
+  color: #fdc119;
   background: transparent;
 }
 
@@ -1761,7 +1760,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   color: #fff;
 }
 .menu_five .menu > .nav-item.submenu .dropdown-menu .nav-item:hover > .nav-link, .menu_five .menu > .nav-item.submenu .dropdown-menu .nav-item:focus > .nav-link, .menu_five .menu > .nav-item.submenu .dropdown-menu .nav-item.active > .nav-link {
-  color: #3d64f4;
+  color: #fdc119;
 }
 .menu_five .menu > .nav-item.submenu.mega_menu > .dropdown-menu > .nav-item > .nav-link {
   color: #051441;
@@ -1777,7 +1776,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .menu_five .btn_get:hover {
   background: #fff;
-  color: #3d64f4;
+  color: #fdc119;
   border-color: #fff;
 }
 .menu_five .menu_toggle .hamburger span,
@@ -2306,17 +2305,17 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   color: #051441;
 }
 .header_area.navbar_fixed .menu_five .btn_get {
-  border-color: #3d64f4;
-  color: #3d64f4;
+  border-color: #fdc119;
+  color: #fdc119;
   display: inline-block;
 }
 .header_area.navbar_fixed .menu_five .btn_get:hover {
-  background: #3d64f4;
+  background: #fdc119;
   color: #fff;
 }
 .header_area.navbar_fixed .menu_five .menu_toggle .hamburger-cross span,
 .header_area.navbar_fixed .menu_five .menu_toggle .hamburger span {
-  background: #3d64f4;
+  background: #fdc119;
 }
 .header_area.navbar_fixed .menu_six .menu > .nav-item > .nav-link {
   color: #051441;
@@ -3349,8 +3348,8 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 /*================ software_banner_area css ================*/
 .software_banner_area {
   min-height: 100vh;
-  background-image: -o-linear-gradient(310deg, #23026d 0%, #3d64f4 100%);
-  background-image: linear-gradient(140deg, #23026d 0%, #3d64f4 100%);
+  background-image: -o-linear-gradient(310deg, #23026d 0%, #fdc119 100%);
+  background-image: linear-gradient(140deg, #23026d 0%, #fdc119 100%);
   position: relative;
   z-index: 0;
 }
@@ -5487,14 +5486,14 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   left: auto;
   right: 0;
   bottom: 0;
-  background: #3d64f4;
+  background: #fdc119;
   position: absolute;
   -webkit-transition: width 0.2s linear;
   -o-transition: width 0.2s linear;
   transition: width 0.2s linear;
 }
 .software_featured_item .learn_btn:hover {
-  color: #3d64f4;
+  color: #fdc119;
 }
 .software_featured_item .learn_btn:hover:before {
   width: 100%;
@@ -5504,8 +5503,8 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 
 /*=============== software_featured_area_two css ==================*/
 .software_featured_area_two {
-  background-image: -o-linear-gradient(50deg, #23026d 0%, #3d64f4 100%);
-  background-image: linear-gradient(40deg, #23026d 0%, #3d64f4 100%);
+  background-image: -o-linear-gradient(50deg, #23026d 0%, #fdc119 100%);
+  background-image: linear-gradient(40deg, #23026d 0%, #fdc119 100%);
 }
 
 .software_featured_img {
@@ -5514,12 +5513,12 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 
 .software_featured_content .btn_four {
   border: 0px;
-  color: #3d64f4;
+  color: #fdc119;
   background: #fff;
 }
 .software_featured_content .btn_four:hover {
   color: #fff;
-  background: #3d64f4;
+  background: #fdc119;
 }
 
 /*=============== saas_featured_area css ==============*/
@@ -6929,7 +6928,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   transition: all 0.2s linear;
 }
 .service_carousel .owl-next:hover {
-  background: #7444fd !important;
+  background: #1cb1b1 !important;
   color: #fff !important;
 }
 
@@ -7052,7 +7051,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   height: 0;
   border-style: solid;
   border-width: 7px 0 7px 8px;
-  border-color: transparent transparent transparent #3d64f4;
+  border-color: transparent transparent transparent #fdc119;
   position: absolute;
   left: -2px;
   top: 50%;
@@ -7062,8 +7061,8 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   opacity: 0;
 }
 .software_service_tab .nav-item .nav-link.active {
-  border-left-color: #3d64f4;
-  color: #3d64f4;
+  border-left-color: #fdc119;
+  color: #fdc119;
 }
 .software_service_tab .nav-item .nav-link.active:before {
   opacity: 1;
@@ -7077,7 +7076,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .software_service_tab_content .software_service_item i {
   font-size: 30px;
-  color: #3d64f4;
+  color: #fdc119;
   line-height: 40px;
 }
 .software_service_tab_content .software_service_item h5 {
@@ -7119,7 +7118,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   left: auto;
   right: 0;
   height: 2px;
-  background: #3d64f4;
+  background: #fdc119;
   position: absolute;
   bottom: -2px;
   -webkit-transition: all 0.3s linear;
@@ -7127,7 +7126,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   transition: all 0.3s linear;
 }
 .developer_product_content .develor_tab .nav-item .nav-link.active {
-  color: #3d64f4;
+  color: #fdc119;
   background: transparent;
 }
 .developer_product_content .develor_tab .nav-item .nav-link.active:before {
@@ -7144,7 +7143,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .developer_product_content .developer_tab_content .details_btn {
   font: 400 14px "Futura Bk BT", sans-serif;
-  color: #3d64f4;
+  color: #fdc119;
   position: relative;
   display: inline-block;
 }
@@ -7154,7 +7153,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   left: auto;
   right: 0;
   height: 1px;
-  background: #3d64f4;
+  background: #fdc119;
   position: absolute;
   bottom: 0px;
   -webkit-transition: all 0.3s linear;
@@ -8378,9 +8377,9 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   transition: color 0.5s ease 0s;
 }
 .design_tab .nav-item .nav-link.active {
-  background-color: #7444fd;
+  background-color: #1cb1b1;
 }
-.design_tab .nav-item .nav-link.active h5,
+.design_tab .nav-item .nav-link.active h4,
 .design_tab .nav-item .nav-link.active p {
   color: #fff;
 }
@@ -9719,7 +9718,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   font: 400 18px/28px "Futura Bk BT", sans-serif;
   color: #b4bacc;
   border-radius: 0px;
-  border-bottom: 1px solid #3d64f4;
+  border-bottom: 1px solid #fdc119;
   -webkit-box-shadow: none;
           box-shadow: none;
 }
@@ -12447,7 +12446,8 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   outline: none;
 }
 .text_box textarea {
-  height: 220px;
+  height: 110px;
+  resize: none;
 }
 
 .contact_form_box .btn_three {
@@ -13248,7 +13248,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: #4b505e;
+  color: #231f20;
 }
 
 p {
@@ -13284,7 +13284,7 @@ p span {
 .heading_style h4,
 .heading_style h5,
 .heading_style h6 {
-  color: #4b505e;
+  color: #231f20;
   font-weight: 700;
 }
 .heading_style .h_title {
@@ -13364,12 +13364,12 @@ p span {
 }
 
 .blockquote {
-  border-left: 2px solid #4b505e;
+  border-left: 2px solid #231f20;
   padding-left: 30px;
 }
 .blockquote p {
   font-size: 18px;
-  color: #4b505e;
+  color: #231f20;
   font-style: italic;
   font-weight: 400;
   line-height: 30px;
@@ -13610,8 +13610,8 @@ p span {
   color: #222d39;
 }
 .btn_border:hover {
-  background: #7444fd;
-  border-color: #7444fd;
+  background: #1cb1b1;
+  border-color: #1cb1b1;
   color: #fff;
 }
 
@@ -13778,7 +13778,7 @@ p span {
   border-right: 1.2px solid rgba(255, 255, 255, 0.2);
 }
 .i_btn_three:hover i {
-  border-color: #7444fd;
+  border-color: #1cb1b1;
 }
 
 .i_btn_four {
@@ -13800,7 +13800,7 @@ p span {
   border-left: 1.2px solid rgba(255, 255, 255, 0.2);
 }
 .i_btn_four:hover i {
-  border-color: #7444fd;
+  border-color: #1cb1b1;
 }
 
 .btn_blue {
@@ -13850,6 +13850,10 @@ p span {
   background: #e4a817;
   border-color: #e4a817;
   padding: 16px 64px;
+  color: #000;
+  border-radius: 45px;
+  transition: all 0.3s linear;
+  display: inline-block;
 }
 .btn_yellow:hover {
   background: #e4a817;
@@ -20530,9 +20534,9 @@ a .h_head:hover {
 }
 .home_avanse_banner_area .h_avanse_img img{margin-bottom: -25%;}
 
-/*============ career_avanse_banner_area css ============*/
+/*============ top_avanse_banner_area css ============*/
 
-.career_avanse_banner_area {
+.top_avanse_banner_area {
   height: 90vh;
   min-height: 650px;
   display: -webkit-box;
@@ -20541,14 +20545,13 @@ a .h_head:hover {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background: url(../img/career-bg.jpg);
   background-size: cover;
   overflow: hidden;
   position: relative;
 }
 
-.career_avanse_banner_area  .h_avanse_img img {
-  margin-bottom: -25%;
+.top_avanse_banner_area  .h_avanse_img img {
+  margin-bottom: -28%;
 }
 
 /*============ h_avanse_features_area css ============*/
@@ -20742,7 +20745,7 @@ a .h_head:hover {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 30px 0px;
+  padding: 90px 0px;
   position: relative;
 }
 .setup_inner .setup_item.flex-row-reverse .setup_content {
@@ -20755,7 +20758,7 @@ a .h_head:hover {
 }
 .setup_inner .setup_item .round {
   border-radius: 50%;
-  background-color: white;
+  background-color:#fdc119;
   -webkit-box-shadow: 0px 10px 30px 0px rgba(1, 1, 64, 0.08);
           box-shadow: 0px 10px 30px 0px rgba(1, 1, 64, 0.08);
   width: 80px;
@@ -20763,7 +20766,7 @@ a .h_head:hover {
   text-align: center;
   margin: 0 auto;
   font-size: 30px;
-  color: #4e78f4;
+  color: #000;
   font-weight: 500;
   line-height: 80px;
 }
@@ -20773,8 +20776,8 @@ a .h_head:hover {
   top: 0;
   width: 0;
   height: 100%;
-  border-right: 2px dashed #94a2ce;
-  opacity: 0.3;
+  border-right: 2px dashed #fdc119;
+  opacity: 0.5;
   margin-left: -1px;
   z-index: -1;
 }
@@ -22877,7 +22880,7 @@ a .h_head:hover {
 }
 .product_discount_content .btn_four:hover {
   background: #fff;
-  color: #3d64f4;
+  color: #fdc119;
   border-color: #fff;
 }
 
@@ -26985,7 +26988,7 @@ a .h_head:hover {
   -webkit-box-shadow: 0px -1px 0px 0px rgba(231, 236, 246, 0.004);
           box-shadow: 0px -1px 0px 0px rgba(231, 236, 246, 0.004);
 }
-
+.fcta_bg{background:#c1e4e4;padding: 35px 0px 10px 0px;}
 .footer_top {
   border-bottom: 1px solid #e0e3ef;
   padding: 115px 0px 100px;
@@ -27259,7 +27262,7 @@ a .h_head:hover {
   transition: all 0.2s linear;
 }
 .footer_three .footer_top .social_icon a:hover {
-  background: #7444fd;
+  background: #1cb1b1;
   color: #fff;
 }
 .footer_three .footer_bottom {
@@ -27295,19 +27298,19 @@ a .h_head:hover {
 
 /*======= footer_area_five css ========*/
 .footer_area_five .footer_top .f_widget.about-widget .f_list li a:hover {
-  color: #3d64f4;
+  color: #fdc119;
 }
 .footer_area_five .footer_top .f_widget.about-widget .f_list li a:hover:before {
-  background: #3d64f4;
+  background: #fdc119;
 }
 .footer_area_five .footer_top .f_widget .widget-wrap p a:hover {
-  color: #3d64f4;
+  color: #fdc119;
 }
 .footer_area_five .footer_bottom p a {
-  color: #3d64f4;
+  color: #fdc119;
 }
 .footer_area_five .footer_bottom a:hover {
-  color: #3d64f4;
+  color: #fdc119;
 }
 
 .footer_area_six {
@@ -27318,7 +27321,7 @@ a .h_head:hover {
 }
 
 .footer_top_six .company_widget a {
-  color: #3d64f4;
+  color: #fdc119;
 }
 .footer_top_six .f_widget.about-widget .f_list li a:before {
   background: #fff;
@@ -28089,11 +28092,12 @@ a .h_head:hover {
 /*# sourceMappingURL=style.css.map */
 .bg_cyan{background:#1cb1b1 ;}
 .c_cyan{color:#1cb1b1 ;}
+.c_dark{color:#000 ;}
 .bg_grey{
   background: #fafbfb;
 }
 .testimonial_slider  .owl-dots { text-align: center; margin-top: 30px; }
-.pillars_icon{height: 140px;max-height:140px;}
+.pillars_icon{height: 110px;max-height:110px;}
 .emp_sp{
   background: url(../img/employees-speak.png) no-repeat;
   background-position: center center;
@@ -28111,8 +28115,9 @@ a .h_head:hover {
     margin: 0 auto;
 }
 .cyan-bg{
-  background: url(../img/cyan-bg.jpg) no-repeat;
-  background-position: center center;
+  background: #02afb3 url(../img/cyan-bg.jpg) no-repeat;
+  background-position: bottom center;
+  background-size: contain;
 }
 .lifeevent_carousel .life_event{
   background: #fff;
@@ -28186,11 +28191,85 @@ padding: 44px 0;
   background: #f8faf9 url(../img/gray-light-bg.jpg) no-repeat;
   background-size: contain;
 }
+.jobopening_carousel .job_opening_box{
+  background: #fff;
+    padding: 30px 15px;
+    border-radius: 30px;
+    min-height: 410px;
+}
+.offer_box_text{min-height: 240px;}
+.check_list{
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+  padding-top: 0px;
+}
+.check_list li{
+  font-size: 16px;
+    line-height: 20px;
+    color: #7b7b93;
+    position: relative;
+    padding-left: 30px;
+    margin-top: 20px;
+}
+.check_list li:before {
+  content: "";
+  display: inline-block;
+  font-family: "themify";
+  position: absolute;
+  left: 0;
+  top: 0px;
+  font-size: 14px;
+  color: #1db1b1;
+}
+ .yello_btn {
+  background: #fdc119;
+  color: #000;
+  border-color:transparent;
+}
+.yello_btn:hover {
+  background: #000;
+  color: #fdc119;
+}
+.dark_btn {
+  background: #000;
+  color: #fff;
+  border-color: transparent;
+  border-radius: 100px;
+  padding: 10px 40px;
+  cursor: pointer;
+}
+.dark_btn:hover {
+  background: #000;
+  color: #fff;
+}
+.course_abroad_form{
+  background: #fff;
+    padding: 65px 30px;
+    text-align: center;
+}
+.course_abroad_form select.form-control:not([size]):not([multiple]) {
+  height: calc(2.25rem + 15px);
+  border: 0;
+  border-bottom: 1px solid;
+  border-radius: 0;
+}
+.form-control:focus {
+  box-shadow: none;
+}
+.white-popup-block {
+  background: #e9e9e9;
+  padding: 20px 30px;
+  text-align: left;
+  max-width: 650px;
+  margin: 40px auto;
+  position: relative;
+}
 @media (min-width:1200px) {
   .bg_grey_light {
     background: #f8faf9 url(../img/gray-light-bg.jpg) no-repeat;
     background-size: cover;
-    height: 600px;
+ 
 }
 }
 @media (max-width:767px){
@@ -28210,8 +28289,20 @@ padding: 44px 0;
     transform: inherit;
     padding-top: 70px;
 }
+.software_service_tab{
+  overflow: hidden;
+    overflow-x: scroll;
+    height: 60px;
+    margin-bottom: 30px;
+    white-space: nowrap;
+}
 }
 .circel-bg{background: url(../img/circel-bg.png) no-repeat; position: absolute; left: -75px; margin-top: 25%; width: 200px; height: 200px;}
 .circel-yellow-bg{background: url(../img/circel-yellow-bg.png) no-repeat; position: absolute; right: 0; margin-top: 20%; width: 50px; height: 112px;}
 .dot-bg{background:url(../img/dot-bg.png) no-repeat; position: absolute; right: -130px; margin-top: 15%; width: 200px; height: 200px;left: unset;}
 .lines-bg{background:url(../img/lines-bg.png) no-repeat; position: absolute; left:0px; margin-top: 25%; width: 300px; height: 50px;}
+
+.career_bg_top{
+  background: url(../img/career-bg.jpg);
+}
+.abroad_top_bg{background:url(../img/study-abroad-bg.jpg);}

@@ -207,7 +207,7 @@
                         items: 3,
                     },
                     1200: {
-                        items: 3,
+                        items: 4,
                     },
                 },
             });
@@ -431,11 +431,14 @@
                 margin: 10,
                 items: 1,
                 autoplay: true,
-                smartSpeed: 2500,
+                smartSpeed: 3500,
                 autoplaySpeed: false,
                 responsiveClass: true,
-                nav: true,
+                nav: false,
                 dot: true,
+                mouseDrag: false,
+                animateIn: 'fadeIn', // add this
+                animateOut: 'fadeOut', // and this
                 stagePadding: 0,
                 navContainer: ".agency_testimonial_info",
                 navText: [

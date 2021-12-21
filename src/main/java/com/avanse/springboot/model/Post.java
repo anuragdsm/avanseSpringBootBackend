@@ -47,11 +47,11 @@ public class Post implements Serializable {
 		private String fileName;
 		private String postTitle;
 		
-		@ManyToOne(fetch = FetchType.LAZY)
-		@JoinColumn(name = "categoryId", referencedColumnName = "category_id")
-		private PostCategory postCategory;
-		
-		
+//		@ManyToOne(fetch = FetchType.LAZY)
+//		@JoinColumn(name = "categoryId", referencedColumnName = "category_id")
+//		private PostCategory postCategory;
+//		
+//		
 		/*
 		 * Banner fileds including image
 		*/
