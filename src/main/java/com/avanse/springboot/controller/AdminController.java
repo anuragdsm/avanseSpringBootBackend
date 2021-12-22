@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.avanse.springboot.DTO.CourseDTO;
+import com.avanse.springboot.DTO.HeaderDTO;
 import com.avanse.springboot.DTO.JobDTO;
 import com.avanse.springboot.DTO.LocationDTO;
 import com.avanse.springboot.DTO.PageDTO;
@@ -69,6 +70,8 @@ public class AdminController {
 	public static String newPageAddDir = System.getProperty("user.dir") + "\\src\\main\\resources\\templates\\addedPages";
 	
 	public static String userAddedImagesDir = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images\\pageImages";
+	public static String cssCodeFileDir = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\viewPagesAssets\\css";
+	public static String jsCodeFileDir = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\viewPagesAssets\\js";
 	
 	
 
@@ -553,11 +556,13 @@ public class AdminController {
 	}
 	
 	@PostMapping("/admin/locations/add")
-	public String locationAddPost(@ModelAttribute ("locationDTO") LocationDTO locationDTO, 
-			@RequestParam("locationImage") MultipartFile file, @RequestParam("locImgName") String locImgName) {
+	public String locationAddPost(@ModelAttribute ("locationDTO") LocationDTO locationDTO) {
+		
 		Location location = new Location();
 		location.setId(locationDTO.getId());
 		location.setCity(locationDTO.getCity());
+
+		locationService.addLocation(location);
 		return "redirect:/admin/locations";
 	}
 	
@@ -917,11 +922,7 @@ public class AdminController {
 				+ "    <script src=\"/viewPagesAssets/js/plugins.js\"></script>\r\n"
 				+ "    <script src=\"/viewPagesAssets/js/main.js\"></script>\r\n"
 				+ " 	</body> ";
-		
-		
-		
-		
-		
+	
 		return boilerPlate;
 	}
 	/*
@@ -1017,8 +1018,28 @@ public class AdminController {
 	}
 	
 	/*
+	 * Below Function is to access the global CSS file located at
+	 * /viewPagesAssets/css/style.css"
+	*/
+	
+	@GetMapping("/admin/globalHeader/add")
+	public String globalHeaderAddGet(Model model) {
+		model.addAttribute("headerDTO", new HeaderDTO());
+		return "globalHeader";
+	}
+	
+	
+	
+	
+	/*
 	 * Below functions will be used to create the posts 
 	*/
+	
+	
+	
+	
+	
+	
 	
 	@GetMapping("/admin/posts")
 	public String getPosts(/*Model model*/) {

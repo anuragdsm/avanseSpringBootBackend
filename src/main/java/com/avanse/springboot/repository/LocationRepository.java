@@ -6,4 +6,5 @@ import com.avanse.springboot.model.Location;
 
 public interface LocationRepository extends JpaRepository<Location, Long> {
 
+	Location findLocationByCity(String city);
 }

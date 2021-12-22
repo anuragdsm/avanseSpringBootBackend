@@ -2,14 +2,24 @@
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="_layout">
 <body id="page-top">
 	<!-- Page Wrapper -->
-	<div layout:fragment="content"  id="wrapper">
+	<div layout:fragment="content">
+	
 
-        <!-- Content Wrapper -->                
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                
-                <div class="container">
-    <h3>Add a new University</h3>
+	<!-- Begin Page Content -->
+	<div class="container-fluid">
+
+		<!-- Page Heading -->
+		<div class="d-sm-flex align-items-center justify-content-between mb-4">
+			<h1 class="h3 mb-0 text-gray-800">University Management</h1>
+			<a href="#"
+				class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+				class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+		</div> 
+
+		<!-- Content Row -->
+		<div class="row">
+			<div class="container-fluid">
+
     <form th:action="@{/admin/universities/add}" method="post" th:object="${universityDTO}" enctype="multipart/form-data">
         <div class="row">
             <div class="col-sm-5">
@@ -80,15 +90,7 @@
                    
                     <!-- Content Row -->
                              
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+         
 
         </div>
         <!-- End of Content Wrapper -->

@@ -1,46 +1,32 @@
-/*
- * This location for now is going to be linked to the careers page
-*/
-
 package com.avanse.springboot.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@Table(name="locations")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Location implements Serializable{
-	
-	/**
+@Table(name = "HEADER_GLOBAL")
+public class Header implements Serializable{/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7200482023017202972L;
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String city;
-	
-	public Location(String city) {
-		super();
-		this.city = city;
-	}
-	
-	
+	@Lob
+	@Basic
+	private String code;
 }
-
-
-

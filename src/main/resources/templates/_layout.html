@@ -62,11 +62,8 @@
 						<h6 class="collapse-header">Manage Pages:</h6>
 						<a class="collapse-item" th:href="@{/admin/pages/add}"><strong>Add
 								New Page</strong></a> <a class="collapse-item" th:href="@{/admin/pages}">View
-							Pages</a> <a class="collapse-item" href="utilities-color.html">Menu</a>
-						<a class="collapse-item" href="login.html">Global CSS</a> <a
-							class="collapse-item" href="register.html">Global JS</a> <a
-							class="collapse-item" href="register.html">Page Settings</a>
-
+							Pages</a> 
+							
 					</div>
 				</div></li>
 			<!-- Nav Item - Utilities Collapse Menu -->
@@ -138,9 +135,11 @@
 				<div id="collapsePages6" class="collapse"
 					aria-labelledby="headingPages" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-											<h6 class="collapse-header">Edit Header:</h6>
+						<h6 class="collapse-header">Edit Header:</h6>
+											
+						<a class="collapse-item" href="#" th:href="@{/admin/globalHeader/add}">Global Header</a>
 					
-						<a class="collapse-item" href="login.html">Embed Code</a>
+					
 					</div>
 				</div></li>
 
@@ -159,8 +158,8 @@
 					</div>
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Cities:</h6>
-						<a class="collapse-item" href="login.html">Add new Location</a> <a
-							class="collapse-item" href="register.html">View Locations</a>
+						<a class="collapse-item" href="#" th:href = "@{/admin/locations/add}"><b>Add new Location</b></a> <a
+							class="collapse-item" href="#" th:href = "@{/admin/locations}">View Locations</a>
 					</div>
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Job Posting:</h6>
@@ -169,23 +168,7 @@
 					</div>
 				</div></li>
 
-			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item"><a class="nav-link collapsed" href="#"
-				data-toggle="collapse" data-target="#collapsePages8"
-				aria-expanded="true" aria-controls="collapsePages">
-					<hr class="sidebar-divider"> <i class="fas fa-fw fa-folder"></i>
-					<span>Users</span>
-			</a>
-				<div id="collapsePages8" class="collapse"
-					aria-labelledby="headingPages" data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<h6 class="collapse-header">Manage Users:</h6>
-						<a class="collapse-item" href="login.html">Add User</a> <a
-							class="collapse-item" href="register.html">Add Role</a> <a
-							class="collapse-item" href="register.html">Delete User</a> <a
-							class="collapse-item" href="register.html">Delete Role</a>
-					</div>
-				</div></li>
+			
 
 			<!-- Sidebar Toggler (Sidebar) -->
 			<div class="text-center d-none d-md-inline">

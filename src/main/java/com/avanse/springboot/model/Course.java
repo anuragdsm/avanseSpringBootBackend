@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 public class Course implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "course_id")
@@ -37,7 +37,6 @@ public class Course implements Serializable{
 
 	@CreationTimestamp
 	private Date dateOfCreation;
-
 	private String title;
 	private String duration;
 	
@@ -48,7 +47,6 @@ public class Course implements Serializable{
 	private String exams;
 	
 	private String documentsRequired;
-
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "UNIVERSITY_ID")
 	private University university;
