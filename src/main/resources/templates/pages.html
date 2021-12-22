@@ -51,7 +51,7 @@
 
 									<tr th:each="page, iStat : ${pages}">
 										<th scope="row" th:text="${iStat.index + 1}">1</th>
-										<td><a href ="" th:href="${page.pageTitle}"th:text="${page.pageTitle}">Home </a></td> 
+										<td><a href ="#" th:href="@{/viewPages/{extractedFileName}(extractedFileName=${page.extractedFileName})}" th:text="${page.pageTitle}">Home </a></td> 
 	
 										<!-- 
 										<td><img src="" height="100px" width="100px"

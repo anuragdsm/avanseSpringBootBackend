@@ -23,10 +23,10 @@ public class PageController {
 	@Autowired
 	PageService pageService;
 
-	@GetMapping("/home")
-	public String homePage() {
-		return "home";
-	}
+//	@GetMapping("/home")
+//	public String homePage() {
+//		return "home";
+//	}
 	
 	@GetMapping("/careers")
 	public String careerPage() {
@@ -49,28 +49,46 @@ public class PageController {
 //	
 	
 	
-	@GetMapping("/viewPages/{pageTitle}")
-	public ModelAndView getAddedPagesCode(@PathVariable("pageTitle") String pageTitle) {
+//	@GetMapping("/viewPages/{pageTitle}")
+//	public ModelAndView getAddedPagesCode(@PathVariable("pageTitle") String pageTitle) {
+//		System.out.println("Into the addedPages Code get ");
+//		ModelAndView modelAndView = new ModelAndView("addedPages/"+pageTitle);
+//		return modelAndView;		
+//	}
+	@GetMapping("/viewPages/{extractedFileName}")
+	public ModelAndView getAddedPage(@PathVariable("extractedFileName") String extractedFileName) {
 		System.out.println("Into the addedPages Code get ");
-		ModelAndView modelAndView = new ModelAndView("addedPages/"+pageTitle);
+		ModelAndView modelAndView = new ModelAndView("addedPages/"+extractedFileName);
 		return modelAndView;		
 	}
 	
 	
 	
 	
-	  @GetMapping("{pageLink}") public ModelAndView
-	  getAddedPage(@PathVariable("pageLink") String pageLink) {
-	  System.out.println("Into the addedPages Code get "); ModelAndView
-	  modelAndView = new ModelAndView("addedPages/"+pageLink); return modelAndView;
-	  }
-	 
+//	@GetMapping("{pageLink}")
+//	public ModelAndView getAddedPage(@PathVariable("pageLink") String pageLink) {
+//		System.out.println("Into the addedPages Code get ");
+//		ModelAndView modelAndView = new ModelAndView("addedPages/" + pageLink);
+//		return modelAndView;
+//	}
+	
+//	
+//	@GetMapping("/viewDynamicPages/{pageTitle}")
+//	public ModelAndView getDynamicPages(@PathVariable("pageTitle") String pageTitle) {
+//		System.out.println("Into the addedPages Code get ");
+//		ModelAndView modelAndView = new ModelAndView("dynamicPages/"+pageTitle);
+//		return modelAndView;		
+//	}
 	
 	
-	@GetMapping("/viewDynamicPages/{pageTitle}")
-	public ModelAndView getDynamicPages(@PathVariable("pageTitle") String pageTitle) {
-		System.out.println("Into the addedPages Code get ");
-		ModelAndView modelAndView = new ModelAndView("dynamicPages/"+pageTitle);
+	
+	
+
+	@GetMapping("/viewDynamicPages/{extractedFileName}")
+	public ModelAndView getDynamicPage(@PathVariable("extractedFileName") String extractedFileName) {
+		System.out.println("Into the get Dyanamic page and find file name by removing the extention ");
+		
+		ModelAndView modelAndView = new ModelAndView("dynamicPages/"+extractedFileName);
 		return modelAndView;		
 	}
 	

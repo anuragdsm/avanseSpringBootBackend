@@ -660,6 +660,7 @@ public class AdminController {
 		page.setMetaKeyword(pageDTO.getMetaKeyword());
 		page.setMetaDescription(pageDTO.getMetaDescription());
 		
+		
 		/*
 		 * Creating a new html template
 		 */
@@ -691,6 +692,8 @@ public class AdminController {
 		// Problem will occur when user will enter 3 the same name for more than 2 times...
 		// Some code will have to be written to handle this problem using string and regex manipulation	
 		// htmlFileName.
+		
+		page.setExtractedFileName(htmlFileName);
 
 		htmlFileName += extention;
 		String pagesLink = htmlFileName;
@@ -1032,7 +1035,7 @@ public class AdminController {
 	@PostMapping("/admin/posts/add")
 	public String postAddPostMethod(@ModelAttribute("post") Post post) {		
 		postService.addPost(post);
-		return "redirect:/admin/postCategories";
+		return "redirect:/admin/posts";
 	}	
 	
 	/*Below functions will be used to create the post categories	*/

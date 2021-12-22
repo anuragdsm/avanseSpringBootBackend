@@ -13,6 +13,7 @@ public class PageDTO {
 	private Boolean isPageActive;
 
 	private String fileName;
+	private String extractedFileName;
 	private String pageTitle;
 	private String pageLink;
 

@@ -38,6 +38,7 @@ public class Page implements Serializable {
 	private Date lastModified;
 	private Boolean isPageActive=false;	
 	private String fileName;
+	private String extractedFileName;
 	private String pageLink;
 	private String pageTitle;
 		
