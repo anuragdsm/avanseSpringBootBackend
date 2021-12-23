@@ -15,6 +15,7 @@
 	rel="stylesheet">
 <!-- Custom styles for this template-->
 <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+<link href="/vendor/summernote/summernote/summernote-bs4.min.css" rel="stylesheet">
 </head>
 <body id="page-top">
 	<!-- Page Wrapper -->
@@ -46,7 +47,6 @@
 						<a class="collapse-item" href="cards.html">Download CSV</a>
 					</div>
 				</div></li>
-
 
 
 			<!-- Nav Item - Utilities Collapse Menu -->
@@ -398,6 +398,30 @@
 	<script src="/js/demo/chart-area-demo.js"></script>
 	<script src="/js/demo/chart-pie-demo.js"></script>
 	<script src="/js/demo/chart-bar-demo.js"></script>
+	<script src="/vendor/summernote/summernote/summernote-bs4.min.js"></script>
+	
+	<script>
+		$('.summernote').summernote(
+				{
+					placeholder : 'Hello stand alone ui',
+					tabsize : 2,
+					height : 120,
+					toolbar : [ [ 'style', [ 'style' ] ],
+							[ 'font', [ 'bold', 'underline', 'clear' ] ],
+							[ 'color', [ 'color' ] ],
+							[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
+							[ 'table', [ 'table' ] ],
+							[ 'insert', [ 'link', 'picture', 'video' ] ],
+							[ 'view', [ 'fullscreen', 'codeview', 'help' ] ] ]
+				});
+	</script>
+	
+	
+	
+	
+	
+	
+	
 
 </body>
 </html>
