@@ -76,11 +76,16 @@
 					aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Manage Posts:</h6>
-						<a class="collapse-item" th:href="@{/admin/postCategories/add}"><strong>Add
-								New Category</strong></a>
+						
 						<a class="collapse-item" href="utilities-color.html">New Post</a>
 						<a class="collapse-item" href="utilities-border.html">View
 							Posts</a>
+					</div>
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Manage Category:</h6>
+						<a class="collapse-item" th:href="@{/admin/postCategories/add}"><strong>
+								Add Category</strong></a>
+						<a class="collapse-item" href="#" th:href = "@{/admin/postCategories}">View Categories</a>
 					</div>
 				</div></li>
 
