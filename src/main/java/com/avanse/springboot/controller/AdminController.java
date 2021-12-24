@@ -527,7 +527,7 @@ public class AdminController {
 	public String jobsAddPost(@ModelAttribute("jobDTO") JobDTO jobDTO) {
 		Job job = new Job();
 		job.setId(jobDTO.getId());
-		return "";
+		return "redirect:/admin/jobs";
 	}
 	
 	/*
@@ -1028,22 +1028,13 @@ public class AdminController {
 		return "globalHeader";
 	}
 	
-	
-	
-	
 	/*
 	 * Below functions will be used to create the posts 
 	*/
 	
-	
-	
-	
-	
-	
-	
 	@GetMapping("/admin/posts")
-	public String getPosts(/*Model model*/) {
-//		model.addAttribute("posts", postService.getAllPosts());
+	public String getPosts(Model model) {
+	model.addAttribute("posts", postService.getAllPosts());
 		return "posts";
 	}
 	
@@ -1101,10 +1092,3 @@ public class AdminController {
 	}
 //	End of class
 }
-
-
-
-
-
-
-

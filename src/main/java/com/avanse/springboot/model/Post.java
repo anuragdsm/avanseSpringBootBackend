@@ -43,7 +43,7 @@ public class Post implements Serializable {
 		
 		private Date lastModified;
 		
-		private Boolean isPostPublished=false;
+		private Boolean isPostActive=false;
 		private String fileName;
 		private String postTitle;
 		

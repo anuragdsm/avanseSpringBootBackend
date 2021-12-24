@@ -1,90 +1,138 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="_layout">
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="_layout">
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Post Add</title>
+
+<!-- Custom fonts for this template-->
+<link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+	type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link href="/css/sb-admin-2.min.css" rel="stylesheet">
+<link href="/vendor/summernote/summernote/summernote-bs4.min.css"
+	rel="stylesheet">
+
+
+</head>
+
 <body id="page-top">
 	<!-- Page Wrapper -->
-	<div layout:fragment="content"  id="wrapper">
 
-        <!-- Content Wrapper -->                
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-	
-					<!-- Page Heading -->
-					<div
-						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Create Post</h1>
-						
+	<div id="wrapper">
+
+		<div layout:fragment="content">
+
+
+			<!-- Begin Page Content -->
+			<div class="container-fluid">
+				<!-- Page Heading -->
+				<div
+					class="d-sm-flex align-items-center justify-content-between mb-4">
+					<h1 class="h3 mb-0 text-gray-800">Create Post</h1>
+					
+				</div>
+				<!-- Section Content Start -->
+				<!-- DataTales Example -->
+				<div class="card shadow mb-4">
+					<div class="card-header py-3">
+						<h6 class="m-0 font-weight-bold text-primary">
+							<a href="#"
+								class="btn btn-info btn-icon-split btn-sm float-right mr-3">
+								<span class="icon text-white-50"> <i
+									class="fas fa-arrow-left"></i>
+							</span> <span class="text">Back</span>
+							</a>
+						</h6>
 					</div>
-					<!-- Section Content Start -->
-					<!-- DataTales Example -->
-					<div class="card shadow mb-4">
-						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">
-								<a href="#"
-									class="btn btn-info btn-icon-split btn-sm float-right mr-3">
-									<span class="icon text-white-50"> <i
-										class="fas fa-arrow-left"></i>
-								</span> <span class="text">Back</span>
-								</a>
-							</h6>
-						</div>
+					<div class="card-body">
+						<form th:action="@{/admin/posts/add}" class="form-horizontal"
+							method="post" th:object="${postDTO}"
+							enctype="multipart/form-data">
+							<input type="hidden" name="id" th:field="*{id}"> <input
+								type="hidden" required="" name="old_slug" value="">
+							<div class="card-header py-3 mb-4">
+								<h6 class="m-0 font-weight-bold text-primary">Post Details</h6>
+							</div>
+							​
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">Post
+									Title (Required)</label>
+								<div class="col-sm-10">
+									<input type="text" required th:field="*{postTitle}"
+										class="form-control get_url_name" id="post_title"
+										name="post_title">
+								</div>
+							</div>
+							​
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">Heading
+								</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control " id="heading"
+										name="heading" value="" th:field="*{heading}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">Sub
+									Heading</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control " id="subHeading"
+										name="sub_heading" value="" th:field="*{subHeading}">
+								</div>
+							</div>
 
-						<div class="card-body">
-							<form th:action="@{/admin/posts/add}" class="form-horizontal" method="post" th:object="${postDTO}" 
-								enctype="multipart/form-data">
 
-								<input type="hidden" name="id" th:field="*{id}"> <input
-									type="hidden" required="" name="old_slug" value="">
+							<div class="card-header py-3 mb-4">
+								<h6 class="m-0 font-weight-bold text-primary">Content</h6>
+							</div>
 
-								<div class="card-header py-3 mb-4">
-									<h6 class="m-0 font-weight-bold text-primary">Post Details</h6>
+							​
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Main Section
+									(Required)</label> ​
+								<div class="col-sm-10">
+									<textarea class="form-control summernote" id="summernote"
+										name="main_section" th:field="*{mainSection}"></textarea>
+									​
 								</div>
-								​
-								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-2 control-label">Post
-										Title (Required)</label>
-									<div class="col-sm-10">
-										<input type="text" required th:field="*{postTitle}"
-											class="form-control get_url_name" id="post_title"
-											name="post_title" >
-									</div>
-								</div>
-								​
-								<div class="card-header py-3 mb-4">
-									<h6 class="m-0 font-weight-bold text-primary">Content</h6>
-								</div>
-							
-								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-2 control-label">Main
-										Section (Required)</label> ​
-									<div class="col-sm-10">
-										<textarea class="form-control summernote" id="summernote"
-											name="main_section" th:field="*{mainSection}" ></textarea>
-									</div>
-								</div>
+							</div>
 
-								<div class="card-header py-3 mb-4">
-									<h6 class="m-0 font-weight-bold text-primary">Featured Image</h6>
+							<div class="card-header py-3 mb-4">
+								<h6 class="m-0 font-weight-bold text-primary">Banner Image Desktop</h6>
+							</div>
+							​
+							<div class="form-group">
+								<div class="col-sm-10">
+
+									<img src="" height="100px"> <br /> Delete <input
+										th:field="*{featuredImageName}" type="checkbox"
+										name="image_delete" value="1"> <input type="file"
+										name="image" id="image"
+										accept="image/jpeg,image/gif,image/x-png,video/*">
+									<p class="help-block">Size (width and height) :1920 X 500</p>
 								</div>
-												​
-								<div class="form-group">
-									<div class="col-sm-10">
-										<img src="" height="100px"> <br /> Delete <input th:field="*{featuredImageName}"
-											type="checkbox" name="image_delete" value="1"> <input
-											type="file" name="image" id="image"
-											accept="image/jpeg,image/gif,image/x-png,video/*">
-										<p class="help-block">Size (width and height) :1920 X 500
-										</p>
-									</div>
+							</div>
+							​ ​ ​
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">Featured Image Alt</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="image_alt"
+										name="image_alt" value="" th:field="*{featuredImageAlt}">
 								</div>
-								​ ​ ​
-								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-2 control-label">Featured Image Alt</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" id="image_alt"
-											name="image_alt" value="" th:field="*{featuredImageAltText}">
-									</div>
-								</div>
-							
+							</div>
+
 							<!-- 	​
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">Header
@@ -96,59 +144,65 @@
 								</div>
 
  -->
-				
-								<div class="card-header py-3 mb-4">
-									<h6 class="m-0 font-weight-bold text-primary">SEO</h6>
+
+							
+
+							<div class="card-header py-3 mb-4">
+								<h6 class="m-0 font-weight-bold text-primary">SEO</h6>
+							</div>
+
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">Meta
+									Title</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control " id="meta_title"
+										name="meta_title" value="" th:field="*{metaTitle}">
 								</div>
-
-								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-2 control-label">Meta
-										Description</label>
-
-									<div class="col-sm-10">
-										<textarea class="form-control" id="meta_description"
-											name="meta_description" th:field="*{metaDescription}"></textarea>
-
-									</div>
-								</div>
+							</div>
 
 
-								<input type="hidden" name="submit_type" id="submit_type"
-									value="1">
-								<div class="box-footer pull-right">
-									<button type="submit" class="btn btn-success btn-icon-split"
-										onclick="">
-										<span class="icon text-white-50"> <i
-											class="fas fa-check"></i>
-										</span> <span class="text">Save</span>
-									</button>
+							
 
-									<button type="reset" class="btn btn-secondary ">Reset</button>
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">Meta
+									Description</label>
 
-
+								<div class="col-sm-10">
+									<textarea class="form-control" id="meta_description"
+										name="meta_description" th:field="*{metaDescription}"></textarea>
 
 								</div>
-							</form>
-						</div>
-					</div>
+							</div>
 
-					<!-- Section Content End -->
-					​
 
-					<div>
+							<input type="hidden" name="submit_type" id="submit_type"
+								value="1">
+							<div class="box-footer pull-right">
+								<button type="submit" class="btn btn-success btn-icon-split"
+									onclick="">
+									<span class="icon text-white-50"> <i
+										class="fas fa-check"></i>
+									</span> <span class="text">Save</span>
+								</button>
+
+								<button type="reset" class="btn btn-secondary ">Reset</button>
+
+							</div>
+						</form>
 					</div>
 				</div>
 
-
-				<!-- /.container-fluid -->
-
+				<!-- Section Content End -->
+				​
+				<div></div>
 			</div>
-			<!-- End of Main Content -->
-
-
+			<!-- /.container-fluid -->
 
 		</div>
-		<!-- End of Content Wrapper -->
+	</div>
+	<!-- End of Main Content -->
+	</div>
+	<!-- End of Content Wrapper -->
 
 	</div>
 	<!-- End of Page Wrapper -->
@@ -157,81 +211,6 @@
 	<a class="scroll-to-top rounded" href="#page-top"> <i
 		class="fas fa-angle-up"></i>
 	</a>
-
-	<!-- Logout Modal-->
-	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-					<button class="close" type="button" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">Select "Logout" below if you are ready
-					to end your current session.</div>
-				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button"
-						data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="#" th:href=@{/logout}>Logout</a>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	
-	<script src="/vendor/summernote/summernote/summernote-bs4.min.js"></script>
-	
-	
-    <script>
-        $('.summernote').summernote({
-          placeholder: 'Hello stand alone ui',
-          tabsize: 2,
-          height: 120,
-          toolbar: [
-            ['style', ['style']],
-            ['font', ['bold', 'underline', 'clear']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture', 'video']],
-            ['view', ['fullscreen', 'codeview', 'help']]
-          ]
-        });
-      </script>
-
-
-
-
-	<!-- 
-<script>
-    function readURL(input){
-        if(input.files && input.files[0]){
-            var reader = new FileReader();
-            reader.onload = function(e){
-                $('#imgPreview').attr('src', e.target.result).width(100).height(100);
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    $('#universityImage').change(function(){
-        readURL(this);
-    });
-    $(".custom-file-input").on("change", function() {
-    	
-    	 
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-        
-        
-    });
-   
-    
-</script>
-
- -->
 
 </body>
 

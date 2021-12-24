@@ -1,37 +1,84 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="_layout">
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="_layout">
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Job Add</title>
+
+<!-- Custom fonts for this template-->
+<link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+	type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link href="/css/sb-admin-2.min.css" rel="stylesheet">
+<link href="/vendor/summernote/summernote/summernote-bs4.min.css" rel="stylesheet">
+
+
+</head>
+
 <body id="page-top">
 	<!-- Page Wrapper -->
+		<div id="wrapper">
+	
 	<div layout:fragment="content">
 
-   
-        <!-- Content Wrapper -->                
+		<!-- Begin Page Content -->
+		<div class="container-fluid">
+			<div class="container">
+				<h3>Add a new Job</h3>
+				<form th:action="@{/admin/jobs/add}" method="post"
+					th:object="${jobDTO}" enctype="multipart/form-data">
+					<div class="row">
+						<div class="col-sm-5">
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                
-                <div class="container">
-    <h3>Add a new University</h3>
-    <form th:action="@{/admin/universities/add}" method="post" th:object="${universityDTO}" enctype="multipart/form-data">
-        <div class="row">
-            <div class="col-sm-5">
+							<input type="hidden" name="id" th:field="*{id}">
+							<div class="form-group">
+								<label for="name">Title</label> <input type="text"
+									class="form-control" required th:field="*{title}" name="title"
+									id="title" placeholder="Enter course title">
+							</div>
 
-                <input type="hidden" name="id" th:field="*{id}">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" required th:field="*{name}" name="name" id="name"
-                           placeholder="Enter name">
+							<div class="form-group">
+								<label for="duration">Description</label> <input type="text"
+									class="form-control" required th:field="*{description}"
+									name="description" id="description"
+									placeholder="Enter course description">
 
-                </div>
+							</div>
 
-                <div class="form-group">
-                    <label for="location">Location</label>
-                    <input type="text" class="form-control" required th:field="*{location}" name="location" id="location"
-                           placeholder="Enter Location">
+							<div class="form-group">
+								<label for="duration">Roles and Responsibilities</label> <input type="text"
+									class="form-control" required th:field="*{rolesAndResponsibilities}"
+									name="rolesAndResponsibilities" id="rolesAndResponsibilities"
+									placeholder="Enter roles and responsibilities">
 
-                </div>
-                
-                <!-- <div class="form-group">
+							</div>
+							<div class="form-group">
+								<label for="duration">Education Qualification</label> <input type="text"
+									class="form-control" required th:field="*{educationQualification}"
+									name="educationQualification" id="educationQualification"
+									placeholder="Enter education qualification">
+
+							</div>
+							<div class="form-group">
+								<label for="duration">skills</label> <input type="text"
+									class="form-control" required th:field="*{skills}"
+									name="skills" id="skills"
+									placeholder="Enter skills">
+
+							</div>
+
+							<!-- <div class="form-group">
                     <label for="category">Select Course</label>
                     <select class="form-control" th:field="*{categoryId}" id="category" name="category">
                         <option th:each="category :${categories}"
@@ -40,144 +87,59 @@
                         >
                     </select>
                 </div> -->
-                
-                <div class="form-group">
-                    <label for="establishedYear">Established Year</label>
-                    <input type="text" class="form-control" required th:field="*{establishedYear}" name="establishedYear" id="establishedYear"
-                           placeholder="Year">
-                </div>
-                <div class="form-group">
-                    <label for="description">University Description</label>
-                    <textarea class="form-control" rows="5" th:field="*{description}" name="description" id="description"></textarea>
-                </div>
-            </div>
-            <div class="col-sm-5">
-                
-                <div class="form-group">
-                    <label for="accomodation">Accommodation Available</label>
-                    <input type="text" class="form-control" required th:field="*{accomodation}" name="accomodation" id="accomodation"
-                           placeholder="">
-                </div>
-                <div class="form-group">
-                    <label for="intakePeriod">Intake Period</label>
-                    <input type="text" class="form-control" required th:field="*{intakePeriod}" name="intakePeriod" id="intakePeriod"
-                           placeholder="intakePeriod">
-                </div>
-                <div class="form-group">
-                    <label for="applicationProcess">Application Process</label>
-                    <input type="text" class="form-control" required th:field="*{applicationProcess}" name="applicationProcess" id="applicationProcess"
-                           placeholder="">
-                </div>
-                <p>University Image</p>
-                <div class="custom-file">
-                    <input type="file"  class="custom-file-input" name="universityImage" accept="image/jpeg, image/png"  id="universityImage"/>
-                    <label class="custom-file-label" for="universityImage">Choose file</label>
-                </div>
-                <div class="form-group">
-                    <img type="hidden" src="#" id="imgPreview" height="100px" width="100px" th:src="@{${'/universityImages/' + universityDTO.imageName}}" style="margin-top: 20px" alt=" ">
-                </div>
-                <input type="hidden" name="imgName" th:value="${universityDTO.imageName}">
-                <button type="submit" class="btn btn-primary  onclick="imageNameModify()"">Submit</button>
-            </div>
-        </div>
-    </form>
-</div>    
-                    </div>
-                   
-                    <!-- Content Row -->
-                             
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
 
-        </div>
-        <!-- End of Content Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+							<div class="form-group">
+								<label for="fees">Experience</label> <input type="number"
+									class="form-control" required th:field="*{experience}" name="experience"
+									id="fees" placeholder="Experience">
+							</div>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="#" th:href=@{/logout}>Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
+						</div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+						<div class="col-sm-5">
 
-    <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin-2.min.js"></script>
+							<div class="form-group">
+								<label for="postedBy">Posted By</label> <input
+									type="text" class="form-control" required
+									th:field="*{postedBy}" name="postedBy"
+									id="postedBy" placeholder="Posted By">
+							</div>
+							
+							<div class="form-group">
+								<label for="documentsRequired">Location</label> 
+								
+								<!-- <input
+									type="text" class="form-control" required
+									th:field="*{exams}" name="Exams"
+									id="exams" placeholder="Exams"> -->
+							</div>
+							<div class="form-group">
+								<label for="documentsRequired">Resume</label> 
+								
+								<!-- <input
+									type="text" class="form-control" required
+									th:field="*{exams}" name="Exams"
+									id="exams" placeholder="Exams"> -->
+							</div>
 
-    <!-- Page level plugins -->
-    <script src="/vendor/chart.js/Chart.min.js"></script>
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		
+		<!-- Content Row -->
+		
+	</div>
+	<!-- End of Content Wrapper -->
 
-    <!-- Page level custom scripts -->
-    <script src="/js/demo/chart-area-demo.js"></script>
-    <script src="/js/demo/chart-pie-demo.js"></script>
-    
-    
+	</div>
+	<!-- End of Page Wrapper -->
 
-	
-</script>
-
-<script>
-    function readURL(input){
-        if(input.files && input.files[0]){
-            var reader = new FileReader();
-            reader.onload = function(e){
-                $('#imgPreview').attr('src', e.target.result).width(100).height(100);
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    $('#universityImage').change(function(){
-        readURL(this);
-    });
-    $(".custom-file-input").on("change", function() {
-    	
-    	 
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-        
-        
-    });
-   
-    
-</script>
-
-    
-    
-    
-    
 
 </body>
 

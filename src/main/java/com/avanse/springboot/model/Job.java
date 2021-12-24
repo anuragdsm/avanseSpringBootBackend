@@ -41,7 +41,6 @@ public class Job implements Serializable {
 	private Integer Compensation;
 	private String postedBy;
 	private String location;
-	private String resume;
 	
 	public Job(String title, String description, String rolesAndResponsibilities, String postedBy, String location) {
 		super();

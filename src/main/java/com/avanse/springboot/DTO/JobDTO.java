@@ -17,6 +17,5 @@ public class JobDTO {
 	private Integer Compensation;
 	private String postedBy;
 	private String location;
-	private String resume;
 	
 }
