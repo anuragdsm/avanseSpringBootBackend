@@ -2,8 +2,10 @@ package com.avanse.springboot.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -43,9 +46,20 @@ public class Post implements Serializable {
 		
 		private Date lastModified;
 		
+		@ManyToMany(mappedBy = "postList", cascade = {CascadeType.MERGE, 
+			CascadeType.DETACH, 
+			CascadeType.PERSIST, 
+			CascadeType.REFRESH})
+		private List<PostCategory>postCategoryList;
+		
 		private Boolean isPostActive=false;
 		private String fileName;
 		private String postTitle;
+		
+		private String extractedFileName;
+		private String postLink;
+
+
 		
 //		@ManyToOne(fetch = FetchType.LAZY)
 //		@JoinColumn(name = "categoryId", referencedColumnName = "category_id")

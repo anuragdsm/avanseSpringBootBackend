@@ -92,6 +92,20 @@
 										name="sub_heading" value="" th:field="*{subHeading}">
 								</div>
 							</div>
+							<div class="form-group">
+								
+								
+								
+								<div class="col-sm-10">
+								<label class="col-sm-2 control-label">Categories to attach</label>
+									<div th:each= "postCategory, iStat : ${postCategories}" >
+										<input type="checkbox" th:id="${postCategory.id}" 
+											th:name="selectedCategories" th:value="${postCategory.id}">
+										<label th:for="${postCategory.id}" th:text="${postCategory.name}" class="col-sm-2 control-label">Category</label>
+									</div>
+								</div>
+								
+							</div>
 
 
 							<div class="card-header py-3 mb-4">
@@ -129,7 +143,7 @@
 								<label for="inputEmail3" class="col-sm-2 control-label">Featured Image Alt</label>
 								<div class="col-sm-10">
 									<input type="text" class="form-control" id="image_alt"
-										name="image_alt" value="" th:field="*{featuredImageAlt}">
+										name="image_alt" value="" th:field="*{featuredImageAltText}">
 								</div>
 							</div>
 

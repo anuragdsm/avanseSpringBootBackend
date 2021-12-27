@@ -68,6 +68,7 @@ public class AdminController {
 			+ "/src/main/resources/static/images/universityImages";
 
 	public static String newPageAddDir = System.getProperty("user.dir") + "\\src\\main\\resources\\templates\\addedPages";
+	public static String newPostAddDir = System.getProperty("user.dir") + "\\src\\main\\resources\\templates\\addedBlogPosts";
 	
 	public static String userAddedImagesDir = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images\\pageImages";
 	public static String cssCodeFileDir = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\viewPagesAssets\\css";
@@ -442,7 +443,8 @@ public class AdminController {
 	 */
 
 	@PostMapping("/admin/courses/add")
-	public String coursesAddPost(@ModelAttribute("courseDTO") CourseDTO courseDTO, @PathVariable("universityDTO") UniversityDTO universityDTO) {
+//	public String coursesAddPost(@ModelAttribute("courseDTO") CourseDTO courseDTO, @PathVariable("universityDTO") UniversityDTO universityDTO) {
+	public String coursesAddPost(@ModelAttribute("courseDTO") CourseDTO courseDTO, @RequestParam("university_id") long university_id) {
 
 		/*
 		 * Use the model attribute to transfer the data from course DTO to course object
@@ -458,7 +460,7 @@ public class AdminController {
 		course.setExams(courseDTO.getExams());
 		course.setFees(courseDTO.getFees());
 //		university.addTheCourse(course);
-		course.setUniversity(courseDTO.getUniversity());
+		course.setUniversity(universityService.getUniversityById(university_id).get());
 
 		courseService.addCourse(course);
 
@@ -492,8 +494,7 @@ public class AdminController {
 		courseDTO.setDuration(course.getDuration());
 		courseDTO.setExams(course.getExams());
 		courseDTO.setFees(course.getFees());
-		course.setUniversity(courseDTO.getUniversity());
-
+		courseDTO.setUniversity(courseDTO.getUniversity());
 		model.addAttribute("courseDTO", courseDTO);
 		return "coursesAdd";
 	}
@@ -995,25 +996,13 @@ public class AdminController {
 			page.setIsPageActive(true);
 			pageService.addPage(page);
 			return "Page Activated/Published";			
-			/*
-			 * University university = universityService.getUniversityById(id).get();
-			 * university.setIsUniversityActive(true);
-			 * universityService.addUniversity(university); return "University Activated!!";
-			 */			
+			
 		}
 
 		else {
-			
 			page.setIsPageActive(false);
 			pageService.addPage(page);
 			return "Page Deactivate/Unpublished";
-			
-			/*
-			 * University university = universityService.getUniversityById(id).get();
-			 * university.setIsUniversityActive(false);
-			 * universityService.addUniversity(university); return
-			 * "University De-Activated!!";
-			 */
 		}
 	}
 	
@@ -1041,27 +1030,205 @@ public class AdminController {
 	@GetMapping("/admin/posts/add")
 	public String postsGet(Model model) {
 		model.addAttribute("postDTO", new PostDTO());
+		model.addAttribute("postCategories",postCategoryService.getAllPostCategories());
 		return "postsAdd";
 	}
 	
-	@PostMapping("/admin/posts/add")
-	public String postAddPostMethod(@ModelAttribute("post") Post post) {		
-		postService.addPost(post);
-		return "redirect:/admin/posts";
-	}	
+	/*
+	 * @PostMapping("/admin/posts/add") public String
+	 * postAddPostMethod(@ModelAttribute("post") Post post) {
+	 * postService.addPost(post); return "redirect:/admin/posts"; }
+	 */
 	
+	@PostMapping("/admin/posts/add")
+	public String blogPostsAddPostMap(@ModelAttribute("postDTO") PostDTO postDTO, @RequestParam("selectedCategories") String[] categoriesIds) {
+
+		/*
+		 * Create a new time stamp and initialize the timestamp with null
+		 * Check if the entry in database is there for the date of creation...
+		 * If it is not then initialise the time stamp with a new date.
+		*/
+		
+		
+		
+		Post post= new Post();
+		Date timeStamp = null;
+		boolean creatingTimeStamp = false;
+			
+		if(postDTO.getDateOfCreation() == null) {
+			timeStamp= new Date();
+			creatingTimeStamp = true;
+		}
+
+		if(creatingTimeStamp) {
+			post.setDateOfCreation(timeStamp);
+		}
+		
+		else {
+			post.setDateOfCreation(postDTO.getDateOfCreation());
+		}
+		
+		post.setId(postDTO.getId());
+		post.setPostTitle(postDTO.getPostTitle().strip());
+		post.setHeading(postDTO.getHeading());
+		post.setSubHeading(postDTO.getSubHeading());
+		post.setMainSection(postDTO.getMainSection());
+		post.setFeaturedImageName(postDTO.getFeaturedImageName());
+		post.setFeaturedImageAltText(postDTO.getFeaturedImageAltText());
+		post.setMetaTitle(postDTO.getMetaTitle());
+		post.setMetaDescription(postDTO.getMetaDescription());
+		
+		for(String s:categoriesIds) {
+			PostCategory postCategory = postCategoryRepository.getById(Long.valueOf(s));
+			postCategory.getPostList().add(post);
+			postCategoryRepository.save(postCategory);
+		}
+
+		
+		
+		
+		/*
+		 * Creating a new html template
+		 */
+		String extention = ".html";
+		/*
+		 * Before creating the html file, we have to ensure that two files do not get
+		 */
+		
+		String preProcessFileName = postDTO.getPostTitle().toLowerCase().strip();
+//		preProcessFileName.toLowerCase();
+		System.out.println("The Pre Process of file name "+preProcessFileName);
+		
+		String htmlFileName = preProcessFileName.replaceAll(" ","-");
+		List<Post> allPosts= postRepository.findAll();
+		Iterator<Post> iterator = allPosts.iterator();
+		
+		/*
+		 * Rename the file if the file with the same name already exist
+		 */
+		
+		int count = 0;
+		while (iterator.hasNext()) {
+			Post postUnderEvaluation = iterator.next();
+			if (postUnderEvaluation.getMetaTitle().equalsIgnoreCase(htmlFileName)) {
+				htmlFileName += ++count;
+			}
+		} 
+		
+		// Problem will occur when user will enter 3 the same name for more than 2 times...
+		// Some code will have to be written to handle this problem using string and regex manipulation	
+		// htmlFileName.
+		
+		post.setExtractedFileName(htmlFileName);
+
+		htmlFileName += extention;
+		
+		try {
+			Path fileNameAndPath = Paths.get(newPostAddDir, htmlFileName);
+			Files.createFile(fileNameAndPath);
+			
+			
+
+		} catch (IOException e) {
+			// TODO: handle exception
+		} 
+		
+//////		String hostName = request.getHeader("host");
+////		System.out.println(hostName);
+////		
+////		String postLink = hostName + "/addedPages/";
+//		String currentPageLink = postLink + htmlFileName;
+		
+		/*
+		 * Write a code to create a  page link.
+		*/
+//		System.out.println(postLink);
+			
+		/*
+		 * Now save the file name in the database so as to access the 
+		 * file in the future while updating...
+		 * Searching with the exact file name will be required.
+		*/
+		postDTO.setFileName(htmlFileName);
+		post.setFileName(postDTO.getFileName());	
+
+		/*
+		 * Lets save the link of the file in the database
+		*/
+//		postDTO.setPostLink(currentPageLink);
+		postDTO.setPostLink(postDTO.getPostLink());	
+		postService.addPost(post);
+//		htmlPage
+	
+		/*
+		 * Logic for adding the content in the file to be over here
+		 * It the end publish the page...
+		*/
+		
+		
+		System.out.println("\n\n\n\n\n\n Main Section preview"+postDTO.getMainSection());
+		
+		String codeInFile = htmlBlogLayout(postDTO.getMetaTitle(),
+							postDTO.getHeading(), 
+							postDTO.getSubHeading(),
+							postDTO.getMetaDescription(),
+							postDTO.getMainSection());
+		System.out.println("The following code will be there in the file "+codeInFile);
+		postDTO.setConsolidatedHTMLCode(codeInFile);
+		post.setConsolidatedHTMLCode(postDTO.getConsolidatedHTMLCode());
+		
+		try {
+			pushCodeInFile(codeInFile, postDTO.getFileName());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		post.setLastModified(postDTO.getLastModified());
+		System.out.println("page Added sucessfully" + codeInFile);
+		postService.addPost(post);
+//		String pageToReturn = "redirect:/viewPages/"+htmlFileName;
+		System.out.println(post.toString());
+		return "redirect:/admin/posts";
+		
+	}
+
+	private void pushCodeInBlogFile(String codeInFile, String fileName) throws IOException {
+		// TODO Auto-generated method stub
+		Path fileNameAndPath = Paths.get(newPostAddDir, fileName);
+		Files.write(fileNameAndPath, codeInFile.getBytes());
+	}
+
+	private String htmlBlogLayout(String metaTitle, String heading, String subheading, String metaDescription, String mainSection) {
+		
+		// TODO Auto-generated method stub
+		/*
+		 * initial code
+		 * 
+		*/
+		
+		String layoutCode=metaTitle+ "    " + heading+ "    " + subheading+ "    " + mainSection+ "    "  ;
+					
+		return layoutCode;
+	}
+
 	/*Below functions will be used to create the post categories	*/
 	
 	@GetMapping("/admin/postCategories")
 	public String getCategories(Model model) {
+		
 		model.addAttribute("postCategories",postCategoryService.getAllPostCategories());
 		return "postCategories";
+		
 	}
+	
 	@GetMapping("/admin/postCategories/add")
 	public String getCatAdd(Model model) {
+		
 		model.addAttribute("postCategory", new PostCategory());
 		return "categoriesAdd";
+		
 	}
+	
 	@PostMapping("/admin/postCategories/add")
 	public String postCatAdd(@ModelAttribute("postCategory") PostCategory postCategory) {
 		

@@ -17,12 +17,14 @@ public class PostDTO {
 
 	private String heading;
 	private String subHeading;
+	private String extractedFileName;
+	private String postLink;
 
 	/*
 	 * image variables
 	 */
 	private String featuredImageName;
-	private String featuredImageAlt;
+	private String featuredImageAltText;
 
 	/*
 	 * The value of 1 will represent Full page The value of 2 will represent Box

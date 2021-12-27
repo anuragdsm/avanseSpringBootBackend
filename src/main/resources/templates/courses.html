@@ -54,6 +54,7 @@
         <tr>
             <th scope="col">SN</th>
             <th scope="col">Course Name</th>
+            <th scope="col">University</th>
             <th scope="col">Duration</th>
             <th scope="col">Fees</th>
             <th scope="col">Documents Required</th>
@@ -67,6 +68,7 @@
         <tr th:each="course, iStat : ${courses}">
             <th scope="row" th:text="${iStat.index + 1}">1</th>
             <td th:text="${course.title}">Engineering</td>
+            <td th:text="${course.university.name}">Engineering</td>
             <td th:text="${course.duration}">1 year</td>
             <td th:text="${course.fees}">INR 20,0000</td>
             <td th:text="${course.documentsRequired}">Degree</td>
