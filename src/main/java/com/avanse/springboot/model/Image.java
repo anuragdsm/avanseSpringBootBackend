@@ -16,9 +16,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "MEDIA_DATA")
+@Table(name = "IMAGE")
 @AllArgsConstructor
-public class Media implements Serializable {
+public class Image implements Serializable {
 
 	/**
 	 * 
@@ -35,11 +35,11 @@ public class Media implements Serializable {
 	private int width;
 	private Date uploadedOn;
 	private Double size;
-	public Media() {
+	public Image() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Media(String name) {
+	public Image(String name) {
 		super();
 		this.name = name;
 	}

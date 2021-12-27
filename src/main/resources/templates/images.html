@@ -3,6 +3,10 @@
 	layout:decorate="_layout">
 <head>
 <body id="page-top">
+
+<!-- Page Wrapper -->
+	<div layout:fragment="content">
+	
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
 	<!-- Page Heading -->
@@ -15,7 +19,7 @@
 		<!-- Content Row -->
 		<div class="row">
 			<div class="container-fluid">
-				<a th:href="@{/admin/universities/add}" style="margin: 20px 0"
+				<a th:href="@{/admin/image/add}" style="margin: 20px 0"
 					class="btn btn-primary">Add New Image</a>
 				<table class="table">
 					<thead class="thead-light">
@@ -24,64 +28,34 @@
 							<th scope="col">Image Name</th>
 							<th scope="col">Preview</th>
 							<th scope="col">Alt-Tag</th>
-
-							<th scope="col">Link</th>
-							<th scope="col">Dimensions</th>
-
 							<th scope="col">Size</th>
 							<th scope="col">Uploaded on</th>
-							
 							<th scope="col">Update</th>
-							<th scope="col">Status</th>
 							<th scope="col">Delete</th>
 
 						</tr>
 					</thead>
 					<tbody>
 
-						<tr th:each="picture, iStat : ${pictures}">
+						<tr th:each="image iStat : ${images}">
 							<th scope="row" th:text="${iStat.index + 1}">1</th>
-							<td th:text="${picture.name}">my image</td>
+							<td th:text="${image.name}">My image</td>
 							<td><img src="" height="100px" width="100px"
 								th:src="@{${'/images/pageImages/' + picture.fileName}}"></td>
 
-							<td th:text="${picture.altTag}">imgAltTag</td>
-							<td th:text="${university.establishedYear}">2002</td>
+							<td th:text="${image.altTag}">imgAltTag</td>
 
-							<td th:text="${university.description}">University
-								Description</td>
-							<td th:text="${university.accomodation}">Accomodadtion</td>
+							<td th:text="${image.size}">Image Size</td>
+							<td th:text="${image.uploadedOn}">Uploaded On</td>
 
+							
 							<td><a href=""
-								th:href="@{/admin/university/delete/{id}(id=${university.id})}"
-								class="btn btn-primary">Edit Courses</a></td>
-
-							<td><a href=""
-								th:href="@{/admin/university/update/{id}(id=${university.id})}"
+								th:href="@{/admin/image/update/{id}(id=${image.id})}"
 								class="btn btn-warning">Update</a></td>
 
 
-							<td>
-								<div class="custom-control custom-switch"
-									th:onclick="'toggleUniversityStatus('+${university.id}+')'">
-									<input th:inline="text" type="checkbox"
-										th:if="${university.isUniversityActive==true}" checked
-										class="custom-control-input"
-										th:id="'customSwitch'+${university.id}"> <input
-										type="checkbox" th:if="${university.isUniversityActive==false}"
-										class="custom-control-input"
-										th:id="'customSwitch'+${university.id}"> <label
-										class="custom-control-label"
-										th:for="'customSwitch'+${university.id}"><span
-										th:id="'universityStatus'+${university.id}"
-										th:text="${university.isUniversityActive==true ?'University Active':'University Inactive'}"></span></label>
-								</div>
-							</td>
-
-
-
 							<td><a href=""
-								th:href="@{/admin/university/delete/{id}(id=${university.id})}"
+								th:href="@{/admin/image/delete/{id}(id=${image.id})}"
 								class="btn btn-danger">Delete</a></td>
 						</tr>
 

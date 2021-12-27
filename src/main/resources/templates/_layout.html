@@ -93,8 +93,23 @@
 			<!-- Nav Item - Utilities Collapse Menu -->
 			<li class="nav-item"><a class="nav-link" href="#"
 			 data-target="#collapseUtilities4" aria-controls="collapseUtilities"> <i
-					class="fas fa-fw fa-wrench"></i> <span>Upload Media</span>
+					class="fas fa-fw fa-wrench"></i> <span>Upload Images</span>
 			</a>
+			
+			<div id="collapseUtilities6" class="collapse"
+					aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Manage Images:</h6>
+						<a class="collapse-item" a href="#"
+							th:href="@{/admin/images}">View images</a> <a
+							class="collapse-item" a href="#"
+							th:href="@{/admin/images/add}">Add new image</a>
+
+					</div>
+				</div>
+			
+			
+			
 				</li>
 
 			<!-- Nav Item - Utilities Collapse Menu -->
@@ -169,8 +184,8 @@
 					</div>
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Job Posting:</h6>
-						<a class="collapse-item" href="login.html">Post Job</a> <a
-							class="collapse-item" href="register.html">View Jobs</a>
+						<a class="collapse-item" href="#" th:href="@{/admin/jobs/add}">Post Job</a> <a
+							class="collapse-item" href="#" th:href="@{/admin/jobs}">View Jobs</a>
 					</div>
 				</div></li>
 

@@ -30,12 +30,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.avanse.springboot.DTO.CourseDTO;
 import com.avanse.springboot.DTO.HeaderDTO;
+import com.avanse.springboot.DTO.ImageDTO;
 import com.avanse.springboot.DTO.JobDTO;
 import com.avanse.springboot.DTO.LocationDTO;
 import com.avanse.springboot.DTO.PageDTO;
 import com.avanse.springboot.DTO.PostDTO;
 import com.avanse.springboot.DTO.UniversityDTO;
 import com.avanse.springboot.model.Course;
+import com.avanse.springboot.model.Image;
 import com.avanse.springboot.model.Job;
 import com.avanse.springboot.model.Location;
 import com.avanse.springboot.model.Page;
@@ -43,6 +45,7 @@ import com.avanse.springboot.model.Post;
 import com.avanse.springboot.model.PostCategory;
 import com.avanse.springboot.model.University;
 import com.avanse.springboot.repository.CourseRepository;
+import com.avanse.springboot.repository.ImageRepository;
 import com.avanse.springboot.repository.JobRespository;
 import com.avanse.springboot.repository.LocationRepository;
 import com.avanse.springboot.repository.PageRepository;
@@ -50,6 +53,7 @@ import com.avanse.springboot.repository.PostCategoryRepository;
 import com.avanse.springboot.repository.PostRepository;
 import com.avanse.springboot.repository.UniversityRepository;
 import com.avanse.springboot.service.CourseService;
+import com.avanse.springboot.service.ImageService;
 import com.avanse.springboot.service.JobService;
 import com.avanse.springboot.service.LocationService;
 import com.avanse.springboot.service.PageService;
@@ -81,6 +85,14 @@ public class AdminController {
 
 	@Autowired
 	CourseService courseService;
+	
+	@Autowired
+	ImageRepository imageRepository;
+	
+	@Autowired
+	ImageService imageService;
+	
+	
 	
 	@Autowired
 	JobRespository jobRespository;
@@ -498,6 +510,70 @@ public class AdminController {
 		model.addAttribute("courseDTO", courseDTO);
 		return "coursesAdd";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
+	 * ===========All Function below are related to images================
+	 */
+	
+	/*
+	 * Method to show the images.html
+	 */
+	
+	@GetMapping("/admin/images")
+	public String getImages(Model model) {
+		model.addAttribute("images", imageService.getAllImages());
+		return "images";
+	}
+	
+
+	@GetMapping("/admin/images/add")
+	public String imagesAddGet(Model model) {
+		model.addAttribute("imageDTO", new ImageDTO());
+//		Course course = new Course();
+		
+		/*
+		 * Pass the university list to the dropdown on courseAdd.html
+		 */
+		
+		Image image = new Image();
+		model.addAttribute("image", image);
+		List<Image> images= imageService.getAllImages();
+		System.out.println(images.toString());
+		model.addAttribute("images", images);
+
+		/*
+		 * Now use the course service to actually add the object
+		 */
+
+//		courseService.addCourse(course);
+
+		return "imagesAdd";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/*
 	 * ===========All Function below are related to jobs ================
