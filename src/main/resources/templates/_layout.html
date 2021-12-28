@@ -61,9 +61,16 @@
 					aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Manage Pages:</h6>
-						<a class="collapse-item" th:href="@{/admin/pages/add}"><strong>Add
+						<a class="collapse-item  active" th:href="@{/admin/pages/add}"><strong>Add
 								New Page</strong></a> <a class="collapse-item" th:href="@{/admin/pages}">View
 							Pages</a> 
+							
+					</div>
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Other:</h6>
+						<a class="collapse-item" th:href="@{/admin/awards}"><strong>
+								Awards</strong></a> <a class="collapse-item" th:href="@{/admin/testimonials}">
+							Testimonials</a> 
 							
 					</div>
 				</div></li>
@@ -78,7 +85,7 @@
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Manage Posts:</h6>
 						
-						<a class="collapse-item" href="#" th:href = "@{/admin/posts/add}">New Post</a>
+						<a class="collapse-item  active" href="#" th:href = "@{/admin/posts/add}"><b>New Post</b></a>
 						<a class="collapse-item" href="#" th:href = "@{/admin/posts}">View
 							Posts</a>
 					</div>
@@ -91,23 +98,10 @@
 				</div></li>
 
 			<!-- Nav Item - Utilities Collapse Menu -->
-			<li class="nav-item"><a class="nav-link" href="#"
+			<li class="nav-item"><a class="nav-link" href="#" th:href="@{/admin/images}"
 			 data-target="#collapseUtilities4" aria-controls="collapseUtilities"> <i
 					class="fas fa-fw fa-wrench"></i> <span>Upload Images</span>
 			</a>
-			
-			<div id="collapseUtilities6" class="collapse"
-					aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<h6 class="collapse-header">Manage Images:</h6>
-						<a class="collapse-item" a href="#"
-							th:href="@{/admin/images}">View images</a> <a
-							class="collapse-item" a href="#"
-							th:href="@{/admin/images/add}">Add new image</a>
-
-					</div>
-				</div>
-			
 			
 			
 				</li>
@@ -122,10 +116,10 @@
 					aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Manage Universities:</h6>
-						<a class="collapse-item" a href="#"
-							th:href="@{/admin/universities}">View</a> <a
+						<a class="collapse-item  active" a href="#"
+							th:href="@{/admin/universities/add}"><b>Add new</b></a> <a
 							class="collapse-item" a href="#"
-							th:href="@{/admin/universities/add}">Add new</a>
+							th:href="@{/admin/universities}">View</a>
 
 					</div>
 				</div></li>
@@ -140,7 +134,7 @@
 					aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Manage Courses:</h6>
-						<a class="collapse-item" th:href="@{/admin/courses/add}">Add
+						<a class="collapse-item  active" th:href="@{/admin/courses/add}">Add
 							Course</a> <a class="collapse-item" th:href="@{/admin/courses}">Show
 							Courses</a>
 					</div>
@@ -158,7 +152,7 @@
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Edit Header:</h6>
 											
-						<a class="collapse-item" href="#" th:href="@{/admin/globalHeader/add}">Global Header</a>
+						<a class="collapse-item" href="#" th:href="@{/admin/globalHeader}"><b>Global Header</b></a>
 					
 					
 					</div>
@@ -169,13 +163,13 @@
 				data-toggle="collapse" data-target="#collapsePages1"
 				aria-expanded="true" aria-controls="collapsePages"> <!-- Divider -->
 					<hr class="sidebar-divider"> <i class="fas fa-fw fa-folder"></i>
-					<span>Human Resources</span>
+					<span>Careers</span>
 			</a>
 				<div id="collapsePages1" class="collapse"
 					aria-labelledby="headingPages" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Applications:</h6>
-						<a class="collapse-item" href="login.html">View Applications</a>
+						<a class="collapse-item" href="login.html"><b>View Applications</b></a>
 					</div>
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Cities:</h6>
@@ -184,7 +178,7 @@
 					</div>
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Job Posting:</h6>
-						<a class="collapse-item" href="#" th:href="@{/admin/jobs/add}">Post Job</a> <a
+						<a class="collapse-item" href="#" th:href="@{/admin/jobs/add}"><b>Post Job</b></a> <a
 							class="collapse-item" href="#" th:href="@{/admin/jobs}">View Jobs</a>
 					</div>
 				</div></li>
@@ -416,10 +410,48 @@
 	<script src="/vendor/chart.js/Chart.min.js"></script>
 
 	<!-- Page level custom scripts layout -->
-	<script src="/vendor/js/demo/chart-area-demo.js"></script>
-	<script src="/vendor/js/demo/chart-pie-demo.js"></script>
-	<script src="/vendor/js/demo/chart-bar-demo.js"></script>
+	<script src="/js/demo/chart-area-demo.js"></script>
+	<script src="/js/demo/chart-pie-demo.js"></script>
+	<script src="/js/demo/chart-bar-demo.js"></script>
 	<script src="/vendor/summernote/summernote/summernote-bs4.min.js"></script>
+	
+	
+<!-- 	<script type="text/javascript">
+	
+	$('#summernote').summernote({
+	    height: ($(window).height() - 300),
+	    callbacks: {
+	        onImageUpload: function(image) {
+	            uploadImage(image[0]);
+	        }
+	    }
+	});
+
+	function uploadImage(image) {
+	    var data = new FormData();
+	    data.append("image", image);
+	    $.ajax({
+	    	
+	    	/* your url to deal with the images is below  */
+	        url: 'localhost:8080/images/userAddedImages',
+	        cache: false,
+	        contentType: false,
+	        processData: false,
+	        data: data,
+	        type: "post",
+	        success: function(url) {
+	            var image = $('<img>').attr('src', 'http://' + url);
+	            $('#summernote').summernote("insertNode", image[0]);
+	        },
+	        error: function(data) {
+	            console.log(data);
+	        }
+	    });
+	}
+	
+	
+	</script> -->
+	
 	
 	<script>
 		$('.summernote').summernote(

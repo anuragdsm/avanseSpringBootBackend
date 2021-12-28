@@ -5,11 +5,17 @@
 package com.avanse.springboot.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -22,7 +28,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Location implements Serializable{
 	
 	/**
@@ -33,6 +38,13 @@ public class Location implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String city;
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@JoinTable(name = "Locations_Jobs", 
+				joinColumns = {@JoinColumn(name="location_id")},
+				inverseJoinColumns = {@JoinColumn(name = "job_id")}
+	)
+	private List<Job> jobList;
 	
 	public Location(String city) {
 		super();

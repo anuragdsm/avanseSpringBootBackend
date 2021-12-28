@@ -18,120 +18,198 @@
 		</div>
 		<!-- Content Row -->
 		<div class="row">
-			<div class="container-fluid">
-				<a th:href="@{/admin/image/add}" style="margin: 20px 0"
-					class="btn btn-primary">Add New Image</a>
-				<table class="table">
-					<thead class="thead-light">
-						<tr>
-							<th scope="col">SN</th>
-							<th scope="col">Image Name</th>
-							<th scope="col">Preview</th>
-							<th scope="col">Alt-Tag</th>
-							<th scope="col">Size</th>
-							<th scope="col">Uploaded on</th>
-							<th scope="col">Update</th>
-							<th scope="col">Delete</th>
-
-						</tr>
-					</thead>
-					<tbody>
-
-						<tr th:each="image iStat : ${images}">
-							<th scope="row" th:text="${iStat.index + 1}">1</th>
-							<td th:text="${image.name}">My image</td>
-							<td><img src="" height="100px" width="100px"
-								th:src="@{${'/images/pageImages/' + picture.fileName}}"></td>
-
-							<td th:text="${image.altTag}">imgAltTag</td>
-
-							<td th:text="${image.size}">Image Size</td>
-							<td th:text="${image.uploadedOn}">Uploaded On</td>
-
-							
-							<td><a href=""
-								th:href="@{/admin/image/update/{id}(id=${image.id})}"
-								class="btn btn-warning">Update</a></td>
+				<div class="container-fluid">
 
 
-							<td><a href=""
-								th:href="@{/admin/image/delete/{id}(id=${image.id})}"
-								class="btn btn-danger">Delete</a></td>
-						</tr>
+					<!--  -->
 
-					</tbody>
-				</table>
+					<!-- Modal -->
+					<div class="modal fade" id="exampleModal" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog modal-xl" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Add Image</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+								
+								<form  method="post"
+							 enctype="multipart/form-data">
+							<div class="row">
+								<div class="col-sm-5">
+									<input type="hidden" name="id">
+									<div class="form-group">
+										<label for="name">Name</label> <input type="text"
+											class="form-control" required name="name"
+											id="name" placeholder="Enter name">
+									</div>
+									
+									
+									<p>Image</p>
+									<div class="custom-file">
+										<input onchange="imageUpload1(event)" type="file" class="custom-file-input"
+											name="image" accept="image/jpeg, image/png"
+											id="image" /> <label class="custom-file-label"
+											for="image">Choose file</label>
+									</div>
+									<script type="text/javascript">
+											function imageUpload1(event) {
+									            console.log('Image Upload happening here............');
+									            let imageElement=document.getElementById('image');
+									            console.log(imageElement.children);
+									            console.log(event);
+									            let reader=new FileReader();
+									            reader.readAsDataURL(event.target.files[0]);
+									            reader.onload = ()=>{document.getElementById('imgPreview').src=reader.result;}
+									            
+									        }
+									</script>
+									<input type="hidden" name="imgName">
+								</div>
+								<div class="col-5">
+										<div class="form-group">
+												<img type="hidden" src="#" id="imgPreview" height="300px"
+													width="600px"
+													style="margin-top: 20px" alt=" ">
+										</div>
+								</div>
+							</div>
+						</form>
+								
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary"
+										data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary">Save
+										changes</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+					<!--  -->
+
+					<a th:href="@{/admin/images/add}" style="margin: 20px 0"
+						class="btn btn-primary" data-toggle="modal"
+						data-target="#exampleModal">Add New Image</a>
+					<table class="table">
+						<thead class="thead-light">
+							<tr>
+								<th scope="col">SN</th>
+								<th scope="col">Image Name</th>
+								<th scope="col">Preview</th>
+								<th scope="col">Alt-Tag</th>
+								<th scope="col">Size</th>
+								<th scope="col">Uploaded on</th>
+								<th scope="col">Update</th>
+								<th scope="col">Delete</th>
+
+							</tr>
+						</thead>
+						<tbody>
+
+							<tr th:each="image, iStat : ${images}">
+								<th scope="row" th:text="${iStat.index + 1}">1</th>
+								<td th:text="${image.name}">My image</td>
+								<td><img src="" height="100px" width="100px"
+									th:src="@{${'/images/pageImages/' + picture.fileName}}"></td>
+
+								<td th:text="${image.altTag}">imgAltTag</td>
+
+								<td th:text="${image.size}">Image Size</td>
+								<td th:text="${image.uploadedOn}">Uploaded On</td>
+
+
+								<td><a href=""
+									th:href="@{/admin/image/update/{id}(id=${image.id})}"
+									class="btn btn-warning">Update</a></td>
+
+
+								<td><a href=""
+									th:href="@{/admin/image/delete/{id}(id=${image.id})}"
+									class="btn btn-danger">Delete</a></td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+
 			</div>
 
+
+			<!-- Content Row -->
+
+
 		</div>
+		<!-- End of Content Wrapper -->
 
+		<!-- Bootstrap core JavaScript-->
+		<script src="/vendor/jquery/jquery.min.js"></script>
+		<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-		<!-- Content Row -->
+		<!-- Core plugin JavaScript-->
+		<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-
-	</div>
-	<!-- End of Content Wrapper -->
-
-	<!-- Bootstrap core JavaScript-->
-	<script src="/vendor/jquery/jquery.min.js"></script>
-	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-	<!-- Core plugin JavaScript-->
-	<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-	<!-- Custom scripts for all pages-->
-	<script src="/js/sb-admin-2.min.js"></script>
+		<!-- Custom scripts for all pages-->
+		<script src="/js/sb-admin-2.min.js"></script>
 
 
 
-	<script th:inline="javascript" type="text/javascript">
-		let contextPath = 'http://localhost:8080';
+		<script th:inline="javascript" type="text/javascript">
+			let contextPath = 'http://localhost:8080';
 
-		function toggleUniversityStatus(id) {
-			console.log('toggling id = ' + id);
+			function toggleUniversityStatus(id) {
+				console.log('toggling id = ' + id);
 
-			let customSwitch = 'customSwitch' + id;
+				let customSwitch = 'customSwitch' + id;
 
-			console.log(document.getElementById(customSwitch));
+				console.log(document.getElementById(customSwitch));
 
-			console.log(document.getElementById(customSwitch).checked);
+				console.log(document.getElementById(customSwitch).checked);
 
-			if (document.getElementById(customSwitch).checked == true
-					|| document.getElementById(customSwitch).checked == null) {
+				if (document.getElementById(customSwitch).checked == true
+						|| document.getElementById(customSwitch).checked == null) {
 
-				document.getElementById(customSwitch).checked = false;
+					document.getElementById(customSwitch).checked = false;
 
-				/* deactivate in controller */
-				console.log('Deactivating..');
-				
-				let http = new XMLHttpRequest();
-				let url = contextPath + '/' + 'admin/' 
-						+ 'activateDeactivateUniversity' + '/' + id + '/'
-						+ 'DeactivateUniversity';
-				
-				http.open("GET", url, false);
-				http.send(null);
-				console.log(http.responseText);
-				document.getElementById('universityStatus' + id).innerHTML = 'University Inactive';
+					/* deactivate in controller */
+					console.log('Deactivating..');
+
+					let http = new XMLHttpRequest();
+					let url = contextPath + '/' + 'admin/'
+							+ 'activateDeactivateUniversity' + '/' + id + '/'
+							+ 'DeactivateUniversity';
+
+					http.open("GET", url, false);
+					http.send(null);
+					console.log(http.responseText);
+					document.getElementById('universityStatus' + id).innerHTML = 'University Inactive';
+				}
+
+				else {
+
+					document.getElementById(customSwitch).checked = true;
+					let http = new XMLHttpRequest();
+					let url = contextPath + '/' + 'admin/'
+							+ 'activateDeactivateUniversity' + '/' + id + '/'
+							+ 'ActivateUniversity';
+					console.log('Activating..')
+					http.open("GET", url, false);
+					http.send(null);
+					console.log(http.responseText);
+					document.getElementById('universityStatus' + id).innerHTML = 'University Active';
+				}
+
 			}
-
-			else {
-
-				document.getElementById(customSwitch).checked = true;
-				let http = new XMLHttpRequest();
-				let url = contextPath + '/' + 'admin/'
-						+ 'activateDeactivateUniversity' + '/' + id + '/'
-						+ 'ActivateUniversity';
-				console.log('Activating..')
-				http.open("GET", url, false);
-				http.send(null);
-				console.log(http.responseText);
-				document.getElementById('universityStatus' + id).innerHTML = 'University Active';
-			}
-
-		}
-	</script>
-
+		</script>
 </body>
 
 </html>
+		</html>

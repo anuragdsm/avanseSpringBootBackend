@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Page Add</title>
+<title>Header Add</title>
 
 <script src="/vendor/CodeFlask/build/codeflask.min.js"></script>
 
@@ -39,7 +39,7 @@
 
 				<div class="container">
 					<h3>Custom Global Header</h3>
-					<form th:action="@{/admin/globalHeader/add}" method="post"
+					<form th:action="@{redirect:/admin/globalHeader/}" method="post"
 									th:object="${headerDTO}" enctype="multipart/form-data">
 
 					<div class="row">
@@ -47,7 +47,7 @@
 							<div class="form-group">
 
 
-									<div class="test" style="width: 500px; height: 700px;">//Feel free to play with the code. :) </div>
+									<div class="test" style="width: 500px; height: 600px;">//Feel free to play with the code. :) </div>
 									<script>
 										const flask = new CodeFlask('.test', {
 											language : 'js',

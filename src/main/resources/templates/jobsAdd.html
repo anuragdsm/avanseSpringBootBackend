@@ -35,7 +35,7 @@
 		<!-- Begin Page Content -->
 		<div class="container-fluid">
 			<div class="container">
-				<h3>Add a new Job</h3>
+				<h3>Post a new Job</h3>
 				<form th:action="@{/admin/jobs/add}" method="post"
 					th:object="${jobDTO}" enctype="multipart/form-data">
 					<div class="row">
@@ -45,55 +45,19 @@
 							<div class="form-group">
 								<label for="name">Title</label> <input type="text"
 									class="form-control" required th:field="*{title}" name="title"
-									id="title" placeholder="Enter course title">
+									id="title" placeholder="Enter Job Title">
 							</div>
 
 							<div class="form-group">
-								<label for="duration">Description</label> <input type="text"
-									class="form-control" required th:field="*{description}"
-									name="description" id="description"
-									placeholder="Enter course description">
+								<label for="duration">Description</label> 
+								
+								<textarea class="form-control" rows="5"
+									th:field="*{description}" name="description" id="description"></textarea>
+								
 
 							</div>
 
-							<div class="form-group">
-								<label for="duration">Roles and Responsibilities</label> <input type="text"
-									class="form-control" required th:field="*{rolesAndResponsibilities}"
-									name="rolesAndResponsibilities" id="rolesAndResponsibilities"
-									placeholder="Enter roles and responsibilities">
-
-							</div>
-							<div class="form-group">
-								<label for="duration">Education Qualification</label> <input type="text"
-									class="form-control" required th:field="*{educationQualification}"
-									name="educationQualification" id="educationQualification"
-									placeholder="Enter education qualification">
-
-							</div>
-							<div class="form-group">
-								<label for="duration">skills</label> <input type="text"
-									class="form-control" required th:field="*{skills}"
-									name="skills" id="skills"
-									placeholder="Enter skills">
-
-							</div>
-
-							<!-- <div class="form-group">
-                    <label for="category">Select Course</label>
-                    <select class="form-control" th:field="*{categoryId}" id="category" name="category">
-                        <option th:each="category :${categories}"
-                                th:value="${category.id}"
-                                th:text="${category.name}"
-                        >
-                    </select>
-                </div> -->
-
-
-							<div class="form-group">
-								<label for="fees">Experience</label> <input type="number"
-									class="form-control" required th:field="*{experience}" name="experience"
-									id="fees" placeholder="Experience">
-							</div>
+							
 
 
 						</div>
@@ -116,14 +80,7 @@
 									th:field="*{exams}" name="Exams"
 									id="exams" placeholder="Exams"> -->
 							</div>
-							<div class="form-group">
-								<label for="documentsRequired">Resume</label> 
-								
-								<!-- <input
-									type="text" class="form-control" required
-									th:field="*{exams}" name="Exams"
-									id="exams" placeholder="Exams"> -->
-							</div>
+							
 
 							<button type="submit" class="btn btn-primary">Submit</button>
 						</div>

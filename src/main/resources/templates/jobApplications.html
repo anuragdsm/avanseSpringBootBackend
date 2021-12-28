@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Jobs</title>
+<title>Jobs Applicants</title>
 
 <!-- Custom fonts for this template-->
 <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -29,23 +29,16 @@
 
 <body id="page-top">
 	<!-- Page Wrapper -->
-
 	<div id="wrapper">
-
 		<div layout:fragment="content">
-
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Job Management</h1>
-                        
-                    </div>
-                                              
+                        <h1 class="h3 mb-0 text-gray-800">Job Management</h1>                     
+                    </div>                                          
                     <!-- Content Row -->
-                    <div class="row">
-                    
+                    <div class="row">  
                     <div class="container-fluid">
 
     <a th:href="@{/admin/jobs/add}" style="margin: 20px 0" class="btn btn-primary">Post Job</a>
@@ -53,18 +46,13 @@
         <thead class="thead-light">
         <tr>
             <th scope="col">SN</th>
-            <th scope="col">Job Id</th>
-            <th scope="col">Job Title</th>
-            <th scope="col">Post Date</th>
-            <th scope="col">Description</th>
-            <th scope="col">Roles & Responsibility</th>
-            <th scope="col">Qualification</th>
-            <th scope="col">Skills</th>
-            <th scope="col">experience</th>
-            <th scope="col">Compensation</th>
-            <th scope="col">Location</th>
-            <th scope="col">Posted By</th>
-            <th scope="col">Update</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Post Applied for</th>
+            <th scope="col">Job Location</th>
+            <th scope="col">Hiring Person</th>
             <th scope="col">Delete</th>
         </tr>
         </thead>
@@ -73,17 +61,6 @@
         <tr th:each="job, iStat : ${jobs}">
             <th scope="row" th:text="${iStat.index + 1}">1</th>
             <td th:text="${job.id}">1</td>
-            <td th:text="${job.title}">Software Engineer</td>
-            <td th:text="${job.postDate}">2021-12-12</td>
-            <td th:text="${job.description}">Lorm ipsism</td>
-            <td th:text="${job.rolesAndResponsibility}">Should do this and that</td>
-            <td th:text="${job.qualification}">Software Engineer</td>
-            <td th:text="${job.skills}">Java & React</td>
-            <td th:text="${job.experience}">3 years</td>
-            <td th:text="${job.compensation}">5LPA</td>
-            <td th:text="${job.location}">Delhi</td>
-            <td th:text="${job.postedBy}">Posted By</td>
-            <td th:text="${job.compensation}">5LPA</td>            
             <td><a href="" th:href="@{/admin/job/delete/{id}(id=${job.id})}" class="btn btn-danger">Delete</a></td>
             <td><a href="" th:href="@{/admin/job/update/{id}(id=${job.id})}" class="btn btn-warning">Update</a></td>
 

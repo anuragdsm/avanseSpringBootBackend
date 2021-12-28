@@ -10,11 +10,6 @@ public class JobDTO {
 	private String title;
 	private Date postDate; 
 	private String description;
-	private String rolesAndResponsibilities;
-	private String educationQualification;
-	private String skills;
-	private Integer experience;
-	private Integer Compensation;
 	private String postedBy;
 	private String location;
 	

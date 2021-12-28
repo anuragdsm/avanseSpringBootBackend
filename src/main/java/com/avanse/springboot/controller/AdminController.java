@@ -10,9 +10,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.io.FilenameUtils;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.internal.build.AllowSysOut;
@@ -27,9 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.avanse.springboot.DTO.CourseDTO;
-import com.avanse.springboot.DTO.HeaderDTO;
 import com.avanse.springboot.DTO.ImageDTO;
 import com.avanse.springboot.DTO.JobDTO;
 import com.avanse.springboot.DTO.LocationDTO;
@@ -37,6 +33,7 @@ import com.avanse.springboot.DTO.PageDTO;
 import com.avanse.springboot.DTO.PostDTO;
 import com.avanse.springboot.DTO.UniversityDTO;
 import com.avanse.springboot.model.Course;
+import com.avanse.springboot.model.Header;
 import com.avanse.springboot.model.Image;
 import com.avanse.springboot.model.Job;
 import com.avanse.springboot.model.Location;
@@ -45,6 +42,7 @@ import com.avanse.springboot.model.Post;
 import com.avanse.springboot.model.PostCategory;
 import com.avanse.springboot.model.University;
 import com.avanse.springboot.repository.CourseRepository;
+import com.avanse.springboot.repository.HeaderRepository;
 import com.avanse.springboot.repository.ImageRepository;
 import com.avanse.springboot.repository.JobRespository;
 import com.avanse.springboot.repository.LocationRepository;
@@ -53,6 +51,7 @@ import com.avanse.springboot.repository.PostCategoryRepository;
 import com.avanse.springboot.repository.PostRepository;
 import com.avanse.springboot.repository.UniversityRepository;
 import com.avanse.springboot.service.CourseService;
+import com.avanse.springboot.service.HeaderService;
 import com.avanse.springboot.service.ImageService;
 import com.avanse.springboot.service.JobService;
 import com.avanse.springboot.service.LocationService;
@@ -60,21 +59,20 @@ import com.avanse.springboot.service.PageService;
 import com.avanse.springboot.service.PostCategoryService;
 import com.avanse.springboot.service.PostService;
 import com.avanse.springboot.service.UniversityService;
-
 import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
 public class AdminController {
 
-	public static String imageUploadDir = System.getProperty("user.dir") + "\\src\\mainresources\\static\\images";
+//	public static String imageUploadDir = System.getProperty("user.dir") + "\\src\\mainresources\\static\\images";
 	public static String universityUploadDir = System.getProperty("user.dir")
 			+ "/src/main/resources/static/images/universityImages";
 
 	public static String newPageAddDir = System.getProperty("user.dir") + "\\src\\main\\resources\\templates\\addedPages";
 	public static String newPostAddDir = System.getProperty("user.dir") + "\\src\\main\\resources\\templates\\addedBlogPosts";
 	
-	public static String userAddedImagesDir = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images\\pageImages";
+	public static String userAddedImagesDir = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images\\userAddedImages";
 	public static String cssCodeFileDir = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\viewPagesAssets\\css";
 	public static String jsCodeFileDir = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\viewPagesAssets\\js";
 	
@@ -131,6 +129,11 @@ public class AdminController {
 	@Autowired
 	UniversityService universityService;
 	
+	@Autowired
+	HeaderRepository headerRepository;
+	
+	@Autowired
+	HeaderService headerService;
 
 	/*
 	 * Method to show the admin home page.
@@ -1087,11 +1090,22 @@ public class AdminController {
 	 * /viewPagesAssets/css/style.css"
 	*/
 	
-	@GetMapping("/admin/globalHeader/add")
+	@GetMapping("/admin/globalHeader")
 	public String globalHeaderAddGet(Model model) {
-		model.addAttribute("headerDTO", new HeaderDTO());
+		model.addAttribute("header", new Header());
 		return "globalHeader";
 	}
+	
+//	@PostMapping("/admin/globalHeader/edit/{id}")
+//	public String globalHeaderAddPost(Model model, @PathVariable long id) {
+//		Header header = headerService.getHeaderById(id).get();
+//		model.addAttribute("header",header);
+//		System.out.println(header.toString());
+//		return "redirect:/admin/globalHeader";
+//	}
+//	
+	
+	
 	
 	/*
 	 * Below functions will be used to create the posts 
@@ -1315,7 +1329,6 @@ public class AdminController {
 //	Delete Method for deleting the categories by id
 	@GetMapping("/admin/postCategory/delete/{id}")
 	public String deleteCat(@PathVariable long id) {
-
 		postCategoryService.removePostCategoryById(id);
 		//		categoryService.removeCategoryById(id);
 		return "redirect:/admin/postCategories";
@@ -1333,5 +1346,13 @@ public class AdminController {
 		else
 			return "404";
 	}
+
+	/*
+	 * Image upload location for summernote
+	*/
+	public String sendImageUploadLocation() {
+		return "To do";
+	}
+	
 //	End of class
 }
