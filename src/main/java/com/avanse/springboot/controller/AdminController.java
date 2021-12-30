@@ -600,13 +600,24 @@ public class AdminController {
 	@GetMapping("/admin/jobs/add")
 	public String jobsAddGet(Model model) {
 		model.addAttribute("jobDTO", new JobDTO());
+		model.addAttribute("locations", locationService.getAllLocations());
 		return "jobsAdd";
 	}
 	
 	@PostMapping("/admin/jobs/add")
-	public String jobsAddPost(@ModelAttribute("jobDTO") JobDTO jobDTO) {
+	public String jobsAddPost(@ModelAttribute("jobDTO") JobDTO jobDTO, @RequestParam("selectedLocations") String[] locationsIds) {
 		Job job = new Job();
 		job.setId(jobDTO.getId());
+		job.setTitle(jobDTO.getTitle());
+		job.setDescription(jobDTO.getDescription());
+		job.setPostedBy(jobDTO.getPostedBy());
+		
+		for(String s: locationsIds) {
+			Location location = locationRepository.getById(Long.valueOf(s));
+			location.getJobs().add(job);
+			locationRepository.save(location);
+		}
+		
 		return "redirect:/admin/jobs";
 	}
 	
@@ -1131,7 +1142,7 @@ public class AdminController {
 	 */
 	
 	@PostMapping("/admin/posts/add")
-	public String blogPostsAddPostMap(@ModelAttribute("postDTO") PostDTO postDTO, @RequestParam("selectedCategories") String[] categoriesIds) {
+	public String blogPostsAddPostMap(@ModelAttribute("postDTO") PostDTO postDTO, @RequestParam("selectedCategories") String[] categoriesIds, HttpServletRequest request) {
 
 		/*
 		 * Create a new time stamp and initialize the timestamp with null
@@ -1168,11 +1179,12 @@ public class AdminController {
 		post.setMetaTitle(postDTO.getMetaTitle());
 		post.setMetaDescription(postDTO.getMetaDescription());
 		
-		for(String s:categoriesIds) {
-			PostCategory postCategory = postCategoryRepository.getById(Long.valueOf(s));
-			postCategory.getPostList().add(post);
-			postCategoryRepository.save(postCategory);
-		}
+		/*
+		 * for(String s:categoriesIds) { PostCategory postCategory =
+		 * postCategoryRepository.getById(Long.valueOf(s));
+		 * postCategory.getPostList().add(post);
+		 * postCategoryRepository.save(postCategory); }
+		 */
 
 		
 		
@@ -1247,7 +1259,7 @@ public class AdminController {
 		*/
 //		postDTO.setPostLink(currentPageLink);
 		postDTO.setPostLink(postDTO.getPostLink());	
-		postService.addPost(post);
+//		postService.addPost(post);
 //		htmlPage
 	
 		/*

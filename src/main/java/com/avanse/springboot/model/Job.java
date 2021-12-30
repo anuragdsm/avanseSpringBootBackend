@@ -29,7 +29,7 @@ import lombok.Setter;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name ="Jobs")
+@Table(name ="jobs")
 public class Job implements Serializable {
 
 	/**

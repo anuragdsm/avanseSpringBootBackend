@@ -60,6 +60,7 @@
 									<th scope="col">Post Title</th>
 									<th scope="col">Created on</th>
 									<th scope="col">Last Modified</th>
+									<th scope="col">Category</th>
 
 									<th scope="col">Status</th>
 									<th scope="col">Edit Page</th>
@@ -79,6 +80,12 @@
 
 										-->
 
+									<td th:each="postCategory, iStat  :  ${postCategories}">
+										<td th:text="${postCategory.name}">Marketing</td>
+									</td>
+									
+									
+									
 									<td th:text="${post.dateOfCreation}">22-3-2022</td>
 									
 									<!-- <td th:text="${page.lastModified}">22-3-2022</td> -->

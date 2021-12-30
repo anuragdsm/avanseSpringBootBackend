@@ -44,7 +44,7 @@ public class Location implements Serializable{
 				joinColumns = {@JoinColumn(name="location_id")},
 				inverseJoinColumns = {@JoinColumn(name = "job_id")}
 	)
-	private List<Job> jobList;
+	private List<Job> jobs;
 	
 	public Location(String city) {
 		super();
