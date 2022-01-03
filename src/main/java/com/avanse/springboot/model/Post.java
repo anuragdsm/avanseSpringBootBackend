@@ -46,10 +46,7 @@ public class Post implements Serializable {
 		
 		private Date lastModified;
 		
-		@ManyToMany(mappedBy = "postList", cascade = {CascadeType.MERGE, 
-			CascadeType.DETACH, 
-			CascadeType.PERSIST, 
-			CascadeType.REFRESH})
+		@ManyToMany(mappedBy = "postList", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
 		private List<PostCategory>postCategoryList;
 		
 		private Boolean isPostActive=false;

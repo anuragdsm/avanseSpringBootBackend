@@ -8,6 +8,7 @@ import com.avanse.springboot.model.Post;
 public interface PostRepository extends JpaRepository<Post, Long> {
 
 //	Optional<Page> findPageBytitle(String title);
-	
+	Post findPostByFileName(String fileName);
+
 
 }

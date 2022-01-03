@@ -59,4 +59,13 @@ public class PostService {
 		return postRepository.count();
 	}
 	
+	/*
+	 * Return the post by the post name
+	*/
+	public Post findPostByFilename(String filename) {
+		return postRepository.findPostByFileName(filename);
+	}
+	
+	
+	
 }

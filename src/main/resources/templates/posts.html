@@ -24,7 +24,6 @@
 <link href="/vendor/summernote/summernote/summernote-bs4.min.css"
 	rel="stylesheet">
 
-
 </head>
 <body id="page-top">
 
@@ -72,21 +71,28 @@
 
 								<tr th:each="post, iStat : ${posts}">
 									<th scope="row" th:text="${iStat.index + 1}">1</th>
-									<td th:text="${post.postTitle}">Home </td>
+									<td><a href="#"
+										th:href="@{/viewPost/{extractedFileName}(extractedFileName=${post.extractedFileName})}"
+										th:text="${post.postTitle}">Home </td>
 
 									<!-- 
 										<td><img src="" height="100px" width="100px"
 										th:src="@{${'/images/universityImages/' + university.imageName}}"></td>
 
 										-->
-
-									<td th:each="postCategory, iStat  :  ${postCategories}">
-										<td th:text="${postCategory.name}">Marketing</td>
+									<td th:text="${post.dateOfCreation}">22-3-2022</td>
+									<td>LastModified----yet to be imp</td>
+									<td>
+										<table>
+										<tr  th:each="postCategory, iStat  :  ${post.postCategoryList}">
+											<td style="border-top:0px;"><a th:text="${postCategory.name}" class="btn btn-outline-secondary"></a></td>
+										</tr>
+										</table>
 									</td>
 									
 									
 									
-									<td th:text="${post.dateOfCreation}">22-3-2022</td>
+									<!-- <td th:text="${post.dateOfCreation}">22-3-2022</td> -->
 									
 									<!-- <td th:text="${page.lastModified}">22-3-2022</td> -->
 									

@@ -39,15 +39,14 @@
 
 				<div class="container">
 					<h3>Custom Global Header</h3>
-					<form th:action="@{redirect:/admin/globalHeader/}" method="post"
-									th:object="${headerDTO}" enctype="multipart/form-data">
+					
 
-					<div class="row">
+					<!-- <div class="row"> -->
 						<div class="col-sm-10">
 							<div class="form-group">
 
-
-									<div class="test" style="width: 500px; height: 600px;">//Feel free to play with the code. :) </div>
+									
+									<div class="test" style="width: 500px; height: 300px;">//Feel free to play with the code. :) </div>
 									<script>
 										const flask = new CodeFlask('.test', {
 											language : 'js',
@@ -60,15 +59,70 @@
 										window['flask'] = flask;
 									</script>
 									
-									
 							</div>
+						</div>
+						
+						<script type="text/javascript">
+							function updateMyGlobalHeader() {
+								let globalHeaderForm= new FormData();
+								let linkForSubmission="http://"+window.location.href.split('/',3)[2]+"/admin/globalHeader";
+								globalHeaderForm.append('globalHeaderCode',flask.getCode());
+								let http = new XMLHttpRequest();
+								http.open('POST',linkForSubmission);
+								http.send(globalHeaderForm);
+								window.location.replace(linkForSubmission);
+							}
+						</script>
+						<button type="submit" onclick="updateMyGlobalHeader()" class="btn btn-primary" style="">Submit</button>
+						
+						<br>
+						<div class="col-sm-10">
+							
+							<div class="form-group">
+										<br>
+									<h3>Already Implemented Code</h3>
+									<div class="readOnlyArea" style="width: 500px; height:150px; overflow: auto;margin-bottom: 20px">// Already Implemented Code</div>
+									<script>
+										const flaskReadOnly = new CodeFlask('.readOnlyArea', {
+											language : 'js',
+											lineNumbers : true,
+											areaId : 'thing2',
+											ariaLabelledby : 'header2',
+											handleTabs : true,
+											 readonly: true
+										});
+
+										window['flaskReadOnly'] = flaskReadOnly;
+									</script>
+							
+							
+							</div>
+							<script type="text/javascript">
+									let alreadyImplementedCode = '';
+									console.log('testing...........',window.location.href);
+									let simpleVariable = window.location.href.split('/',3);
+									let urlForGlobalHeaderFile = 'http://'+simpleVariable[2]+'/viewPagesAssets/js/customGlobalHeader/globalHeader.js';
+									let http = new XMLHttpRequest();
+									http.open('GET',urlForGlobalHeaderFile);
+									http.send();
+									http.onloadend=()=>{
+										console.log(http.responseText);
+										flaskReadOnly.updateCode(http.responseText);
+									}
+									
+									
+							
+							</script>
+							
 							
 						</div>
 						
-						</div>
-									<button type="submit" class="btn btn-primary" style="margin-top:20px; margin-bottom:20px">Submit</button>
+					<!-- </div> -->
+									
+						
+						
 
-						</form>
+						
 					
 				</div>
 				<!-- Content Row -->

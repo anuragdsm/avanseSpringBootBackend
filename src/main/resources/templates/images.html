@@ -42,36 +42,60 @@
 							 enctype="multipart/form-data">
 							<div class="row">
 								<div class="col-sm-5">
-									<input type="hidden" name="id">
-									<div class="form-group">
-										<label for="name">Name</label> <input type="text"
-											class="form-control" required name="name"
-											id="name" placeholder="Enter name">
-									</div>
 									
-									
-									<p>Image</p>
+									<h3>Image</h3>
 									<div class="custom-file">
 										<input onchange="imageUpload1(event)" type="file" class="custom-file-input"
 											name="image" accept="image/jpeg, image/png"
-											id="image" /> <label class="custom-file-label"
+											id="image" multiple  /> <label id="labelOfFiles" class="custom-file-label"
 											for="image">Choose file</label>
 									</div>
+									<br><br>
+									<h3>File Names</h3>
+									<div id="fileNames" class="col-5" style="overflow: auto; max-height: 300px;">
+										<p>sdfsdf</p>
+										
+										
+									</div>
+							
 									<script type="text/javascript">
+											let collectionOfFiles;
 											function imageUpload1(event) {
 									            console.log('Image Upload happening here............');
+									            collectionOfFiles=event.target.files;
 									            let imageElement=document.getElementById('image');
+									            let outerBox=document.getElementById('imagePreviewOuterBox');
+									            
+									            let fileNameDiv = document.getElementById('fileNames');
+									            
+									            
 									            console.log(imageElement.children);
 									            console.log(event);
-									            let reader=new FileReader();
-									            reader.readAsDataURL(event.target.files[0]);
-									            reader.onload = ()=>{document.getElementById('imgPreview').src=reader.result;}
+									            outerBox.innerHTML="";
+									            fileNameDiv.innerHTML="";
+									            
+									            
+									            count=0;
+									            for(let f of event.target.files) {
+									            	let reader=new FileReader();
+									            	reader.readAsDataURL(f);
+									            	reader.onload = ()=>{
+									            		outerBox.innerHTML=outerBox.innerHTML+'<div class="form-group"><img type="hidden" src="'+reader.result+'" id="imgPreview'+count+'" height="300px" width="600px" style="margin-top: 20px" alt=" "></div>';
+									            		fileNameDiv.innerHTML = fileNameDiv.innerHTML+ '<p>'+f.name+'</p>';
+									            		count++;
+											            		if(event.target.files.length==count) {
+											            			document.getElementById('labelOfFiles').innerHTML=event.target.files.length+" Files Selected";
+											            		}
+									            		}
+									            }
+									            /* reader.readAsDataURL(event.target.files[0]);
+									            reader.onload = ()=>{document.getElementById('imgPreview').src=reader.result;} */
 									            
 									        }
 									</script>
 									<input type="hidden" name="imgName">
 								</div>
-								<div class="col-5">
+								<div id="imagePreviewOuterBox" class="col-7" style="overflow: auto;max-height: 400px;">
 										<div class="form-group">
 												<img type="hidden" src="#" id="imgPreview" height="300px"
 													width="600px"
@@ -85,9 +109,25 @@
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary"
 										data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary">Save
+									<button onclick="saveImages()" type="button" class="btn btn-primary">Save
 										changes</button>
 								</div>
+								<script type="text/javascript">
+									function saveImages() {
+										console.log('Uploading Images to the server....');
+										imagesForm=new FormData();
+										//imagesForm.append('imageList',collectionOfFiles);
+										for(let f of collectionOfFiles) {
+											imagesForm.append('imageList',f,f.name);
+										}
+										let http= new XMLHttpRequest();
+										console.log(http);
+										http.open('POST','http://localhost:8080/admin/images');
+										http.send(imagesForm);
+										console.log(http.responseText);
+										window.location.replace('http://localhost:8080/admin/images');
+									}
+								</script>
 							</div>
 						</div>
 					</div>

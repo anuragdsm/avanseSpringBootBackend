@@ -1,20 +1,19 @@
 package com.avanse.springboot.controller;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FilenameUtils;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -71,6 +70,12 @@ public class AdminController {
 
 	public static String newPageAddDir = System.getProperty("user.dir") + "\\src\\main\\resources\\templates\\addedPages";
 	public static String newPostAddDir = System.getProperty("user.dir") + "\\src\\main\\resources\\templates\\addedBlogPosts";
+	
+
+	
+	public static String newFeaturedImageAddDir = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\viewPagesAssets\\img\\userAddedFeaturedImages";
+	public static String newBannerImageAddDir = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\viewPagesAssets\\img\\userAddedBannerImages";
+	public static String globalHeaderFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\viewPagesAssets\\js\\customGlobalHeader\\globalHeader.js";
 	
 	public static String userAddedImagesDir = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images\\userAddedImages";
 	public static String cssCodeFileDir = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\viewPagesAssets\\css";
@@ -359,9 +364,7 @@ public class AdminController {
 
 	/*
 	 * Show university mapped courses
-	 */
-
-	
+	 */	
 	/* 14th December 2021 -> To be adressed soon
 	 * 
 	 * 
@@ -371,12 +374,9 @@ public class AdminController {
 	 * "courses"; }
 	 * 
 	 */	
-	
-
 	/*
 	 * Function to populate university list in drop down...
 	 */
-
 	// @ModelAttribute("universityDTO") UniversityDTO universityDTO
 
 	public void preLoadUniversity(Model model) {
@@ -390,14 +390,12 @@ public class AdminController {
 	@CrossOrigin("*")
 	public String activateDeactivateUniversity(@PathVariable(name = "id") long id, @PathVariable String action) {
 		System.out.println("Requested for University action = " + action + " for University id= " + id);
-
 		if (action.equals("ActivateUniversity")) {
 			University university = universityService.getUniversityById(id).get();
 			university.setIsUniversityActive(true);
 			universityService.addUniversity(university);
 			return "University Activated!!";
 		}
-
 		else {
 			University university = universityService.getUniversityById(id).get();
 			university.setIsUniversityActive(false);
@@ -430,18 +428,13 @@ public class AdminController {
 	public String coursesAddGet(Model model) {
 		model.addAttribute("courseDTO", new CourseDTO());
 //		Course course = new Course();
-
 		/*
 		 * Pass the university list to the dropdown on courseAdd.html
 		 */
-
 		University university = new University();
 		model.addAttribute("university", university);
-
 		List<University> universities = universityService.getAllUniversity();
-
 		System.out.println(universities.toString());
-
 		model.addAttribute("universities", universities);
 
 		/*
@@ -458,13 +451,12 @@ public class AdminController {
 	 */
 
 	@PostMapping("/admin/courses/add")
-//	public String coursesAddPost(@ModelAttribute("courseDTO") CourseDTO courseDTO, @PathVariable("universityDTO") UniversityDTO universityDTO) {
 	public String coursesAddPost(@ModelAttribute("courseDTO") CourseDTO courseDTO, @RequestParam("university_id") long university_id) {
 
 		/*
 		 * Use the model attribute to transfer the data from course DTO to course object
 		 */
-
+		
 //		University university = new University();
 		Course course = new Course();
 		course.setId(courseDTO.getId());
@@ -476,11 +468,8 @@ public class AdminController {
 		course.setFees(courseDTO.getFees());
 //		university.addTheCourse(course);
 		course.setUniversity(universityService.getUniversityById(university_id).get());
-
 		courseService.addCourse(course);
-
 		System.out.println(course.toString());
-
 		return "redirect:/admin/courses";
 	}
 
@@ -514,14 +503,6 @@ public class AdminController {
 		return "coursesAdd";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
 	/*
 	 * ===========All Function below are related to images================
 	 */
@@ -536,7 +517,26 @@ public class AdminController {
 		return "images";
 	}
 	
-
+	
+	@PostMapping(path = "/admin/images",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@CrossOrigin("*")
+	public String postImages(@RequestParam(name = "imageList") MultipartFile[] imageList) {
+		
+		for(MultipartFile mFile : imageList) {
+			try {
+				
+				File newFile= new File(userAddedImagesDir+"\\"+mFile.getOriginalFilename());
+				newFile.createNewFile();
+				mFile.transferTo(newFile);
+			} catch(Exception e) {
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+			}
+		}
+		return "redirect:/admin/images";
+	}
+	
+	
 	@GetMapping("/admin/images/add")
 	public String imagesAddGet(Model model) {
 		model.addAttribute("imageDTO", new ImageDTO());
@@ -560,22 +560,6 @@ public class AdminController {
 
 		return "imagesAdd";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	/*
@@ -611,6 +595,8 @@ public class AdminController {
 		job.setTitle(jobDTO.getTitle());
 		job.setDescription(jobDTO.getDescription());
 		job.setPostedBy(jobDTO.getPostedBy());
+		
+		jobService.addJob(job);
 		
 		for(String s: locationsIds) {
 			Location location = locationRepository.getById(Long.valueOf(s));
@@ -717,8 +703,8 @@ public class AdminController {
 	 */
 
 //	@ResponseBody
-	@PostMapping("/admin/pages/add")
-	public String pagesAddPost(@ModelAttribute("pageDTO") PageDTO pageDTO, HttpServletRequest request) {
+	@PostMapping(path = "/admin/pages/add",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public String pagesAddPost(@ModelAttribute("pageDTO") PageDTO pageDTO, HttpServletRequest request,@RequestParam(name = "bannerImageFile",required = false) MultipartFile bannerImageFile) {
 
 		/*
 		 * Create a new time stamp and initialize the timestamp with null
@@ -726,21 +712,29 @@ public class AdminController {
 		 * If it is not then initialise the time stamp with a new date.
 		*/
 		
-		Page page = new Page();
-		Date timeStamp = null;
-		boolean creatingTimeStamp = false;
-			
-		if(pageDTO.getDateOfCreation() == null) {
-			timeStamp= new Date();
-			creatingTimeStamp = true;
+//		Page page = new Page();
+		Page page;		
+		
+		if(bannerImageFile != null) {
+			try {
+				System.out.println("Testing------------>"+newBannerImageAddDir+"\\"+bannerImageFile.getOriginalFilename());
+				File myBannerImageFile = new File(newBannerImageAddDir+"\\"+bannerImageFile.getOriginalFilename());
+				myBannerImageFile.createNewFile();
+				bannerImageFile.transferTo(myBannerImageFile);
+			} catch(Exception e) {
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+			}
 		}
 
-		if(creatingTimeStamp) {
-			page.setDateOfCreation(timeStamp);
+		if(pageDTO.getId() == null) {
+			System.out.println("New Page is Being created..............");
+			 page = new Page();
+			 page.setDateOfCreation(new Date());
 		}
-		
 		else {
-			page.setDateOfCreation(pageDTO.getDateOfCreation());
+			System.out.println("Update Page Operation happening..................");
+			page=pageService.getPageById(pageDTO.getId()).get();
 		}
 		
 		page.setId(pageDTO.getId());
@@ -748,14 +742,15 @@ public class AdminController {
 		page.setBannerHeading(pageDTO.getBannerHeading());
 		page.setBannerSubHeading(pageDTO.getBannerSubHeading());
 		page.setMainSection(pageDTO.getMainSection());
-		page.setBannerImageName(pageDTO.getBannerImageName());
+		if(bannerImageFile!=null) {
+			page.setBannerImageName(bannerImageFile.getOriginalFilename());
+		}
 		page.setBannerImageAlt(pageDTO.getBannerImageAlt());
 		page.setCssCode(pageDTO.getCssCode());
 		page.setJsCode(pageDTO.getJsCode());
 		page.setMetaTitle(pageDTO.getMetaTitle());
 		page.setMetaKeyword(pageDTO.getMetaKeyword());
 		page.setMetaDescription(pageDTO.getMetaDescription());
-		
 		
 		/*
 		 * Creating a new html template
@@ -764,7 +759,6 @@ public class AdminController {
 		/*
 		 * Before creating the html file, we have to ensure that two files do not get
 		 */
-		
 		String preProcessFileName = pageDTO.getPageTitle().toLowerCase().strip();
 //		preProcessFileName.toLowerCase();
 		System.out.println("The Pre Process of file name "+preProcessFileName);
@@ -796,8 +790,6 @@ public class AdminController {
 		try {
 			Path fileNameAndPath = Paths.get(newPageAddDir, htmlFileName);
 			Files.createFile(fileNameAndPath);
-			
-			
 
 		} catch (IOException e) {
 			// TODO: handle exception
@@ -839,11 +831,13 @@ public class AdminController {
 		System.out.println("\n\n\n\n\n\n Main Section preview"+pageDTO.getMainSection());
 		
 		String codeInFile = htmlBoilerPlate(pageDTO.getMetaTitle(),
+											pageDTO.getMetaKeyword(),
 											pageDTO.getBannerHeading(), 
 											pageDTO.getBannerSubHeading(),
 											pageDTO.getMetaDescription(),
 											pageDTO.getMainSection(),
-											pageDTO.getCssCode());
+											pageDTO.getCssCode(),
+											bannerImageFile.getOriginalFilename());
 		System.out.println("The following code will be there in the file "+codeInFile);
 		pageDTO.setConsolidatedHTMLCode(codeInFile);
 		page.setConsolidatedHTMLCode(pageDTO.getConsolidatedHTMLCode());
@@ -869,8 +863,10 @@ public class AdminController {
 		Path fileNameAndPath = Paths.get(newPageAddDir, fileName);
 		Files.write(fileNameAndPath, codeInFile.getBytes());
 	}
+	
+	
 
-	private String htmlBoilerPlate(String metaTitle, String bannerHeading, String bannerSubheading, String metaDescription, String mainSection, String cSSCode) {
+	private String htmlBoilerPlate(String metaTitle, String metaKeyword, String bannerHeading, String bannerSubheading, String metaDescription, String mainSection, String cSSCode, String bannerImageFileName) {
 		// TODO Auto-generated method stub
 		/*
 		 * initial code
@@ -879,14 +875,37 @@ public class AdminController {
 				+ "<html lang=\"en\" xmlns:layout=\"http://www.ultraq.net.nz/thymeleaf/layout\"\r\n"
 				+ "	layout:decorate=\"_LivePagelayout\">\r\n"
 				+ "<head>\r\n"
+				+ "<!-- KEYWORDTOFINDGLOBALHEADERINSERTIONCODESPACESTART -->\r\n"
+				+ "\r\n"
+				+ "<!-- KEYWORDTOFINDGLOBALHEADERINSERTIONCODESPACEEND -->"
 //				+ header to be implemented later
+				+ "<script type=\"text/javascript\" src=\"/viewPagesAssets/js/customGlobalHeader/globalHeader.js\"></script>"
+				+ "<style>\r\n"
+				+ "        .banner_bg_top{\r\n"
+				+ "				  background: url('/viewPagesAssets/img/userAddedBannerImages/"+bannerImageFileName+"');\r\n"
+				+ "				}\r\n"
+				+ "</style>\r\n"
 				+ "</head>\r\n"
-				+ ""
-				
+				+ ""	
 				+ "<body id=\"page-top\">\r\n"
 				+ "\r\n"
 				+ "	<!-- Content Wrapper -->\r\n"
 				+ "	<div layout:fragment=\"contentPlus\">"
+				
+				+ "<section class=\"top_avanse_banner_area banner_bg_top \">\r\n"
+				+ "            \r\n"
+				+ "            <div class=\"container\">\r\n"
+				+ "                <div class=\"row align-items-center\">\r\n"
+				+ "                    <div class=\"col-lg-7\">\r\n"
+				+ "                        <div class=\"h_avaneses_content\">\r\n"
+				+ "                            <h2 class=\"wow fadeInLeft\" data-wow-delay=\"0.4s\"><span>"+bannerHeading+"</span></h2>\r\n"
+				+ "                            <h2 class=\"wow fadeInLeft\" data-wow-delay=\"0.6s\">"+bannerSubheading+"</h2>\r\n"
+				+ "                        </div>\r\n"
+				+ "                    </div>\r\n"
+				+ "                </div>\r\n"
+				+ "            </div>\r\n"
+				+ "        </section>"
+				
 				+ mainSection
 				+ "<footer class=\"footer_area f_bg\">\r\n"
 				+ "        <div class=\"footer_cta fcta_bg\">\r\n"
@@ -1026,8 +1045,9 @@ public class AdminController {
 		/*
 		 * Basic check if the page already exist or not
 		*/
+		String type = "page";
 		if(pageRepository.findById(id).isPresent()) {
-			deleteHtmlFileFromAddedPagesFolder(id);
+			deleteHtmlFileFromServer(id, type);
 			pageService.removePageById(id);
 		}
 		else {
@@ -1036,12 +1056,30 @@ public class AdminController {
 		return "redirect:/admin/pages";
 	}
 
-	private void deleteHtmlFileFromAddedPagesFolder(@PathVariable long id) {
+	private void deleteHtmlFileFromServer(@PathVariable long id, String type) {
 		// TODO Auto-generated method stub
-		Page htmlFileToBeDeleted = pageService.getPageById(id).get();
-		String theFile = htmlFileToBeDeleted.getFileName();	
-		File file = new File(newPageAddDir + "/" + theFile);		
-		if(file.exists())file.delete();
+		if(type.equalsIgnoreCase("page")) {
+		
+			Page htmlFileToBeDeleted = pageService.getPageById(id).get();
+		
+			String theFile = htmlFileToBeDeleted.getFileName();	
+		
+			File file = new File(newPageAddDir + "/" + theFile);		
+		
+			if(file.exists())file.delete();
+		}
+		
+		else if(type.equalsIgnoreCase("post")) {
+			Post htmlFileToBeDeleted = postService.getPostById(id).get();
+			String theFile = htmlFileToBeDeleted.getFileName();
+			
+			File file = new File(newPostAddDir + "/" + theFile);
+			
+			if(file.exists()) file.delete();
+			
+			
+			
+		}
 	}
 	
 	/*
@@ -1106,6 +1144,35 @@ public class AdminController {
 		model.addAttribute("header", new Header());
 		return "globalHeader";
 	}
+	@PostMapping("/admin/globalHeader")
+	public String globalHeaderAddPost(@RequestParam("globalHeaderCode") String globalHeaderCode ) {
+		
+		File globalHeaderFile = new File(globalHeaderFilePath);
+		System.out.println("InputCode----->"+globalHeaderCode);
+//		try {
+//			FileReader fr = new FileReader(globalHeaderFile);
+//			int x=0;
+//			String fileText="";
+//			while(x!=-1) {
+//				x=fr.read();
+//				char c=(char)x;
+//				fileText=fileText.concat(String.valueOf(c));
+//			}
+//			System.out.println("FILE CONTENT ------>"+fileText);
+//		} catch(IOException e) {
+//			System.out.println(e.getMessage());
+//			e.printStackTrace();
+//		}
+		try {
+			FileWriter fwr = new FileWriter(globalHeaderFile);
+			fwr.write(globalHeaderCode);
+			fwr.close();
+		} catch(IOException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		return "redirect:/admin/globalHeader";
+	}
 	
 //	@PostMapping("/admin/globalHeader/edit/{id}")
 //	public String globalHeaderAddPost(Model model, @PathVariable long id) {
@@ -1141,32 +1208,38 @@ public class AdminController {
 	 * postService.addPost(post); return "redirect:/admin/posts"; }
 	 */
 	
-	@PostMapping("/admin/posts/add")
-	public String blogPostsAddPostMap(@ModelAttribute("postDTO") PostDTO postDTO, @RequestParam("selectedCategories") String[] categoriesIds, HttpServletRequest request) {
+	@PostMapping(path = "/admin/posts/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public String blogPostsAddPostMap(@ModelAttribute("postDTO") PostDTO postDTO, HttpServletRequest request,@RequestParam(name= "featuredImageFile", required = false) MultipartFile featuredImageFile, @RequestParam("selectedCategories") String[] categoriesIds) {
 
 		/*
 		 * Create a new time stamp and initialize the timestamp with null
 		 * Check if the entry in database is there for the date of creation...
 		 * If it is not then initialise the time stamp with a new date.
 		*/
-		
-		
-		
-		Post post= new Post();
-		Date timeStamp = null;
-		boolean creatingTimeStamp = false;
 			
-		if(postDTO.getDateOfCreation() == null) {
-			timeStamp= new Date();
-			creatingTimeStamp = true;
+		Post post;
+			
+		if(featuredImageFile != null) {
+			try {
+				File myFeaturedImageFile = new File(newFeaturedImageAddDir+"\\"+featuredImageFile.getOriginalFilename());
+				myFeaturedImageFile.createNewFile();
+				featuredImageFile.transferTo(myFeaturedImageFile);
+					
+				
+			}catch (Exception e) {
+				// TODO: handle exception
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+			}
 		}
-
-		if(creatingTimeStamp) {
-			post.setDateOfCreation(timeStamp);
+		
+		if(postDTO.getId()==null) {
+			post = new Post();
+			post.setDateOfCreation(new Date());
 		}
 		
 		else {
-			post.setDateOfCreation(postDTO.getDateOfCreation());
+			post = postService.getPostById(postDTO.getId()).get();
 		}
 		
 		post.setId(postDTO.getId());
@@ -1174,17 +1247,18 @@ public class AdminController {
 		post.setHeading(postDTO.getHeading());
 		post.setSubHeading(postDTO.getSubHeading());
 		post.setMainSection(postDTO.getMainSection());
+		
+		if(featuredImageFile!=null) {
+			post.setFeaturedImageName(featuredImageFile.getOriginalFilename());
+		}
+		
 		post.setFeaturedImageName(postDTO.getFeaturedImageName());
 		post.setFeaturedImageAltText(postDTO.getFeaturedImageAltText());
 		post.setMetaTitle(postDTO.getMetaTitle());
 		post.setMetaDescription(postDTO.getMetaDescription());
 		
-		/*
-		 * for(String s:categoriesIds) { PostCategory postCategory =
-		 * postCategoryRepository.getById(Long.valueOf(s));
-		 * postCategory.getPostList().add(post);
-		 * postCategoryRepository.save(postCategory); }
-		 */
+		
+		
 
 		
 		
@@ -1235,6 +1309,15 @@ public class AdminController {
 			// TODO: handle exception
 		} 
 		
+		postService.addPost(post);
+		
+		  for(String s:categoriesIds) { 
+			  PostCategory postCategory =
+		  postCategoryRepository.getById(Long.valueOf(s));
+		  postCategory.getPostList().add(post);
+		  postCategoryRepository.save(postCategory); }
+		 
+		
 //////		String hostName = request.getHeader("host");
 ////		System.out.println(hostName);
 ////		
@@ -1259,7 +1342,7 @@ public class AdminController {
 		*/
 //		postDTO.setPostLink(currentPageLink);
 		postDTO.setPostLink(postDTO.getPostLink());	
-//		postService.addPost(post);
+		postService.addPost(post);
 //		htmlPage
 	
 		/*
@@ -1274,13 +1357,14 @@ public class AdminController {
 							postDTO.getHeading(), 
 							postDTO.getSubHeading(),
 							postDTO.getMetaDescription(),
-							postDTO.getMainSection());
-		System.out.println("The following code will be there in the file "+codeInFile);
+							postDTO.getMainSection(),
+							featuredImageFile.getOriginalFilename());
+		System.out.println("The following code will be there in the blog file "+codeInFile);
 		postDTO.setConsolidatedHTMLCode(codeInFile);
 		post.setConsolidatedHTMLCode(postDTO.getConsolidatedHTMLCode());
 		
 		try {
-			pushCodeInFile(codeInFile, postDTO.getFileName());
+			pushCodeInBlogFile(codeInFile, postDTO.getFileName());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -1300,7 +1384,7 @@ public class AdminController {
 		Files.write(fileNameAndPath, codeInFile.getBytes());
 	}
 
-	private String htmlBlogLayout(String metaTitle, String heading, String subheading, String metaDescription, String mainSection) {
+	private String htmlBlogLayout(String metaTitle, String heading, String subheading, String metaDescription, String mainSection, String featuredImageFileName) {
 		
 		// TODO Auto-generated method stub
 		/*
@@ -1308,10 +1392,191 @@ public class AdminController {
 		 * 
 		*/
 		
-		String layoutCode=metaTitle+ "    " + heading+ "    " + subheading+ "    " + mainSection+ "    "  ;
+		String layoutCode= " <!DOCTYPE html>\r\n"
+				+ "<html lang=\"en\" xmlns:layout=\"http://www.ultraq.net.nz/thymeleaf/layout\"\r\n"
+				+ "	layout:decorate=\"_LivePagelayout\">\r\n"
+				+ "<head>\r\n"
+				+ "<!-- KEYWORDTOFINDGLOBALHEADERINSERTIONCODESPACESTART -->\r\n"
+				+ "\r\n"
+				+ "<!-- KEYWORDTOFINDGLOBALHEADERINSERTIONCODESPACEEND -->"
+//				+ header to be implemented later
+				+ "<script type=\"text/javascript\" src=\"/viewPagesAssets/js/customGlobalHeader/globalHeader.js\"></script>"
+				+ "<style>\r\n"
+				+ "        .banner_bg_top{\r\n"
+				+ "				  background: url('/viewPagesAssets/img/userAddedFeaturedImages/"+featuredImageFileName+"');\r\n"
+				+ "				}\r\n"
+				+ "</style>\r\n"
+				+ "</head>\r\n"
+				+ ""	
+				+ "<body id=\"page-top\">\r\n"
+				+ "\r\n"
+				+ "	<!-- Content Wrapper -->\r\n"
+				+ "	<div layout:fragment=\"contentPlus\">"
+				
+				+ "<section class=\"top_avanse_banner_area banner_bg_top \">\r\n"
+				+ "            \r\n"
+				+ "            <div class=\"container\">\r\n"
+				+ "                <div class=\"row align-items-center\">\r\n"
+				+ "                    <div class=\"col-lg-7\">\r\n"
+				+ "                        <div class=\"h_avaneses_content\">\r\n"
+				+ "                            <h2 class=\"wow fadeInLeft\" data-wow-delay=\"0.4s\"><span>"+heading+"</span></h2>\r\n"
+				+ "                            <h2 class=\"wow fadeInLeft\" data-wow-delay=\"0.6s\">"+subheading+"</h2>\r\n"
+				+ "                        </div>\r\n"
+				+ "                    </div>\r\n"
+				+ "                </div>\r\n"
+				+ "            </div>\r\n"
+				+ "        </section>"
+				
+				+ mainSection
+				+ "<footer class=\"footer_area f_bg\">\r\n"
+				+ "        <div class=\"footer_cta fcta_bg\">\r\n"
+				+ "           <div class=\"container\">\r\n"
+				+ "                <div class=\"row\">\r\n"
+				+ "                    <div class=\"col-lg-3 text-lg-left text-sm-center\">\r\n"
+				+ "                        <img src=\"/viewPagesAssets/img/logo.png\">\r\n"
+				+ "                    </div>\r\n"
+				+ "                    <div class=\"col-lg-6 text-lg-center text-sm-center\">\r\n"
+				+ "                            <h2 class=\"\">Enroll to transform your Lives</h2>\r\n"
+				+ "                            <p class=\"f_size_22\"> Get a hassle free education loan is 3 days</p>\r\n"
+				+ "                    </div>\r\n"
+				+ "                    <div class=\"col-lg-3 text-lg-right text-sm-center\">\r\n"
+				+ "                        <a href=\"\" class=\"btn_yellow \">Apply Now</a>\r\n"
+				+ "                    </div>\r\n"
+				+ "                </div>\r\n"
+				+ "           </div>\r\n"
+				+ "        </div>\r\n"
+				+ "        <div class=\"footer_top\">\r\n"
+				+ "            <div class=\"container\">\r\n"
+				+ "                <div class=\"row\">\r\n"
+				+ "                    \r\n"
+				+ "                    <div class=\"col-lg-3 col-md-6\">\r\n"
+				+ "                        <div class=\"f_widget about-widget  wow fadeInLeft\" data-wow-delay=\"0.4s\"\r\n"
+				+ "                            style=\"visibility: visible; animation-delay: 0.4s; animation-name: fadeInLeft;\">\r\n"
+				+ "                            <h3 class=\"f-title f_500 text-white f_size_18 mb_40\">Education Loan </h3>\r\n"
+				+ "                            <ul class=\"list-unstyled f_list\">\r\n"
+				+ "                                <li><a href=\"#\">Avanse Education Loans</a></li>\r\n"
+				+ "                                <li><a href=\"#\">Study in India Education Loan</a></li>\r\n"
+				+ "                                <li><a href=\"#\">Study Abroad Education Loan</a></li>\r\n"
+				+ "                                <li><a href=\"#\">Executive Education Loan</a></li>\r\n"
+				+ "                                <li><a href=\"#\">Student Loan Refinancing</a></li>\r\n"
+				+ "                            </ul>\r\n"
+				+ "                        </div>\r\n"
+				+ "                    </div>\r\n"
+				+ "                    <div class=\"col-lg-3 col-md-6\">\r\n"
+				+ "                        <div class=\"f_widget about-widget  wow fadeInLeft\" data-wow-delay=\"0.4s\"\r\n"
+				+ "                            style=\"visibility: visible; animation-delay: 0.4s; animation-name: fadeInLeft;\">\r\n"
+				+ "                            <h3 class=\"f-title f_500 text-white f_size_18 mb_40\">Calculator</h3>\r\n"
+				+ "                            <ul class=\"list-unstyled f_list\">\r\n"
+				+ "                                <li><a href=\"#\">Course Expense Calculator</a></li>\r\n"
+				+ "                                <li><a href=\"#\">Eligibility Calculator</a></li>\r\n"
+				+ "                                <li><a href=\"#\">Eligibility Calculator</a></li>\r\n"
+				+ "                                <li><a href=\"#\">Education Loan Repayment Calculator</a></li>\r\n"
+				+ "                            </ul>\r\n"
+				+ "                        </div>\r\n"
+				+ "                    </div>\r\n"
+				+ "                    <div class=\"col-lg-3 col-md-6\">\r\n"
+				+ "                        <div class=\"f_widget about-widget  wow fadeInLeft\" data-wow-delay=\"0.6s\"\r\n"
+				+ "                            style=\"visibility: visible; animation-delay: 0.6s; animation-name: fadeInLeft;\">\r\n"
+				+ "                            <h3 class=\"f-title f_500 text-white f_size_18 mb_40\">Company</h3>\r\n"
+				+ "                            <ul class=\"list-unstyled f_list\">\r\n"
+				+ "                                    <li><a href=\"#\">About Avanse</a></li>\r\n"
+				+ "                                    <li><a href=\"#\">Career</a></li>\r\n"
+				+ "                                    <li><a href=\"#\">Investors</a></li>\r\n"
+				+ "                                    <li><a href=\"#\">Media Room</a></li>\r\n"
+				+ "                                    <li><a href=\"#\">Responsible Lending</a></li>\r\n"
+				+ "                                    <li><a href=\"#\">Sitemap</a></li>\r\n"
+				+ "                            </ul>\r\n"
+				+ "                        </div>\r\n"
+				+ "                    </div>\r\n"
+				+ "                    <div class=\"col-lg-3 col-md-6\">\r\n"
+				+ "                        <div class=\"f_widget about-widget  wow fadeInLeft\" data-wow-delay=\"0.8s\"\r\n"
+				+ "                            style=\"visibility: visible; animation-delay: 0.8s; animation-name: fadeInLeft;\">\r\n"
+				+ "                            <h3 class=\"f-title f_500 text-white f_size_18 mb_40\">Resources </h3>\r\n"
+				+ "                            <ul class=\"list-unstyled f_list\">\r\n"
+				+ "                                <li><a href=\"#\">Blog</a></li>\r\n"
+				+ "                                <li><a href=\"#\">Good Credit</a></li>\r\n"
+				+ "                                <li><a href=\"#\">FAQ</a></li>\r\n"
+				+ "                                <li><a href=\"#\">Pay Online</a></li>\r\n"
+				+ "                                <li><a href=\"#\">WhatsApp Communication</a></li>\r\n"
+				+ "                                <li><a href=\"#\">Ex-gratia FAQs</a></li>\r\n"
+				+ "                                <li><a href=\"#\">Sarfaesi Notice</a></li>\r\n"
+				+ "                            </ul>\r\n"
+				+ "                        </div>\r\n"
+				+ "                    </div>\r\n"
+				+ "                </div>\r\n"
+				+ "            </div>\r\n"
+				+ "        </div>\r\n"
+				+ "        <div class=\"footer_bottom\">\r\n"
+				+ "            <div class=\"container\">\r\n"
+				+ "                <div class=\"row align-items-center\">\r\n"
+				+ "                    <div class=\"col-lg-8 col-md-8 col-sm-12\">\r\n"
+				+ "                        <p class=\"mb-2 f_300\">Copyright © 2021 Avanse Financial Services Ltd. All Rights Reserved .       <a class=\"ml-4\" href=\"https://www.digistreetmedia.com/\" target=\"_blank\">Site Credits</a></p>\r\n"
+				+ "                        <p class=\"mb-2 f_300\">CIN : U67120MH1992PLC068060</p>\r\n"
+				+ "                    </div>\r\n"
+				+ "                    \r\n"
+				+ "                    <div class=\"col-lg-4 col-md-4 col-sm-12\">\r\n"
+				+ "                        <div class=\"f_social_icon_two text-right mb-2\">\r\n"
+				+ "                            <a href=\"#\"><i class=\"ti-facebook\"></i></a>\r\n"
+				+ "                            <a href=\"#\"><i class=\"ti-twitter-alt\"></i></a>\r\n"
+				+ "                            <a href=\"#\"><i class=\"ti-linkedin\"></i></a>\r\n"
+				+ "                            <a href=\"#\"><i class=\"ti-instagram\"></i></a>\r\n"
+				+ "                        </div>\r\n"
+				+ "                        <p class=\"mb-2 f_300 text-lg-right\">Phone support: 1800-266-0200</p>\r\n"
+				+ "                    </div>\r\n"
+				+ "                    <div class=\"col-lg-12\">\r\n"
+				+ "                        <p>Disclaimer | Base Lending Rate | Privacy Policy | Terms & Conditions | Ombudsman Scheme | Customer Complaints | Moratorium Policy | WhatsApp T&C | Communication Policy | Digital Partners</p>\r\n"
+				+ "                    </div>\r\n"
+				+ "                </div>\r\n"
+				+ "            </div>\r\n"
+				+ "        </div>\r\n"
+				+ "    </footer>\r\n"
+				+ "    "
+				
+				
+				+ "    <!-- Optional JavaScript -->\r\n"
+				
+				+ "    <!-- jQuery first, then Popper.js, then Bootstrap JS -->\r\n"
+				+ "    <script src=\"/viewPagesAssets/js/jquery-3.6.0.min.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/js/propper.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/js/bootstrap.min.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/vendors/wow/wow.min.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/vendors/sckroller/jquery.parallax-scroll.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/vendors/owl-carousel/owl.carousel.min.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/vendors/imagesloaded/imagesloaded.pkgd.min.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssetsvendors/isotope/isotope-min.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/vendors/magnify-pop/jquery.magnific-popup.min.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/vendors/counterup/jquery.counterup.min.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/vendors/counterup/jquery.waypoints.min.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/vendors/counterup/appear.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/vendors/circle-progress/circle-progress.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/vendors/scroll/jquery.mCustomScrollbar.concat.min.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/js/plugins.js\"></script>\r\n"
+				+ "    <script src=\"/viewPagesAssets/js/main.js\"></script>\r\n"
+				+ " 	</body> ";
+	
 					
 		return layoutCode;
 	}
+	
+	/*
+	 * Function to delete a post from the database and the server
+	 *
+	*/
+	@GetMapping("/admin/post/delete/{id}")
+	public String deletePost(@PathVariable long id) {
+		
+		String type = "post";
+		if(postRepository.findById(id).isPresent()) {
+			deleteHtmlFileFromServer(id, type);
+			postService.removePostById(id);
+		}
+		
+		else {
+			System.out.println("Cannot delete the page");
+		}
+		return "redirect:/admin/posts";
+	}
+	
 
 	/*Below functions will be used to create the post categories	*/
 	
@@ -1358,6 +1623,9 @@ public class AdminController {
 		else
 			return "404";
 	}
+	
+	
+	
 
 	/*
 	 * Image upload location for summernote

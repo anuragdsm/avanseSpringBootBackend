@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Page Add</title>
+<title>University Add</title>
 
 <!-- Custom fonts for this template-->
 <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
@@ -66,10 +66,20 @@
 									</div>
 
 									<div class="form-group">
-										<label for="establishedYear">Established Year</label> <input
-											type="text" class="form-control" required
+										<label for="establishedYear">Established Year</label> <select 
+											 class="form-control" required
 											th:field="*{establishedYear}" name="establishedYear"
 											id="establishedYear" placeholder="Year">
+											<option value="">Select Year of Establishment</option>
+											</select>
+											<script type="text/javascript">
+											let date = new Date();
+									        let latestYear=date.getFullYear();
+									        let establishedYearBox=document.getElementById('establishedYear');
+									        	for(let i=latestYear;i>=1900;i--){
+									        		establishedYearBox.innerHTML=establishedYearBox.innerHTML+'<option value='+i+'>'+i+'</option>';
+									        	}
+											</script>
 									</div>
 									<div class="form-group">
 										<label for="description">University Description</label>
@@ -154,9 +164,6 @@
 	<script src="/js/demo/chart-area-demo.js"></script>
 	<script src="/js/demo/chart-pie-demo.js"></script>
 
-
-
-
 	</script>
 
 	<script>
@@ -183,11 +190,6 @@
 
 				});
 	</script>
-
-
-
-
-
 
 </body>
 

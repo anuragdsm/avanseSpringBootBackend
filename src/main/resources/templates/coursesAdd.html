@@ -66,11 +66,22 @@
                     </select>
                 </div> -->
 
-
+								<style>
+									input::-webkit-outer-spin-button,
+									input::-webkit-inner-spin-button {
+									  -webkit-appearance: none;
+									  margin: 0;
+									}
+								</style>
 							<div class="form-group">
-								<label for="fees">Course Fee</label> <input type="number"
-									class="form-control" required th:field="*{fees}" name="fees"
-									id="fees" placeholder="Course Fee">
+							<label for="fees">Course Fee</label>
+								<div class="row">
+									<div class="col-1 text-right" style="top:5px; left:14px;"><h3 >&#8377;</h3></div>
+									<div class="col-11"><input type="number"
+										class="form-control" required th:field="*{fees}" name="fees"
+										id="fees" placeholder="Course Fee">
+									</div>
+								</div>
 							</div>
 
 
