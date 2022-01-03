@@ -70,6 +70,7 @@ a {
   text-decoration: none;
 }
 a:hover, a:focus {
+  color: #1b8593;
   text-decoration: none;
 }
 
@@ -87,7 +88,7 @@ i:before {
 
 body {
   font: 400 15px/28px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
   padding: 0px;
   overflow-x: hidden;
   z-index: 0;
@@ -240,7 +241,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 
 
 .t_color {
-  color: #051441;
+  color: #000000;
 }
 
 .w_color {
@@ -706,7 +707,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .btn_six {
-  font-size: 15px;
+  font-size: 16px;
   border: 1px solid #17c7bd;
   padding: 13px 35px;
   -webkit-transition: all 0.3s linear;
@@ -1062,8 +1063,8 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   padding-top: 35px;
 }
 .menu > .nav-item > .nav-link {
-  font: 500 15px "Futura Bk BT", sans-serif;
-  color: #051441;
+  font-size:  16px;
+  color: #000000;
   padding: 0px;
   -webkit-transition: color 0.3s ease 0s;
   -o-transition: color 0.3s ease 0s;
@@ -1122,7 +1123,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   padding: 0px;
   white-space: nowrap;
   font: 400 14px/34px "Futura Bk BT", sans-serif;
-  color: #051441;
+  color: #000000;
   -webkit-transition: color 0.2s linear;
   -o-transition: color 0.2s linear;
   transition: color 0.2s linear;
@@ -1211,9 +1212,9 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .menu > .nav-item.submenu .dropdown-menu.mega_menu_three > .nav-item > .dropdown-menu .nav-item .nav-link .navdropdown_link .navdropdown_content p {
   margin-bottom: 0;
   padding-top: 5px;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 20px;
-  color: #677294;
+  color: #414042;
 }
 .menu > .nav-item.submenu .dropdown-menu.mega_menu_three > .nav-item > .dropdown-menu .nav-item.nav_download_btn {
   border-top-color: #f2f0f7;
@@ -1583,7 +1584,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
       align-self: center;
 }
 .navbar .search_cart .shpping-cart .dropdown-menu .cart-single-item .cart-content .cart-title {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 22px;
   font-family: "Futura Bk BT", sans-serif;
@@ -1763,7 +1764,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   color: #fdc119;
 }
 .menu_five .menu > .nav-item.submenu.mega_menu > .dropdown-menu > .nav-item > .nav-link {
-  color: #051441;
+  color: #000000;
 }
 .menu_five .btn_get {
   background: transparent;
@@ -1800,7 +1801,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   color: #17c7bd;
 }
 .menu_six .menu > .nav-item.submenu.mega_menu > .dropdown-menu > .nav-item > .nav-link {
-  color: #051441;
+  color: #000000;
 }
 .menu_six .menu > .nav-item:nth-last-child(-n+2).submenu .dropdown-menu {
   left: -40px;
@@ -1833,7 +1834,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   color: #4069eb;
 }
 .menu_seven .menu .nav-item.submenu.mega_menu > .dropdown-menu > .nav-item > .nav-link {
-  color: #051441;
+  color: #000000;
 }
 .menu_seven .menu_toggle .hamburger-cross span,
 .menu_seven .menu_toggle .hamburger span {
@@ -1854,7 +1855,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   color: #00b1b2;
 }
 .menu_eight .menu .nav-item.submenu.mega_menu > .dropdown-menu > .nav-item > .nav-link {
-  color: #051441;
+  color: #000000;
 }
 .menu_eight .saas_btn {
   border-radius: 4px;
@@ -1881,7 +1882,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .menu_nine .btn_get {
   border-radius: 45px;
   line-height: 40px;
-  font-size: 15px;
+  font-size: 16px;
   margin-left: 35px;
 }
 
@@ -2133,7 +2134,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   color: #282835;
 }
 .header_area_six .header_top .header_contact_info li a {
-  color: #677294;
+  color: #414042;
 }
 .header_area_six .header_top .header_social_icon li a {
   color: #282835;
@@ -2236,10 +2237,10 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   display: block;
 }
 .header_area.navbar_fixed .w_menu .nav-item .nav-link {
-  color: #051441;
+  color: #000000;
 }
 .header_area.navbar_fixed .w_menu .nav-item .nav-link:before {
-  background: #051441;
+  background: #000000;
 }
 .header_area.navbar_fixed #landing_page .w_menu .nav-item .nav-link:before {
   background: #1cb1b1;
@@ -2264,7 +2265,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .header_area.navbar_fixed .menu_two .menu_toggle .hamburger-cross span,
 .header_area.navbar_fixed .menu_two .menu_toggle .hamburger span {
-  background: #051441;
+  background: #000000;
 }
 .header_area.navbar_fixed .menu_two .nav_right_btn .login_btn.active, .header_area.navbar_fixed .menu_two .nav_right_btn .login_btn:hover {
   -webkit-box-shadow: none;
@@ -2302,7 +2303,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   color: #fff;
 }
 .header_area.navbar_fixed .nav_right_btn .login_btn {
-  color: #051441;
+  color: #000000;
 }
 .header_area.navbar_fixed .menu_five .btn_get {
   border-color: #fdc119;
@@ -2318,7 +2319,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   background: #fdc119;
 }
 .header_area.navbar_fixed .menu_six .menu > .nav-item > .nav-link {
-  color: #051441;
+  color: #000000;
 }
 .header_area.navbar_fixed .menu_six .menu > .nav-item:hover > .nav-link, .header_area.navbar_fixed .menu_six .menu > .nav-item.active > .nav-link {
   color: #17c7bd;
@@ -2340,7 +2341,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   color: #fff;
 }
 .header_area.navbar_fixed .menu_seven .menu > .nav-item > .nav-link {
-  color: #051441;
+  color: #000000;
 }
 .header_area.navbar_fixed .menu_seven .menu > .nav-item:hover > .nav-link, .header_area.navbar_fixed .menu_seven .menu > .nav-item.active > .nav-link {
   color: #4069eb;
@@ -2495,7 +2496,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   display: inline-block;
 }
 .full_header.header_area.navbar_fixed .bar_menu span {
-  background: #051441;
+  background: #000000;
 }
 
 .hamburger-menu-wrepper {
@@ -2790,7 +2791,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  color: #051441;
+  color: #000000;
   margin-left: 25px;
 }
 
@@ -2869,7 +2870,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   font-size: 3.5vh;
   line-height: 4vh;
   font-weight: 700;
-  color: #051441;
+  color: #000000;
   margin-bottom: 1vh;
 }
 .side_menu_wrapper .side_menu .m_content a {
@@ -3104,7 +3105,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   /* padding-top: 210px; */
 }
 .banner_top h2 {
-  color: #051441;
+  color: #000000;
   margin-bottom: 25px;
 }
 .banner_top p {
@@ -3122,7 +3123,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
           box-shadow: 0px 30px 30px 0px rgba(0, 11, 40, 0.1);
   font: 400 15px/46px "Futura Bk BT", sans-serif;
   padding-left: 30px;
-  color: #051441;
+  color: #000000;
   z-index: 0;
 }
 .banner_top .subcribes .form-control.placeholder {
@@ -3721,7 +3722,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .payment_content_two .slider_btn {
   color: #5f51fb;
-  font-size: 15px;
+  font-size: 16px;
   padding: 15px 41px;
   -webkit-box-shadow: 0px 30px 30px 0px rgba(0, 11, 40, 0.1);
           box-shadow: 0px 30px 30px 0px rgba(0, 11, 40, 0.1);
@@ -3811,7 +3812,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   opacity: 0.1;
 }
 .company_banner_area .company_banner_content h6 {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 400;
   margin-bottom: 28px;
   color: #fff;
@@ -3824,7 +3825,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .company_banner_area .company_banner_content .about_btn {
   color: #5f51fb;
-  font-size: 15px;
+  font-size: 16px;
   padding: 14px 35px;
   margin-top: 28px;
   background: transparent;
@@ -3932,7 +3933,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 
 .startup_content_three h2 {
   font-size: 50px;
-  color: #051441;
+  color: #000000;
   font-weight: 300;
   line-height: 60px;
   margin-bottom: 30px;
@@ -4027,7 +4028,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   padding-right: 85px;
 }
 .digital_content h6 {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 300;
   line-height: 28px;
   border-bottom: 1px solid #fff;
@@ -4042,7 +4043,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   color: #fff;
 }
 .digital_content p {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 28px;
   margin-bottom: 44px;
   color: #fff;
@@ -4556,12 +4557,12 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 /*====================================================*/
 /*================= Start breadcrumb_area css =================*/
 .breadcrumb_area {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#00b1b2), to(#a485fd));
-  background-image: -o-linear-gradient(top, #00b1b2 0%, #a485fd 100%);
-  background-image: linear-gradient(180deg, #00b1b2 0%, #a485fd 100%);
+  background-image: -webkit-gradient(linear-gradient( 180deg, #01b1b2 0%, #1b8593 100%));
+  background-image: -o-linear-gradient( 180deg, #01b1b2 0%, #1b8593 100%);
+  background-image: linear-gradient( 180deg, #01b1b2 0%, #1b8593 100%);
   position: relative;
   z-index: 1;
-  padding: 235px 0px 125px;
+  padding:150px 0px 125px;
   overflow: hidden;
 }
 .breadcrumb_area .breadcrumb_shap {
@@ -4671,7 +4672,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   color: #525c7c;
 }
 .breadcrumb_content_two .breadcrumb li a {
-  color: #051441;
+  color: #000000;
 }
 .breadcrumb_content_two .breadcrumb li + li {
   padding-left: 32px;
@@ -4944,8 +4945,8 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .learn_btn_two {
-  color: #051441;
-  font-size: 15px;
+  color: #000000;
+  font-size: 16px;
   display: inline-block;
   margin-top: 7px;
   position: relative;
@@ -5037,7 +5038,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 
 .learn_btn {
   font: 500 16px/25px "Futura Bk BT", sans-serif;
-  color: #051441;
+  color: #000000;
   vertical-align: middle;
   display: inline-block;
   position: relative;
@@ -5059,7 +5060,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   left: 0;
   bottom: 0;
   height: 1px;
-  background: #051441;
+  background: #000000;
   position: absolute;
   -webkit-transition: background 0.3s linear;
   -o-transition: background 0.3s linear;
@@ -5163,7 +5164,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .s_promo_info .promo_item .text p {
   display: block;
   font-size: 14px;
-  color: #677294;
+  color: #414042;
   margin-bottom: 0px;
   margin-top: 5px;
   font-weight: 400;
@@ -5304,7 +5305,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   margin: 8px 0px 30px;
 }
 .feature_info .f_content p {
-  color: #677294;
+  color: #414042;
   line-height: 30px;
   margin-bottom: 0px;
 }
@@ -5431,7 +5432,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   margin: 32px 0px 25px;
 }
 .agency_featured_item .agency_featured_content p {
-  font-size: 15px;
+  font-size: 16px;
 }
 .agency_featured_item .agency_featured_content .icon {
   width: 46px;
@@ -5605,7 +5606,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   color: #fff;
 }
 .saas_featured_info .saas_featured_item p {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 300;
   color: #fff;
 }
@@ -5943,12 +5944,12 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .payment_features_content h2 {
   font-weight: 700;
   font-size: 26px;
-  color: #051441;
+  color: #000000;
   margin-bottom: 15px;
 }
 .payment_features_content p {
   font-size: 18px;
-  color: #677294;
+  color: #414042;
   line-height: 30px;
   margin-bottom: 50px;
 }
@@ -6025,7 +6026,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .payment_features_item h4 {
   font: 600 20px/26px "Futura Bk BT", sans-serif;
-  color: #051441;
+  color: #000000;
   margin-bottom: 22px;
 }
 .payment_features_item p {
@@ -6059,7 +6060,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .payment_features_content_two .item h3 {
   font-size: 20px;
   line-height: 26px;
-  color: #051441;
+  color: #000000;
   margin-bottom: 15px;
   margin-top: 0px;
 }
@@ -6151,7 +6152,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .perfect_solution_area .perfect_solution_left .per_solution_content h2 {
   font-size: 40px;
   line-height: 56px;
-  color: #051441;
+  color: #000000;
   font-weight: 500;
   margin-bottom: 32px;
 }
@@ -6162,7 +6163,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .perfect_solution_area .perfect_solution_left .per_solution_content .btn_three {
   margin-top: 0px;
-  font-size: 15px;
+  font-size: 16px;
   background: #5f51fb;
   padding: 15px 42px;
 }
@@ -6171,7 +6172,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .perfect_solution_area .perfect_solution_left .per_solution_content .btn_six {
   background: transparent;
-  color: #677294;
+  color: #414042;
   border-color: #dfe3ed;
   margin-left: 20px;
 }
@@ -6253,7 +6254,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .startup_tab .nav-item .nav-link h3 {
   font-size: 18px;
   line-height: 26px;
-  color: #051441;
+  color: #000000;
   font-weight: 400;
   white-space: pre-line;
   margin-bottom: 0;
@@ -6342,7 +6343,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 
 .intregration_content h2 {
   font-size: 30px;
-  color: #051441;
+  color: #000000;
   font-weight: 600;
   margin-bottom: 25px;
 }
@@ -6783,7 +6784,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   margin-bottom: 15px;
 }
 .p_service_item p {
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .symbols-pulse {
@@ -7042,7 +7043,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   border-left: 4px solid #e6e8ef;
   background: transparent;
   font: 400 16px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
   position: relative;
 }
 .software_service_tab .nav-item .nav-link:before {
@@ -7084,7 +7085,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   color: #222d39;
 }
 .software_service_tab_content .software_service_item p {
-  font-size: 15px;
+  font-size: 16px;
 }
 
 /*============== developer_product_area css ================*/
@@ -7094,7 +7095,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .developer_product_content {
-  padding-right: 100px;
+  padding-right: auto;
 }
 .developer_product_content .develor_tab {
   display: inline-block;
@@ -7107,7 +7108,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .developer_product_content .develor_tab .nav-item .nav-link {
   font: 400 16px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
   border: 0px;
   padding: 0px 0px 10px;
   position: relative;
@@ -7228,7 +7229,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .app_service_item .app_icon.one {
   text-shadow: 0px 14px 30px rgba(44, 130, 237, 0.4);
-  color: #677294;
+  color: #414042;
   background-image: -webkit-gradient(linear, left bottom, left top, from(#2171d4), to(#2cc4f0));
   background-image: -o-linear-gradient(bottom, #2171d4 0%, #2cc4f0 100%);
   background-image: linear-gradient(0deg, #2171d4 0%, #2cc4f0 100%);
@@ -7292,7 +7293,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .service_details ul li {
   font: 400 16px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
   position: relative;
   padding-left: 35px;
   margin-bottom: 13px;
@@ -7308,7 +7309,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .service_details_item + .service_details_item {
-  margin-top: 200px;
+  margin-top: 90px;
 }
 
 /*============= saas_service_area css =============*/
@@ -7465,11 +7466,11 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   font-size: 18px;
   font-weight: 600;
   font-family: "Futura Bk BT", sans-serif;
-  color: #051441;
+  color: #000000;
   margin-bottom: 2px;
 }
 .stratup_service_info .startup_service_item p {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 400;
   margin-bottom: 0;
 }
@@ -7498,7 +7499,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   margin-bottom: 22px;
 }
 .progress_bar_area .progress_item h4 {
-  color: #051441;
+  color: #000000;
   font-size: 20px;
   font-weight: 500;
   line-height: 30px;
@@ -7516,7 +7517,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   font-size: 40px;
-  color: #051441;
+  color: #000000;
   font-family: "Futura Bk BT", sans-serif;
   font-weight: 400;
 }
@@ -7551,8 +7552,8 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   cursor: pointer;
 }
 .case_study_item p {
-  font-size: 15px;
-  color: #677294;
+  font-size: 16px;
+  color: #414042;
   margin-bottom: 0;
 }
 .case_study_item h3 {
@@ -7578,7 +7579,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .study_details h2 {
   font-size: 30px;
   font-weight: 600;
-  color: #051441;
+  color: #000000;
   margin-bottom: 25px;
 }
 .study_details .btn_info {
@@ -7597,12 +7598,12 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .study_details ul li {
   font: 400 15px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
   margin-bottom: 15px;
 }
 .study_details ul li span {
   font-weight: 600;
-  color: #051441;
+  color: #000000;
 }
 
 .study_details_content {
@@ -7610,13 +7611,13 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .study_details_content h2 {
   font-size: 26px;
-  color: #051441;
+  color: #000000;
   font-weight: 600;
   margin-bottom: 25px;
 }
 .study_details_content p {
-  color: #677294;
-  font-size: 15px;
+  color: #414042;
+  font-size: 16px;
   line-height: 28px;
   margin-bottom: 0;
 }
@@ -7874,7 +7875,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   color: #3e5ae8;
 }
 .service_primary p {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.733;
   margin-bottom: 26px;
 }
@@ -7962,15 +7963,15 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   color: #e92460;
 }
 .s_pricing-item p {
-  color: #677294;
+  color: #414042;
 }
 .s_pricing-item .price {
-  color: #051441;
+  color: #000000;
   padding: 24px 0px 40px;
   border-bottom: 1px solid #e9e9f4;
 }
 .s_pricing-item .price sub {
-  color: #677294;
+  color: #414042;
   bottom: 0;
 }
 .s_pricing-item ul li {
@@ -8102,7 +8103,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .price_tab .nav-item .nav-link {
   margin: 0px;
   font: 400 16px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
   padding: 12px 30px;
   display: inline-block;
   border: 0px;
@@ -8186,7 +8187,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .price_content .price_item p {
   font-size: 16px;
   line-height: 22px;
-  color: #677294;
+  color: #414042;
   font-weight: 300;
   margin-bottom: 0px;
 }
@@ -8196,7 +8197,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   padding: 33px 0px 30px;
 }
 .price_content .price_item .price sub {
-  color: #677294;
+  color: #414042;
   bottom: 0;
 }
 .price_content .price_item .p_list {
@@ -8369,9 +8370,9 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .design_tab .nav-item .nav-link p {
   margin-bottom: 0px;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 300;
-  color: #677294;
+  color: #414042;
   -webkit-transition: color 0.5s ease 0s;
   -o-transition: color 0.5s ease 0s;
   transition: color 0.5s ease 0s;
@@ -8548,11 +8549,11 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .payment_price_item h2 {
   font-size: 40px;
   font-weight: 600;
-  color: #051441;
+  color: #000000;
 }
 .payment_price_item h6 {
   font-size: 18px;
-  color: #051441;
+  color: #000000;
   font-weight: 400;
   margin-bottom: 30px;
 }
@@ -8561,7 +8562,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   margin-bottom: 50px;
 }
 .payment_price_item .payment_price_btn {
-  font-size: 15px;
+  font-size: 16px;
   font-family: "Futura Bk BT", sans-serif;
   font-weight: 500;
   border-radius: 45px;
@@ -8736,7 +8737,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .price_info_two .price_btn {
   border-radius: 45px;
-  color: #677294;
+  color: #414042;
   border-color: #dfe3ed;
   padding: 0px 32px;
   line-height: 46px;
@@ -8760,7 +8761,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
           box-shadow: 0px 20px 40px 0px rgba(12, 0, 46, 0.14);
   font-size: "Futura Bk BT", sans-serif;
   font-size: 16px;
-  color: #677294;
+  color: #414042;
   line-height: 26px;
   width: 100%;
 }
@@ -9469,7 +9470,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .personal_portfolio_area .personal_portfolio_text .social_icon li a {
   color: #8086ca;
-  font-size: 15px;
+  font-size: 16px;
 }
 .personal_portfolio_area .personal_portfolio_text .social_icon li a:hover {
   color: #fff;
@@ -10213,7 +10214,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .feedback_area_three .feedback_slider_two .owl-nav i {
   border-color: #dfe3ed;
-  color: #677294;
+  color: #414042;
 }
 .feedback_area_three .feedback_slider_two .owl-nav i:hover {
   border-color: #5f51fb;
@@ -10384,7 +10385,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .ex_team_item h5 {
   font: 300 14px/24px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
   margin-bottom: 0px;
 }
 .ex_team_item .team_content {
@@ -10746,7 +10747,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   border-radius: 45px;
   background: rgba(247, 248, 252, 0.059);
   color: #fff;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 300;
   padding-left: 30px;
   -webkit-box-shadow: none;
@@ -10807,7 +10808,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   border: 1px solid #e0e4ed;
   text-align: center;
   font-size: 14px;
-  color: #677294;
+  color: #414042;
   border-radius: 50%;
   line-height: 48px;
   -webkit-transition: all 0.3s linear;
@@ -11364,7 +11365,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .get_started_three .get_btn_info .get_btn_item h3 {
   font-size: 20px;
   line-height: 34px;
-  color: #051441;
+  color: #000000;
   font-weight: 400;
   -webkit-box-flex: 1;
       -ms-flex: 1;
@@ -11405,7 +11406,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .job_listing .job_list_tab .list_item_tab {
   font: 300 15px/26px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
   padding: 0px 0px 10px;
   border: 0px;
   border-radius: 0px;
@@ -11496,7 +11497,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .job_listing .listing_tab .list_item .joblisting_text ul li {
   float: left;
   font: 300 14px/15px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
   padding: 0px 10px;
   border-left: 2px solid #aeb3c3;
 }
@@ -11559,7 +11560,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   display: inline-block;
   text-align: center;
   line-height: 40px;
-  color: #677294;
+  color: #414042;
   font-size: 16px;
   border-radius: 50%;
   background-color: #fbfbfd;
@@ -11598,8 +11599,8 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   position: relative;
   padding-left: 36px;
   font-weight: 300;
-  font-size: 15px;
-  color: #677294;
+  font-size: 16px;
+  color: #414042;
   margin-bottom: 27px;
 }
 .job_deatails_content ul li i {
@@ -11653,7 +11654,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   margin-bottom: 0px;
   font-size: 14px;
   font-weight: 300;
-  color: #677294;
+  color: #414042;
 }
 
 /*========== job_apply_area css =========*/
@@ -11714,7 +11715,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .apply_form p {
   font: 300 15px/26px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
 }
 .apply_form p a {
   color: #222d39;
@@ -11757,7 +11758,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .faq_tab .nav-item .nav-link {
   font: 400 16px/22px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
   padding: 0px;
   border: 0px;
   border-radius: 0px;
@@ -11830,7 +11831,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .faq_content .tab-pane .card .card-body {
   padding: 0px 0px 45px;
   font: 400 15px/26px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
 }
 
 /*====================================================*/
@@ -11862,7 +11863,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .portfolio_filter .work_portfolio_item {
   font: 400 16px/22px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
   display: inline-block;
   border-radius: 3px;
   -webkit-transition: all 0.2s linear;
@@ -12038,8 +12039,8 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   overflow: hidden;
 }
 .portfolio-description .links a {
-  font-size: 15px;
-  color: #677294;
+  font-size: 16px;
+  color: #414042;
   font-weight: 300;
   position: relative;
   display: inline-block;
@@ -12145,7 +12146,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   background: transparent;
   padding: 0px;
   font-size: 24px;
-  color: #677294;
+  color: #414042;
   -webkit-transition: color 0.2s linear;
   -o-transition: color 0.2s linear;
   transition: color 0.2s linear;
@@ -12270,7 +12271,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   content: ",";
   line-height: 1;
   position: absolute;
-  color: #677294;
+  color: #414042;
 }
 .portfolio_grid .category_list > li:last-child {
   margin-right: 0px;
@@ -12282,9 +12283,9 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .portfolio_grid .category_list > li > a {
   display: block;
   line-height: 1;
-  font-size: 15px;
+  font-size: 16px;
   position: relative;
-  color: #677294;
+  color: #414042;
 }
 .portfolio_grid .category_list > li > a:before {
   width: 0px;
@@ -12367,11 +12368,11 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   left: 0;
 }
 .app_contact_info .info_item h6 {
-  color: #051441;
+  color: #000000;
   margin-bottom: 5px;
 }
 .app_contact_info .info_item p, .app_contact_info .info_item a {
-  color: #677294;
+  color: #414042;
   line-height: 24px;
   margin-bottom: 0px;
 }
@@ -12385,11 +12386,11 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   padding-bottom: 25px;
 }
 .contact_info_item p {
-  color: #677294;
+  color: #414042;
   margin-bottom: 8px;
 }
 .contact_info_item a {
-  color: #677294;
+  color: #414042;
   padding-left: 3px;
   display: inline-block;
 }
@@ -12487,7 +12488,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   z-index: -1;
 }
 .login_area .login_info p a {
-  color: #677294;
+  color: #414042;
 }
 
 .login-form .text_box .text_c {
@@ -12549,7 +12550,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   left: 3px;
 }
 .login-form .extra .forgotten-password a {
-  color: #677294;
+  color: #414042;
 }
 .login-form .btn_three {
   width: 100%;
@@ -12592,11 +12593,11 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .sign_info .sign_info_content h2 {
   font-size: 30px;
-  color: #677294;
+  color: #414042;
 }
 .sign_info .sign_info_content ul li {
   font: 400 16px/34px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
 }
 .sign_info .sign_info_content ul li i {
   color: #00b1b2;
@@ -12607,7 +12608,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .sign_info .lead-text {
   font: 400 14px/40px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
   padding-right: 20px;
 }
 .sign_info .social_tag li {
@@ -12662,7 +12663,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .get_quote_form .form-group .form-control {
   font: 300 15px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
   border-radius: 4px;
   background-color: white;
   -webkit-box-shadow: 0px 2px 4px 0px rgba(12, 0, 46, 0.04);
@@ -12752,7 +12753,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   font-style: italic;
 }
 .saasland_container .saasland_col_content .saasland_content h1 {
-  color: #051441;
+  color: #000000;
   font-size: 50px;
   font-weight: 600;
   margin-bottom: 60px;
@@ -12993,7 +12994,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   font-size: 40px;
   font-weight: 500;
   line-height: 50px;
-  color: #051441;
+  color: #000000;
   margin-top: 40px;
 }
 .error_content_two p {
@@ -13011,30 +13012,30 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   border-radius: 45px;
   height: 60px;
   padding: 0px 30px;
-  color: #677294;
-  font-size: 15px;
+  color: #414042;
+  font-size: 16px;
   font-weight: 300;
   -webkit-transition: all 0.3s linear;
   -o-transition: all 0.3s linear;
   transition: all 0.3s linear;
 }
 .error_content_two .search .form-control.placeholder {
-  color: #677294;
+  color: #414042;
 }
 .error_content_two .search .form-control:-moz-placeholder {
-  color: #677294;
+  color: #414042;
 }
 .error_content_two .search .form-control::-moz-placeholder {
-  color: #677294;
+  color: #414042;
 }
 .error_content_two .search .form-control::-webkit-input-placeholder {
-  color: #677294;
+  color: #414042;
 }
 .error_content_two .search .form-control:focus {
   border-color: #00b1b2;
 }
 .error_content_two .about_btn {
-  background: #051441;
+  background: #000000;
   color: #fff;
   border-radius: 3px;
   padding: 17px 35px;
@@ -13151,7 +13152,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .download_content h2 {
   font-size: 60px;
-  color: #051441;
+  color: #000000;
   font-weight: 400;
   margin-bottom: 35px;
 }
@@ -13159,7 +13160,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   margin-bottom: 0;
   font-size: 20px;
   font-weight: 400;
-  color: #051441;
+  color: #000000;
 }
 .download_content p a {
   color: #00b1b2;
@@ -13181,7 +13182,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   margin-top: 30px;
 }
 .thanks_content p {
-  color: #677294;
+  color: #414042;
 }
 .thanks_content a {
   font-size: 14px;
@@ -13239,7 +13240,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   font-weight: 700;
 }
 .typography_breacrumb p {
-  color: #677294;
+  color: #414042;
 }
 
 h1,
@@ -13253,7 +13254,7 @@ h6 {
 
 p {
   font-size: 16px;
-  color: #677294;
+  color: #414042;
 }
 p span {
   padding: 3px 8px;
@@ -13273,7 +13274,7 @@ p span {
 
 .h_title {
   font-size: 24px;
-  color: #677294;
+  color: #414042;
   font-weight: 300;
   margin-bottom: 50px;
 }
@@ -13289,7 +13290,7 @@ p span {
 }
 .heading_style .h_title {
   font-size: 24px;
-  color: #677294;
+  color: #414042;
   font-weight: 300;
 }
 .heading_style h1 {
@@ -13390,7 +13391,7 @@ p span {
   background: #f9fafb;
   padding: 40px;
   font-size: 22px;
-  color: #677294;
+  color: #414042;
   font-style: italic;
   line-height: 40px;
 }
@@ -13435,7 +13436,7 @@ p span {
 }
 .typography_promo_area .btn_get:hover {
   background: #fff;
-  color: #051441;
+  color: #000000;
 }
 
 .alert {
@@ -13469,7 +13470,7 @@ p span {
 .alert.notice {
   background: #f9f8fc;
   border-color: #e9e6f5;
-  color: #677294;
+  color: #414042;
 }
 .alert.error {
   background: #ffebeb;
@@ -13517,7 +13518,7 @@ p span {
   text-align: center;
   line-height: 70px;
   font-size: 20px;
-  color: #677294;
+  color: #414042;
   border: 1px solid #e9e6f5;
   background: #f9f8fc;
   border-radius: 50%;
@@ -13531,15 +13532,15 @@ p span {
   margin-bottom: 10px;
 }
 .box_alert .media-body p {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 28px;
-  color: #677294;
+  color: #414042;
 }
 .box_alert .alert_close {
   position: absolute;
   right: 20px;
   top: 20px;
-  color: #677294;
+  color: #414042;
   font-size: 20px;
   cursor: pointer;
 }
@@ -13987,7 +13988,7 @@ p span {
 }
 .blog_content p {
   font-weight: 400;
-  font-size: 15px;
+  font-size: 16px;
 }
 .blog_content h5:hover {
   color: #00b1b2;
@@ -14013,11 +14014,11 @@ p span {
 
 .entry_post_info {
   font: 400 15px/25px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
   padding-bottom: 5px;
 }
 .entry_post_info a {
-  color: #677294;
+  color: #414042;
 }
 .entry_post_info a + a:before {
   content: "/";
@@ -14090,10 +14091,10 @@ p span {
   padding-left: 20px;
 }
 .post_author .media-body h6 {
-  color: #677294;
+  color: #414042;
 }
 .post_author .media-body p {
-  color: #677294;
+  color: #414042;
   margin-bottom: 0px;
 }
 
@@ -14142,7 +14143,7 @@ p span {
 .widget_title .border_bottom {
   width: 180px;
   height: 1px;
-  background: #677294;
+  background: #414042;
   display: block;
 }
 
@@ -14161,7 +14162,7 @@ p span {
 }
 .blog-sidebar .widget.widget_search .search-form .form-control {
   font: 300 14px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
   border-radius: 3px;
   background-color: white;
   -webkit-box-shadow: 0px 2px 3px 0px rgba(12, 0, 46, 0.08);
@@ -14174,16 +14175,16 @@ p span {
   border: 1px solid transparent;
 }
 .blog-sidebar .widget.widget_search .search-form .form-control.placeholder {
-  color: #677294;
+  color: #414042;
 }
 .blog-sidebar .widget.widget_search .search-form .form-control:-moz-placeholder {
-  color: #677294;
+  color: #414042;
 }
 .blog-sidebar .widget.widget_search .search-form .form-control::-moz-placeholder {
-  color: #677294;
+  color: #414042;
 }
 .blog-sidebar .widget.widget_search .search-form .form-control::-webkit-input-placeholder {
-  color: #677294;
+  color: #414042;
 }
 .blog-sidebar .widget.widget_search .search-form .form-control:focus {
   border-color: #ccc5fa;
@@ -14280,8 +14281,8 @@ p span {
   background: #f3f4f9;
   border-radius: 4px;
   height: 60px;
-  font-size: 15px;
-  color: #677294;
+  font-size: 16px;
+  color: #414042;
   -webkit-box-shadow: none;
           box-shadow: none;
   position: relative;
@@ -14292,16 +14293,16 @@ p span {
   transition: all 0.3s linear;
 }
 .blog-sidebar .widget.search_widget_two .search-form .form-control.placeholder {
-  color: #677294;
+  color: #414042;
 }
 .blog-sidebar .widget.search_widget_two .search-form .form-control:-moz-placeholder {
-  color: #677294;
+  color: #414042;
 }
 .blog-sidebar .widget.search_widget_two .search-form .form-control::-moz-placeholder {
-  color: #677294;
+  color: #414042;
 }
 .blog-sidebar .widget.search_widget_two .search-form .form-control::-webkit-input-placeholder {
-  color: #677294;
+  color: #414042;
 }
 .blog-sidebar .widget.search_widget_two .search-form .form-control:focus {
   border-color: #00b1b2;
@@ -14467,7 +14468,7 @@ p span {
 }
 .blog_list_item_two .post_date span {
   display: block;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 400;
 }
 .blog_list_item_two a img {
@@ -14771,7 +14772,7 @@ p span {
 }
 .post_author_two .media-body .comment_info .comment-date {
   font: 400 14px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
 }
 .post_author_two .media-body p {
   margin-bottom: 0;
@@ -14791,7 +14792,7 @@ p span {
   margin-bottom: 8px;
 }
 .blog_related_post.blog_grid_info .blog_list_item .blog_content p {
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .comment_inner {
@@ -14888,7 +14889,7 @@ p span {
   margin-top: 7px;
 }
 .comments_widget ul li .comments_items .media-body p {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 26px;
   color: #282835;
   margin-bottom: 0px;
@@ -14916,7 +14917,7 @@ p span {
 .widget_recent_comments #recentcomments .recentcomments {
   position: relative;
   padding-left: 90px;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 26px;
   color: #282835;
   font-family: "Futura Bk BT", sans-serif;
@@ -14985,7 +14986,7 @@ p span {
 }
 .shop_menu_right .selectpickers .current {
   font: 300 16px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
 }
 .shop_menu_right .shop_grid {
   display: -webkit-box;
@@ -14994,7 +14995,7 @@ p span {
 }
 .shop_menu_right .shop_grid a {
   font-size: 16px;
-  color: #677294;
+  color: #414042;
   margin-left: 12px;
 }
 .shop_menu_right .shop_grid .active a {
@@ -15070,7 +15071,7 @@ p span {
       -ms-flex-pack: center;
           justify-content: center;
   font: 300 14px/28px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
 }
 .single_product_item .single_pr_details .price ins {
   font-weight: 500;
@@ -15110,7 +15111,7 @@ p span {
   font-size: 16px;
   line-height: 39px;
   font-weight: 300;
-  color: #677294;
+  color: #414042;
   text-align: center;
   display: block;
   -webkit-transition: all 0.2s linear;
@@ -15152,7 +15153,7 @@ p span {
 }
 .shop_list_item .single_product_item .single_pr_details .pr_button .cart_btn {
   font: 400 15px/30px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
   border: 1px solid #e7e7f6;
   border-radius: 45px;
   background: #f9f9fc;
@@ -15239,11 +15240,11 @@ p span {
 .pr_details .ratting .woocommerce-review-link {
   font-size: 14px;
   font-weight: 300;
-  color: #677294;
+  color: #414042;
 }
 .pr_details .price {
   font: 300 20px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -15296,7 +15297,7 @@ p span {
   background: #fff;
   border: 0px;
   font-size: 12px;
-  color: #677294;
+  color: #414042;
   right: 5px;
   border-radius: 15px;
   padding: 0px 15px 0px 0px;
@@ -15316,7 +15317,7 @@ p span {
 .pr_details .cart_button .cart_btn {
   border-radius: 45px;
   font: 400 15px/48px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
   border: 1px solid #e7e7f6;
   background: #f8f8fc;
   min-width: 140px;
@@ -15350,11 +15351,11 @@ p span {
 .pr_details .product_meta li {
   font-family: "Futura Bk BT", sans-serif;
   font-weight: 300;
-  color: #677294;
+  color: #414042;
   margin-bottom: 10px;
 }
 .pr_details .product_meta li a {
-  color: #677294;
+  color: #414042;
 }
 .pr_details .product_meta li a:hover {
   color: #00b1b2;
@@ -15378,7 +15379,7 @@ p span {
 }
 .pr_details .share-link .social-icon li a {
   font-size: 12px;
-  color: #677294;
+  color: #414042;
   padding-right: 10px;
   -webkit-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
@@ -15411,7 +15412,7 @@ p span {
 }
 .product_info_details .pr_tab .nav-item .nav-link {
   font: 300 16px/40px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
   padding: 5px 25px;
   min-width: 148px;
   text-align: center;
@@ -15450,7 +15451,7 @@ p span {
   display: inline-block;
 }
 .product_info_details .comment-box .comment-content .comment-header a {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
   color: #3d3f45;
 }
@@ -15589,7 +15590,7 @@ input[type=number] {
   width: 175px;
 }
 .shopping_cart_area .cart_table .quantity p {
-  color: #677294;
+  color: #414042;
   margin-bottom: 0px;
 }
 .shopping_cart_area .cart_table .del-item {
@@ -15598,7 +15599,7 @@ input[type=number] {
   width: 140px;
 }
 .shopping_cart_area .cart_table .del-item a {
-  color: #677294;
+  color: #414042;
 }
 .shopping_cart_area .cart_table .del-item a:hover {
   color: #00b1b2;
@@ -15622,7 +15623,7 @@ input[type=number] {
   background: #fff;
   border: 0px;
   font-size: 12px;
-  color: #677294;
+  color: #414042;
   right: 16px;
   border-radius: 15px;
   padding: 0px;
@@ -15644,19 +15645,19 @@ input[type=number] {
   height: 44px;
   border-radius: 45px;
   text-align: center;
-  color: #677294;
+  color: #414042;
 }
 .shopping_cart_area .cart_table .product-qty .manual-adjust.placeholder {
-  color: #677294;
+  color: #414042;
 }
 .shopping_cart_area .cart_table .product-qty .manual-adjust:-moz-placeholder {
-  color: #677294;
+  color: #414042;
 }
 .shopping_cart_area .cart_table .product-qty .manual-adjust::-moz-placeholder {
-  color: #677294;
+  color: #414042;
 }
 .shopping_cart_area .cart_table .product-qty .manual-adjust::-webkit-input-placeholder {
-  color: #677294;
+  color: #414042;
 }
 .shopping_cart_area .cart_btn {
   font: 400 14px "Futura Bk BT", sans-serif;
@@ -15729,7 +15730,7 @@ input[type=number] {
   text-align: right;
 }
 .cart_box .shop_table tbody tr td .amount {
-  color: #677294;
+  color: #414042;
 }
 .cart_box .shop_table tbody tr:last-child {
   border: 0px;
@@ -15959,7 +15960,7 @@ input[type=number] {
 }
 .checkout_content .tab_content p {
   font-family: "Futura Bk BT", sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   margin-bottom: 0px;
   padding: 0px 0px 25px;
 }
@@ -16025,7 +16026,7 @@ input[type=number] {
 }
 .woocommerce-checkout-review-order .shop_table tbody tr td {
   font: 400 15px/30px "Futura Bk BT", sans-serif;
-  color: #677294;
+  color: #414042;
 }
 .woocommerce-checkout-review-order .shop_table tbody tr td.price {
   color: #282835;
@@ -16045,7 +16046,7 @@ input[type=number] {
   padding-bottom: 0px;
 }
 .woocommerce-checkout-review-order h6 {
-  font-size: 15px;
+  font-size: 16px;
   color: #282835;
   font-family: "Futura Bk BT", sans-serif;
   font-weight: 400;
@@ -16054,9 +16055,9 @@ input[type=number] {
   margin-bottom: 6px;
 }
 .woocommerce-checkout-review-order .note {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 26px;
-  color: #677294;
+  color: #414042;
   font-weight: 300;
   font-family: "Futura Bk BT", sans-serif;
   margin-bottom: 25px;
@@ -16127,7 +16128,7 @@ input[type=number] {
   margin-top: 50px;
 }
 .woocommerce-checkout-review-order .condition p {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 300;
 }
 .woocommerce-checkout-review-order .condition input[type=checkbox] {
@@ -16256,7 +16257,7 @@ input[type=number] {
 }
 .pr_sidebar .widget_category ul li a {
   font-size: 16px;
-  color: #677294;
+  color: #414042;
   display: inline-block;
   position: relative;
 }
@@ -16357,7 +16358,7 @@ input[type=number] {
   color: #282835;
 }
 .pr_sidebar .widget_product ul li .media .media-body .rate {
-  color: #677294;
+  color: #414042;
   font-size: 16px;
 }
 .pr_sidebar .widget_product ul li:not(:last-child) {
@@ -16369,7 +16370,7 @@ input[type=number] {
 }
 .pr_sidebar .widget_tag ul li a {
   font-size: 16px;
-  color: #677294;
+  color: #414042;
   position: relative;
   display: block;
   -webkit-transition: all 0.2s linear;
@@ -16860,7 +16861,7 @@ input[type=text] {
   border-radius: 3px;
   color: #fff;
   padding: 3px 33px;
-  font-size: 15px;
+  font-size: 16px;
   -webkit-box-shadow: none;
           box-shadow: none;
   -webkit-transform: translateY(10px);
@@ -16998,7 +16999,7 @@ input[type=text] {
   margin-bottom: 0;
 }
 .split_app_content .btn_three {
-  font-size: 15px;
+  font-size: 16px;
   padding: 15px 33px;
 }
 .split_app_content .s_app_btn {
@@ -17032,7 +17033,7 @@ input[type=text] {
 .split_title {
   font-size: 40px;
   line-height: 50px;
-  color: #051441;
+  color: #000000;
   font-weight: 700;
   font-family: "Futura Bk BT", sans-serif;
 }
@@ -17066,9 +17067,9 @@ input[type=text] {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
-  color: #051441;
+  color: #000000;
   padding-bottom: 8px;
 }
 .web_skill_content .skillbar-box {
@@ -18696,7 +18697,7 @@ a .h_head:hover {
   padding-top: 30px;
 }
 .erp_testimonial_item .ratting a {
-  font-size: 15px;
+  font-size: 16px;
   color: #f5c10d;
 }
 .erp_testimonial_item .media {
@@ -19628,7 +19629,7 @@ a .h_head:hover {
 .support_help_area .support_item h4 {
   font-size: 24px;
   font-weight: 500;
-  color: #051441;
+  color: #000000;
   margin: 36px 0px 25px;
 }
 .support_help_area .support_item .software_banner_btn {
@@ -19683,7 +19684,7 @@ a .h_head:hover {
 }
 .s_integration_item h5 {
   font-size: 18px;
-  color: #051441;
+  color: #000000;
   margin-top: 15px;
 }
 .s_integration_item:hover {
@@ -20745,7 +20746,7 @@ a .h_head:hover {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 90px 0px;
+  padding:40px 0px;
   position: relative;
 }
 .setup_inner .setup_item.flex-row-reverse .setup_content {
@@ -21129,11 +21130,11 @@ a .h_head:hover {
 }
 .gadget_slider_content .gadget_btn:hover {
   background: #fff;
-  color: #051441;
+  color: #000000;
 }
 
 .gadget_btn {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
   color: #fff;
   border-radius: 45px;
@@ -21167,7 +21168,7 @@ a .h_head:hover {
   width: 100%;
 }
 .shop_slider_content h6 {
-  font-size: 15px;
+  font-size: 16px;
   color: #2c2c51;
   text-transform: uppercase;
   margin-bottom: 25px;
@@ -21233,7 +21234,7 @@ a .h_head:hover {
   font-size: 36px;
   line-height: 48px;
   font-weight: 500;
-  color: #051441;
+  color: #000000;
   margin-bottom: 20px;
 }
 .gadget_details h2.animated .char {
@@ -21320,7 +21321,7 @@ a .h_head:hover {
   text-transform: uppercase;
 }
 .gadget_features_item .content .see_btn {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 400;
   color: #fff;
   position: relative;
@@ -21406,7 +21407,7 @@ a .h_head:hover {
   font-size: 36px;
   font-weight: 500;
   line-height: 44px;
-  color: #051441;
+  color: #000000;
 }
 .gadget_title p {
   font-size: 16px;
@@ -21518,7 +21519,7 @@ a .h_head:hover {
 }
 .gadget_pr_item .single_pr_details h3 {
   font-size: 20px;
-  color: #051441;
+  color: #000000;
   -webkit-transition: color 0.2s linear;
   -o-transition: color 0.2s linear;
   transition: color 0.2s linear;
@@ -21543,7 +21544,7 @@ a .h_head:hover {
 .gadget_pr_item .single_pr_details .price ins {
   text-decoration: none;
   font-weight: 600;
-  color: #051441;
+  color: #000000;
 }
 .gadget_pr_item .single_pr_details .price del {
   color: #acacac;
@@ -22135,7 +22136,7 @@ a .h_head:hover {
 .partner_logo_area_two h2 {
   font-size: 30px;
   line-height: 40px;
-  color: #051441;
+  color: #000000;
 }
 
 
@@ -22146,12 +22147,12 @@ a .h_head:hover {
   color: #161341;
 }
 .team_details_content .postition {
-  font-size: 15px;
+  font-size: 16px;
   text-transform: uppercase;
   margin-bottom: 25px;
 }
 .team_details_content p {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 30px;
 }
 .team_details_content h5 {
@@ -22211,19 +22212,19 @@ a .h_head:hover {
   font-weight: 600;
 }
 .skill_copntent p {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 30px;
   margin-top: 25px;
 }
 
 .progress-element p {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
-  color: #051441;
+  color: #000000;
   margin-bottom: 5px;
 }
 .progress-element .count-tip {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
 }
 .progress-element .count-tip.one {
@@ -22255,7 +22256,7 @@ a .h_head:hover {
 /*============ team_contact_area css =========*/
 .team_contact_area .chat_title h2 {
   font-size: 40px;
-  color: #051441;
+  color: #000000;
 }
 .team_contact_area .chat_title h2 span {
   display: block;
@@ -22363,7 +22364,7 @@ a .h_head:hover {
 /*============ shop_product_area css =========*/
 .shop_title h2 {
   font-size: 48px;
-  color: #051441;
+  color: #000000;
 }
 .shop_title h2.w_color {
   color: #fff;
@@ -22495,11 +22496,11 @@ a .h_head:hover {
   background: transparent;
   border-radius: 50%;
   color: #fff;
-  font-size: 15px;
+  font-size: 16px;
 }
 .custom_arrow button:hover {
   background: #fff;
-  color: #051441;
+  color: #000000;
 }
 
 /*============ trending_product_area css =========*/
@@ -24050,7 +24051,7 @@ a .h_head:hover {
 
 .tracking_banner_content h3 {
   font-size: 48px;
-  color: #051441;
+  color: #000000;
   font-weight: 400;
   line-height: 60px;
 }
@@ -24292,7 +24293,7 @@ a .h_head:hover {
   font-size: 48px;
   line-height: 72px;
   font-weight: 400;
-  color: #051441;
+  color: #000000;
   margin-bottom: 30px;
 }
 .chat_banner_content .chat_btn {
@@ -24368,7 +24369,7 @@ a .h_head:hover {
 .chat_title p {
   max-width: 730px;
   margin: 0px auto;
-  color: #677294;
+  color: #414042;
 }
 
 .chat_features_item {
@@ -24799,7 +24800,7 @@ a .h_head:hover {
   line-height: 50px;
   font-weight: 600;
   margin-bottom: 15px;
-  color: #051441;
+  color: #000000;
 }
 .section_title h2 span {
   font-weight: 400;
@@ -24849,7 +24850,7 @@ a .h_head:hover {
 .demo_features_area .features_item .content h3 {
   font-size: 20px;
   margin-bottom: 20px;
-  color: #051441;
+  color: #000000;
   font-weight: 600;
 }
 .demo_features_area .features_item .content p {
@@ -24990,7 +24991,7 @@ a .h_head:hover {
   -o-transition: color 0.2s linear;
   transition: color 0.2s linear;
   margin-bottom: 0;
-  color: #051441;
+  color: #000000;
 }
 .portfolio-image h6:hover {
   color: #00b1b2;
@@ -25138,7 +25139,7 @@ a .h_head:hover {
   font-size: 34px;
   line-height: 44px;
   font-weight: 600;
-  color: #051441;
+  color: #000000;
   margin-bottom: 30px;
 }
 .f_content p {
@@ -25276,7 +25277,7 @@ a .h_head:hover {
   font-size: 34px;
   margin-bottom: 25px;
   line-height: 44px;
-  color: #051441;
+  color: #000000;
   font-weight: 600;
 }
 .u_content p {
@@ -25763,7 +25764,7 @@ a .h_head:hover {
 }
 .testimonial_slider_demo .slick-slide .content span {
   color: #7b7b93;
-  font-size: 15px;
+  font-size: 16px;
   font-style: italic;
   font-weight: 400;
 }
@@ -25872,7 +25873,7 @@ a .h_head:hover {
   line-height: 1.5;
   margin-bottom: 19px;
   font-weight: 600;
-  color: #051441;
+  color: #000000;
 }
 @media (max-width: 991px) and (min-width: 768px) {
   .typography_part .typgraphy_content h2 {
@@ -26223,7 +26224,7 @@ a .h_head:hover {
   margin-bottom: 15px;
 }
 .responsive_content .u_content .item p {
-  font-size: 15px;
+  font-size: 16px;
   margin-bottom: 0;
 }
 
@@ -26331,7 +26332,7 @@ a .h_head:hover {
 }
 .agency_title h2 {
   font-size: 40px;
-  color: #051441;
+  color: #000000;
   font-weight: 600;
 }
 .agency_title.agency_title_decoration .small_title {
@@ -26384,7 +26385,7 @@ a .h_head:hover {
   line-height: 1;
   display: block;
   font-weight: 700;
-  color: #677294;
+  color: #414042;
   -webkit-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
@@ -26998,10 +26999,10 @@ a .h_head:hover {
   margin-top: 35px;
 }
 .f_widget .widget-wrap p span {
-  color: #051441;
+  color: #000000;
 }
 .f_widget .widget-wrap p a {
-  color: #677294;
+  color: #414042;
   -webkit-transition: color 0.2s linear;
   -o-transition: color 0.2s linear;
   transition: color 0.2s linear;
@@ -27615,7 +27616,7 @@ a .h_head:hover {
   padding-top: 150px;
 }
 .footer_nine_top .f_widget .f-title {
-  color: #051441;
+  color: #000000;
   text-transform: uppercase;
 }
 .footer_nine_top .f_widget .f-title:after {
@@ -27640,7 +27641,7 @@ a .h_head:hover {
 }
 
 .footer_nine_bottom {
-  background: #051441;
+  background: #000000;
   padding: 27px 0px;
 }
 .footer_nine_bottom p {
@@ -27807,7 +27808,7 @@ a .h_head:hover {
   border-radius: 4px;
   height: 55px;
   background: #fff;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 300;
   line-height: 55px;
   padding-left: 30px;
@@ -27972,7 +27973,7 @@ a .h_head:hover {
   height: 100%;
   display: block;
   color: #ffffff;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   padding: 0px 15px;
   line-height: 70px;
@@ -28097,7 +28098,7 @@ a .h_head:hover {
   background: #fafbfb;
 }
 .testimonial_slider  .owl-dots { text-align: center; margin-top: 30px; }
-.pillars_icon{height: 110px;max-height:110px;}
+.pillars_icon{height:90px;max-height:90px;}
 .emp_sp{
   background: url(../img/employees-speak.png) no-repeat;
   background-position: center center;
@@ -28118,6 +28119,13 @@ a .h_head:hover {
   background: #02afb3 url(../img/cyan-bg.jpg) no-repeat;
   background-position: bottom center;
   background-size: contain;
+}
+@media (min-width:1400px){
+  .cyan-bg{
+    background: #02afb3 url(../img/cyan-bg.jpg) no-repeat;
+    background-position: bottom center;
+    background-size: cover;
+  }
 }
 .lifeevent_carousel .life_event{
   background: #fff;
@@ -28265,12 +28273,34 @@ padding: 44px 0;
   margin: 40px auto;
   position: relative;
 }
+.team_leader{
+  background: #1db1b1;
+  text-align: center;
+  -webkit-box-shadow: 5px 4px 12px 0px rgb(0 0 0 / 38%);
+  box-shadow: 5px 4px 12px 0px rgb(0 0 0 / 38%);
+}
+.team_leader .team_info{
+  padding: 15px 15px;
+  color: #fff;
+  margin-top: -45%;
+  background: #1db1b1ed;
+  z-index: 999999;
+  display: inline-block;
+  height: 315px;
+  overflow: hidden;
+}
+.team_leader:hover .team_info{
+  overflow: hidden;
+    overflow-y: auto;
+}
+.address_info{    padding-top: 30px;}
+.address_info .map{       padding-top: 50px;}
 @media (min-width:1200px) {
   .bg_grey_light {
     background: #f8faf9 url(../img/gray-light-bg.jpg) no-repeat;
-    background-size: cover;
+    background-size: contain;
  
-}
+  }
 }
 @media (max-width:767px){
   .emp_sp{

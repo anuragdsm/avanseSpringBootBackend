@@ -317,6 +317,34 @@
     }
     EventSlider();
 
+    function LeadersSlider() {
+        var leaders_slider = $(".leaders_team_slider");
+        if (leaders_slider.length) {
+            leaders_slider.owlCarousel({
+                loop: true,
+                margin:50,
+                items: 3,
+                nav: false,
+                dots:true,
+                autoplay: false,
+                smartSpeed: 2000,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                    },
+                    576: {
+                        items: 2,
+                    },
+                    1199: {
+                        items: 3,
+                    },
+                },
+            });
+        }
+    }
+    LeadersSlider();
+
     /*-------------------------------------------------------------------------------
 	  feedback_slider two js
 	-------------------------------------------------------------------------------*/

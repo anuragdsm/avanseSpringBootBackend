@@ -6,6 +6,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -71,17 +75,13 @@ public class AdminController {
 	public static String newPageAddDir = System.getProperty("user.dir") + "\\src\\main\\resources\\templates\\addedPages";
 	public static String newPostAddDir = System.getProperty("user.dir") + "\\src\\main\\resources\\templates\\addedBlogPosts";
 	
-
-	
 	public static String newFeaturedImageAddDir = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\viewPagesAssets\\img\\userAddedFeaturedImages";
 	public static String newBannerImageAddDir = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\viewPagesAssets\\img\\userAddedBannerImages";
 	public static String globalHeaderFilePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\viewPagesAssets\\js\\customGlobalHeader\\globalHeader.js";
 	
 	public static String userAddedImagesDir = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images\\userAddedImages";
 	public static String cssCodeFileDir = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\viewPagesAssets\\css";
-	public static String jsCodeFileDir = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\viewPagesAssets\\js";
-	
-	
+	public static String jsCodeFileDir = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\viewPagesAssets\\js";	
 
 	@Autowired
 	CourseRepository courseRepository;
@@ -94,8 +94,6 @@ public class AdminController {
 	
 	@Autowired
 	ImageService imageService;
-	
-	
 	
 	@Autowired
 	JobRespository jobRespository;
@@ -153,7 +151,6 @@ public class AdminController {
 		model.addAttribute("numOfUniversities",noOfUniversities);
 		model.addAttribute("numOfCourses",noOfCourses);
 		model.addAttribute("numOfPages",noOfPages);
-
 		System.out.println("User Added Image Directory is "+ userAddedImagesDir);
 		return "adminDashboard";
 	}
@@ -1391,6 +1388,14 @@ public class AdminController {
 		 * initial code
 		 * 
 		*/
+		Date date = new Date();
+        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        int day = localDate.getDayOfMonth();
+        
+        Calendar cal = Calendar.getInstance();
+        String month = new SimpleDateFormat("MMMM").format(cal.getTime());
+        
+//		String BlogDate = date
 		
 		String layoutCode= " <!DOCTYPE html>\r\n"
 				+ "<html lang=\"en\" xmlns:layout=\"http://www.ultraq.net.nz/thymeleaf/layout\"\r\n"
@@ -1412,22 +1417,205 @@ public class AdminController {
 				+ "\r\n"
 				+ "	<!-- Content Wrapper -->\r\n"
 				+ "	<div layout:fragment=\"contentPlus\">"
-				
-				+ "<section class=\"top_avanse_banner_area banner_bg_top \">\r\n"
-				+ "            \r\n"
+				+ " <section class=\" pt-3 pb-3\" style=\"background: #02afb3\">\r\n"
+				+ "           \r\n"
 				+ "            <div class=\"container\">\r\n"
-				+ "                <div class=\"row align-items-center\">\r\n"
-				+ "                    <div class=\"col-lg-7\">\r\n"
-				+ "                        <div class=\"h_avaneses_content\">\r\n"
-				+ "                            <h2 class=\"wow fadeInLeft\" data-wow-delay=\"0.4s\"><span>"+heading+"</span></h2>\r\n"
-				+ "                            <h2 class=\"wow fadeInLeft\" data-wow-delay=\"0.6s\">"+subheading+"</h2>\r\n"
+				+ "                <div class=\"breadcrumb_content text-center\">\r\n"
+				+ "                    <h1 class=\"f_p f_500 f_size_40 w_color l_height50 mb_20\">"+heading+"</h1>\r\n"
+				+ "                    <p class=\"f_400 w_color f_size_21 l_height28\">"+subheading+"</p>\r\n"
+				+ "                </div>\r\n"
+				+ "            </div>\r\n"
+				+ "        </section>"
+				+ "<section class=\"blog_area sec_pad\">\r\n"
+				+ "            <div class=\"container\">\r\n"
+				+ "                <div class=\"row\">\r\n"
+				+ "                    <div class=\"col-lg-8 blog_sidebar_left\">\r\n"
+				+ "                        <div class=\" mb_50\">\r\n"
+				+ "                            <img class=\"top_avanse_banner_area banner_bg_top\" alt=\"\">\r\n"
+				+ "                            <div class=\"blog_content\">\r\n"
+				+ "                                <div class=\"post_date\">\r\n"
+				+ "                                    <h2>"+day+"<span>"+month+"</span></h2>\r\n"
+				+ "                                </div>\r\n"
+				+ "                                <!-- <div class=\"entry_post_info\">\r\n"
+				+ "                                    By: <a href=\"#\">Admin</a>\r\n"
+				+ "                                    <a href=\"#\">2 Comments</a>\r\n"
+				+ "                                    <a href=\"#\">SaasLand</a>\r\n"
+				+ "                                </div> -->\r\n"
+				+ "                                <!-- <a href=\"#\">\r\n"
+				+ "                                    <h5 class=\"f_p f_size_20 f_500 t_color mb-30\">Lorem Ipsum is simply dummy text of the printing and typesetting</h5>\r\n"
+				+ "                                </a> -->\r\n"
+				+ "                                <p class=\"f_400 mb-30\">"+mainSection+" </p>\r\n"
+				+ "                                <div class=\"post_share\">\r\n"
+				+ "                                    <div class=\"post-nam\"> Share: </div>\r\n"
+				+ "                                    <div class=\"flex\">\r\n"
+				+ "                                        <a href=\"https://www.facebook.com/AvanseEducationLoan\"><i class=\"ti-facebook\"></i>Facebook</a>\r\n"
+				+ "                                        <a href=\"https://twitter.com/AvanseEduLoan\"><i class=\"ti-twitter\"></i>Twitter</a>\r\n"
+				+ "                                    </div>\r\n"
+				+ "                                </div>\r\n"
+				+ "                                <!-- <div class=\"post_tag d-flex\">\r\n"
+				+ "                                    <div class=\"post-nam\"> Tags: </div>\r\n"
+				+ "                                    <a href=\"#\">Wheels</a>\r\n"
+				+ "                                    <a href=\"#\">Saasland</a>\r\n"
+				+ "                                    <a href=\"#\">UX/Design</a>\r\n"
+				+ "                                </div>\r\n"
+				+ "                                <div class=\"media post_author mt_60\">\r\n"
+				+ "                                    <img class=\"rounded-circle\" src=\"img/blog-grid/author_img.png\" alt=\"\">\r\n"
+				+ "                                    <div class=\"media-body\">\r\n"
+				+ "                                        <h5 class=\"f_p t_color3 f_size_18 f_500\">Bodrum Salvador</h5>\r\n"
+				+ "                                        <h6 class=\"f_p f_size_15 f_400 mb_20\">Editor</h6>\r\n"
+				+ "                                        <p>Tinkety tonk old fruit Harry gormless morish Jeffrey what a load of rubbish\r\n"
+				+ "                                            burke what a plonker hunky-dory cor blimey guvnor.!</p>\r\n"
+				+ "                                    </div>\r\n"
+				+ "                                </div> -->\r\n"
+				+ "                            </div>\r\n"
+				+ "                        </div>\r\n"
+				+ "                        <div class=\"blog_post\">\r\n"
+				+ "                            <div class=\"widget_title\">\r\n"
+				+ "                                <h3 class=\"f_p f_size_20 t_color3\">Related Post</h3>\r\n"
+				+ "                                <div class=\"border_bottom\"></div>\r\n"
+				+ "                            </div>\r\n"
+				+ "                            <div class=\"row\">\r\n"
+				+ "                                <div class=\"col-lg-4 col-sm-6\">\r\n"
+				+ "                                    <div class=\"blog_post_item\">\r\n"
+				+ "                                        <div class=\"blog_img\">\r\n"
+				+ "                                            <img src=\"/viewPagesAssets/img/blog-grid/post_img_1.png\" alt=\"\">\r\n"
+				+ "                                        </div>\r\n"
+				+ "                                        <div class=\"blog_content\">\r\n"
+				+ "                                            <div class=\"entry_post_info\">\r\n"
+				+ "                                                <a href=\"#\">March 14, 2020</a>\r\n"
+				+ "                                            </div>\r\n"
+				+ "                                            <a href=\"#\">\r\n"
+				+ "                                                <h5 class=\"f_p f_size_16 f_500 t_color\">Why I say old chap that.</h5>\r\n"
+				+ "                                            </a>\r\n"
+				+ "                                            <p class=\"f_400 mb-0\">Harry bits and bleeding crikey argy-bargy...</p>\r\n"
+				+ "                                        </div>\r\n"
+				+ "                                    </div>\r\n"
+				+ "                                </div>\r\n"
+				+ "                                <div class=\"col-lg-4 col-sm-6\">\r\n"
+				+ "                                    <div class=\"blog_post_item\">\r\n"
+				+ "                                        <div class=\"blog_img\">\r\n"
+				+ "                                            <img src=\"/viewPagesAssets/img/blog-grid/post_img_2.png\" alt=\"\">\r\n"
+				+ "                                        </div>\r\n"
+				+ "                                        <div class=\"blog_content\">\r\n"
+				+ "                                            <div class=\"entry_post_info\">\r\n"
+				+ "                                                <a href=\"#\">April 14, 2017</a>\r\n"
+				+ "                                            </div>\r\n"
+				+ "                                            <a href=\"#\">\r\n"
+				+ "                                                <h5 class=\"f_p f_size_16 f_500 t_color\">Bloke cracking goal the.</h5>\r\n"
+				+ "                                            </a>\r\n"
+				+ "                                            <p class=\"f_400 mb-0\">Harry bits and bleeding crikey argy-bargy...</p>\r\n"
+				+ "                                        </div>\r\n"
+				+ "                                    </div>\r\n"
+				+ "                                </div>\r\n"
+				+ "                                <div class=\"col-lg-4 col-sm-6\">\r\n"
+				+ "                                    <div class=\"blog_post_item\">\r\n"
+				+ "                                        <div class=\"blog_img\">\r\n"
+				+ "                                            <img src=\"/viewPagesAssets/img/blog-grid/post_img_3.png\" alt=\"\">\r\n"
+				+ "                                        </div>\r\n"
+				+ "                                        <div class=\"blog_content\">\r\n"
+				+ "                                            <div class=\"entry_post_info\">\r\n"
+				+ "                                                <a href=\"#\">March 15, 2016</a>\r\n"
+				+ "                                            </div>\r\n"
+				+ "                                            <a href=\"#\">\r\n"
+				+ "                                                <h5 class=\"f_p f_size_16 f_500 t_color\">Oxford james bond.</h5>\r\n"
+				+ "                                            </a>\r\n"
+				+ "                                            <p class=\"f_400 mb-0\">Harry bits and bleeding crikey argy-bargy...</p>\r\n"
+				+ "                                        </div>\r\n"
+				+ "                                    </div>\r\n"
+				+ "                                </div>\r\n"
+				+ "                            </div>\r\n"
+				+ "                        </div>\r\n"
+				+ "                        \r\n"
+				+ "                        \r\n"
+				+ "                    </div>\r\n"
+				+ "                    <div class=\"col-lg-4\">\r\n"
+				+ "                        <div class=\"blog-sidebar\">\r\n"
+				+ "                            <div class=\"widget sidebar_widget widget_categorie mt_60\">\r\n"
+				+ "                                <div class=\"widget_title\">\r\n"
+				+ "                                    <h3 class=\"f_p f_size_20 t_color3\">Categories</h3>\r\n"
+				+ "                                    <div class=\"border_bottom\"></div>\r\n"
+				+ "                                </div>\r\n"
+				+ "                                <ul class=\"list-unstyled\">\r\n"
+				+ "                                    <li> <a href=\"#\"><span>Education</span><em>(54)</em></a> </li>\r\n"
+				+ "                                    <li> <a href=\"#\"><span>Food for thought</span><em>(83)</em></a> </li>\r\n"
+				+ "                                    <li> <a href=\"#\"><span>Loans</span><em>(96)</em></a> </li>\r\n"
+				+ "                                    <li> <a href=\"#\"><span>Loans</span><em>(38)</em></a> </li>\r\n"
+				+ "                                    <li> <a href=\"#\"><span>Loans</span><em>(44)</em></a> </li>\r\n"
+				+ "                                    <li> <a href=\"#\"><span>Digi</span><em>(44)</em></a> </li>\r\n"
+				+ "                                    <li> <a href=\"#\"><span>Project Management</span><em>(44)</em></a> </li>\r\n"
+				+ "                                    <li> <a href=\"#\"><span>Education</span><em>(44)</em></a> </li>\r\n"
+				+ "                                </ul>\r\n"
+				+ "                            </div>\r\n"
+				+ "                            <div class=\"widget sidebar_widget widget_recent_post mt_60\">\r\n"
+				+ "                                <div class=\"widget_title\">\r\n"
+				+ "                                    <h3 class=\"f_p f_size_20 t_color3\">Recent posts</h3>\r\n"
+				+ "                                    <div class=\"border_bottom\"></div>\r\n"
+				+ "                                </div>\r\n"
+				+ "                                <div class=\"media post_item\">\r\n"
+				+ "                                    <img src=\"/viewPagesAssets/img/blog-grid/post_1.jpg\" alt=\"\">\r\n"
+				+ "                                    <div class=\"media-body\">\r\n"
+				+ "                                        <a href=\"#\">\r\n"
+				+ "                                            <h3 class=\"f_size_16 f_p f_400\">Proin gravi nibh velit auctor aliquet\r\n"
+				+ "                                                aenean.</h3>\r\n"
+				+ "                                        </a>\r\n"
+				+ "                                        <div class=\"entry_post_info\">\r\n"
+				+ "                                           \r\n"
+				+ "                                            <a href=\"#\">March 14, 2020</a>\r\n"
+				+ "                                        </div>\r\n"
+				+ "                                    </div>\r\n"
+				+ "                                </div>\r\n"
+				+ "                                <div class=\"media post_item\">\r\n"
+				+ "                                    <img src=\"/viewPagesAssets/img/blog-grid/post_2.jpg\" alt=\"\">\r\n"
+				+ "                                    <div class=\"media-body\">\r\n"
+				+ "                                        <a href=\"#\">\r\n"
+				+ "                                            <h3 class=\"f_size_16 f_p f_400\">Proin gravi nibh velit auctor aliquet\r\n"
+				+ "                                                aenean.</h3>\r\n"
+				+ "                                        </a>\r\n"
+				+ "                                        <div class=\"entry_post_info\">\r\n"
+				+ "                                           \r\n"
+				+ "                                            <a href=\"#\">March 14, 2020</a>\r\n"
+				+ "                                        </div>\r\n"
+				+ "                                    </div>\r\n"
+				+ "                                </div>\r\n"
+				+ "                                <div class=\"media post_item\">\r\n"
+				+ "                                    <img src=\"/viewPagesAssets/img/blog-grid/post_3.jpg\" alt=\"\">\r\n"
+				+ "                                    <div class=\"media-body\">\r\n"
+				+ "                                        <a href=\"#\">\r\n"
+				+ "                                            <h3 class=\"f_size_16 f_p f_400\">Proin gravi nibh velit auctor aliquet\r\n"
+				+ "                                                aenean.</h3>\r\n"
+				+ "                                        </a>\r\n"
+				+ "                                        <div class=\"entry_post_info\">\r\n"
+				+ "                                           \r\n"
+				+ "                                            <a href=\"#\">March 14, 2020</a>\r\n"
+				+ "                                        </div>\r\n"
+				+ "                                    </div>\r\n"
+				+ "                                </div>\r\n"
+				+ "                                <div class=\"media post_item\">\r\n"
+				+ "                                    <img src=\"/viewPagesAssets/img/blog-grid/post_4.jpg\" alt=\"\">\r\n"
+				+ "                                    <div class=\"media-body\">\r\n"
+				+ "                                        <a href=\"#\">\r\n"
+				+ "                                            <h3 class=\"f_size_16 f_p f_400\">Proin gravi nibh velit auctor aliquet\r\n"
+				+ "                                                aenean.</h3>\r\n"
+				+ "                                        </a>\r\n"
+				+ "                                        <div class=\"entry_post_info\">\r\n"
+				+ "                                           \r\n"
+				+ "                                            <a href=\"#\">March 14, 2020</a>\r\n"
+				+ "                                        </div>\r\n"
+				+ "                                    </div>\r\n"
+				+ "                                </div>\r\n"
+				+ "                            </div>\r\n"
+				+ "                            \r\n"
+				+ "                            \r\n"
 				+ "                        </div>\r\n"
 				+ "                    </div>\r\n"
+				+ "\r\n"
 				+ "                </div>\r\n"
 				+ "            </div>\r\n"
 				+ "        </section>"
 				
-				+ mainSection
+				
+				
+//				+ mainSection
 				+ "<footer class=\"footer_area f_bg\">\r\n"
 				+ "        <div class=\"footer_cta fcta_bg\">\r\n"
 				+ "           <div class=\"container\">\r\n"
