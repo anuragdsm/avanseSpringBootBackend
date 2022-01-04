@@ -9,12 +9,17 @@ import java.util.Optional;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.avanse.springboot.model.Page;
+import com.avanse.springboot.model.Post;
+import com.avanse.springboot.model.PostCategory;
 import com.avanse.springboot.service.PageService;
+import com.avanse.springboot.service.PostCategoryService;
+import com.avanse.springboot.service.PostService;
 
 @Controller
 
@@ -22,11 +27,12 @@ public class PageController {
 	
 	@Autowired
 	PageService pageService;
-
-//	@GetMapping("/home")
-//	public String homePage() {
-//		return "home";
-//	}
+	
+	@Autowired
+	PostCategoryService postCategoryService;
+	
+	@Autowired
+	PostService postService;
 	
 	@GetMapping("/careers")
 	public String careerPage() {
@@ -37,59 +43,18 @@ public class PageController {
 	public String aboutPage() {
 		return "about";
 	}
-	
-//	To be reslved later to publish pages only on the basis of if the page is active or not
-	
-//	@GetMapping("/viewPages/{pageTitle}")
-//	public Boolean checkIfPublished(@PathVariable String pageTitle) {
-//		Page page = pageService.getPageByPageTitle(pageTitle).get();
-//		Boolean check = page.getIsPageActive();
-//		return check;
-//	}
-//	
-	
-	
-//	@GetMapping("/viewPages/{pageTitle}")
-//	public ModelAndView getAddedPagesCode(@PathVariable("pageTitle") String pageTitle) {
-//		System.out.println("Into the addedPages Code get ");
-//		ModelAndView modelAndView = new ModelAndView("addedPages/"+pageTitle);
-//		return modelAndView;		
-//	}
-	
+
 	@GetMapping("/viewPages/{extractedFileName}")
 	public ModelAndView getAddedPage(@PathVariable("extractedFileName") String extractedFileName) {
-		System.out.println("Into the addedPages Code get ");
 		ModelAndView modelAndView = new ModelAndView("addedPages/"+extractedFileName);
 		return modelAndView;		
 	}
 	
-	
-	
-	
-//	@GetMapping("{pageLink}")
-//	public ModelAndView getAddedPage(@PathVariable("pageLink") String pageLink) {
-//		System.out.println("Into the addedPages Code get ");
-//		ModelAndView modelAndView = new ModelAndView("addedPages/" + pageLink);
-//		return modelAndView;
-//	}
-	
-//	
-//	@GetMapping("/viewDynamicPages/{pageTitle}")
-//	public ModelAndView getDynamicPages(@PathVariable("pageTitle") String pageTitle) {
-//		System.out.println("Into the addedPages Code get ");
-//		ModelAndView modelAndView = new ModelAndView("dynamicPages/"+pageTitle);
-//		return modelAndView;		
-//	}
-	
-	
-	
-	
-
 	@GetMapping("/viewDynamicPages/{extractedFileName}")
-	public ModelAndView getDynamicPage(@PathVariable("extractedFileName") String extractedFileName) {
-		System.out.println("Into the get Dyanamic page and find file name by removing the extention ");
-		
+	public ModelAndView getDynamicPage(@PathVariable("extractedFileName") String extractedFileName, Model model) {
 		ModelAndView modelAndView = new ModelAndView("dynamicPages/"+extractedFileName);
+		model.addAttribute("postCategories", postCategoryService.getAllPostCategories());
+		model.addAttribute("posts", postService.getAllPosts());
 		return modelAndView;		
 	}
 	
@@ -98,8 +63,5 @@ public class PageController {
 		String consolidateCode = page.getConsolidatedHTMLCode();	
 		System.out.println("THE CONSOLIDATED CODE IS " + consolidateCode); 
 		return consolidateCode;
-	}
-	
-	
-	
+	}	
 }

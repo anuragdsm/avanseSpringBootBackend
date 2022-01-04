@@ -1,6 +1,7 @@
 package com.avanse.springboot.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -44,9 +45,11 @@ public class Post implements Serializable {
 		@CreationTimestamp
 		private Date dateOfCreation;
 		
+		private String dateOfPostCreation;
+		
 		private Date lastModified;
 		
-		@ManyToMany(mappedBy = "postList", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
+		@ManyToMany(mappedBy = "postList", fetch = FetchType.LAZY)
 		private List<PostCategory>postCategoryList;
 		
 		private Boolean isPostActive=false;

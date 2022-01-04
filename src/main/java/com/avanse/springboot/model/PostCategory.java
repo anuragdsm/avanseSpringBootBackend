@@ -35,7 +35,7 @@ public class PostCategory implements Serializable {
 	private Long id;
 	private String name;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JsonIgnore
 	private List<Post> postList;
 	

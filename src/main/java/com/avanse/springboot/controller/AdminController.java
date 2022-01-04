@@ -1239,21 +1239,22 @@ public class AdminController {
 			post = postService.getPostById(postDTO.getId()).get();
 		}
 		
+		Date date = new Date();
+		String tempDate = new SimpleDateFormat("DD MMMM, YYYY").format(date);
+		
+		
+		
 		post.setId(postDTO.getId());
 		post.setPostTitle(postDTO.getPostTitle().strip());
 		post.setHeading(postDTO.getHeading());
 		post.setSubHeading(postDTO.getSubHeading());
 		post.setMainSection(postDTO.getMainSection());
-		
-		if(featuredImageFile!=null) {
-			post.setFeaturedImageName(featuredImageFile.getOriginalFilename());
-		}
-		
-		post.setFeaturedImageName(postDTO.getFeaturedImageName());
+		post.setFeaturedImageName(featuredImageFile.getOriginalFilename());
+//		post.setFeaturedImageName(postDTO.getFeaturedImageName());
 		post.setFeaturedImageAltText(postDTO.getFeaturedImageAltText());
 		post.setMetaTitle(postDTO.getMetaTitle());
 		post.setMetaDescription(postDTO.getMetaDescription());
-		
+		post.setDateOfPostCreation(tempDate);
 		
 		
 
@@ -1332,7 +1333,13 @@ public class AdminController {
 		 * Searching with the exact file name will be required.
 		*/
 		postDTO.setFileName(htmlFileName);
-		post.setFileName(postDTO.getFileName());	
+		post.setFileName(postDTO.getFileName());
+		
+		
+		/*
+		 * Get the date in 
+		*/
+		
 
 		/*
 		 * Lets save the link of the file in the database
@@ -1394,10 +1401,9 @@ public class AdminController {
         
         Calendar cal = Calendar.getInstance();
         String month = new SimpleDateFormat("MMMM").format(cal.getTime());
-        
-//		String BlogDate = date
-		
-		String layoutCode= " <!DOCTYPE html>\r\n"
+        String dateOfBlogPost = new SimpleDateFormat("DD MMMM, YYYY").format(date);
+        		
+		String layoutCode="<!DOCTYPE html>\r\n"
 				+ "<html lang=\"en\" xmlns:layout=\"http://www.ultraq.net.nz/thymeleaf/layout\"\r\n"
 				+ "	layout:decorate=\"_LivePagelayout\">\r\n"
 				+ "<head>\r\n"
@@ -1406,18 +1412,12 @@ public class AdminController {
 				+ "<!-- KEYWORDTOFINDGLOBALHEADERINSERTIONCODESPACEEND -->"
 //				+ header to be implemented later
 				+ "<script type=\"text/javascript\" src=\"/viewPagesAssets/js/customGlobalHeader/globalHeader.js\"></script>"
-				+ "<style>\r\n"
-				+ "        .banner_bg_top{\r\n"
-				+ "				  background: url('/viewPagesAssets/img/userAddedFeaturedImages/"+featuredImageFileName+"');\r\n"
-				+ "				}\r\n"
-				+ "</style>\r\n"
-				+ "</head>\r\n"
-				+ ""	
+				+ "</head>\r\n"	
 				+ "<body id=\"page-top\">\r\n"
 				+ "\r\n"
 				+ "	<!-- Content Wrapper -->\r\n"
-				+ "	<div layout:fragment=\"contentPlus\">"
-				+ " <section class=\" pt-3 pb-3\" style=\"background: #02afb3\">\r\n"
+				+ "	<div layout:fragment=\"contentPlus\">" 
+				+"<section class=\" pt-3 pb-3\" style=\"background: #02afb3\">\r\n"
 				+ "           \r\n"
 				+ "            <div class=\"container\">\r\n"
 				+ "                <div class=\"breadcrumb_content text-center\">\r\n"
@@ -1425,16 +1425,18 @@ public class AdminController {
 				+ "                    <p class=\"f_400 w_color f_size_21 l_height28\">"+subheading+"</p>\r\n"
 				+ "                </div>\r\n"
 				+ "            </div>\r\n"
-				+ "        </section>"
-				+ "<section class=\"blog_area sec_pad\">\r\n"
+				+ "        </section>\r\n"
+				+ "      \r\n"
+				+ "\r\n"
+				+ "        <section class=\"blog_area sec_pad\">\r\n"
 				+ "            <div class=\"container\">\r\n"
 				+ "                <div class=\"row\">\r\n"
 				+ "                    <div class=\"col-lg-8 blog_sidebar_left\">\r\n"
 				+ "                        <div class=\" mb_50\">\r\n"
-				+ "                            <img class=\"top_avanse_banner_area banner_bg_top\" alt=\"\">\r\n"
+				+ "                            <img id=\"myFeaturedImage\" class=\"img-fluid\" src=\"/viewPagesAssets/img/userAddedFeaturedImages/"+featuredImageFileName+"\" alt=\"\">\r\n"
 				+ "                            <div class=\"blog_content\">\r\n"
 				+ "                                <div class=\"post_date\">\r\n"
-				+ "                                    <h2>"+day+"<span>"+month+"</span></h2>\r\n"
+				+ "                                    <h2>"+day+" <span>"+month+"</span></h2>\r\n"
 				+ "                                </div>\r\n"
 				+ "                                <!-- <div class=\"entry_post_info\">\r\n"
 				+ "                                    By: <a href=\"#\">Admin</a>\r\n"
@@ -1444,7 +1446,14 @@ public class AdminController {
 				+ "                                <!-- <a href=\"#\">\r\n"
 				+ "                                    <h5 class=\"f_p f_size_20 f_500 t_color mb-30\">Lorem Ipsum is simply dummy text of the printing and typesetting</h5>\r\n"
 				+ "                                </a> -->\r\n"
-				+ "                                <p class=\"f_400 mb-30\">"+mainSection+" </p>\r\n"
+				+ "                                <p class=\"f_400 mb-30\">"+mainSection+"</p>"
+				
+				+ "                                <!--<blockquote class=\"blockquote mb_40\">\r\n"
+				+ "                                    <h6 class=\"mb-0 f_size_18 l_height30 f_p f_400\">Elizabeth ummm I'm telling bodge\r\n"
+				+ "                                        spend a penny say wellies say James Bond, bubble and squeak a such a fibber you\r\n"
+				+ "                                        mug quaint cack what.!</h6>\r\n"
+				+ "                                </blockquote>-->\r\n"
+						                              
 				+ "                                <div class=\"post_share\">\r\n"
 				+ "                                    <div class=\"post-nam\"> Share: </div>\r\n"
 				+ "                                    <div class=\"flex\">\r\n"
@@ -1535,74 +1544,30 @@ public class AdminController {
 				+ "                                    <h3 class=\"f_p f_size_20 t_color3\">Categories</h3>\r\n"
 				+ "                                    <div class=\"border_bottom\"></div>\r\n"
 				+ "                                </div>\r\n"
-				+ "                                <ul class=\"list-unstyled\">\r\n"
-				+ "                                    <li> <a href=\"#\"><span>Education</span><em>(54)</em></a> </li>\r\n"
-				+ "                                    <li> <a href=\"#\"><span>Food for thought</span><em>(83)</em></a> </li>\r\n"
-				+ "                                    <li> <a href=\"#\"><span>Loans</span><em>(96)</em></a> </li>\r\n"
-				+ "                                    <li> <a href=\"#\"><span>Loans</span><em>(38)</em></a> </li>\r\n"
-				+ "                                    <li> <a href=\"#\"><span>Loans</span><em>(44)</em></a> </li>\r\n"
-				+ "                                    <li> <a href=\"#\"><span>Digi</span><em>(44)</em></a> </li>\r\n"
-				+ "                                    <li> <a href=\"#\"><span>Project Management</span><em>(44)</em></a> </li>\r\n"
-				+ "                                    <li> <a href=\"#\"><span>Education</span><em>(44)</em></a> </li>\r\n"
-				+ "                                </ul>\r\n"
+				+ "									<ul th:each =\"postCategory, iStat : ${postCategories}\" class=\"list-unstyled\">\r\n"
+				+ "                                    <li> <a href=\"#\"><span th:href=\"${postCategory.name}\"th:text=\"${postCategory.name}\">Education</span></a> </li>\r\n"
+				+ "                                    \r\n"
+				+ "                                </ul>"		
 				+ "                            </div>\r\n"
 				+ "                            <div class=\"widget sidebar_widget widget_recent_post mt_60\">\r\n"
 				+ "                                <div class=\"widget_title\">\r\n"
 				+ "                                    <h3 class=\"f_p f_size_20 t_color3\">Recent posts</h3>\r\n"
 				+ "                                    <div class=\"border_bottom\"></div>\r\n"
 				+ "                                </div>\r\n"
-				+ "                                <div class=\"media post_item\">\r\n"
-				+ "                                    <img src=\"/viewPagesAssets/img/blog-grid/post_1.jpg\" alt=\"\">\r\n"
+				+ "								<div class=\"media post_item\" th:each = \"post , iStat : ${posts}\">\r\n"
+				+ "                                    <!-- <img src=\"/viewPagesAssets/img/blog-grid/post_1.jpg\" alt=\"\"> -->\r\n"
+				+ "                                    <img width = \"90px\" height = \"80\" th:src=\"@{/viewPagesAssets/img/userAddedFeaturedImages/{featuredImageName}(featuredImageName=${post.featuredImageName})}\" alt=\"\">\r\n"
+				+ "                                    \r\n"
 				+ "                                    <div class=\"media-body\">\r\n"
-				+ "                                        <a href=\"#\">\r\n"
-				+ "                                            <h3 class=\"f_size_16 f_p f_400\">Proin gravi nibh velit auctor aliquet\r\n"
-				+ "                                                aenean.</h3>\r\n"
+				+ "                                        <a href=\"#\" th:href=\"@{/viewPost/{extractedFileName}(extractedFileName=${post.extractedFileName})}\" >\r\n"
+				+ "                                            <h3 class=\"f_size_16 f_p f_400\"  th:text=\"${post.postTitle}\">Pro</h3>\r\n"
 				+ "                                        </a>\r\n"
 				+ "                                        <div class=\"entry_post_info\">\r\n"
 				+ "                                           \r\n"
-				+ "                                            <a href=\"#\">March 14, 2020</a>\r\n"
+				+ "                                            <a th:href=\"@{/viewPost/{extractedFileName}(extractedFileName=${post.extractedFileName})}\" th:text=\"${post.dateOfPostCreation}\">March 14, 2020</a>\r\n"
 				+ "                                        </div>\r\n"
 				+ "                                    </div>\r\n"
-				+ "                                </div>\r\n"
-				+ "                                <div class=\"media post_item\">\r\n"
-				+ "                                    <img src=\"/viewPagesAssets/img/blog-grid/post_2.jpg\" alt=\"\">\r\n"
-				+ "                                    <div class=\"media-body\">\r\n"
-				+ "                                        <a href=\"#\">\r\n"
-				+ "                                            <h3 class=\"f_size_16 f_p f_400\">Proin gravi nibh velit auctor aliquet\r\n"
-				+ "                                                aenean.</h3>\r\n"
-				+ "                                        </a>\r\n"
-				+ "                                        <div class=\"entry_post_info\">\r\n"
-				+ "                                           \r\n"
-				+ "                                            <a href=\"#\">March 14, 2020</a>\r\n"
-				+ "                                        </div>\r\n"
-				+ "                                    </div>\r\n"
-				+ "                                </div>\r\n"
-				+ "                                <div class=\"media post_item\">\r\n"
-				+ "                                    <img src=\"/viewPagesAssets/img/blog-grid/post_3.jpg\" alt=\"\">\r\n"
-				+ "                                    <div class=\"media-body\">\r\n"
-				+ "                                        <a href=\"#\">\r\n"
-				+ "                                            <h3 class=\"f_size_16 f_p f_400\">Proin gravi nibh velit auctor aliquet\r\n"
-				+ "                                                aenean.</h3>\r\n"
-				+ "                                        </a>\r\n"
-				+ "                                        <div class=\"entry_post_info\">\r\n"
-				+ "                                           \r\n"
-				+ "                                            <a href=\"#\">March 14, 2020</a>\r\n"
-				+ "                                        </div>\r\n"
-				+ "                                    </div>\r\n"
-				+ "                                </div>\r\n"
-				+ "                                <div class=\"media post_item\">\r\n"
-				+ "                                    <img src=\"/viewPagesAssets/img/blog-grid/post_4.jpg\" alt=\"\">\r\n"
-				+ "                                    <div class=\"media-body\">\r\n"
-				+ "                                        <a href=\"#\">\r\n"
-				+ "                                            <h3 class=\"f_size_16 f_p f_400\">Proin gravi nibh velit auctor aliquet\r\n"
-				+ "                                                aenean.</h3>\r\n"
-				+ "                                        </a>\r\n"
-				+ "                                        <div class=\"entry_post_info\">\r\n"
-				+ "                                           \r\n"
-				+ "                                            <a href=\"#\">March 14, 2020</a>\r\n"
-				+ "                                        </div>\r\n"
-				+ "                                    </div>\r\n"
-				+ "                                </div>\r\n"
+				+ "                                </div>"	
 				+ "                            </div>\r\n"
 				+ "                            \r\n"
 				+ "                            \r\n"
@@ -1611,137 +1576,7 @@ public class AdminController {
 				+ "\r\n"
 				+ "                </div>\r\n"
 				+ "            </div>\r\n"
-				+ "        </section>"
-				
-				
-				
-//				+ mainSection
-				+ "<footer class=\"footer_area f_bg\">\r\n"
-				+ "        <div class=\"footer_cta fcta_bg\">\r\n"
-				+ "           <div class=\"container\">\r\n"
-				+ "                <div class=\"row\">\r\n"
-				+ "                    <div class=\"col-lg-3 text-lg-left text-sm-center\">\r\n"
-				+ "                        <img src=\"/viewPagesAssets/img/logo.png\">\r\n"
-				+ "                    </div>\r\n"
-				+ "                    <div class=\"col-lg-6 text-lg-center text-sm-center\">\r\n"
-				+ "                            <h2 class=\"\">Enroll to transform your Lives</h2>\r\n"
-				+ "                            <p class=\"f_size_22\"> Get a hassle free education loan is 3 days</p>\r\n"
-				+ "                    </div>\r\n"
-				+ "                    <div class=\"col-lg-3 text-lg-right text-sm-center\">\r\n"
-				+ "                        <a href=\"\" class=\"btn_yellow \">Apply Now</a>\r\n"
-				+ "                    </div>\r\n"
-				+ "                </div>\r\n"
-				+ "           </div>\r\n"
-				+ "        </div>\r\n"
-				+ "        <div class=\"footer_top\">\r\n"
-				+ "            <div class=\"container\">\r\n"
-				+ "                <div class=\"row\">\r\n"
-				+ "                    \r\n"
-				+ "                    <div class=\"col-lg-3 col-md-6\">\r\n"
-				+ "                        <div class=\"f_widget about-widget  wow fadeInLeft\" data-wow-delay=\"0.4s\"\r\n"
-				+ "                            style=\"visibility: visible; animation-delay: 0.4s; animation-name: fadeInLeft;\">\r\n"
-				+ "                            <h3 class=\"f-title f_500 text-white f_size_18 mb_40\">Education Loan </h3>\r\n"
-				+ "                            <ul class=\"list-unstyled f_list\">\r\n"
-				+ "                                <li><a href=\"#\">Avanse Education Loans</a></li>\r\n"
-				+ "                                <li><a href=\"#\">Study in India Education Loan</a></li>\r\n"
-				+ "                                <li><a href=\"#\">Study Abroad Education Loan</a></li>\r\n"
-				+ "                                <li><a href=\"#\">Executive Education Loan</a></li>\r\n"
-				+ "                                <li><a href=\"#\">Student Loan Refinancing</a></li>\r\n"
-				+ "                            </ul>\r\n"
-				+ "                        </div>\r\n"
-				+ "                    </div>\r\n"
-				+ "                    <div class=\"col-lg-3 col-md-6\">\r\n"
-				+ "                        <div class=\"f_widget about-widget  wow fadeInLeft\" data-wow-delay=\"0.4s\"\r\n"
-				+ "                            style=\"visibility: visible; animation-delay: 0.4s; animation-name: fadeInLeft;\">\r\n"
-				+ "                            <h3 class=\"f-title f_500 text-white f_size_18 mb_40\">Calculator</h3>\r\n"
-				+ "                            <ul class=\"list-unstyled f_list\">\r\n"
-				+ "                                <li><a href=\"#\">Course Expense Calculator</a></li>\r\n"
-				+ "                                <li><a href=\"#\">Eligibility Calculator</a></li>\r\n"
-				+ "                                <li><a href=\"#\">Eligibility Calculator</a></li>\r\n"
-				+ "                                <li><a href=\"#\">Education Loan Repayment Calculator</a></li>\r\n"
-				+ "                            </ul>\r\n"
-				+ "                        </div>\r\n"
-				+ "                    </div>\r\n"
-				+ "                    <div class=\"col-lg-3 col-md-6\">\r\n"
-				+ "                        <div class=\"f_widget about-widget  wow fadeInLeft\" data-wow-delay=\"0.6s\"\r\n"
-				+ "                            style=\"visibility: visible; animation-delay: 0.6s; animation-name: fadeInLeft;\">\r\n"
-				+ "                            <h3 class=\"f-title f_500 text-white f_size_18 mb_40\">Company</h3>\r\n"
-				+ "                            <ul class=\"list-unstyled f_list\">\r\n"
-				+ "                                    <li><a href=\"#\">About Avanse</a></li>\r\n"
-				+ "                                    <li><a href=\"#\">Career</a></li>\r\n"
-				+ "                                    <li><a href=\"#\">Investors</a></li>\r\n"
-				+ "                                    <li><a href=\"#\">Media Room</a></li>\r\n"
-				+ "                                    <li><a href=\"#\">Responsible Lending</a></li>\r\n"
-				+ "                                    <li><a href=\"#\">Sitemap</a></li>\r\n"
-				+ "                            </ul>\r\n"
-				+ "                        </div>\r\n"
-				+ "                    </div>\r\n"
-				+ "                    <div class=\"col-lg-3 col-md-6\">\r\n"
-				+ "                        <div class=\"f_widget about-widget  wow fadeInLeft\" data-wow-delay=\"0.8s\"\r\n"
-				+ "                            style=\"visibility: visible; animation-delay: 0.8s; animation-name: fadeInLeft;\">\r\n"
-				+ "                            <h3 class=\"f-title f_500 text-white f_size_18 mb_40\">Resources </h3>\r\n"
-				+ "                            <ul class=\"list-unstyled f_list\">\r\n"
-				+ "                                <li><a href=\"#\">Blog</a></li>\r\n"
-				+ "                                <li><a href=\"#\">Good Credit</a></li>\r\n"
-				+ "                                <li><a href=\"#\">FAQ</a></li>\r\n"
-				+ "                                <li><a href=\"#\">Pay Online</a></li>\r\n"
-				+ "                                <li><a href=\"#\">WhatsApp Communication</a></li>\r\n"
-				+ "                                <li><a href=\"#\">Ex-gratia FAQs</a></li>\r\n"
-				+ "                                <li><a href=\"#\">Sarfaesi Notice</a></li>\r\n"
-				+ "                            </ul>\r\n"
-				+ "                        </div>\r\n"
-				+ "                    </div>\r\n"
-				+ "                </div>\r\n"
-				+ "            </div>\r\n"
-				+ "        </div>\r\n"
-				+ "        <div class=\"footer_bottom\">\r\n"
-				+ "            <div class=\"container\">\r\n"
-				+ "                <div class=\"row align-items-center\">\r\n"
-				+ "                    <div class=\"col-lg-8 col-md-8 col-sm-12\">\r\n"
-				+ "                        <p class=\"mb-2 f_300\">Copyright © 2021 Avanse Financial Services Ltd. All Rights Reserved .       <a class=\"ml-4\" href=\"https://www.digistreetmedia.com/\" target=\"_blank\">Site Credits</a></p>\r\n"
-				+ "                        <p class=\"mb-2 f_300\">CIN : U67120MH1992PLC068060</p>\r\n"
-				+ "                    </div>\r\n"
-				+ "                    \r\n"
-				+ "                    <div class=\"col-lg-4 col-md-4 col-sm-12\">\r\n"
-				+ "                        <div class=\"f_social_icon_two text-right mb-2\">\r\n"
-				+ "                            <a href=\"#\"><i class=\"ti-facebook\"></i></a>\r\n"
-				+ "                            <a href=\"#\"><i class=\"ti-twitter-alt\"></i></a>\r\n"
-				+ "                            <a href=\"#\"><i class=\"ti-linkedin\"></i></a>\r\n"
-				+ "                            <a href=\"#\"><i class=\"ti-instagram\"></i></a>\r\n"
-				+ "                        </div>\r\n"
-				+ "                        <p class=\"mb-2 f_300 text-lg-right\">Phone support: 1800-266-0200</p>\r\n"
-				+ "                    </div>\r\n"
-				+ "                    <div class=\"col-lg-12\">\r\n"
-				+ "                        <p>Disclaimer | Base Lending Rate | Privacy Policy | Terms & Conditions | Ombudsman Scheme | Customer Complaints | Moratorium Policy | WhatsApp T&C | Communication Policy | Digital Partners</p>\r\n"
-				+ "                    </div>\r\n"
-				+ "                </div>\r\n"
-				+ "            </div>\r\n"
-				+ "        </div>\r\n"
-				+ "    </footer>\r\n"
-				+ "    "
-				
-				
-				+ "    <!-- Optional JavaScript -->\r\n"
-				
-				+ "    <!-- jQuery first, then Popper.js, then Bootstrap JS -->\r\n"
-				+ "    <script src=\"/viewPagesAssets/js/jquery-3.6.0.min.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/js/propper.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/js/bootstrap.min.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/vendors/wow/wow.min.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/vendors/sckroller/jquery.parallax-scroll.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/vendors/owl-carousel/owl.carousel.min.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/vendors/imagesloaded/imagesloaded.pkgd.min.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssetsvendors/isotope/isotope-min.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/vendors/magnify-pop/jquery.magnific-popup.min.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/vendors/counterup/jquery.counterup.min.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/vendors/counterup/jquery.waypoints.min.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/vendors/counterup/appear.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/vendors/circle-progress/circle-progress.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/vendors/scroll/jquery.mCustomScrollbar.concat.min.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/js/plugins.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/js/main.js\"></script>\r\n"
-				+ " 	</body> ";
-	
+				+ "        </section>";	
 					
 		return layoutCode;
 	}
@@ -1756,6 +1591,12 @@ public class AdminController {
 		String type = "post";
 		if(postRepository.findById(id).isPresent()) {
 			deleteHtmlFileFromServer(id, type);
+			Post postToBeDeleted = postService.getPostById(id).get();
+			for(PostCategory pc : postToBeDeleted.getPostCategoryList())
+			{
+				pc.getPostList().remove(postToBeDeleted);
+				postCategoryService.addPostCategory(pc);
+			}
 			postService.removePostById(id);
 		}
 		
@@ -1812,9 +1653,6 @@ public class AdminController {
 			return "404";
 	}
 	
-	
-	
-
 	/*
 	 * Image upload location for summernote
 	*/
