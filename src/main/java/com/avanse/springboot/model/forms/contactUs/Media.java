@@ -1,4 +1,4 @@
-package com.avanse.springboot.model.forms;
+package com.avanse.springboot.model.forms.contactUs;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,35 +7,24 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@Table(name = "CAREER_SUBMISSION")
-@Getter
-@Setter
-@NoArgsConstructor
+@Table(name = "MEDIA_CONTACTUS_FORM" )
+@Data
 @AllArgsConstructor
-public class CareerForm {
-
+@NoArgsConstructor
+public class Media {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String name;
-	private String email;
+	private String mediaHouse;
 	private String phoneNumber;
-	private String resumeFileName;
-	
-	public CareerForm(String name, String email, String phoneNumber) {
-		super();
-		this.name = name;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-	}
-	
-	
+	private String emailId;
+	private String city;
+	private String subjectLine;
 	
 }
-
-
