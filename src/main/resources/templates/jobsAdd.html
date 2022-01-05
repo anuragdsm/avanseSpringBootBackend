@@ -21,76 +21,83 @@
 
 <!-- Custom styles for this template-->
 <link href="/css/sb-admin-2.min.css" rel="stylesheet">
-<link href="/vendor/summernote/summernote/summernote-bs4.min.css" rel="stylesheet">
+<link href="/vendor/summernote/summernote/summernote-bs4.min.css"
+	rel="stylesheet">
 
 
 </head>
 
 <body id="page-top">
 	<!-- Page Wrapper -->
-		<div id="wrapper">
-	
-	<div layout:fragment="content">
+	<div id="wrapper">
 
-		<!-- Begin Page Content -->
-		<div class="container-fluid">
-			<div class="container">
-				<h3>Post a new Job</h3>
-				<form th:action="@{/admin/jobs/add}" method="post"
-					th:object="${jobDTO}" enctype="multipart/form-data">
-					<div class="row">
-						<div class="col-sm-5">
+		<div layout:fragment="content">
 
-							<input type="hidden" name="id" th:field="*{id}">
-							<div class="form-group">
-								<label for="name">Job Title</label> <input type="text"
-									class="form-control" required th:field="*{title}" name="title"
-									id="title" placeholder="Enter Job Title">
+			<!-- Begin Page Content -->
+			<div class="container-fluid">
+				<div class="container">
+					<h3>Post a new Job</h3>
+					<form th:action="@{/admin/jobs/add}" method="post"
+						th:object="${jobDTO}" enctype="multipart/form-data">
+						<div class="row">
+							<div class="col-sm-5">
+
+								<input type="hidden" name="id" th:field="*{id}">
+								<div class="form-group">
+									<label for="name">Job Title</label> <input type="text"
+										class="form-control" required th:field="*{title}" name="title"
+										id="title" placeholder="Enter Job Title">
+								</div>
+
+								<div class="form-group">
+									<label for="postedBy">Posted By</label> <input type="text"
+										class="form-control" required th:field="*{postedBy}"
+										name="postedBy" id="postedBy" placeholder="Posted By">
+								</div>
+
+
+
+
+
 							</div>
 
-							<div class="form-group">
-								<label for="duration">Job Description</label> 								
-								<textarea class="form-control" rows="5"
-									th:field="*{description}" name="description" id="description"></textarea>
 
-							</div>
-						</div>
+							<div class="col-sm-5">
+
+								<div class="form-group">
 
 
-						<div class="col-sm-5">
-
-							<div class="form-group">
-								<label for="postedBy">Posted By</label> <input
-									type="text" class="form-control" required
-									th:field="*{postedBy}" name="postedBy"
-									id="postedBy" placeholder="Posted By">
-							</div>
-							
-						<div class="form-group">
-								
-								
-								<label for = "location" class="col-sm-5 control-label">Location</label>
-									<div th:each= "location, iStat : ${locations}" >
-										<input type="checkbox" th:id="${location.id}" 
+									<label for="location" class="col-sm-5 control-label">Location</label>
+									<div th:each="location, iStat : ${locations}">
+										<input type="checkbox" th:id="${location.id}"
 											th:name="selectedLocations" th:value="${location.id}">
-										<label th:for="${location.id}" th:text="${location.city}" class="col-sm-5 control-label">Location</label>
+										<label th:for="${location.id}" th:text="${location.city}"
+											class="col-sm-5 control-label">Location</label>
 									</div>
-								
-								
+								</div>
 							</div>
-							
-							
-
-							<button type="submit" class="btn btn-primary">Submit</button>
 						</div>
-					</div>
-				</form>
+						<div class="form-group">
+							<label class="col-lg-10 control-label">Job Description</label> ​
+							<div class="col-lg-10">
+								<textarea class="form-control summernote" id="summernote"
+									name="jobDescription" th:field="*{description}"></textarea>
+
+								<br>
+								<button type="submit" class="btn btn-primary">Submit</button>
+
+								​
+							</div>
+
+						</div>
+
+					</form>
+				</div>
 			</div>
+
+			<!-- Content Row -->
 		</div>
-		
-		<!-- Content Row -->		
-	</div>
-	<!-- End of Content Wrapper -->
+		<!-- End of Content Wrapper -->
 	</div>
 	<!-- End of Page Wrapper -->
 </body>

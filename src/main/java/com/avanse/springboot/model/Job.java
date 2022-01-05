@@ -45,6 +45,8 @@ public class Job implements Serializable {
 	@CreationTimestamp
 	private Date postDate; 
 	
+	private String jobCreatedDate;
+	
 	@Lob
 	@Basic
 	private String description;

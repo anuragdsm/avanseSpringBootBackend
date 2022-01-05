@@ -573,6 +573,12 @@ public class AdminController {
 	}
 	
 	/*
+	 * @GetMapping("/admin/jobApplications") public String getJobsApplications() {
+	 * // model.addAttribute("jobs", jobService.getAllJobs()); return
+	 * "jobsApplications"; }
+	 */
+	
+	/*
 	 * Method to add a job. For that we will need both the get and post 
 	 * mapping. Get mapping to open the form 
 	 * Post mapping to send the data from the form and process it via controller
@@ -592,6 +598,11 @@ public class AdminController {
 		job.setTitle(jobDTO.getTitle());
 		job.setDescription(jobDTO.getDescription());
 		job.setPostedBy(jobDTO.getPostedBy());
+		Date date = new Date();
+        String dateOfJobCreated= new SimpleDateFormat("DD MMMM, YYYY").format(date);
+        job.setJobCreatedDate(dateOfJobCreated);
+      
+
 		
 		jobService.addJob(job);
 		

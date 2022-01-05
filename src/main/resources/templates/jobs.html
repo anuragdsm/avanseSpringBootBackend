@@ -5,8 +5,7 @@
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
 
@@ -24,7 +23,6 @@
 <link href="/vendor/summernote/summernote/summernote-bs4.min.css"
 	rel="stylesheet">
 
-
 </head>
 
 <body id="page-top">
@@ -34,80 +32,116 @@
 
 		<div layout:fragment="content">
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
+			<!-- Begin Page Content -->
+			<div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Job Management</h1>
-                        
-                    </div>
-                                              
-                    <!-- Content Row -->
-                    <div class="row">
-                    
-                    <div class="container-fluid">
+				<!-- Page Heading -->
+				<div
+					class="d-sm-flex align-items-center justify-content-between mb-4">
+					<h1 class="h3 mb-0 text-gray-800">Job Management</h1>
 
-    <a th:href="@{/admin/jobs/add}" style="margin: 20px 0" class="btn btn-primary">Post Job</a>
-    <table class="table">
-        <thead class="thead-light">
-        <tr>
-            <th scope="col">SN</th>
-            <th scope="col">Job Id</th>
-            <th scope="col">Job Title</th>
-            <th scope="col">Post Date</th>
-            <th scope="col">Description</th>
-            <th scope="col">Location</th>
-            <th scope="col">Posted By</th>
-            <th scope="col">Update</th>
-            <th scope="col">Delete</th>
-        </tr>
-        </thead>
-        <tbody>
+				</div>
 
-        <tr th:each="job, iStat : ${jobs}">
-            <th scope="row" th:text="${iStat.index + 1}">1</th>
-            <td th:text="${job.id}">1</td>
-            <td th:text="${job.title}">Software Engineer</td>
-            <td th:text="${job.postDate}">2021-12-12</td>
-            <td th:text="${job.description}">Lorm ipsism</td>
-            <td>
-            	<table>
-            		<tr th:each="location, iStat : ${job.locationList}">
-            			<td th:text="${location.city}" style="border-top:0px;">Delhi</td>
-            		</tr>
-            	</table>
-            	
-            </td>
-            <td th:text="${job.postedBy}">Posted By</td>
-            <td><a href="" th:href="@{/admin/job/delete/{id}(id=${job.id})}" class="btn btn-danger">Delete</a></td>
-            <td><a href="" th:href="@{/admin/job/update/{id}(id=${job.id})}" class="btn btn-warning">Update</a></td>
+				<!-- Content Row -->
+				<div class="row">
 
-        </tr>
-        </tbody>
-    </table>
-</div>
-                    	
-                    </div>
+					<div class="container-fluid">
 
-                    
-                    <!-- Content Row -->
-                    
-        </div>
-        <!-- End of Content Wrapper -->
+						<a th:href="@{/admin/jobs/add}" style="margin: 20px 0"
+							class="btn btn-primary">Post Job</a>
+						<table class="table">
+							<thead class="thead-light">
+								<tr>
+									<th scope="col">SN</th>
+									<th scope="col">Job Id</th>
+									<th scope="col">Job Title</th>
+									<th scope="col">Post Date</th>
+									<th scope="col">Description</th>
+									<th scope="col">Location</th>
+									<th scope="col">Posted By</th>
+									<th scope="col">Update</th>
+									<th scope="col">Delete</th>
+								</tr>
+							</thead>
+							<tbody>
 
-    </div>
-    
-    </div>
-    <!-- End of Page Wrapper -->
+								<tr th:each="job, iStat : ${jobs}">
+									<th scope="row" th:text="${iStat.index + 1}">1</th>
+									<td th:text="${job.id}">1</td>
+									<td th:text="${job.title}">Software Engineer</td>
+									<td th:text="${job.jobCreatedDate}">2021-12-12</td>
+									
+									<!-- 
+									<td class="col-sm-4" th:text="${job.description}">Lorm
+										ipsism</td> -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
 
-       
+									<td><a href="#" data-toggle="modal" data-target="#myModal">Job
+											Description</a> <!-- Modal -->
+										<div class="modal fade" id="myModal" role="dialog">
+											<div class="modal-dialog modal-xl">
 
+												<!-- Modal content-->
+												<div class="modal-content">
+													<div class="modal-header">
+														<h4 class="modal-title" th:text="${job.title}">Job Description Heading</h4>
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+														
+													</div>
+													<div  class="modal-body">
+													 
+														<p th:text="${job.description}">Some text in the modal.</p>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default"
+															data-dismiss="modal">Close</button>
+													</div>
+												</div>
+
+											</div>
+										</div></td>
+
+
+									<td>
+										<table>
+											<tr th:each="location, iStat : ${job.locationList}">
+												<td th:text="${location.city}" style="border-top: 0px;">Delhi</td>
+											</tr>
+										</table>
+									</td>
+									<td th:text="${job.postedBy}">Posted By</td>
+									<td><a href=""
+										th:href="@{/admin/job/delete/{id}(id=${job.id})}"
+										class="btn btn-danger">Delete</a></td>
+									<td><a href=""
+										th:href="@{/admin/job/update/{id}(id=${job.id})}"
+										class="btn btn-warning">Update</a></td>
+								</tr>
+							</tbody>
+						</table>
+
+
+
+
+					</div>
+				</div>
+
+				<!-- Content Row -->
+
+			</div>
+			<!-- End of Content Wrapper -->
+
+		</div>
+
+	</div>
+	<!-- End of Page Wrapper -->
+
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top"> <i
+		class="fas fa-angle-up"></i>
+	</a>
+	
+	
 </body>
 
 </html>

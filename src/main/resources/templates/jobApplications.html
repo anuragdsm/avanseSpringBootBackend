@@ -23,71 +23,72 @@
 <link href="/css/sb-admin-2.min.css" rel="stylesheet">
 <link href="/vendor/summernote/summernote/summernote-bs4.min.css"
 	rel="stylesheet">
-
-
 </head>
-
 <body id="page-top">
 	<!-- Page Wrapper -->
 	<div id="wrapper">
 		<div layout:fragment="content">
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Job Management</h1>                     
-                    </div>                                          
-                    <!-- Content Row -->
-                    <div class="row">  
-                    <div class="container-fluid">
+			<!-- Begin Page Content -->
+			<div class="container-fluid">
+				<!-- Page Heading -->
+				<div
+					class="d-sm-flex align-items-center justify-content-between mb-4">
+					<h1 class="h3 mb-0 text-gray-800">Job Management</h1>
+				</div>
+				<!-- Content Row -->
+				<div class="row">
+					<div class="container-fluid">
+						<a  style="margin: 20px 0"
+							class="btn btn-primary">Post Job</a>
+						<table class="table">
+							<thead class="thead-light">
+								<tr>
+									<th scope="col">SN</th>
+									<th scope="col">First Name</th>
+									<th scope="col">Last Name</th>
+									<th scope="col">Email</th>
+									<th scope="col">Phone</th>
+									<th scope="col">Post Applied for</th>
+									<th scope="col">Job Location</th>
+									<th scope="col">Hiring Person</th>
+									<th scope="col">Resume</th>
+									<th scope="col">Delete</th>
+								</tr>
+							</thead>
+							<tbody>
 
-    <a th:href="@{/admin/jobs/add}" style="margin: 20px 0" class="btn btn-primary">Post Job</a>
-    <table class="table">
-        <thead class="thead-light">
-        <tr>
-            <th scope="col">SN</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Post Applied for</th>
-            <th scope="col">Job Location</th>
-            <th scope="col">Hiring Person</th>
-            <th scope="col">Delete</th>
-        </tr>
-        </thead>
-        <tbody>
 
-        <tr th:each="job, iStat : ${jobs}">
+								<!-- <tr th:each="job, iStat : ${jobs}">
             <th scope="row" th:text="${iStat.index + 1}">1</th>
             <td th:text="${job.id}">1</td>
             <td><a href="" th:href="@{/admin/job/delete/{id}(id=${job.id})}" class="btn btn-danger">Delete</a></td>
             <td><a href="" th:href="@{/admin/job/update/{id}(id=${job.id})}" class="btn btn-warning">Update</a></td>
 
-        </tr>
-        </tbody>
-    </table>
-</div>
-                    	
-                    </div>
+        </tr> -->
 
-                    
-                    <!-- Content Row -->
-                    
-        </div>
-        <!-- End of Content Wrapper -->
 
-    </div>
-    
-    </div>
-    <!-- End of Page Wrapper -->
+							</tbody>
+						</table>
+					</div>
+				</div>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
 
-       
+				<!-- Content Row -->
+
+			</div>
+			<!-- End of Content Wrapper -->
+
+		</div>
+
+	</div>
+	<!-- End of Page Wrapper -->
+
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top"> <i
+		class="fas fa-angle-up"></i>
+	</a>
+
+
 
 </body>
 

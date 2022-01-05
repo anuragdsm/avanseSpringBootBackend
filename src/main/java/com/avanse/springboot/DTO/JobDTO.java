@@ -12,5 +12,7 @@ public class JobDTO {
 	private String description;
 	private String postedBy;
 	private String location;
+	private String jobCreatedDate;
+
 	
 }
