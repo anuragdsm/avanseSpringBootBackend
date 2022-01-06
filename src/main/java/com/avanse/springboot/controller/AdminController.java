@@ -530,6 +530,9 @@ public class AdminController {
 				e.printStackTrace();
 			}
 		}
+		
+		
+		
 		return "redirect:/admin/images";
 	}
 	
@@ -650,6 +653,34 @@ public class AdminController {
 		locationService.addLocation(location);
 		return "redirect:/admin/locations";
 	}
+	
+	
+	/*
+	 * Function to delete the location
+	*/
+	@GetMapping("/admin/location/delete/{id}")
+	public String deleteLocation(@PathVariable long id) {
+		locationService.removeLocationById(id);
+		return "redirect:/admin/locations";
+	}
+	
+	/*
+	 * Function to edit the location
+	*/
+	
+	@GetMapping("/admin/location/edit/{id}")
+	public String editLocation(@PathVariable long id, Model model) {
+		Optional<Location> location = locationService.getLocationById(id);
+		if(location.isPresent()) {
+			model.addAttribute("locationDTO", location.get());
+			return "locationsAdd";
+		}
+		
+		else
+			return "404";
+	}
+	
+	
 	
 	/*
 	 * ===========All Function below are related to pages =============
@@ -1615,10 +1646,39 @@ public class AdminController {
 			System.out.println("Cannot delete the page");
 		}
 		return "redirect:/admin/posts";
+	
 	}
 	
+	@GetMapping("/admin/post/edit/{id}")
+	public String editPost(@PathVariable long id, Model model) {
+		
+		Post post = postService.getPostById(id).get();
+		PostDTO postDTO = new PostDTO();
+		
+		postDTO.setId(post.getId());
+		postDTO.setFileName(post.getFileName());
+		postDTO.setPostTitle(post.getPostTitle());
+		postDTO.setHeading(post.getHeading());
+		postDTO.setSubHeading(post.getSubHeading());
+		postDTO.setFeaturedImageName(post.getFeaturedImageName());
+		postDTO.setFeaturedImageAltText(post.getFeaturedImageAltText());
+		postDTO.setMainSection(post.getMainSection());
+		postDTO.setConsolidatedHTMLCode(post.getConsolidatedHTMLCode());
+		postDTO.setMetaTitle(post.getMetaTitle());
+		postDTO.setMetaDescription(post.getMetaTitle());
+		postDTO.setMetaDescription(post.getMetaDescription());
+			
+		return "postsAdd";
+		
+	}
+	
+	
 
-	/*Below functions will be used to create the post categories	*/
+	
+
+	/*POST CATEGORIES
+	 * 
+	 * Below functions will be used to create the post categories	*/
 	
 	@GetMapping("/admin/postCategories")
 	public String getCategories(Model model) {

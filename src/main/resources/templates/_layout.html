@@ -171,15 +171,17 @@
 						<h6 class="collapse-header">Applications:</h6>
 						<a class="collapse-item" href="#" th:href = "@{/admin/jobApplications}"><b>View Applications</b></a>
 					</div>
-					<div class="bg-white py-2 collapse-inner rounded">
-						<h6 class="collapse-header">Cities:</h6>
-						<a class="collapse-item" href="#" th:href = "@{/admin/locations/add}"><b>Add new Location</b></a> <a
-							class="collapse-item" href="#" th:href = "@{/admin/locations}">View Locations</a>
-					</div>
+					
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Job Posting:</h6>
 						<a class="collapse-item" href="#" th:href="@{/admin/jobs/add}"><b>Post Job</b></a> <a
 							class="collapse-item" href="#" th:href="@{/admin/jobs}">View Jobs</a>
+					</div>
+					
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Cities:</h6>
+						<a class="collapse-item" href="#" th:href = "@{/admin/locations/add}"><b>Add new Location</b></a> <a
+							class="collapse-item" href="#" th:href = "@{/admin/locations}">View Locations</a>
 					</div>
 				</div></li>
 
@@ -299,11 +301,8 @@
 								</a> <a class="dropdown-item text-center small text-gray-500"
 									href="#">Show All Alerts</a>
 							</div></li>
-
 						<!-- Nav Item - Messages -->
-
 						<div class="topbar-divider d-none d-sm-block"></div>
-
 						<!-- Nav Item - User Information -->
 						<li class="nav-item dropdown no-arrow"><a
 							class="nav-link dropdown-toggle" href="#" id="userDropdown"
@@ -332,18 +331,14 @@
 									Logout
 								</a>
 							</div></li>
-
 					</ul>
-
 				</nav>
 				<!-- End of Topbar -->
 
 				<div layout:fragment="content">
 					<p>Changing contents</p>
 				</div>
-
-
-
+				
 			</div>
 			<!-- End of Main Content -->
 
@@ -469,14 +464,13 @@
 				});
 	</script>
 	
-	
 	<script>
 		function readURL(input) {
 			if (input.files && input.files[0]) {
 				var reader = new FileReader();
 				reader.onload = function(e) {
-					$('#imgPreview').attr('src', e.target.result).width(100)
-							.height(100);
+					$('#imgPreview').attr('src', e.target.result).width(400)
+							.height(300);
 				}
 				reader.readAsDataURL(input.files[0]);
 			}
@@ -496,11 +490,8 @@
 	</script>
 	
 	
-	
-	
-	
-	
-	
 
+	
+	
 </body>
 </html>

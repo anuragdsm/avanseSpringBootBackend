@@ -76,9 +76,9 @@
 										ipsism</td> -->
 
 
-									<td><a href="#" data-toggle="modal" data-target="#myModal">Job
+									<td><a href="#" data-toggle="modal" th:data-target="'#myModal'+${job.id}">Job
 											Description</a> <!-- Modal -->
-										<div class="modal fade" id="myModal" role="dialog">
+										<div class="modal fade" th:id="'myModal'+${job.id}" role="dialog">
 											<div class="modal-dialog modal-xl">
 
 												<!-- Modal content-->
@@ -90,7 +90,7 @@
 													</div>
 													<div  class="modal-body">
 													 
-														<p th:text="${job.description}">Some text in the modal.</p>
+														<p th:utext="${job.description}">Some text in the modal.</p>
 													</div>
 													<div class="modal-footer">
 														<button type="button" class="btn btn-default"
