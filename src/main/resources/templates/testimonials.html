@@ -29,6 +29,8 @@
 						<tr>
 							<th scope="col">SN</th>
 							<th scope="col">Preview</th>
+							<th scope="col">Name</th>
+							<th scope="col">Info</th>
 							<th scope="col">Message</th>
 							<th scope="col">Update</th>
 							<th scope="col">Delete</th>
@@ -42,7 +44,9 @@
 							<td><img src="" height="100px" width="100px"
 								th:src="@{${'/images/testimonialImages/' + testimonial.picFileName}}"></td>
 
-							<td th:text="${testimonial.message}">Testimoinal message</td>
+							<td th:text="${testimonial.name}">Name</td>
+							<td th:text="${testimonial.info}">Univerity and course</td>
+							<td th:text="${testimonial.message}">Testimonial message</td>
 					
 							<td><a href=""
 								th:href="@{/admin/testimonial/update/{id}(id=${testimonial.id})}"

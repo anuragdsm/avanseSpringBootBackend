@@ -17,9 +17,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Award implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String message;
+	private String title;
+	private String description;
 	
 }
