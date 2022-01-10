@@ -27,7 +27,7 @@ public class TestimonialService {
 	}
 	
 	@Transactional
-	public void deleteTestimonial(long id) {
+	public void removeTestimonialById(long id) {
 		testimonialRepository.deleteById(id);
 	}
 	

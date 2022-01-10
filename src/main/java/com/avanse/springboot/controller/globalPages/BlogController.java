@@ -17,17 +17,17 @@ public class BlogController {
 	PostService postService;
 	@Autowired
 	PostCategoryService postCategoryService;
-	
+
 	@GetMapping("/viewPost/{extractedFileName}")
 	public ModelAndView getAddedBlogPost(@PathVariable("extractedFileName") String extractedFileName, Model model) {
 		System.out.println("Into the getAddBlogPost Get");
 		ModelAndView modelAndView = new ModelAndView("addedBlogPosts/"+extractedFileName);
 		model.addAttribute("postCategories", postCategoryService.getAllPostCategories());
-		model.addAttribute("posts", postService.getAllPosts());
+		model.addAttribute("posts", postService.getTopFourLatestPosts());
+		model.addAttribute("relatedThreePosts",postService.randomThreePosts());
 
 
 		return modelAndView;
 	}
-	
 	
 }

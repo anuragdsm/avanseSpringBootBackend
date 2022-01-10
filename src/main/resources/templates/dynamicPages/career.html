@@ -288,7 +288,7 @@
             </div>
             <div class="">
                 <div class="container">
-                    <div class="row s_service_info">
+                    <div id="jobCardContainer" class="row s_service_info">
                        
                         <div class="col-lg-4 col-sm-6">
                             <div class="s_service_item latest_job_box wow fadeInLeft" data-wow-delay="0.3s">
@@ -344,6 +344,34 @@
                     </div>
                 </div>
             </div>
+            <script>
+		            function charOptimize(descText) {
+		                let size;
+		                let summaryJobDescription='';
+		                /* if(descText.length<250) size=descText.length; else size=250; */
+		                for(let i=0;i<250;i++) {summaryJobDescription=summaryJobDescription+descText.charAt(i);}
+		                return summaryJobDescription;	
+		           }
+            	console.log('SCRIPT RUNNING>>>>>>')
+            	let urlForAllJobs="http://"+window.location.href.split('/',3)[2]+"/public/api/getAllJobs";
+            	console.log(urlForAllJobs);
+            	let http = new XMLHttpRequest();
+                let listOfJobs;
+                let jobContainer=document.getElementById('jobCardContainer');
+                jobContainer.innerHTML="";
+                http.open('GET',urlForAllJobs);
+                http.onloadend=()=>{
+                	console.log('ONLOAD FUNCTION START')
+                    listOfJobs = JSON.parse(http.responseText);
+                	console.log(listOfJobs);
+                    for(let job of listOfJobs) {
+                    	jobContainer.innerHTML=jobContainer.innerHTML+'<a style="color:inherit;" href="http://'+window.location.href.split('/',3)[2]+'/viewDynamicPages/jobApplication/'+job.id+'"><div class="col-lg-4 col-sm-6"><div class="s_service_item latest_job_box wow fadeInLeft" data-wow-delay="0.3s"><div class="solid_overlay"></div><h5 class="f_p f_size_20 f_500 t_color">'+job.title+'</h5><p class="l_height28">'+job.description+''+charOptimize(job.description)+'</p><a href="http://'+window.location.href.split('/',3)[2]+'/viewDynamicPages/jobApplication/'+job.id+'" class="learn_btn_two">Learn More <i class="ti-arrow-right"></i></a></div></div></a>';		
+                        
+                    }
+                }
+                http.send();
+                
+            </script>
         </section>
         
 

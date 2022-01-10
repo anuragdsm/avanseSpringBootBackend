@@ -24,7 +24,7 @@ public class Testimonial implements Serializable{
 	private Long id;
 	@Lob
 	@Basic
-	private String testimonialMessage;
+	private String message;
 	
 	private String picFileName;
 	

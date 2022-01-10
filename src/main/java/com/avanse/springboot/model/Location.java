@@ -18,6 +18,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,6 +41,7 @@ public class Location implements Serializable{
 	private Long id;
 	private String city;
 	
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "Locations_Jobs", 
 				joinColumns = {@JoinColumn(name="location_id")},
