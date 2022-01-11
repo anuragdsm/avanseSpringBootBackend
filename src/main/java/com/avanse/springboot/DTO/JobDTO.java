@@ -9,6 +9,7 @@ public class JobDTO {
 	private Long id;
 	private String title;
 	private Date postDate; 
+	private String shortDescription;
 	private String description;
 	private String postedBy;
 	private String location;

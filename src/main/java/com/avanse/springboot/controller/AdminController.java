@@ -1,5 +1,4 @@
 package com.avanse.springboot.controller;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -28,6 +27,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.avanse.springboot.DTO.AwardDTO;
 import com.avanse.springboot.DTO.CourseDTO;
 import com.avanse.springboot.DTO.ImageDTO;
 import com.avanse.springboot.DTO.JobDTO;
@@ -36,6 +37,7 @@ import com.avanse.springboot.DTO.PageDTO;
 import com.avanse.springboot.DTO.PostDTO;
 import com.avanse.springboot.DTO.TestimonialDTO;
 import com.avanse.springboot.DTO.UniversityDTO;
+import com.avanse.springboot.model.Award;
 import com.avanse.springboot.model.Course;
 import com.avanse.springboot.model.Header;
 import com.avanse.springboot.model.Image;
@@ -46,6 +48,7 @@ import com.avanse.springboot.model.Post;
 import com.avanse.springboot.model.PostCategory;
 import com.avanse.springboot.model.Testimonial;
 import com.avanse.springboot.model.University;
+import com.avanse.springboot.repository.AwardRepository;
 import com.avanse.springboot.repository.CourseRepository;
 import com.avanse.springboot.repository.HeaderRepository;
 import com.avanse.springboot.repository.ImageRepository;
@@ -56,6 +59,7 @@ import com.avanse.springboot.repository.PostCategoryRepository;
 import com.avanse.springboot.repository.PostRepository;
 import com.avanse.springboot.repository.TestimonialRepository;
 import com.avanse.springboot.repository.UniversityRepository;
+import com.avanse.springboot.service.AwardService;
 import com.avanse.springboot.service.CourseService;
 import com.avanse.springboot.service.HeaderService;
 import com.avanse.springboot.service.ImageService;
@@ -98,6 +102,13 @@ public class AdminController {
 	public static String jsCodeFileDir = System.getProperty("user.dir")
 			+ "\\src\\main\\resources\\static\\viewPagesAssets\\js";
 
+	@Autowired
+	AwardRepository awardRepository;
+	
+	@Autowired
+	AwardService awardService;
+	
+	
 	@Autowired
 	CourseRepository courseRepository;
 
@@ -163,7 +174,6 @@ public class AdminController {
 	 */
 	@GetMapping("/admin")
 	public String adminDashboard(Model model) {
-
 		Long noOfUniversities = universityService.numberOfUniversities();
 		Long noOfCourses = courseService.numberOfCourses();
 		Long noOfPages = pageService.numberOfPages();
@@ -179,7 +189,57 @@ public class AdminController {
 	public String adminHome() {
 		return "adminHome";
 	}
+	
+	/*
+	 * Method to add a awards Need both get and post mapping for adding the
+	 * university because the request could be of any type...
+	 */
+	@GetMapping("/admin/awards/add")
+	public String awardsAddGet(Model model) {
+		model.addAttribute("awardsDTO", new AwardDTO());
+		return "awardsAdd";
+	}
 
+
+	@PostMapping("/admin/awards/add")
+	public String awardsAddPost(@ModelAttribute("awardDTO") AwardDTO awardDTO){
+		Award award= new Award();
+		award.setId(awardDTO.getId());
+		award.setTitle(awardDTO.getTitle());
+		award.setDescription(awardDTO.getDescription());
+		awardService.addAward(award);
+		return "redirect:/admin/awards";
+	}
+
+	/*
+	 * Function to delete a testimonial by id
+	 */
+	@GetMapping("/admin/award/delete/{id}")
+	public String deleteAward(@PathVariable long id){
+		if (awardRepository.findById(id).isPresent()) {
+			awardService.deleteAward(id);
+		}
+		
+		else {
+			System.out.println("Cannot Delete the object, Later to be displayed over the page");
+		}
+		return "redirect:/admin/awards";
+	}
+
+	@GetMapping("/admin/award/update/{id}")
+	public String updateAward(@PathVariable long id, Model model) {
+		Award award= awardService.getAwardById(id).get();
+		AwardDTO awardDTO= new AwardDTO();
+		awardDTO.setId(award.getId());
+		awardDTO.setTitle(award.getTitle());
+		awardDTO.setDescription(award.getDescription());
+		
+		model.addAttribute("awardDTO", awardDTO);
+		return "awardsAdd";
+	}
+
+	
+	
 	/*
 	 * ===================All methods below are related to universities
 	 * ================================================
@@ -617,6 +677,7 @@ public class AdminController {
 		Job job = new Job();
 		job.setId(jobDTO.getId());
 		job.setTitle(jobDTO.getTitle());
+		job.setShortDescription(jobDTO.getShortDescription());
 		job.setDescription(jobDTO.getDescription());
 		job.setPostedBy(jobDTO.getPostedBy());
 		Date date = new Date();
@@ -740,7 +801,6 @@ public class AdminController {
 	/*
 	 * Method to add a page but need implement both get and post mapping for adding
 	 * the university
-	 * 
 	 */
 
 	@GetMapping("/admin/pages/add")
@@ -1725,7 +1785,7 @@ public class AdminController {
 	}
 
 	/*
-	 * Function to delete a university by id
+	 * Function to delete a testimonial by id
 	 */
 	@GetMapping("/admin/testimonial/delete/{id}")
 	public String deleteTestimonial(@PathVariable long id){

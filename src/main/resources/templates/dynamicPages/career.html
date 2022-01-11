@@ -365,7 +365,7 @@
                     listOfJobs = JSON.parse(http.responseText);
                 	console.log(listOfJobs);
                     for(let job of listOfJobs) {
-                    	jobContainer.innerHTML=jobContainer.innerHTML+'<a style="color:inherit;" href="http://'+window.location.href.split('/',3)[2]+'/viewDynamicPages/jobApplication/'+job.id+'"><div class="col-lg-4 col-sm-6"><div class="s_service_item latest_job_box wow fadeInLeft" data-wow-delay="0.3s"><div class="solid_overlay"></div><h5 class="f_p f_size_20 f_500 t_color">'+job.title+'</h5><p class="l_height28">'+job.description+''+charOptimize(job.description)+'</p><a href="http://'+window.location.href.split('/',3)[2]+'/viewDynamicPages/jobApplication/'+job.id+'" class="learn_btn_two">Learn More <i class="ti-arrow-right"></i></a></div></div></a>';		
+                    	jobContainer.innerHTML=jobContainer.innerHTML+'<a style="color:inherit;" href="http://'+window.location.href.split('/',3)[2]+'/viewDynamicPages/jobApplication/'+job.id+'"><div class="col-lg-4 col-sm-6"><div class="s_service_item latest_job_box wow fadeInLeft" data-wow-delay="0.3s"><div class="solid_overlay"></div><h5 class="f_p f_size_20 f_500 t_color">'+job.title+'</h5><p class="l_height28">'+job.shortDescription+''+charOptimize(job.shortDescription)+'</p><a href="http://'+window.location.href.split('/',3)[2]+'/viewDynamicPages/jobApplication/'+job.id+'" class="learn_btn_two">Learn More <i class="ti-arrow-right"></i></a></div></div></a>';		
                         
                     }
                 }

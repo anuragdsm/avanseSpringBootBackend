@@ -47,6 +47,8 @@ public class Job implements Serializable {
 	
 	private String jobCreatedDate;
 	
+	private String shortDescription;
+	
 	@Lob
 	@Basic
 	private String description;
