@@ -78,11 +78,11 @@ public class PostService {
 		long postLowestIdInDb = postRepository.findFirstByOrderByIdAsc().get().getId();
 		System.out.println("postLowestInDB = "+postLowestIdInDb);
 		System.out.println("PostRepositoryCount " + postRepository.count());
-		long noOfRandomPosts = 3 > postRepository.count() ? postRepository.count() : (3);
+		long noOfRandomPosts = 3 > postRepository.count() ? postRepository.count() : 3;
 		System.out.println("NoOfRandomPosts : "+ noOfRandomPosts);
 		for (int i = 0; i < noOfRandomPosts; i++) {
 			Boolean check = true;
-			if (noOfRandomPosts > 3) {
+			if (noOfRandomPosts==3) {
 				while (check) {
 					long tempId = (long) (Math.random() * (postHighestIdInDb - postLowestIdInDb) + postLowestIdInDb);
 					System.out.println("Post at position "+i+"is "+ tempId );
@@ -115,6 +115,10 @@ public class PostService {
 			}
 			return false;
 		}
+	}
+	
+	public List<Post> getPostsInRange(long lowerLimit,long upperLimit) {
+		return postRepository.getPostsInRange(lowerLimit, upperLimit).get();
 	}
 
 }

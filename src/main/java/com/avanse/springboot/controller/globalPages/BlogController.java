@@ -1,12 +1,17 @@
 package com.avanse.springboot.controller.globalPages;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.avanse.springboot.model.Post;
 import com.avanse.springboot.service.PostCategoryService;
 import com.avanse.springboot.service.PostService;
 
@@ -29,5 +34,20 @@ public class BlogController {
 
 		return modelAndView;
 	}
+	
+	@GetMapping(path = "/public/api/post/getPostCountInDb")
+	@ResponseBody
+	@CrossOrigin("*")
+	public long getPostCountInDb() {
+		return postService.numberOfPosts();
+	}
+	
+	@GetMapping(path = "/public/api/post/getPostsInRange/{lowerLimit}/{upperLimit}")
+	@ResponseBody
+	@CrossOrigin("*")
+	public List<Post> getPostsInRange(@PathVariable("lowerLimit") long lowerLimit, @PathVariable("upperLimit") long upperLimit) {
+		return postService.getPostsInRange(lowerLimit, upperLimit);
+	}
+	
 	
 }

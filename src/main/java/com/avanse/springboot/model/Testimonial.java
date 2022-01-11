@@ -1,5 +1,4 @@
 package com.avanse.springboot.model;
-
 import java.io.Serializable;
 
 import javax.persistence.Basic;
@@ -28,9 +27,6 @@ public class Testimonial implements Serializable{
 	@Lob
 	@Basic
 	private String message;
-	
 	private String picFileName;
-	
-	
 	
 }
