@@ -194,6 +194,14 @@ public class AdminController {
 	 * Method to add a awards Need both get and post mapping for adding the
 	 * university because the request could be of any type...
 	 */
+	
+	@GetMapping("/admin/awards")
+	public String getAwards(Model model) {
+		model.addAttribute("awards", awardService.getAllAwards());
+		return "awards";
+	}
+	
+	
 	@GetMapping("/admin/awards/add")
 	public String awardsAddGet(Model model) {
 		model.addAttribute("awardsDTO", new AwardDTO());
@@ -984,9 +992,9 @@ public class AdminController {
 				+ "<!-- KEYWORDTOFINDGLOBALHEADERINSERTIONCODESPACEEND -->"
 //				+ header to be implemented later
 				+ "<script type=\"text/javascript\" src=\"/viewPagesAssets/js/customGlobalHeader/globalHeader.js\"></script>"
-				+ "<style>\r\n" + "        .banner_bg_top{\r\n"
+				+ "<style>\r\n" + cSSCode  + ".banner_bg_top{\r\n"
 				+ "				  background: url('/viewPagesAssets/img/userAddedBannerImages/" + bannerImageFileName
-				+ "');\r\n" + "				}\r\n" + "</style>\r\n" + "</head>\r\n" + "" + "<body id=\"page-top\">\r\n"
+				+ "'); max-width:100%; height:auto;; \r\n" + "				}\r\n" + "</style>\r\n" + "</head>\r\n" + "" + "<body id=\"page-top\">\r\n"
 				+ "\r\n" + "	<!-- Content Wrapper -->\r\n" + "	<div layout:fragment=\"contentPlus\">"
 
 				+ "<section class=\"top_avanse_banner_area banner_bg_top \">\r\n" + "            \r\n"
@@ -1835,6 +1843,8 @@ public class AdminController {
 		TestimonialDTO testimonialDTO= new TestimonialDTO();
 		
 		testimonialDTO.setId(testimonial.getId());
+		testimonialDTO.setName(testimonial.getName());
+		testimonialDTO.setInfo(testimonial.getInfo());	
 		testimonialDTO.setMessage(testimonial.getMessage());
 		testimonialDTO.setPicFileName(testimonial.getPicFileName());
 

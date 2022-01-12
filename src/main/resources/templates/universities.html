@@ -36,7 +36,6 @@
 
 							<th scope="col">Description</th>
 							<th scope="col">Accomodation</th>
-							<th scope="col">Courses</th>
 							<th scope="col">Update</th>
 							<th scope="col">Status</th>
 							<th scope="col">Delete</th>
@@ -53,19 +52,55 @@
 
 							<td th:text="${university.location}">Delhi</td>
 							<td th:text="${university.establishedYear}">2002</td>
+							
+							
+							
+							<td><a href="#" data-toggle="modal" th:data-target="'#myModal'+${university.id}">University
+											Description</a> <!-- Modal -->
+										<div class="modal fade" th:id="'myModal'+${university.id}" role="dialog">
+											<div class="modal-dialog modal-xl">
+
+												<!-- Modal content-->
+												<div class="modal-content">
+													<div class="modal-header">
+														<h4 class="modal-title" th:text="${university.name}">University Name</h4>
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+														
+													</div>
+													<div  class="modal-body">
+													 
+														<p th:utext="${university.description}">Some text in the modal.</p>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default"
+															data-dismiss="modal">Close</button>
+													</div>
+												</div>
+
+											</div>
+										</div></td>
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+<!-- 							
 
 							<td th:text="${university.description}">University
 								Description</td>
+
+ -->
 							<td th:text="${university.accomodation}">Accomodadtion</td>
 
-							<td><a href=""
-								th:href="@{/admin/university/delete/{id}(id=${university.id})}"
-								class="btn btn-primary">Edit Courses</a></td>
+								
 
-							<td><a href=""
-								th:href="@{/admin/university/update/{id}(id=${university.id})}"
-								class="btn btn-warning">Update</a></td>
-
+							
 
 							<td>
 								<div class="custom-control custom-switch"
@@ -83,6 +118,11 @@
 										th:text="${university.isUniversityActive==true ?'University Active':'University Inactive'}"></span></label>
 								</div>
 							</td>
+							
+							<td><a href=""
+								th:href="@{/admin/university/update/{id}(id=${university.id})}"
+								class="btn btn-warning">Update</a></td>
+							
 
 
 

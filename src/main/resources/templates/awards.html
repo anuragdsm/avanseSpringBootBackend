@@ -12,7 +12,7 @@
 
 		<!-- Page Heading -->
 		<div class="d-sm-flex align-items-center justify-content-between mb-4">
-			<h1 class="h3 mb-0 text-gray-800">University Management</h1>
+			<h1 class="h3 mb-0 text-gray-800">Award Management</h1>
 			<a href="#"
 				class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
 				class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
@@ -22,79 +22,37 @@
 		<div class="row">
 			<div class="container-fluid">
 
-				<a th:href="@{/admin/universities/add}" style="margin: 20px 0"
-					class="btn btn-primary">Add University</a>
+				<a th:href="@{/admin/awards/add}" style="margin: 20px 0"
+					class="btn btn-primary">Add Award</a>
 				<table class="table">
 					<thead class="thead-light">
 						<tr>
 							<th scope="col">SN</th>
-							<th scope="col">University</th>
-							<th scope="col">Preview</th>
-
-							<th scope="col">Location</th>
-							<th scope="col">Est. Year</th>
-
+							<th scope="col">Title</th>
 							<th scope="col">Description</th>
-							<th scope="col">Accomodation</th>
-							<th scope="col">Courses</th>
 							<th scope="col">Update</th>
-							<th scope="col">Status</th>
 							<th scope="col">Delete</th>
 
 						</tr>
 					</thead>
 					<tbody>
 
-						<tr th:each="university, iStat : ${universities}">
+						<tr th:each="award, iStat : ${awards}">
 							<th scope="row" th:text="${iStat.index + 1}">1</th>
-							<td th:text="${university.name}">Delhi University</td>
-							<td><img src="" height="100px" width="100px"
-								th:src="@{${'/images/universityImages/' + university.imageName}}"></td>
-
-							<td th:text="${university.location}">Delhi</td>
-							<td th:text="${university.establishedYear}">2002</td>
-
-							<td th:text="${university.description}">University
-								Description</td>
-							<td th:text="${university.accomodation}">Accomodadtion</td>
-
+							<td th:text="${award.title}">Award Title</td>
+							<td th:text="${award.description}">Award Description</td>
+							
 							<td><a href=""
-								th:href="@{/admin/university/delete/{id}(id=${university.id})}"
-								class="btn btn-primary">Edit Courses</a></td>
-
-							<td><a href=""
-								th:href="@{/admin/university/update/{id}(id=${university.id})}"
+								th:href="@{/admin/award/update/{id}(id=${award.id})}"
 								class="btn btn-warning">Update</a></td>
 
-
-							<td>
-								<div class="custom-control custom-switch"
-									th:onclick="'toggleUniversityStatus('+${university.id}+')'">
-									<input th:inline="text" type="checkbox"
-										th:if="${university.isUniversityActive==true}" checked
-										class="custom-control-input"
-										th:id="'customSwitch'+${university.id}"> <input
-										type="checkbox" th:if="${university.isUniversityActive==false}"
-										class="custom-control-input"
-										th:id="'customSwitch'+${university.id}"> <label
-										class="custom-control-label"
-										th:for="'customSwitch'+${university.id}"><span
-										th:id="'universityStatus'+${university.id}"
-										th:text="${university.isUniversityActive==true ?'University Active':'University Inactive'}"></span></label>
-								</div>
-							</td>
-
-
-
 							<td><a href=""
-								th:href="@{/admin/university/delete/{id}(id=${university.id})}"
+								th:href="@{/admin/award/delete/{id}(id=${award.id})}"
 								class="btn btn-danger">Delete</a></td>
 						</tr>
-
 					</tbody>
 				</table>
 			</div>
-
 		</div>
 
 
@@ -114,28 +72,7 @@
 		class="fas fa-angle-up"></i>
 	</a>
 
-	<!-- Logout Modal-->
-	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-					<button class="close" type="button" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">Select "Logout" below if you are ready
-					to end your current session.</div>
-				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button"
-						data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="#" th:href=@{/logout}>Logout</a>
-				</div>
-			</div>
-		</div>
-	</div>
+
 
 	<!-- Bootstrap core JavaScript-->
 	<script src="/vendor/jquery/jquery.min.js"></script>
@@ -154,56 +91,6 @@
 	<script src="/js/demo/chart-area-demo.js"></script>
 	<script src="/js/demo/chart-pie-demo.js"></script>
 	<script src="/js/demo/chart-bar-demo.js"></script>
-
-
-
-	<script th:inline="javascript" type="text/javascript">
-		let contextPath = 'http://localhost:8080';
-
-		function toggleUniversityStatus(id) {
-			console.log('toggling id = ' + id);
-
-			let customSwitch = 'customSwitch' + id;
-
-			console.log(document.getElementById(customSwitch));
-
-			console.log(document.getElementById(customSwitch).checked);
-
-			if (document.getElementById(customSwitch).checked == true
-					|| document.getElementById(customSwitch).checked == null) {
-
-				document.getElementById(customSwitch).checked = false;
-
-				/* deactivate in controller */
-				console.log('Deactivating..');
-				
-				let http = new XMLHttpRequest();
-				let url = contextPath + '/' + 'admin/' 
-						+ 'activateDeactivateUniversity' + '/' + id + '/'
-						+ 'DeactivateUniversity';
-				
-				http.open("GET", url, false);
-				http.send(null);
-				console.log(http.responseText);
-				document.getElementById('universityStatus' + id).innerHTML = 'University Inactive';
-			}
-
-			else {
-
-				document.getElementById(customSwitch).checked = true;
-				let http = new XMLHttpRequest();
-				let url = contextPath + '/' + 'admin/'
-						+ 'activateDeactivateUniversity' + '/' + id + '/'
-						+ 'ActivateUniversity';
-				console.log('Activating..')
-				http.open("GET", url, false);
-				http.send(null);
-				console.log(http.responseText);
-				document.getElementById('universityStatus' + id).innerHTML = 'University Active';
-			}
-
-		}
-	</script>
 
 </body>
 
