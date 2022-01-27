@@ -96,15 +96,27 @@
 							<div class="form-group">
 								
 								
+										<!-- When new post is being created this post will be rendered -->
+										<div th:if="${postCategoriesSelectedForThisPost==null}" class="col-sm-10">
+										<label class="col-sm-2 control-label">Categories to attach</label>
+											<div th:each= "postCategory, iStat : ${postCategories}" >
+												<input type="checkbox" th:id="${postCategory.id}" 
+													th:name="selectedCategories" th:value="${postCategory.id}">
+												<label th:for="${postCategory.id}" th:text="${postCategory.name}" class="col-sm-2 control-label">Category</label>
+											</div>
+										</div>
+										
+										<!-- While Updating this block will be rendered -->
+										<div th:if="${postCategoriesSelectedForThisPost!=null}" class="col-sm-10">
+										<input name="updateOperation" type="text" value="updateOperationInputText" hidden>
+										<label class="col-sm-2 control-label">Categories to attach</label>
+											<div th:each= "postCategory, iStat : ${postCategories}" >
+												<input type="checkbox" th:id="${postCategory.id}" 
+													th:name="selectedCategories" th:value="${postCategory.id}" th:checked="${#lists.contains(postCategoriesSelectedForThisPost,postCategory)}">
+												<label th:for="${postCategory.id}" th:text="${postCategory.name}" class="col-sm-2 control-label">Category</label>
+											</div>
+										</div>
 								
-								<div class="col-sm-10">
-								<label class="col-sm-2 control-label">Categories to attach</label>
-									<div th:each= "postCategory, iStat : ${postCategories}" >
-										<input type="checkbox" th:id="${postCategory.id}" 
-											th:name="selectedCategories" th:value="${postCategory.id}">
-										<label th:for="${postCategory.id}" th:text="${postCategory.name}" class="col-sm-2 control-label">Category</label>
-									</div>
-								</div>
 								
 							</div>
 							

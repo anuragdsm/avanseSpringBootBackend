@@ -1,4 +1,5 @@
 package com.avanse.springboot.controller;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
@@ -104,11 +106,10 @@ public class AdminController {
 
 	@Autowired
 	AwardRepository awardRepository;
-	
+
 	@Autowired
 	AwardService awardService;
-	
-	
+
 	@Autowired
 	CourseRepository courseRepository;
 
@@ -156,10 +157,10 @@ public class AdminController {
 
 	@Autowired
 	UniversityService universityService;
-	
+
 	@Autowired
 	TestimonialRepository testimonialRepository;
-	
+
 	@Autowired
 	TestimonialService testimonialService;
 
@@ -189,29 +190,27 @@ public class AdminController {
 	public String adminHome() {
 		return "adminHome";
 	}
-	
+
 	/*
 	 * Method to add a awards Need both get and post mapping for adding the
 	 * university because the request could be of any type...
 	 */
-	
+
 	@GetMapping("/admin/awards")
 	public String getAwards(Model model) {
 		model.addAttribute("awards", awardService.getAllAwards());
 		return "awards";
 	}
-	
-	
+
 	@GetMapping("/admin/awards/add")
 	public String awardsAddGet(Model model) {
 		model.addAttribute("awardsDTO", new AwardDTO());
 		return "awardsAdd";
 	}
 
-
 	@PostMapping("/admin/awards/add")
-	public String awardsAddPost(@ModelAttribute("awardDTO") AwardDTO awardDTO){
-		Award award= new Award();
+	public String awardsAddPost(@ModelAttribute("awardDTO") AwardDTO awardDTO) {
+		Award award = new Award();
 		award.setId(awardDTO.getId());
 		award.setTitle(awardDTO.getTitle());
 		award.setDescription(awardDTO.getDescription());
@@ -220,14 +219,14 @@ public class AdminController {
 	}
 
 	/*
-	 * Function to delete a testimonial by id
+	 * Function to delete an award by id
 	 */
 	@GetMapping("/admin/award/delete/{id}")
-	public String deleteAward(@PathVariable long id){
+	public String deleteAward(@PathVariable long id) {
 		if (awardRepository.findById(id).isPresent()) {
 			awardService.deleteAward(id);
 		}
-		
+
 		else {
 			System.out.println("Cannot Delete the object, Later to be displayed over the page");
 		}
@@ -236,18 +235,16 @@ public class AdminController {
 
 	@GetMapping("/admin/award/update/{id}")
 	public String updateAward(@PathVariable long id, Model model) {
-		Award award= awardService.getAwardById(id).get();
-		AwardDTO awardDTO= new AwardDTO();
+		Award award = awardService.getAwardById(id).get();
+		AwardDTO awardDTO = new AwardDTO();
 		awardDTO.setId(award.getId());
 		awardDTO.setTitle(award.getTitle());
 		awardDTO.setDescription(award.getDescription());
-		
+
 		model.addAttribute("awardDTO", awardDTO);
 		return "awardsAdd";
 	}
 
-	
-	
 	/*
 	 * ===================All methods below are related to universities
 	 * ================================================
@@ -992,10 +989,11 @@ public class AdminController {
 				+ "<!-- KEYWORDTOFINDGLOBALHEADERINSERTIONCODESPACEEND -->"
 //				+ header to be implemented later
 				+ "<script type=\"text/javascript\" src=\"/viewPagesAssets/js/customGlobalHeader/globalHeader.js\"></script>"
-				+ "<style>\r\n" + cSSCode  + ".banner_bg_top{\r\n"
+				+ "<style>\r\n" + cSSCode + ".banner_bg_top{\r\n"
 				+ "				  background: url('/viewPagesAssets/img/userAddedBannerImages/" + bannerImageFileName
-				+ "'); max-width:100%; height:auto;; \r\n" + "				}\r\n" + "</style>\r\n" + "</head>\r\n" + "" + "<body id=\"page-top\">\r\n"
-				+ "\r\n" + "	<!-- Content Wrapper -->\r\n" + "	<div layout:fragment=\"contentPlus\">"
+				+ "'); max-width:100%; height:auto;; \r\n" + "				}\r\n" + "</style>\r\n" + "</head>\r\n" + ""
+				+ "<body id=\"page-top\">\r\n" + "\r\n" + "	<!-- Content Wrapper -->\r\n"
+				+ "	<div layout:fragment=\"contentPlus\">"
 
 				+ "<section class=\"top_avanse_banner_area banner_bg_top \">\r\n" + "            \r\n"
 				+ "            <div class=\"container\">\r\n"
@@ -1285,7 +1283,7 @@ public class AdminController {
 	@PostMapping(path = "/admin/posts/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public String blogPostsAddPostMap(@ModelAttribute("postDTO") PostDTO postDTO, HttpServletRequest request,
 			@RequestParam(name = "featuredImageFile", required = false) MultipartFile featuredImageFile,
-			@RequestParam("selectedCategories") String[] categoriesIds) {
+			@RequestParam("selectedCategories") String[] categoriesIds, @RequestParam(value = "updateOperation",required = false) String isUpdating) {
 
 		/*
 		 * Create a new time stamp and initialize the timestamp with null Check if the
@@ -1320,13 +1318,18 @@ public class AdminController {
 
 		Date date = new Date();
 		String tempDate = new SimpleDateFormat("DD MMMM, YYYY").format(date);
-
+		System.out.println("TESTING ------------> "+isUpdating);
 		post.setId(postDTO.getId());
 		post.setPostTitle(postDTO.getPostTitle().strip());
 		post.setHeading(postDTO.getHeading());
 		post.setSubHeading(postDTO.getSubHeading());
 		post.setMainSection(postDTO.getMainSection());
-		post.setFeaturedImageName(featuredImageFile.getOriginalFilename());
+		if(featuredImageFile!=null) {
+			post.setFeaturedImageName(featuredImageFile.getOriginalFilename());
+		} else if(isUpdating!=null) {
+			System.out.println("Image test edit ---> "+postService.getPostById(postDTO.getId()).get().getFeaturedImageName()+"PostDTO id = "+postDTO.getId());
+			post.setFeaturedImageName(postService.getPostById(postDTO.getId()).get().getFeaturedImageName());
+		}
 //		post.setFeaturedImageName(postDTO.getFeaturedImageName());
 		post.setFeaturedImageAltText(postDTO.getFeaturedImageAltText());
 		post.setMetaTitle(postDTO.getMetaTitle());
@@ -1380,12 +1383,45 @@ public class AdminController {
 		}
 
 		postService.addPost(post);
-
-		for (String s : categoriesIds) {
-			PostCategory postCategory = postCategoryRepository.getById(Long.valueOf(s));
-			postCategory.getPostList().add(post);
-			postCategoryRepository.save(postCategory);
+		
+		if(isUpdating==null) {
+			for (String s : categoriesIds) {
+				PostCategory postCategory = postCategoryRepository.getById(Long.valueOf(s));
+				postCategory.getPostList().add(post);
+				postCategoryRepository.save(postCategory);
+			}
+		} else {
+			List<Long> postNotInCategory = new ArrayList<>();
+			List<Long> postAlreadyInCategory = new ArrayList<>();
+			List<PostCategory> currentCategoryList = postService.getPostById(postDTO.getId()).get().getPostCategoryList();
+			for(PostCategory pc:currentCategoryList) {
+				boolean isPresent=false; 
+				for(String s : categoriesIds) {if(pc.getId()==Long.valueOf(s)) isPresent=true; }
+				if(!isPresent)
+				postNotInCategory.add(pc.getId());
+				else 
+				postAlreadyInCategory.add(pc.getId());
+				
+			}
+			for(long categoryId:postNotInCategory) {
+				PostCategory postCategoryForPostRemoval = postCategoryRepository.getById(categoryId);
+				List<Post> postList = postCategoryForPostRemoval.getPostList();
+				List<Integer> idsToBeRemoved = new ArrayList<>();
+				int x=0;
+				for(Post po : postList) {if(po.getId()==postDTO.getId()) idsToBeRemoved.add(x); x++;}
+				for(int y : idsToBeRemoved) {postCategoryForPostRemoval.getPostList().remove(y);}
+				postCategoryRepository.save(postCategoryForPostRemoval);
+				}
+			for (String s : categoriesIds) {
+					PostCategory postCategory = postCategoryRepository.getById(Long.valueOf(s));
+					//if(!postCategory.getPostList().contains(postService.getPostById(postDTO.getId())))
+						if(!postAlreadyInCategory.contains(Long.valueOf(s)))
+					postCategory.getPostList().add(post);
+					postCategoryRepository.save(postCategory);
+				
+			}
 		}
+		
 
 //////		String hostName = request.getHeader("host");
 ////		System.out.println(hostName);
@@ -1636,6 +1672,11 @@ public class AdminController {
 		postDTO.setMetaDescription(post.getMetaTitle());
 		postDTO.setMetaDescription(post.getMetaDescription());
 
+		model.addAttribute("postDTO", postDTO);
+		model.addAttribute("postCategories", postCategoryService.getAllPostCategories());
+		model.addAttribute("postCategoriesSelectedForThisPost",
+				postService.getPostById(id).get().getPostCategoryList());
+
 		return "postsAdd";
 
 	}
@@ -1695,14 +1736,10 @@ public class AdminController {
 	public String sendImageUploadLocation() {
 		return "To do";
 	}
-	
-	
-	
-	
+
 	/*
 	 * -------Functions below are for handelling testimonials
-	*/
-	
+	 */
 
 	@GetMapping("/admin/testimonials")
 	public String getTestimonials(Model model) {
@@ -1745,8 +1782,9 @@ public class AdminController {
 
 		String modifiedFileNameByDate = String.valueOf(millisecsFrom1970);
 
-		
 		testimonial.setId(testimonialDTO.getId());
+		testimonial.setName(testimonialDTO.getName());
+		testimonial.setInfo(testimonialDTO.getInfo());
 		testimonial.setMessage(testimonialDTO.getMessage());
 		testimonial.setPicFileName(testimonialDTO.getPicFileName());
 
@@ -1796,8 +1834,7 @@ public class AdminController {
 	 * Function to delete a testimonial by id
 	 */
 	@GetMapping("/admin/testimonial/delete/{id}")
-	public String deleteTestimonial(@PathVariable long id){
-
+	public String deleteTestimonial(@PathVariable long id) {
 
 		if (testimonialRepository.findById(id).isPresent()) {
 			deleteImageFromStaticFolderContainingTestimonialImages(id);
@@ -1827,7 +1864,7 @@ public class AdminController {
 		 * use the service method of get University by ID
 		 */
 
-		File file = new File(testimonialPersonUploadDir+ "/" + myFile);
+		File file = new File(testimonialPersonUploadDir + "/" + myFile);
 //		System.out.println(file.getAbsolutePath());
 
 		/*
@@ -1839,12 +1876,12 @@ public class AdminController {
 
 	@GetMapping("/admin/testimonial/update/{id}")
 	public String updateTestimonial(@PathVariable long id, Model model) {
-		Testimonial testimonial= testimonialService.getTestimonialById(id).get();
-		TestimonialDTO testimonialDTO= new TestimonialDTO();
-		
+		Testimonial testimonial = testimonialService.getTestimonialById(id).get();
+		TestimonialDTO testimonialDTO = new TestimonialDTO();
+
 		testimonialDTO.setId(testimonial.getId());
 		testimonialDTO.setName(testimonial.getName());
-		testimonialDTO.setInfo(testimonial.getInfo());	
+		testimonialDTO.setInfo(testimonial.getInfo());
 		testimonialDTO.setMessage(testimonial.getMessage());
 		testimonialDTO.setPicFileName(testimonial.getPicFileName());
 
@@ -1853,11 +1890,9 @@ public class AdminController {
 		return "testimonialsAdd";
 	}
 
-		
 	/*
 	 * -------Functions handelling testimonials ends here
 	 */
-	
 
 //	End of class
 }
