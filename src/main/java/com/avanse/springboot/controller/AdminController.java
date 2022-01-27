@@ -657,11 +657,7 @@ public class AdminController {
 		return "jobs";
 	}
 
-	/*
-	 * @GetMapping("/admin/jobApplications") public String getJobsApplications() {
-	 * // model.addAttribute("jobs", jobService.getAllJobs()); return
-	 * "jobsApplications"; }
-	 */
+
 
 	/*
 	 * Method to add a job. For that we will need both the get and post mapping. Get
@@ -699,6 +695,29 @@ public class AdminController {
 
 		return "redirect:/admin/jobs";
 	}
+	
+	@GetMapping("/admin/job/delete/{id}")
+	public String deleteJob(@PathVariable long id) {
+
+		String type = "job";
+		if (jobRespository.findById(id).isPresent()) {
+			
+			Job jobToBeDeleted = jobService.getJobById(id).get();
+			for (Location loc : jobToBeDeleted.getLocationList()){
+				loc.getJobs().remove(jobToBeDeleted);
+				locationService.addLocation(loc);
+			}
+			jobService.removeJobById(id);
+		}
+
+		else {
+			System.out.println("Cannot delete the job");
+		}
+		return "redirect:/admin/jobs";
+
+	}
+	
+	
 
 	/*
 	 * ===========All Function below are related to office location ==============
