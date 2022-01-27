@@ -154,7 +154,9 @@
 				function onSubmit() {
 					if(document.getElementById('mainForm').checkValidity()) {
 						document.getElementById('modalButtonForSpinner').click();
-						setTimeout(() => {document.getElementById('mainForm').submit();},5000);
+						setTimeout(() => {
+							document.getElementById('mainForm').submit();
+							},5000);
 					}
 				}
 				

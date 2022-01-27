@@ -15,7 +15,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -72,6 +74,7 @@ import com.avanse.springboot.service.PostCategoryService;
 import com.avanse.springboot.service.PostService;
 import com.avanse.springboot.service.TestimonialService;
 import com.avanse.springboot.service.UniversityService;
+
 import lombok.AllArgsConstructor;
 
 @Controller
@@ -204,7 +207,7 @@ public class AdminController {
 
 	@GetMapping("/admin/awards/add")
 	public String awardsAddGet(Model model) {
-		model.addAttribute("awardsDTO", new AwardDTO());
+		model.addAttribute("awardDTO", new AwardDTO());
 		return "awardsAdd";
 	}
 
@@ -255,10 +258,30 @@ public class AdminController {
 	 */
 	@GetMapping("/admin/universities")
 	public String getUniversities(Model model) {
+
+		List<University>universities = universityService.getAllUniversity();
 		model.addAttribute("universities", universityService.getAllUniversity());
 
 		return "universities";
 	}
+	
+	
+	@GetMapping("/admin/universities/page/{pageNum}")
+	public String listByPage(@PathVariable(name = "pageNum") int PageNum, Model model) {
+		org.springframework.data.domain.Page<University> page =universityService.listByPage(PageNum);
+	
+		List<University>universities= page.getContent();
+		
+		System.out.println("PageNum =" + PageNum);
+		System.out.println("Total elements= "+page.getNumberOfElements());
+		System.out.println("Total Pages= "+page.getTotalPages());
+		
+		model.addAttribute("universities", universities);
+		return "universities";
+		
+	}
+	
+	
 
 	/*
 	 * Method to add a university Need both get and post mapping for adding the
@@ -445,26 +468,9 @@ public class AdminController {
 		return "universitiesAdd";
 	}
 
-	/*
-	 * Show university mapped courses
-	 */
-	/*
-	 * 14th December 2021 -> To be adressed soon
-	 * 
-	 * 
-	 * @GetMapping("/admin/university/courses/{id}") public String
-	 * getUniversityMappedCourses(Model model, @PathVariable long id) {
-	 * model.addAttribute("courses", courseService.getCourseById(id)); return
-	 * "courses"; }
-	 * 
-	 */
-	/*
-	 * Function to populate university list in drop down...
-	 */
-	// @ModelAttribute("universityDTO") UniversityDTO universityDTO
 
 	public void preLoadUniversity(Model model) {
-		List<University> myUniversityList = universityService.getAllUniversity();
+	List<University> myUniversityList = universityService.getAllUniversity();
 		model.addAttribute("universityList", myUniversityList);
 	}
 
@@ -657,8 +663,6 @@ public class AdminController {
 		return "jobs";
 	}
 
-
-
 	/*
 	 * Method to add a job. For that we will need both the get and post mapping. Get
 	 * mapping to open the form Post mapping to send the data from the form and
@@ -674,7 +678,8 @@ public class AdminController {
 
 	@PostMapping("/admin/jobs/add")
 	public String jobsAddPost(@ModelAttribute("jobDTO") JobDTO jobDTO,
-			@RequestParam("selectedLocations") String[] locationsIds) {
+			@RequestParam("selectedLocations") String[] locationsIds,
+			@RequestParam(value = "updateOperation", required = false) String isUpdating) {
 		Job job = new Job();
 		job.setId(jobDTO.getId());
 		job.setTitle(jobDTO.getTitle());
@@ -687,23 +692,74 @@ public class AdminController {
 
 		jobService.addJob(job);
 
-		for (String s : locationsIds) {
-			Location location = locationRepository.getById(Long.valueOf(s));
-			location.getJobs().add(job);
-			locationRepository.save(location);
-		}
+		if (isUpdating == null) {
+			for (String s : locationsIds) {
+				Location location = locationRepository.getById(Long.valueOf(s));
+				location.getJobs().add(job);
+				locationRepository.save(location);
+			}
+		} else {
+			List<Long> jobNotInLocation = new ArrayList<>();
+			List<Long> jobAlreadyInLocation = new ArrayList<>();
+			List<Location> currentLocationList = jobService.getJobById(jobDTO.getId()).get().getLocationList();
 
+			for (Location loc : currentLocationList) {
+				boolean isPresent = false;
+
+				for (String s : locationsIds) {
+					if (loc.getId() == Long.valueOf(s))
+						isPresent = true;
+
+					if (isPresent)
+						jobNotInLocation.add(loc.getId());
+					else
+						jobAlreadyInLocation.add(loc.getId());
+
+				}
+				for (long locationId : jobNotInLocation) {
+					Location locationForJobRemoval = locationRepository.getById(locationId);
+					List<Job> jobList = locationForJobRemoval.getJobs();
+					List<Integer> idsToBeRemoved = new ArrayList<>();
+
+					int x = 0;
+					for (Job jb : jobList) {
+						if (jb.getId() == jobDTO.getId())
+							idsToBeRemoved.add(x);
+						x++;
+					}
+
+					for (int y : idsToBeRemoved) {
+						locationForJobRemoval.getJobs().remove(y);
+					}
+					locationRepository.save(locationForJobRemoval);
+
+				}
+
+				for (String s : locationsIds) {
+
+					Location location = locationRepository.getById(Long.valueOf(s));
+					if (!jobAlreadyInLocation.contains(Long.valueOf(s)))
+						location.getJobs().add(job);
+					locationRepository.save(location);
+
+				}
+
+			}
+		}
+		
+		jobService.addJob(job);
 		return "redirect:/admin/jobs";
+
 	}
-	
+
 	@GetMapping("/admin/job/delete/{id}")
 	public String deleteJob(@PathVariable long id) {
 
 		String type = "job";
 		if (jobRespository.findById(id).isPresent()) {
-			
+
 			Job jobToBeDeleted = jobService.getJobById(id).get();
-			for (Location loc : jobToBeDeleted.getLocationList()){
+			for (Location loc : jobToBeDeleted.getLocationList()) {
 				loc.getJobs().remove(jobToBeDeleted);
 				locationService.addLocation(loc);
 			}
@@ -716,8 +772,27 @@ public class AdminController {
 		return "redirect:/admin/jobs";
 
 	}
-	
-	
+
+	/*
+	 * Function to update the jobs
+	 */
+	@GetMapping("/admin/job/update/{id}")
+	public String editJob(@PathVariable Long id, Model model) {
+		Job job = jobService.getJobById(id).get();
+		JobDTO jobDTO = new JobDTO();
+
+		jobDTO.setId(job.getId());
+		jobDTO.setTitle(job.getTitle());
+		jobDTO.setShortDescription(job.getShortDescription());
+		jobDTO.setDescription(job.getDescription());
+		jobDTO.setPostedBy(job.getPostedBy());
+
+		model.addAttribute("jobDTO", jobDTO);
+		model.addAttribute("locations", locationService.getAllLocations());
+		model.addAttribute("locationsSelectedForThisJob", jobService.getJobById(id).get().getLocationList());
+
+		return "jobsAdd";
+	}
 
 	/*
 	 * ===========All Function below are related to office location ==============
@@ -1302,7 +1377,8 @@ public class AdminController {
 	@PostMapping(path = "/admin/posts/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public String blogPostsAddPostMap(@ModelAttribute("postDTO") PostDTO postDTO, HttpServletRequest request,
 			@RequestParam(name = "featuredImageFile", required = false) MultipartFile featuredImageFile,
-			@RequestParam("selectedCategories") String[] categoriesIds, @RequestParam(value = "updateOperation",required = false) String isUpdating) {
+			@RequestParam("selectedCategories") String[] categoriesIds,
+			@RequestParam(value = "updateOperation", required = false) String isUpdating) {
 
 		/*
 		 * Create a new time stamp and initialize the timestamp with null Check if the
@@ -1337,16 +1413,18 @@ public class AdminController {
 
 		Date date = new Date();
 		String tempDate = new SimpleDateFormat("DD MMMM, YYYY").format(date);
-		System.out.println("TESTING ------------> "+isUpdating);
+		System.out.println("TESTING ------------> " + isUpdating);
 		post.setId(postDTO.getId());
 		post.setPostTitle(postDTO.getPostTitle().strip());
 		post.setHeading(postDTO.getHeading());
 		post.setSubHeading(postDTO.getSubHeading());
 		post.setMainSection(postDTO.getMainSection());
-		if(featuredImageFile!=null) {
+		if (featuredImageFile != null) {
 			post.setFeaturedImageName(featuredImageFile.getOriginalFilename());
-		} else if(isUpdating!=null) {
-			System.out.println("Image test edit ---> "+postService.getPostById(postDTO.getId()).get().getFeaturedImageName()+"PostDTO id = "+postDTO.getId());
+		} else if (isUpdating != null) {
+			System.out.println(
+					"Image test edit ---> " + postService.getPostById(postDTO.getId()).get().getFeaturedImageName()
+							+ "PostDTO id = " + postDTO.getId());
 			post.setFeaturedImageName(postService.getPostById(postDTO.getId()).get().getFeaturedImageName());
 		}
 //		post.setFeaturedImageName(postDTO.getFeaturedImageName());
@@ -1402,8 +1480,8 @@ public class AdminController {
 		}
 
 		postService.addPost(post);
-		
-		if(isUpdating==null) {
+
+		if (isUpdating == null) {
 			for (String s : categoriesIds) {
 				PostCategory postCategory = postCategoryRepository.getById(Long.valueOf(s));
 				postCategory.getPostList().add(post);
@@ -1412,35 +1490,44 @@ public class AdminController {
 		} else {
 			List<Long> postNotInCategory = new ArrayList<>();
 			List<Long> postAlreadyInCategory = new ArrayList<>();
-			List<PostCategory> currentCategoryList = postService.getPostById(postDTO.getId()).get().getPostCategoryList();
-			for(PostCategory pc:currentCategoryList) {
-				boolean isPresent=false; 
-				for(String s : categoriesIds) {if(pc.getId()==Long.valueOf(s)) isPresent=true; }
-				if(!isPresent)
-				postNotInCategory.add(pc.getId());
-				else 
-				postAlreadyInCategory.add(pc.getId());
-				
+			List<PostCategory> currentCategoryList = postService.getPostById(postDTO.getId()).get()
+					.getPostCategoryList();
+			for (PostCategory pc : currentCategoryList) {
+				boolean isPresent = false;
+				for (String s : categoriesIds) {
+					if (pc.getId() == Long.valueOf(s))
+						isPresent = true;
+				}
+				if (!isPresent)
+					postNotInCategory.add(pc.getId());
+				else
+					postAlreadyInCategory.add(pc.getId());
+
 			}
-			for(long categoryId:postNotInCategory) {
+			for (long categoryId : postNotInCategory) {
 				PostCategory postCategoryForPostRemoval = postCategoryRepository.getById(categoryId);
 				List<Post> postList = postCategoryForPostRemoval.getPostList();
 				List<Integer> idsToBeRemoved = new ArrayList<>();
-				int x=0;
-				for(Post po : postList) {if(po.getId()==postDTO.getId()) idsToBeRemoved.add(x); x++;}
-				for(int y : idsToBeRemoved) {postCategoryForPostRemoval.getPostList().remove(y);}
-				postCategoryRepository.save(postCategoryForPostRemoval);
+				int x = 0;
+				for (Post po : postList) {
+					if (po.getId() == postDTO.getId())
+						idsToBeRemoved.add(x);
+					x++;
 				}
+				for (int y : idsToBeRemoved) {
+					postCategoryForPostRemoval.getPostList().remove(y);
+				}
+				postCategoryRepository.save(postCategoryForPostRemoval);
+			}
 			for (String s : categoriesIds) {
-					PostCategory postCategory = postCategoryRepository.getById(Long.valueOf(s));
-					//if(!postCategory.getPostList().contains(postService.getPostById(postDTO.getId())))
-						if(!postAlreadyInCategory.contains(Long.valueOf(s)))
+				PostCategory postCategory = postCategoryRepository.getById(Long.valueOf(s));
+				// if(!postCategory.getPostList().contains(postService.getPostById(postDTO.getId())))
+				if (!postAlreadyInCategory.contains(Long.valueOf(s)))
 					postCategory.getPostList().add(post);
-					postCategoryRepository.save(postCategory);
-				
+				postCategoryRepository.save(postCategory);
+
 			}
 		}
-		
 
 //////		String hostName = request.getHeader("host");
 ////		System.out.println(hostName);

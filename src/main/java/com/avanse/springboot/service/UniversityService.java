@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,16 +16,23 @@ import com.avanse.springboot.repository.UniversityRepository;
 @Service
 public class UniversityService {
 
+	public static final int UNIVERSITTIES_PER_PAGE = 4;
+	
+	
 	@Autowired
 	UniversityRepository universityRepository;
 	
-	
-	
-	
 //	Return the list of all the universities
 	public List<University> getAllUniversity(){
-		return universityRepository.findAll();
+		return (List<University>) universityRepository.findAll();
 	}
+	
+	public Page<University>listByPage(int pageNum){
+		Pageable pageable = PageRequest.of(pageNum -1, UNIVERSITTIES_PER_PAGE);		
+		return universityRepository.findAll(pageable);
+	}
+	
+	
 
 //	Function to delete the university from the database
 	@Transactional
@@ -48,9 +58,6 @@ public class UniversityService {
 	public long numberOfUniversities() {
 		return universityRepository.count();
 	}
-	
-	
-	
 	
 	
 }

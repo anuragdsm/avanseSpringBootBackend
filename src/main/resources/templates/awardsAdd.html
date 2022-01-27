@@ -50,7 +50,7 @@
 					<div class="container-fluid">
 
 						<form th:action="@{/admin/awards/add}" method="post"
-							th:object="${awardsDTO}" enctype="multipart/form-data">
+							th:object="${awardDTO}" enctype="multipart/form-data">
 							<div class="row">
 								<div class="col-sm-5">
 									<input type="hidden" name="id" th:field="*{id}">
