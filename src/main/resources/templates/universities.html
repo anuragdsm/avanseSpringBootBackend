@@ -23,7 +23,60 @@
 					</a>
 				</h6>
 			</div>
+			
+			
+			<script th:inline="javascript" type="text/javascript">
+		let contextPath = 'http://localhost:8080';
 
+		function toggleUniversityStatus(id) {
+			console.log('toggling id = ' + id);
+
+			let customSwitch = 'customSwitch' + id;
+
+			console.log(document.getElementById(customSwitch));
+
+			console.log(document.getElementById(customSwitch).checked);
+
+			if (document.getElementById(customSwitch).checked == true
+					|| document.getElementById(customSwitch).checked == null) {
+
+				document.getElementById(customSwitch).checked = false;
+
+				/* deactivate in controller */
+				console.log('Deactivating..');
+
+				let http = new XMLHttpRequest();
+				let url = contextPath + '/' + 'admin/'
+						+ 'activateDeactivateUniversity' + '/' + id + '/'
+						+ 'DeactivateUniversity';
+
+				http.open("GET", url, false);
+				http.send(null);
+				console.log(http.responseText);
+				document.getElementById('universityStatus' + id).innerHTML = 'University Inactive';
+			}
+
+			else {
+
+				document.getElementById(customSwitch).checked = true;
+				let http = new XMLHttpRequest();
+				let url = contextPath + '/' + 'admin/'
+						+ 'activateDeactivateUniversity' + '/' + id + '/'
+						+ 'ActivateUniversity';
+				console.log('Activating..')
+				http.open("GET", url, false);
+				http.send(null);
+				console.log(http.responseText);
+				document.getElementById('universityStatus' + id).innerHTML = 'University Active';
+			}
+
+		}
+	</script>
+			
+			
+			
+			
+			
 			<!-- Content Row -->
 			<div class="row">
 				<div class="container-fluid">
@@ -51,7 +104,10 @@
 						<tbody>
 
 							<tr th:each="university, iStat : ${universities}">
-								<th scope="row" th:text="${iStat.index + 1}">1</th>
+							
+							
+								<th scope="row" th:text="${iStat.index + startCount}">1</th>
+							
 								<td th:text="${university.name}">Delhi University</td>
 								<td><img src="" height="100px" width="100px"
 									th:src="@{${'/images/universityImages/' + university.imageName}}"></td>
@@ -261,53 +317,7 @@
 
 
 
-	<script th:inline="javascript" type="text/javascript">
-		let contextPath = 'http://localhost:8080';
-
-		function toggleUniversityStatus(id) {
-			console.log('toggling id = ' + id);
-
-			let customSwitch = 'customSwitch' + id;
-
-			console.log(document.getElementById(customSwitch));
-
-			console.log(document.getElementById(customSwitch).checked);
-
-			if (document.getElementById(customSwitch).checked == true
-					|| document.getElementById(customSwitch).checked == null) {
-
-				document.getElementById(customSwitch).checked = false;
-
-				/* deactivate in controller */
-				console.log('Deactivating..');
-
-				let http = new XMLHttpRequest();
-				let url = contextPath + '/' + 'admin/'
-						+ 'activateDeactivateUniversity' + '/' + id + '/'
-						+ 'DeactivateUniversity';
-
-				http.open("GET", url, false);
-				http.send(null);
-				console.log(http.responseText);
-				document.getElementById('universityStatus' + id).innerHTML = 'University Inactive';
-			}
-
-			else {
-
-				document.getElementById(customSwitch).checked = true;
-				let http = new XMLHttpRequest();
-				let url = contextPath + '/' + 'admin/'
-						+ 'activateDeactivateUniversity' + '/' + id + '/'
-						+ 'ActivateUniversity';
-				console.log('Activating..')
-				http.open("GET", url, false);
-				http.send(null);
-				console.log(http.responseText);
-				document.getElementById('universityStatus' + id).innerHTML = 'University Active';
-			}
-
-		}
-	</script>
+	
 
 </body>
 

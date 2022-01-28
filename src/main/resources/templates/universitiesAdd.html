@@ -84,14 +84,42 @@
 								<div class="col-sm-5">
 									<input type="hidden" name="id" th:field="*{id}">
 									<div class="form-group">
-										<label for="name">Name</label> <input type="text"
+										<label for="name">University Name</label> <input type="text"
 											class="form-control" required th:field="*{name}" name="name"
-											id="name" placeholder="Enter name">
+											id="name" placeholder="Enter University name">
 									</div>
 									<div class="form-group">
-										<label for="location">Location</label> <input type="text"
+										<label for="location">Country</label>
+
+										<!-- <input type="text"
 											class="form-control" required th:field="*{location}"
-											name="location" id="location" placeholder="Enter Location">
+											name="location" id="location" placeholder="Enter Location"> -->
+
+
+										<select required class="form-control" id="countryListSelect"
+											name="location">
+											<option value="">Select Country</option>
+										</select>
+										<script>
+												let cSelect=document.getElementById('countryListSelect');
+												let countryApiList;
+												console.log(window.location.href.split('/',3)[2]);
+												fetch("http://"+window.location.href.split('/',3)[2]+"/jsons/countries.json")
+										        .then((value) => {
+											          value.json().then((data) => {
+												        	 console.log(data);
+												        	 countryApiList = data;
+												        	 countryApiList.sort((a,b)=>{if(a.name>b.name) return 1; else if(a.name==b.name) return 0; else return -1;});
+												        	 console.log(countryApiList[0].name);
+												        	 for(let i=0;i<countryApiList.length;i++) {
+												        		 cSelect.innerHTML=cSelect.innerHTML+'<option value="'+countryApiList[i].name+'">'+countryApiList[i].name+'</option>';
+												        	 }
+												          });
+												        })
+										        .catch((error) => {
+										          console.log("error for countries api call", error);
+										        });
+											</script>
 									</div>
 
 									<div class="form-group">
@@ -121,12 +149,41 @@
 								</div>
 								<div class="col-sm-5">
 
-									<div class="form-group">
+									<!-- <div class="form-group">
 										<label for="accomodation">Accommodation Available</label> <input
 											type="text" class="form-control" required
 											th:field="*{accomodation}" name="accomodation"
 											id="accomodation" placeholder="">
+									</div> -->
+
+
+									<div class="form-group">
+										<label for="accomodation">Accommodation Availability </label> 
+
+
+										
+											
+												<div class="input-group-radio">
+													<input name="accomodation" id="accomodationOption1" value="Yes" type="radio"
+														>
+														<label for="accomodationOption1">Yes</label>
+												</div>
+												<div class="input-group-radio">
+													<input name="accomodation" id="accomodationOption2" type="radio" value="No"> 
+													<label for="accomodationOption2">No</label>
+												</div>
+												<div class="input-group-radio">
+													<input name="accomodation" type="radio"
+														id="accomodationOption3" value="N/A"> 
+														<label for="accomodationOption3">N/A</label>
+												</div>
+											
+											
+										
+
 									</div>
+
+
 									<div class="form-group">
 										<label for="intakePeriod">Intake Period</label> <input
 											type="text" class="form-control" required
