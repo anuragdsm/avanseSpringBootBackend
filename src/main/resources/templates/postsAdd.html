@@ -34,28 +34,25 @@
 
 		<div layout:fragment="content">
 
-
+			<h6 class="m-0 font-weight-bold text-primary">
+				<a href="javascript:history.back()"
+					class="btn btn-info btn-icon-split btn-sm float-right mr-3"> <span
+					class="icon text-white-50"> <i class="fas fa-arrow-left"></i>
+				</span> <span class="text">Back</span>
+				</a>
+			</h6>
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
 				<!-- Page Heading -->
 				<div
 					class="d-sm-flex align-items-center justify-content-between mb-4">
 					<h1 class="h3 mb-0 text-gray-800">Create Post</h1>
-					
+
 				</div>
 				<!-- Section Content Start -->
 				<!-- DataTales Example -->
 				<div class="card shadow mb-4">
-					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">
-							<a href="#"
-								class="btn btn-info btn-icon-split btn-sm float-right mr-3">
-								<span class="icon text-white-50"> <i
-									class="fas fa-arrow-left"></i>
-							</span> <span class="text">Back</span>
-							</a>
-						</h6>
-					</div>
+					
 					<div class="card-body">
 						<form th:action="@{/admin/posts/add}" class="form-horizontal"
 							method="post" th:object="${postDTO}"
@@ -92,37 +89,45 @@
 										name="sub_heading" value="" th:field="*{subHeading}">
 								</div>
 							</div>
-							
+
 							<div class="form-group">
-								
-								
-										<!-- When new post is being created this post will be rendered -->
-										<div th:if="${postCategoriesSelectedForThisPost==null}" class="col-sm-10">
-										<label class="col-sm-2 control-label">Categories to attach</label>
-											<div th:each= "postCategory, iStat : ${postCategories}" >
-												<input type="checkbox" th:id="${postCategory.id}" 
-													th:name="selectedCategories" th:value="${postCategory.id}">
-												<label th:for="${postCategory.id}" th:text="${postCategory.name}" class="col-sm-2 control-label">Category</label>
-											</div>
-										</div>
-										
-										<!-- While Updating this block will be rendered -->
-										<div th:if="${postCategoriesSelectedForThisPost!=null}" class="col-sm-10">
-										<input name="updateOperation" type="text" value="updateOperationInputText" hidden>
-										<label class="col-sm-2 control-label">Categories to attach</label>
-											<div th:each= "postCategory, iStat : ${postCategories}" >
-												<input type="checkbox" th:id="${postCategory.id}" 
-													th:name="selectedCategories" th:value="${postCategory.id}" th:checked="${#lists.contains(postCategoriesSelectedForThisPost,postCategory)}">
-												<label th:for="${postCategory.id}" th:text="${postCategory.name}" class="col-sm-2 control-label">Category</label>
-											</div>
-										</div>
-								
-								
+
+
+								<!-- When new post is being created this post will be rendered -->
+								<div th:if="${postCategoriesSelectedForThisPost==null}"
+									class="col-sm-10">
+									<label class="col-sm-2 control-label">Categories to
+										attach</label>
+									<div th:each="postCategory, iStat : ${postCategories}">
+										<input type="checkbox" th:id="${postCategory.id}"
+											th:name="selectedCategories" th:value="${postCategory.id}">
+										<label th:for="${postCategory.id}"
+											th:text="${postCategory.name}" class="col-sm-2 control-label">Category</label>
+									</div>
+								</div>
+
+								<!-- While Updating this block will be rendered -->
+								<div th:if="${postCategoriesSelectedForThisPost!=null}"
+									class="col-sm-10">
+									<input name="updateOperation" type="text"
+										value="updateOperationInputText" hidden> <label
+										class="col-sm-2 control-label">Categories to attach</label>
+									<div th:each="postCategory, iStat : ${postCategories}">
+										<input type="checkbox" th:id="${postCategory.id}"
+											th:name="selectedCategories" th:value="${postCategory.id}"
+											th:checked="${#lists.contains(postCategoriesSelectedForThisPost,postCategory)}">
+										<label th:for="${postCategory.id}"
+											th:text="${postCategory.name}" class="col-sm-2 control-label">Category</label>
+									</div>
+								</div>
+
+
 							</div>
-							
-							
+
+
 							<div class="card-header py-3 mb-4">
-								<h6 class="m-0 font-weight-bold text-primary">Featured Image</h6>
+								<h6 class="m-0 font-weight-bold text-primary">Featured
+									Image</h6>
 							</div>
 							​
 							<div class="form-group">
@@ -138,13 +143,14 @@
 							</div>
 							​ ​ ​
 							<div class="form-group">
-								<label for="inputEmail3" class="col-sm-2 control-label">Featured Image Alt</label>
+								<label for="inputEmail3" class="col-sm-2 control-label">Featured
+									Image Alt</label>
 								<div class="col-sm-10">
 									<input type="text" class="form-control" id="image_alt"
 										name="image_alt" value="" th:field="*{featuredImageAltText}">
 								</div>
 							</div>
-							
+
 
 
 							<div class="card-header py-3 mb-4">
@@ -162,7 +168,7 @@
 								</div>
 							</div>
 
-							
+
 							<!-- 	​
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">Header
@@ -175,7 +181,7 @@
 
  -->
 
-							
+
 
 							<div class="card-header py-3 mb-4">
 								<h6 class="m-0 font-weight-bold text-primary">SEO</h6>
@@ -191,7 +197,7 @@
 							</div>
 
 
-							
+
 
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">Meta

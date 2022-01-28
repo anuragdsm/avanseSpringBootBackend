@@ -15,9 +15,13 @@
 			<div
 				class="d-sm-flex align-items-center justify-content-between mb-4">
 				<h1 class="h3 mb-0 text-gray-800">University Management</h1>
-				<a href="#"
-					class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-					class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+				<h6 class="m-0 font-weight-bold text-primary">
+					<a href="javascript:history.back()"
+						class="btn btn-info btn-icon-split btn-sm float-right mr-3"> <span
+						class="icon text-white-50"> <i class="fas fa-arrow-left"></i>
+					</span> <span class="text">Back</span>
+					</a>
+				</h6>
 			</div>
 
 			<!-- Content Row -->
@@ -163,19 +167,28 @@
 			<div>
 				<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-center">
-						<li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}"><a class="page-link"
-							th:href="@{/admin/universities/page/1}">First</a></li>
-						
-						<li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}"><a class="page-link"
-							th:href="@{'/admin/universities/page/' + ${currentPage - 1}}">Previous</a></li>
-						
-						<li th:class="${currentPage != i ? 'page-item': 'page-item active' } "   th:each = "i : ${#numbers.sequence(1, totalPages)}">
-							<a class="page-link" th:href="@{'/admin/universities/page/' + ${i}} ">[[${i}]]</a>
-						</li>
+						<li
+							th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}"><a
+							class="page-link" th:href="@{/admin/universities/page/1}">First</a></li>
 
-						<li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}"><a class="page-link"
+						<li
+							th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}"><a
+							class="page-link"
+							th:href="@{'/admin/universities/page/' + ${currentPage - 1}}">Previous</a></li>
+
+						<li
+							th:class="${currentPage != i ? 'page-item': 'page-item active' } "
+							th:each="i : ${#numbers.sequence(1, totalPages)}"><a
+							class="page-link"
+							th:href="@{'/admin/universities/page/' + ${i}} ">[[${i}]]</a></li>
+
+						<li
+							th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}"><a
+							class="page-link"
 							th:href="@{'/admin/universities/page/' + ${currentPage + 1}}">Next</a></li>
-						<li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}"><a class="page-link"
+						<li
+							th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}"><a
+							class="page-link"
 							th:href="@{'/admin/universities/page/' + ${totalPages}}">Last</a></li>
 					</ul>
 				</nav>

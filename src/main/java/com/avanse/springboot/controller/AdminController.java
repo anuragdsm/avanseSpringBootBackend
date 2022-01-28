@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,8 @@ import com.avanse.springboot.model.Post;
 import com.avanse.springboot.model.PostCategory;
 import com.avanse.springboot.model.Testimonial;
 import com.avanse.springboot.model.University;
+import com.avanse.springboot.model.forms.contactUs.Customer;
+import com.avanse.springboot.model.forms.contactUs.exports.CustomersCSVExporter;
 import com.avanse.springboot.repository.AwardRepository;
 import com.avanse.springboot.repository.CourseRepository;
 import com.avanse.springboot.repository.HeaderRepository;
@@ -74,6 +77,7 @@ import com.avanse.springboot.service.PostCategoryService;
 import com.avanse.springboot.service.PostService;
 import com.avanse.springboot.service.TestimonialService;
 import com.avanse.springboot.service.UniversityService;
+import com.avanse.springboot.service.forms.contactUs.CustomerService;
 
 import lombok.AllArgsConstructor;
 
@@ -2013,6 +2017,20 @@ public class AdminController {
 	/*
 	 * -------Functions handelling testimonials ends here
 	 */
-
+	
+	
+	/*
+	 * function to export the list of customers in CSV
+	 */
+	@Autowired
+	CustomerService customerService;
+	
+	@GetMapping("/admin/customers/csv")
+	public void exportToCSV(HttpServletResponse response) throws IOException{
+		List<Customer> listOfCustomers = customerService.getAllCustomers();
+		CustomersCSVExporter exporter = new CustomersCSVExporter();
+		exporter.export(listOfCustomers, response);
+	}
+	
 //	End of class
 }

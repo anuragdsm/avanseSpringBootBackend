@@ -34,6 +34,14 @@
 
 		<div layout:fragment="content">
 
+			<h6 class="m-0 font-weight-bold text-primary">
+				<a href="javascript:history.back()"
+					class="btn btn-info btn-icon-split btn-sm float-right mr-3"> <span
+					class="icon text-white-50"> <i class="fas fa-arrow-left"></i>
+				</span> <span class="text">Back</span>
+				</a>
+			</h6>
+
 
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
@@ -42,7 +50,7 @@
 				<div
 					class="d-sm-flex align-items-center justify-content-between mb-4">
 					<h1 class="h3 mb-0 text-gray-800">Testimonial Management</h1>
-					
+
 				</div>
 
 				<!-- Content Row -->
@@ -66,8 +74,8 @@
 									</div>
 									<div class="form-group">
 										<label for="name">Message</label> <input type="text"
-											class="form-control" required th:field="*{message}" name="message"
-											id="message" placeholder="Enter message">
+											class="form-control" required th:field="*{message}"
+											name="message" id="message" placeholder="Enter message">
 									</div>
 									<p>Person Picture</p>
 									<div class="custom-file">
@@ -106,7 +114,7 @@
 			class="fas fa-angle-up"></i>
 		</a>
 
-		
+
 	</div>
 
 	<!-- Bootstrap core JavaScript-->
@@ -128,7 +136,7 @@
 
 	</script>
 
-	
+
 </body>
 
 </html>
