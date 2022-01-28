@@ -273,8 +273,6 @@ public class AdminController {
 		List<University>universities= page.getContent();
 		
 		
-		
-		
 		System.out.println("PageNum =" + pageNum);
 		System.out.println("Total elements= "+page.getNumberOfElements());
 		System.out.println("Total Pages= "+page.getTotalPages());
@@ -287,7 +285,9 @@ public class AdminController {
 			endCount = page.getTotalElements();
 		}
 		
+		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("startCount", startCount);
+		model.addAttribute("totalPages", page.getTotalPages());
 		model.addAttribute("endCount", endCount);
 		model.addAttribute("totalItems", page.getTotalElements());
 		model.addAttribute("universities", universities);
