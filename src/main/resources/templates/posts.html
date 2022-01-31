@@ -42,6 +42,12 @@
 				</span> <span class="text">Back</span>
 				</a>
 			</h6>
+			
+			
+			
+			
+			
+			
 
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
@@ -52,11 +58,58 @@
 					<h1 class="h3 mb-0 text-gray-800">Posts Management</h1>
 
 				</div>
+				
+		<script th:inline="javascript" type="text/javascript">
+		let contextPath = 'http://localhost:8080';
 
+		function togglePostStatus(id) {
+			console.log('toggling id = ' + id);
+
+			let customSwitch = 'customSwitch' + id;
+
+			console.log(document.getElementById(customSwitch));
+
+			console.log(document.getElementById(customSwitch).checked);
+
+			if (document.getElementById(customSwitch).checked == true
+					|| document.getElementById(customSwitch).checked == null) {
+
+				document.getElementById(customSwitch).checked = false;
+
+				/* deactivate in controller */
+				console.log('Deactivating..');
+
+				let http = new XMLHttpRequest();
+				let url = contextPath + '/' + 'admin/'
+						+ 'activateDeactivatePost' + '/' + id + '/'
+						+ 'DeactivatePost';
+
+				http.open("GET", url, false);
+				http.send(null);
+				console.log(http.responseText);
+				document.getElementById('postStatus' + id).innerHTML = 'Post Inactive';
+			}
+
+			else {
+
+				document.getElementById(customSwitch).checked = true;
+				let http = new XMLHttpRequest();
+				let url = contextPath + '/' + 'admin/'
+						+ 'activateDeactivatePost' + '/' + id + '/'
+						+ 'ActivatePost';
+				console.log('Activating..')
+				http.open("GET", url, false);
+				http.send(null);
+				console.log(http.responseText);
+				document.getElementById('postStatus' + id).innerHTML = 'Post Active';
+			}
+
+		}
+	</script>		
+				
 				<!-- Content Row -->
 				<div class="row">
 					<div class="container-fluid">
-
 						<a th:href="@{/admin/posts/add}" style="margin: 20px 0"
 							class="btn btn-primary">Create Post</a>
 						<table class="table">
@@ -67,7 +120,6 @@
 									<th scope="col">Created on</th>
 									<th scope="col">Last Modified</th>
 									<th scope="col">Category</th>
-
 									<th scope="col">Status</th>
 									<th scope="col">Edit Page</th>
 									<th scope="col">Delete</th>

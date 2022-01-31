@@ -19,7 +19,6 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
-//@AllArgsConstructor
 @Table(name = "pages")
 public class Page implements Serializable {
 	
@@ -36,7 +35,7 @@ public class Page implements Serializable {
 	
 	@UpdateTimestamp
 	private Date lastModified;
-	private Boolean isPageActive=false;	
+	private Boolean isPageActive=true;	
 	private String fileName;
 	private String extractedFileName;
 	private String pageLink;

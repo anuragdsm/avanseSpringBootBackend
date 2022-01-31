@@ -45,6 +45,8 @@ public class Course implements Serializable{
 	private String description;
 	private Double fees;
 	private String exams;
+	private Boolean isCourseActive = true;
+	
 	
 	private String documentsRequired;
 	@ManyToOne(fetch = FetchType.LAZY)

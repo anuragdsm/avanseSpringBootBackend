@@ -164,10 +164,6 @@
  -->
 								<td th:text="${university.accomodation}">Accomodadtion</td>
 
-
-
-
-
 								<td>
 									<div class="custom-control custom-switch"
 										th:onclick="'toggleUniversityStatus('+${university.id}+')'">
@@ -190,33 +186,20 @@
 									th:href="@{/admin/university/update/{id}(id=${university.id})}"
 									class="btn btn-warning">Update</a></td>
 
-
-
-
 								<td><a href=""
 									th:href="@{/admin/university/delete/{id}(id=${university.id})}"
 									class="btn btn-danger">Delete</a></td>
 							</tr>
-
 						</tbody>
 					</table>
-
-
 				</div>
-
-
-
-
 			</div>
-
 			<div class="text-center m-1" th:if="${totalItems>0}">
 				<span>Showing Universities # [[${startCount}]] to
 					[[${endCount}]] of [[${totalItems}]]</span>
 			</div>
-
 			<div class="text-center m-1" th:unless="${totalItems>0}">
 				<span>No users found</span>
-
 			</div>
 
 			<!-- Pagination  -->

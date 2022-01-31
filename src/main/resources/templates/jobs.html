@@ -46,6 +46,54 @@
 							</span> <span class="text">Back</span>
 							</a>
 						</h6>
+						
+			<script th:inline="javascript" type="text/javascript">
+		let contextPath = 'http://localhost:8080';
+
+		function toggleJobStatus(id) {
+			console.log('toggling id = ' + id);
+
+			let customSwitch = 'customSwitch' + id;
+
+			console.log(document.getElementById(customSwitch));
+
+			console.log(document.getElementById(customSwitch).checked);
+
+			if (document.getElementById(customSwitch).checked == true
+					|| document.getElementById(customSwitch).checked == null) {
+
+				document.getElementById(customSwitch).checked = false;
+
+				/* deactivate in controller */
+				console.log('Deactivating..');
+
+				let http = new XMLHttpRequest();
+				let url = contextPath + '/' + 'admin/'
+						+ 'activateDeactivateJob' + '/' + id + '/'
+						+ 'DeactivateJob';
+
+				http.open("GET", url, false);
+				http.send(null);
+				console.log(http.responseText);
+				document.getElementById('jobStatus' + id).innerHTML = 'Job Inactive';
+			}
+
+			else {
+
+				document.getElementById(customSwitch).checked = true;
+				let http = new XMLHttpRequest();
+				let url = contextPath + '/' + 'admin/'
+						+ 'activateDeactivateJob' + '/' + id + '/'
+						+ 'ActivateJob';
+				console.log('Activating..')
+				http.open("GET", url, false);
+				http.send(null);
+				console.log(http.responseText);
+				document.getElementById('jobStatus' + id).innerHTML = 'Job Active';
+			}
+
+		}
+	</script>
 				
 				<div
 					class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -66,10 +114,14 @@
 									<th scope="col">SN</th>
 									<th scope="col">Job Id</th>
 									<th scope="col">Job Title</th>
+									<th scope="col">Experience</th>
+									<th scope="col">Skills</th>
 									<th scope="col">Post Date</th>
+									<th scope="col">Short Description</th>
 									<th scope="col">Description</th>
 									<th scope="col">Location</th>
 									<th scope="col">Posted By</th>
+									<th scope="col">Status</th>
 									<th scope="col">Update</th>
 									<th scope="col">Delete</th>
 								</tr>
@@ -80,7 +132,10 @@
 									<th scope="row" th:text="${iStat.index + 1}">1</th>
 									<td th:text="${job.id}">1</td>
 									<td th:text="${job.title}">Software Engineer</td>
+									<td th:text="${job.experienceInYears}+' years'" >2+Years</td>
+									<td th:text="${job.skills}" >Skills</td>
 									<td th:text="${job.jobCreatedDate}">2021-12-12</td>
+									<td th:text="${job.shortDescription}">Short Description</td>
 
 									<!-- 
 									<td class="col-sm-4" th:text="${job.description}">Lorm
@@ -124,6 +179,38 @@
 										</table>
 									</td>
 									<td th:text="${job.postedBy}">Posted By</td>
+									
+									
+									
+									<td>
+									<div class="custom-control custom-switch"
+										th:onclick="'toggleJobStatus('+${job.id}+')'">
+										<input th:inline="text" type="checkbox"
+											th:if="${job.isJobActive==true}" checked
+											class="custom-control-input"
+											th:id="'customSwitch'+${job.id}"> <input
+											type="checkbox"
+											th:if="${job.isJobActive==false}"
+											class="custom-control-input"
+											th:id="'customSwitch'+${job.id}"> <label
+											class="custom-control-label"
+											th:for="'customSwitch'+${job.id}"><span
+											th:id="'jobStatus'+${job.id}"
+											th:text="${job.isJobActive==true ?'Job Active':'Job Inactive'}"></span></label>
+									</div>
+								</td>
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
 
 									<td><a href=""
 										th:href="@{/admin/job/update/{id}(id=${job.id})}"

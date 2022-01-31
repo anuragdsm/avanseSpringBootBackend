@@ -34,125 +34,252 @@
 
 		<div layout:fragment="content">
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
+			<!-- Begin Page Content -->
+			<div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Course Management</h1>
-                        <h6 class="m-0 font-weight-bold text-primary">
-							<a href="javascript:history.back()"
-								class="btn btn-info btn-icon-split btn-sm float-right mr-3">
-								<span class="icon text-white-50"> <i
-									class="fas fa-arrow-left"></i>
-							</span> <span class="text">Back</span>
-							</a>
-						</h6>
-                    </div>
-                                              
-                    <!-- Content Row -->
-                    <div class="row">
-                    
-                    <div class="container-fluid">
+				<!-- Page Heading -->
+				<div
+					class="d-sm-flex align-items-center justify-content-between mb-4">
+					<h1 class="h3 mb-0 text-gray-800">Course Management</h1>
+					<h6 class="m-0 font-weight-bold text-primary">
+						<a href="javascript:history.back()"
+							class="btn btn-info btn-icon-split btn-sm float-right mr-3">
+							<span class="icon text-white-50"> <i
+								class="fas fa-arrow-left"></i>
+						</span> <span class="text">Back</span>
+						</a>
+					</h6>
+				</div>
 
-    <a th:href="@{/admin/courses/add}" style="margin: 20px 0" class="btn btn-primary">Add Course</a>
-    <table class="table">
-        <thead class="thead-light">
-        <tr>
-            <th scope="col">SN</th>
-            <th scope="col">Course Name</th>
-            <th scope="col">University</th>
-            <th scope="col">Duration</th>
-            <th scope="col">Fees</th>
-            <th scope="col">Documents Required</th>
-            <th scope="col">Description</th>
-            <th scope="col">Delete</th>
-            <th scope="col">Update</th>
-        </tr>
-        </thead>
-        <tbody>
 
-        <tr th:each="course, iStat : ${courses}">
-            <th scope="row" th:text="${iStat.index + 1}">1</th>
-            <td th:text="${course.title}">Engineering</td>
-            <td th:text="${course.university.name}">Engineering</td>
-            <td th:text="${course.duration}">1 year</td>
-            <td th:text="${course.fees}">INR 20,0000</td>
-            <td th:text="${course.documentsRequired}">Degree</td>
-            <td th:text="${course.description}">Description</td>
-            <td><a href="" th:href="@{/admin/course/delete/{id}(id=${course.id})}" class="btn btn-danger">Delete</a></td>
-            <td><a href="" th:href="@{/admin/course/update/{id}(id=${course.id})}" class="btn btn-warning">Update</a></td>
 
-        </tr>
-        </tbody>
-    </table>
-</div>
-                    	
-                    </div>
 
-                    
-                    <!-- Content Row -->
-                    
-           
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
 
-        </div>
-        <!-- End of Content Wrapper -->
+				<script th:inline="javascript" type="text/javascript">
+					let contextPath = 'http://localhost:8080';
 
-    </div>
-    
-    </div>
-    <!-- End of Page Wrapper -->
+					function toggleCourseStatus(id) {
+						console.log('toggling id = ' + id);
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+						let customSwitch = 'customSwitch' + id;
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="#" th:href=@{/logout}>Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
+						console.log(document.getElementById(customSwitch));
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+						console
+								.log(document.getElementById(customSwitch).checked);
 
-    <!-- Core plugin JavaScript-->
-    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+						if (document.getElementById(customSwitch).checked == true
+								|| document.getElementById(customSwitch).checked == null) {
 
-    <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin-2.min.js"></script>
+							document.getElementById(customSwitch).checked = false;
 
-    <!-- Page level plugins -->
-    <script src="/vendor/chart.js/Chart.min.js"></script>
+							/* deactivate in controller */
+							console.log('Deactivating..');
 
-    <!-- Page level custom scripts -->
-    <script src="/js/demo/chart-area-demo.js"></script>
-    <script src="/js/demo/chart-pie-demo.js"></script>   
+							let http = new XMLHttpRequest();
+							let url = contextPath + '/' + 'admin/'
+									+ 'activateDeactivateCourse' + '/' + id
+									+ '/' + 'DeactivateCourse';
+
+							http.open("GET", url, false);
+							http.send(null);
+							console.log(http.responseText);
+							document.getElementById('courseStatus' + id).innerHTML = 'Course Inactive';
+						}
+
+						else {
+
+							document.getElementById(customSwitch).checked = true;
+							let http = new XMLHttpRequest();
+							let url = contextPath + '/' + 'admin/'
+									+ 'activateDeactivateCourse' + '/' + id
+									+ '/' + 'ActivateCourse';
+							console.log('Activating..')
+							http.open("GET", url, false);
+							http.send(null);
+							console.log(http.responseText);
+							document.getElementById('courseStatus' + id).innerHTML = 'Course Active';
+						}
+
+					}
+				</script>
+
+
+
+
+
+				<!-- Content Row -->
+				<div class="row">
+
+					<div class="container-fluid">
+
+						<a th:href="@{/admin/courses/add}" style="margin: 20px 0"
+							class="btn btn-primary">Add Course</a>
+						<table class="table">
+							<thead class="thead-light">
+								<tr>
+									<th scope="col">SN</th>
+									<th scope="col">Course Name</th>
+									<th scope="col">University</th>
+									<th scope="col">Duration</th>
+									<th scope="col">Fees</th>
+
+									<th scope="col">Description</th>
+									<th scope="col">Documents Required</th>
+									<th scope="col">Status</th>
+
+
+									<th scope="col">Update</th>
+									<th scope="col">Delete</th>
+
+								</tr>
+							</thead>
+							<tbody>
+
+								<tr th:each="course, iStat : ${courses}">
+									<th scope="row" th:text="${iStat.index + 1}">1</th>
+									<td th:text="${course.title}">Engineering</td>
+									<td th:text="${course.university.name}">Engineering</td>
+									<td th:text="${course.duration}">1 year</td>
+									<td th:text="${course.fees}">INR 20,0000</td>
+
+									<td><a href="#" data-toggle="modal"
+										th:data-target="'#myModal'+${course.id}">Course
+											Description</a> <!-- Modal -->
+										<div class="modal fade" th:id="'myModal'+${course.id}"
+											role="dialog">
+											<div class="modal-dialog modal-xl">
+
+												<!-- Modal content-->
+												<div class="modal-content">
+													<div class="modal-header">
+														<h4 class="modal-title" th:text="${course.title}">Course
+															Title</h4>
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+
+													</div>
+													<div class="modal-body">
+
+														<p th:utext="${course.description}">Some text in the
+															modal.</p>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default"
+															data-dismiss="modal">Close</button>
+													</div>
+												</div>
+
+											</div>
+										</div></td>
+
+
+
+
+
+
+
+
+
+
+
+									<td th:text="${course.documentsRequired}">Degree</td>
+									<td>
+										<div class="custom-control custom-switch"
+											th:onclick="'toggleCourseStatus('+${course.id}+')'">
+											<input th:inline="text" type="checkbox"
+												th:if="${course.isCourseActive==true}" checked
+												class="custom-control-input"
+												th:id="'customSwitch'+${course.id}"> <input
+												type="checkbox" th:if="${course.isCourseActive==false}"
+												class="custom-control-input"
+												th:id="'customSwitch'+${course.id}"> <label
+												class="custom-control-label"
+												th:for="'customSwitch'+${course.id}"><span
+												th:id="'courseStatus'+${course.id}"
+												th:text="${course.isCourseActive==true ?'Course Active':'Course Inactive'}"></span></label>
+										</div>
+									</td>
+									<td><a href=""
+										th:href="@{/admin/course/update/{id}(id=${course.id})}"
+										class="btn btn-warning">Update</a></td>
+									<td><a href=""
+										th:href="@{/admin/course/delete/{id}(id=${course.id})}"
+										class="btn btn-danger">Delete</a></td>
+
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+
+
+				<!-- Content Row -->
+
+
+				<!-- Footer -->
+				<footer class="sticky-footer bg-white">
+					<div class="container my-auto">
+						<div class="copyright text-center my-auto">
+							<span>Copyright &copy; Your Website 2021</span>
+						</div>
+					</div>
+				</footer>
+				<!-- End of Footer -->
+
+			</div>
+			<!-- End of Content Wrapper -->
+
+		</div>
+
+	</div>
+	<!-- End of Page Wrapper -->
+
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top"> <i
+		class="fas fa-angle-up"></i>
+	</a>
+
+	<!-- Logout Modal-->
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">Select "Logout" below if you are ready
+					to end your current session.</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button"
+						data-dismiss="modal">Cancel</button>
+					<a class="btn btn-primary" href="#" th:href=@{/logout}>Logout</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript-->
+	<script src="/vendor/jquery/jquery.min.js"></script>
+	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script src="/js/sb-admin-2.min.js"></script>
+
+	<!-- Page level plugins -->
+	<script src="/vendor/chart.js/Chart.min.js"></script>
+
+	<!-- Page level custom scripts -->
+	<script src="/js/demo/chart-area-demo.js"></script>
+	<script src="/js/demo/chart-pie-demo.js"></script>
 
 </body>
 

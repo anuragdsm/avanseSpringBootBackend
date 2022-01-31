@@ -610,6 +610,29 @@ public class AdminController {
 		model.addAttribute("courseDTO", courseDTO);
 		return "coursesAdd";
 	}
+	
+	
+	
+	// Activate Deactivate course
+		@GetMapping("/admin/activateDeactivateCourse/{id}/{action}")
+		@ResponseBody
+		@CrossOrigin("*")
+		public String activateDeactivateCourse(@PathVariable(name = "id") long id, @PathVariable String action) {
+			System.out.println("Requested for Course action = " + action + " for Course id= " + id);
+			if (action.equals("ActivateCourse")) {
+				Course course= courseService.getCourseById(id).get();
+				course.setIsCourseActive(true);
+				courseService.addCourse(course);
+				return "Course Activated!!";
+			} else {
+				Course course= courseService.getCourseById(id).get();
+				course.setIsCourseActive(false);
+				courseService.addCourse(course);
+				return "Course De-Activated!!";
+			}
+		}
+
+
 
 	/*
 	 * ===========All Function below are related to images================
@@ -701,9 +724,12 @@ public class AdminController {
 		Job job = new Job();
 		job.setId(jobDTO.getId());
 		job.setTitle(jobDTO.getTitle());
+		
 		job.setShortDescription(jobDTO.getShortDescription());
 		job.setDescription(jobDTO.getDescription());
 		job.setPostedBy(jobDTO.getPostedBy());
+		job.setExperienceInYears(jobDTO.getExperienceInYears());
+		job.setSkills(jobDTO.getSkills());
 		Date date = new Date();
 		String dateOfJobCreated = new SimpleDateFormat("DD MMMM, YYYY").format(date);
 		job.setJobCreatedDate(dateOfJobCreated);
@@ -811,6 +837,36 @@ public class AdminController {
 
 		return "jobsAdd";
 	}
+	
+	
+	
+	
+	@GetMapping("/admin/activateDeactivateJob/{id}/{action}")
+	@ResponseBody
+	@CrossOrigin("*")
+	public String activateDeactivateJob(@PathVariable(name = "id") long id, @PathVariable String action) {
+		System.out.println("Requested for Job action = " + action + " for Job id= " + id);
+		Job job = jobService.getJobById(id).get();
+
+		if (action.equals("ActivateJob")) {
+			job.setIsJobActive(true);
+			jobService.addJob(job);
+			return "Job Activated/Published";
+		}
+
+		else {
+			job.setIsJobActive(false);
+			jobService.addJob(job);
+			return "Job Deactivate/Unpublished";
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
 
 	/*
 	 * ===========All Function below are related to office location ==============
@@ -1804,6 +1860,33 @@ public class AdminController {
 		return "postsAdd";
 
 	}
+	
+	
+	
+	
+	
+	
+	
+	// Activate Deactivate post
+		@GetMapping("/admin/activateDeactivatePost/{id}/{action}")
+		@ResponseBody
+		@CrossOrigin("*")
+		public String activateDeactivatePost(@PathVariable(name = "id") long id, @PathVariable String action) {
+			System.out.println("Requested for Post action = " + action + " for Post id= " + id);
+			if (action.equals("ActivatePost")) {
+				Post post= postService.getPostById(id).get();
+				post.setIsPostActive(true);
+				postService.addPost(post);
+				return "Post Activated!!";
+			} else {
+				Post post= postService.getPostById(id).get();
+				post.setIsPostActive(false);
+				postService.addPost(post);
+				return "Post De-Activated!!";
+			}
+		}
+
+
 
 	/*
 	 * POST CATEGORIES
@@ -1813,7 +1896,6 @@ public class AdminController {
 
 	@GetMapping("/admin/postCategories")
 	public String getCategories(Model model) {
-
 		model.addAttribute("postCategories", postCategoryService.getAllPostCategories());
 		return "postCategories";
 

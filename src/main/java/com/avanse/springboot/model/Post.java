@@ -1,21 +1,17 @@
 package com.avanse.springboot.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -52,9 +48,11 @@ public class Post implements Serializable {
 		@ManyToMany(mappedBy = "postList", fetch = FetchType.LAZY)
 		private List<PostCategory>postCategoryList;
 		
-		private Boolean isPostActive=false;
+		private Boolean isPostActive=true;
 		private String fileName;
 		private String postTitle;
+		
+		
 		
 		private String extractedFileName;
 		private String postLink;

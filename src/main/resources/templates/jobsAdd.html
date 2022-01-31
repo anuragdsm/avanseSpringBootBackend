@@ -64,8 +64,41 @@
 										class="form-control" required th:field="*{postedBy}"
 										name="postedBy" id="postedBy" placeholder="Posted By">
 								</div>
-
+								
+								<div class="form-group">
+									<label for="postedBy">Skills </label> <input type="text"
+										class="form-control" required th:field="*{skills}"
+										name="postedBy" id="postedBy" placeholder="Seperate Skills by comma(,)">
+								</div>
+								
+								
+								
+								
+								
+								<div class="form-group">
+										<label for="experienceInYears">Experience In Years</label> <select
+											class="form-control" required th:field="*{experienceInYears}"
+											name="experienceInYears" id="experienceInYears"
+											placeholder="Experience In Years">
+											<option value="">Select Experience In Years</option>
+										</select>
+										<script type="text/javascript">
+											
+											let establishedYearBox = document
+													.getElementById('experienceInYears');
+											for (let i = 0; i < 20; i++) {
+												establishedYearBox.innerHTML = establishedYearBox.innerHTML
+														+ '<option value='+i+'>'
+														+ i + '</option>';
+											}
+										</script>
+									</div>
+								
+					
+								
 							</div>
+							
+					
 
 							<div class="col-sm-5">
 
@@ -79,14 +112,16 @@
 										<label th:for="${location.id}" th:text="${location.city}"
 											class="col-sm-5 control-label">Location</label>
 									</div>
+									
+									
 								</div>
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-sm-5 control-label">Short Description <em>(250
+							<label class="col-lg-10 control-label">Short Description <em>(250
 									Characters)</em></label> ​
-							<div class="col-sm-5">
+							<div class="col-lg-10">
 								<textarea class="form-control " id="" name="shortDescription"
 									th:field="*{shortDescription}" placeholder="ShortDescription in plain text to show in cards"
 									maxlength = 150 data-max-length = 150></textarea>

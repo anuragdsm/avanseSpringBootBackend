@@ -41,12 +41,6 @@
 				<div
 					class="d-sm-flex align-items-center justify-content-between mb-4">
 					<h1 class="h3 mb-0 text-gray-800">Create Pages</h1>
-					
-				</div>
-				<!-- Section Content Start -->
-				<!-- DataTales Example -->
-				<div class="card shadow mb-4">
-					<div class="card-header py-3">
 						<h6 class="m-0 font-weight-bold text-primary">
 							<a href="javascript:history.back()"
 								class="btn btn-info btn-icon-split btn-sm float-right mr-3">
@@ -55,6 +49,13 @@
 							</span> <span class="text">Back</span>
 							</a>
 						</h6>
+					
+				</div>
+				<!-- Section Content Start -->
+				<!-- DataTales Example -->
+				<div class="card shadow mb-4">
+					<div class="card-header py-3">
+					
 					</div>
 					<div class="card-body">
 						<form th:action="@{/admin/pages/add}" class="form-horizontal"
@@ -267,6 +268,18 @@
 						</form>
 					</div>
 				</div>
+				
+				<script type="text/javascript">
+				function onSubmit() {
+					if(document.getElementById('mainForm').checkValidity()) {
+						document.getElementById('modalButtonForSpinner').click();
+						setTimeout(() => {
+							document.getElementById('mainForm').submit();
+							},5000);
+					}
+				}
+				
+				</script>
 
 				<!-- Section Content End -->
 				​

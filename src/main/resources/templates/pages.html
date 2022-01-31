@@ -58,6 +58,61 @@
 							</a>
 						</h6>
 					</div>
+					
+					
+					
+		<script th:inline="javascript" type="text/javascript">
+		let contextPath = 'http://localhost:8080';
+
+		function togglePageStatus(id) {
+			console.log('toggling id = ' + id);
+
+			let customSwitch = 'customSwitch' + id;
+
+			console.log(document.getElementById(customSwitch));
+
+			console.log(document.getElementById(customSwitch).checked);
+
+			if (document.getElementById(customSwitch).checked == true
+					|| document.getElementById(customSwitch).checked == null) {
+
+				document.getElementById(customSwitch).checked = false;
+
+				/* deactivate in controller */
+				console.log('Deactivating..');
+
+				let http = new XMLHttpRequest();
+				let url = contextPath + '/' + 'admin/'
+						+ 'activateDeactivatePage' + '/' + id + '/'
+						+ 'DeactivatePage';
+
+				http.open("GET", url, false);
+				http.send(null);
+				console.log(http.responseText);
+				document.getElementById('pageStatus' + id).innerHTML = 'Page Inactive';
+			}
+
+			else {
+
+				document.getElementById(customSwitch).checked = true;
+				let http = new XMLHttpRequest();
+				let url = contextPath + '/' + 'admin/'
+						+ 'activateDeactivatePage' + '/' + id + '/'
+						+ 'ActivatePage';
+				console.log('Activating..')
+				http.open("GET", url, false);
+				http.send(null);
+				console.log(http.responseText);
+				document.getElementById('pageStatus' + id).innerHTML = 'Page Active';
+			}
+
+		}
+	</script>
+			
+					
+					
+					
+					
 
 				<!-- Content Row -->
 				<div class="row">
