@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FilenameUtils;
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -519,9 +520,42 @@ public class AdminController {
 	/*
 	 * Function to show the courses
 	 */
+	
 	@GetMapping("/admin/courses")
-	public String getCourses(Model model) {
-		model.addAttribute("courses", courseService.getAllCourses());
+	public String getFirstCoursePage(Model model) {
+
+//		List<University>universities = universityService.getAllUniversity();
+//		model.addAttribute("universities", universityService.getAllUniversity());
+
+		return listCoursesByPage(1, model);
+	}
+	
+	
+	@GetMapping("/admin/courses/page/{pageNum}")
+	public String listCoursesByPage(@PathVariable(name = "pageNum") int pageNum, Model model) {
+		
+		org.springframework.data.domain.Page<Course> page = courseService.listByPage(pageNum);
+		
+		List<Course> courses = page.getContent();
+		
+		System.out.println("PageNum = "+ pageNum);
+		System.out.println("Total elements= "+ page.getNumberOfElements());
+		
+		long startCount = (pageNum - 1) * courseService.COURSES_PER_PAGE + 1;
+		long endCount = startCount + courseService.COURSES_PER_PAGE - 1;
+		
+		if(endCount > page.getTotalElements()) {
+			endCount = page.getTotalElements();
+		}
+		
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("startCount", startCount);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("endCount", endCount);
+		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("courses", courses);
+		
+		
 		return "courses";
 	}
 

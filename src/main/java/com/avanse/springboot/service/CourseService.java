@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +15,8 @@ import com.avanse.springboot.repository.CourseRepository;
 
 @Service
 public class CourseService {
+	
+	public static final int COURSES_PER_PAGE=4;
 
 	@Autowired
 	CourseRepository courseRepository;
@@ -19,8 +24,15 @@ public class CourseService {
 //	Return the list of courses
 	public List<Course> getAllCourses(){
 		
-		return courseRepository.findAll();
+		return (List<Course>)courseRepository.findAll();
 	}
+	
+	
+	public Page<Course> listByPage(int pageNum){
+		Pageable pageable = PageRequest.of(pageNum-1, COURSES_PER_PAGE);
+		return courseRepository.findAll(pageable);
+	}
+	
 	
 //	Function to add a course
 	
