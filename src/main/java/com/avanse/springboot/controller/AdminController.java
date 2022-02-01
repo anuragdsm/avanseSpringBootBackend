@@ -206,9 +206,41 @@ public class AdminController {
 
 	@GetMapping("/admin/awards")
 	public String getAwards(Model model) {
-		model.addAttribute("awards", awardService.getAllAwards());
-		return "awards";
+//		model.addAttribute("awards", awardService.getAllAwards());
+		return listAwardsByPage(1, model);
 	}
+	
+	
+	
+	@GetMapping("/admin/awards/page/{pageNum}")
+	public String listAwardsByPage(@PathVariable(name = "pageNum") int pageNum, Model model) {
+		org.springframework.data.domain.Page<Award> page =awardService.listAwardsByPage(pageNum);
+	
+		List<Award>awards= page.getContent();
+		
+		
+		System.out.println("PageNum =" + pageNum);
+		System.out.println("Total elements= "+page.getNumberOfElements());
+		System.out.println("Total Pages= "+page.getTotalPages());
+		
+		
+		long startCount = (pageNum - 1) * awardService.AWARDS_PER_PAGE + 1;
+		long endCount = startCount + awardService.AWARDS_PER_PAGE - 1;
+		
+		if(endCount > page.getTotalElements()) {
+			endCount = page.getTotalElements();
+		}
+		
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("startCount", startCount);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("endCount", endCount);
+		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("awards", awards);
+		return "awards";
+		
+	}
+	
 
 	@GetMapping("/admin/awards/add")
 	public String awardsAddGet(Model model) {
@@ -1985,9 +2017,49 @@ public class AdminController {
 
 	@GetMapping("/admin/testimonials")
 	public String getTestimonials(Model model) {
-		model.addAttribute("testimonials", testimonialService.getAllTestimonials());
-		return "testimonials";
+//		model.addAttribute("testimonials", testimonialService.getAllTestimonials());
+		return listTestimonialsByPage(1, model) ;
 	}
+	
+	
+	
+	@GetMapping("/admin/testimonials/page/{pageNum}")
+	public String listTestimonialsByPage(@PathVariable(name = "pageNum") int pageNum, Model model) {
+		org.springframework.data.domain.Page<Testimonial> page =testimonialService.listTestimonialsByPage(pageNum);
+	
+		List<Testimonial>testimonials= page.getContent();
+		
+		
+		System.out.println("PageNum =" + pageNum);
+		System.out.println("Total elements= "+page.getNumberOfElements());
+		System.out.println("Total Pages= "+page.getTotalPages());
+		
+		
+		long startCount = (pageNum - 1) * testimonialService.TESTIMONIALS_PER_PAGE + 1;
+		long endCount = startCount + testimonialService.TESTIMONIALS_PER_PAGE - 1;
+		
+		if(endCount > page.getTotalElements()) {
+			endCount = page.getTotalElements();
+		}
+		
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("startCount", startCount);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("endCount", endCount);
+		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("testimonials", testimonials);
+		return "testimonials";
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	/*
 	 * Method to add a university Need both get and post mapping for adding the

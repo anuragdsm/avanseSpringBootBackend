@@ -44,7 +44,7 @@
 					<tbody>
 
 						<tr th:each="testimonial, iStat : ${testimonials}">
-							<th scope="row" th:text="${iStat.index + 1}">1</th>
+							<th scope="row" th:text="${iStat.index + startCount}">1</th>
 							
 							<td><img src="" height="100px" width="100px"
 								th:src="@{${'/images/testimonialImages/' + testimonial.picFileName}}"></td>
@@ -67,12 +67,49 @@
 			</div>
 
 		</div>
+		
+		
+		
+						<div class="text-center m-1" th:if="${totalItems>0}">
+				<span>Showing Testimonials# [[${startCount}]] to
+					[[${endCount}]] of [[${totalItems}]]</span>
+			</div>
+			<div class="text-center m-1" th:unless="${totalItems>0}">
+				<span>No users found</span>
+			</div>
 
+			<!-- Pagination  -->
+			<div>
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-center">
+						<li
+							th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}"><a
+							class="page-link" th:href="@{/admin/testimonials/page/1}">First</a></li>
+
+						<li
+							th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}"><a
+							class="page-link"
+							th:href="@{'/admin/testimonials/page/' + ${currentPage - 1}}">Previous</a></li>
+
+						<li
+							th:class="${currentPage != i ? 'page-item': 'page-item active' } "
+							th:each="i : ${#numbers.sequence(1, totalPages)}"><a
+							class="page-link"
+							th:href="@{'/admin/testimonials/page/' + ${i}} ">[[${i}]]</a></li>
+
+						<li
+							th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}"><a
+							class="page-link"
+							th:href="@{'/admin/testimonials/page/' + ${currentPage + 1}}">Next</a></li>
+						<li
+							th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}"><a
+							class="page-link"
+							th:href="@{'/admin/testimonials/page/' + ${totalPages}}">Last</a></li>
+					</ul>
+				</nav>
+			</div>
 
 		<!-- Content Row -->
-
-
-		
 
 	</div>
 	<!-- End of Content Wrapper -->

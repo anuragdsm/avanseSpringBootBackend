@@ -129,7 +129,7 @@
 							<tbody>
 
 								<tr th:each="post, iStat : ${posts}">
-									<th scope="row" th:text="${iStat.index + 1}">1</th>
+									<th scope="row" th:text="${iStat.index + startCount}">1</th>
 									<td><a href="#"
 										th:href="@{/viewPost/{extractedFileName}(extractedFileName=${post.extractedFileName})}"
 										th:text="${post.postTitle}">Home </td>
@@ -233,18 +233,7 @@
 
 			</div>
 
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+		
 				
 				<!-- Content Row -->
 
