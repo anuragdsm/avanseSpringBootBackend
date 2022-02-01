@@ -895,13 +895,6 @@ public class AdminController {
 		}
 	}
 	
-	
-	
-	
-	
-	
-	
-
 	/*
 	 * ===========All Function below are related to office location ==============
 	 */
@@ -973,28 +966,7 @@ public class AdminController {
 	 * 
 	 */
 
-	/*
-	 * @GetMapping("/admin") public String adminDashboard(Model model) {
-	 * 
-	 * Long noOfUniversities = universityService.numberOfUniversities(); Long
-	 * noOfCourses= courseService.numberOfCourses(); Long noOfPages =
-	 * pageService.numberOfPages();
-	 * 
-	 * System.out.println("Number of University is " + noOfUniversities);
-	 * 
-	 * model.addAttribute("numOfUniversities",noOfUniversities);
-	 * model.addAttribute("numOfCourses",noOfCourses);
-	 * model.addAttribute("numOfPages",noOfPages);
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * System.out.println("User Added Image Directory is "+ userAddedImagesDir);
-	 * 
-	 * return "adminDashboard"; }
-	 */
+	
 
 	@GetMapping("/admin/pages")
 	public String getPages(Model model) {
@@ -1374,7 +1346,6 @@ public class AdminController {
 		pageDTO.setBannerHeading(page.getBannerHeading());
 		pageDTO.setBannerSubHeading(page.getBannerSubHeading());
 		pageDTO.setPageLink(page.getPageLink());
-//		page.setPageLayout(pageDTO.getPageLayout());
 		pageDTO.setMainSection(page.getMainSection());
 		pageDTO.setBannerImageName(page.getBannerImageName());
 		pageDTO.setBannerImageAlt(page.getBannerImageAlt());
@@ -1465,9 +1436,40 @@ public class AdminController {
 
 	@GetMapping("/admin/posts")
 	public String getPosts(Model model) {
-		model.addAttribute("posts", postService.getAllPosts());
-		return "posts";
+//		model.addAttribute("posts", postService.getAllPosts());
+		return listPostsByPage(1, model);
 	}
+	
+	
+	@GetMapping("/admin/posts/page/{pageNum}")
+	public String listPostsByPage(@PathVariable(name = "pageNum") int pageNum, Model model) {
+		org.springframework.data.domain.Page<Post> page =postService.listBlogsPostsByPage(pageNum);
+	
+		List<Post>posts= page.getContent();
+		
+		
+		System.out.println("PageNum =" + pageNum);
+		System.out.println("Total elements= "+page.getNumberOfElements());
+		System.out.println("Total Pages= "+page.getTotalPages());
+		
+		
+		long startCount = (pageNum - 1) * postService.BLOG_POSTS_PER_PAGE + 1;
+		long endCount = startCount + postService.BLOG_POSTS_PER_PAGE - 1;
+		
+		if(endCount > page.getTotalElements()) {
+			endCount = page.getTotalElements();
+		}
+		
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("startCount", startCount);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("endCount", endCount);
+		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("posts", posts);
+		return "posts";
+		
+	}
+	
 
 	@GetMapping("/admin/posts/add")
 	public String postsGet(Model model) {

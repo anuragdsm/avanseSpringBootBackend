@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +16,8 @@ import com.avanse.springboot.repository.PostRepository;
 
 @Service
 public class PostService {
+	
+	public static final int BLOG_POSTS_PER_PAGE = 4;
 
 	@Autowired
 	PostRepository postRepository;
@@ -24,6 +29,14 @@ public class PostService {
 	public List<Post> getAllPosts() {
 		return postRepository.findAll();
 	}
+	
+	
+	public Page<Post> listBlogsPostsByPage (int pageNum){
+		Pageable pageable = PageRequest.of(pageNum -1, BLOG_POSTS_PER_PAGE);
+		return postRepository.findAll(pageable);
+	}
+	
+	
 
 	/*
 	 * Function to delete a post by Id
