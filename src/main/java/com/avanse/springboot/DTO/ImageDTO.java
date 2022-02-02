@@ -15,6 +15,6 @@ public class ImageDTO {
 	private int height;
 	private int width;
 	private Date uploadedOn;
-	private Double size;
+	private Long size;
 	
 }

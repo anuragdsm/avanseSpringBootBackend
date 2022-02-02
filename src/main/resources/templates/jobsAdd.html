@@ -32,15 +32,14 @@
 	<div id="wrapper">
 
 		<div layout:fragment="content">
-		
-		<h6 class="m-0 font-weight-bold text-primary">
-							<a href="javascript:history.back()"
-								class="btn btn-info btn-icon-split btn-sm float-right mr-3">
-								<span class="icon text-white-50"> <i
-									class="fas fa-arrow-left"></i>
-							</span> <span class="text">Back</span>
-							</a>
-						</h6>
+
+			<h6 class="m-0 font-weight-bold text-primary">
+				<a href="javascript:history.back()"
+					class="btn btn-info btn-icon-split btn-sm float-right mr-3"> <span
+					class="icon text-white-50"> <i class="fas fa-arrow-left"></i>
+				</span> <span class="text">Back</span>
+				</a>
+			</h6>
 
 
 			<!-- Begin Page Content -->
@@ -64,47 +63,87 @@
 										class="form-control" required th:field="*{postedBy}"
 										name="postedBy" id="postedBy" placeholder="Posted By">
 								</div>
-								
+
 								<div class="form-group">
 									<label for="postedBy">Skills </label> <input type="text"
 										class="form-control" required th:field="*{skills}"
-										name="postedBy" id="postedBy" placeholder="Seperate Skills by comma(,)">
+										name="postedBy" id="postedBy"
+										placeholder="Seperate Skills by comma(,)">
 								</div>
-								
-								
-								
-								
-								
+
 								<div class="form-group">
-										<label for="experienceInYears">Experience In Years</label> <select
-											class="form-control" required th:field="*{experienceInYears}"
-											name="experienceInYears" id="experienceInYears"
-											placeholder="Experience In Years">
-											<option value="">Select Experience In Years</option>
-										</select>
-										<script type="text/javascript">
-											
-											let establishedYearBox = document
-													.getElementById('experienceInYears');
-											for (let i = 0; i < 20; i++) {
-												establishedYearBox.innerHTML = establishedYearBox.innerHTML
-														+ '<option value='+i+'>'
-														+ i + '</option>';
-											}
-										</script>
-									</div>
-								
-					
-								
+									<label for="experienceInYears">Experience In Years</label> <select
+										class="form-control" required th:field="*{experienceInYears}"
+										name="experienceInYears" id="experienceInYears"
+										placeholder="Experience In Years">
+										<option value="">Select Experience In Years</option>
+									</select>
+									<script type="text/javascript">
+										let establishedYearBox = document
+												.getElementById('experienceInYears');
+										for (let i = 0; i < 20; i++) {
+											establishedYearBox.innerHTML = establishedYearBox.innerHTML
+													+ '<option value='+i+'>'
+													+ i + '</option>';
+										}
+									</script>
+								</div>
+
+
+
 							</div>
-							
-					
+
+
 
 							<div class="col-sm-5">
 
 								<div class="form-group">
 
+									<!--When new job is created this block will be rendered -->
+									<div th:if="${locationsSelectedForThisPost == null}"
+										class="col-sm-10">
+										<label class="col-sm-5 control-label">Location To
+											Attach</label>
+										<div th:each="location, iStat : ${locations}">
+											<input type="checkbox" th:id="${location.id}"
+											th:name = "selectedLocations" th:value="${location.id}"> <label
+												th:for="${location.id}" th:text="${location.city}"
+												class="col-sm-5 control-label">Location </label>
+										</div>
+									</div>
 
+
+
+									<!-- While Updating this block will be rendered -->
+									<div th:if="${locationsSelectedForThisPost!=null}"
+										class="col-sm-10">
+										<input name="updateOperation" type="text"
+											value="updateOperationInputText" hidden> <label
+											class="col-sm-2 control-label">Locations to attach</label>
+										<div th:each="location, iStat : ${locations}">
+											<input type="checkbox" th:id="${location.id}"
+												th:name="selectedLocations" th:value="${location.id}"
+												th:checked="${#lists.contains(locationsSelectedForThisPost,location)}">
+											<label th:for="${location.id}"
+												th:text="${location.city}"
+												class="col-sm-2 control-label">Category</label>
+										</div>
+									</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+									<!-- 
 									<label for="location" class="col-sm-5 control-label">Location</label>
 									<div th:each="location, iStat : ${locations}">
 										<input type="checkbox" th:id="${location.id}"
@@ -112,35 +151,38 @@
 										<label th:for="${location.id}" th:text="${location.city}"
 											class="col-sm-5 control-label">Location</label>
 									</div>
-									
-									
+									 -->
+
 								</div>
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-lg-10 control-label">Short Description <em>(250
-									Characters)</em></label> ​
+							<label class="col-lg-10 control-label">Short Description
+								<em>(250 Characters)</em>
+							</label> ​
 							<div class="col-lg-10">
 								<textarea class="form-control " id="" name="shortDescription"
-									th:field="*{shortDescription}" placeholder="ShortDescription in plain text to show in cards"
-									maxlength = 150 data-max-length = 150></textarea>
-									</div></br>
+									th:field="*{shortDescription}"
+									placeholder="ShortDescription in plain text to show in cards"
+									maxlength=150 data-max-length=150></textarea>
+							</div>
+							</br>
 
-								<div class="form-group">
-									<label class="col-lg-10 control-label">Detailed Job Description</label>
+							<div class="form-group">
+								<label class="col-lg-10 control-label">Detailed Job
+									Description</label> ​
+								<div class="col-lg-10">
+									<textarea class="form-control summernote" id="summernote"
+										name="jobDescription" th:field="*{description}"></textarea>
+
+									<br>
+									<button type="submit" class="btn btn-primary">Submit</button>
+
 									​
-									<div class="col-lg-10">
-										<textarea class="form-control summernote" id="summernote"
-											name="jobDescription" th:field="*{description}"></textarea>
-
-										<br>
-										<button type="submit" class="btn btn-primary">Submit</button>
-
-										​
-									</div>
-
 								</div>
+
+							</div>
 
 
 						</div>

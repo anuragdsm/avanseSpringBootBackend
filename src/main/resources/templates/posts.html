@@ -27,8 +27,6 @@
 </head>
 <body id="page-top">
 
-
-
 	<div id="wrapper">
 
 
@@ -42,12 +40,6 @@
 				</span> <span class="text">Back</span>
 				</a>
 			</h6>
-			
-			
-			
-			
-			
-			
 
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
@@ -242,32 +234,8 @@
 		</div>
 	</div>
 	<!-- End of Page Wrapper -->
-	<!-- Scroll to Top Button-->
-	<a class="scroll-to-top rounded" href="#page-top"> <i
-		class="fas fa-angle-up"></i>
-	</a>
-	<!-- Logout Modal-->
-	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-					<button class="close" type="button" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">Select "Logout" below if you are ready
-					to end your current session.</div>
-				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button"
-						data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="#" th:href=@{/logout}>Logout</a>
-				</div>
-			</div>
-		</div>
-	</div>
+
+	
 	<!-- Bootstrap core JavaScript-->
 	<script src="/vendor/jquery/jquery.min.js"></script>
 	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -280,54 +248,7 @@
 	<!-- Page level custom scripts -->
 	<script src="/js/demo/chart-area-demo.js"></script>
 	<script src="/js/demo/chart-pie-demo.js"></script>
-	<script th:inline="javascript" type="text/javascript">
-		let contextPath = 'http://localhost:8080';
-
-		function togglePostStatus(id) {
-
-			console.log('toggling id = ' + id);
-
-			let customSwitch = 'customSwitch' + id;
-
-			console.log(document.getElementById(customSwitch));
-
-			console.log(document.getElementById(customSwitch).checked);
-
-			if (document.getElementById(customSwitch).checked == true
-					|| document.getElementById(customSwitch).checked == null) {
-
-				document.getElementById(customSwitch).checked = false;
-
-				/* deactivate in controller */
-				console.log('Deactivating..');
-
-				let http = new XMLHttpRequest();
-				let url = contextPath + '/' + 'admin/'
-						+ 'activateDeactivatePost' + '/' + id + '/'
-						+ 'DeactivatePost';
-
-				http.open("GET", url, false);
-				http.send(null);
-				console.log(http.responseText);
-				document.getElementById('postStatus' + id).innerHTML = 'Post Inactive';
-			}
-
-			else {
-
-				document.getElementById(customSwitch).checked = true;
-				let http = new XMLHttpRequest();
-				let url = contextPath + '/' + 'admin/'
-						+ 'activateDeactivatePost' + '/' + id + '/'
-						+ 'ActivatePost';
-				console.log('Activating..')
-				http.open("GET", url, false);
-				http.send(null);
-				console.log(http.responseText);
-				document.getElementById('postStatus' + id).innerHTML = 'Post Active';
-			}
-
-		}
-	</script>
+	
 </body>
 
 </html>

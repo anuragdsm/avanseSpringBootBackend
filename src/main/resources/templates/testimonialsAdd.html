@@ -53,11 +53,36 @@
 
 				</div>
 
+
+				<!-- Button trigger modal -->
+				<button hidden id="modalButtonForSpinner" type="button"
+					class="btn btn-primary" data-toggle="modal"
+					data-target="#staticBackdrop">Launch static backdrop modal
+				</button>
+
+				<!-- Modal -->
+				<div style="left: 10%; top: 30%;" class="modal fade"
+					id="staticBackdrop" data-backdrop="static" data-keyboard="false"
+					tabindex="-1" aria-labelledby="staticBackdropLabel"
+					aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-body">
+							<div class="spinner-border text-primary"
+								style="height: 150px; width: 150px;" role="status">
+								<span class="sr-only">Loading...</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+
 				<!-- Content Row -->
 				<div class="row">
 					<div class="container-fluid">
 
-						<form th:action="@{/admin/testimonials/add}" method="post"
+						<form id = "mainForm" th:action="@{/admin/testimonials/add}" method="post"
 							th:object="${testimonialDTO}" enctype="multipart/form-data">
 							<div class="row">
 								<div class="col-sm-5">
@@ -92,12 +117,27 @@
 									</div>
 									<input type="hidden" name="imgName"
 										th:value="${testimonialDTO.picFileName}">
-									<button type="submit" class="btn btn-primary  onclick="imageNameModify()"">Submit</button>
+									<button type="submit" class="btn btn-primary"
+										onClick="onSubmit()">Submit</button>
 								</div>
 							</div>
 						</form>
 					</div>
 				</div>
+
+
+				<script type="text/javascript">
+				function onSubmit() {
+					if(document.getElementById('mainForm').checkValidity()) {
+						document.getElementById('modalButtonForSpinner').click();
+						setTimeout(() => {
+							document.getElementById('mainForm').submit();
+							},15000);
+					}
+				}
+				
+				</script>
+				
 
 				<!-- Content Row -->
 
@@ -119,24 +159,22 @@
 
 	<!-- Bootstrap core JavaScript-->
 	<script src="/vendor/jquery/jquery.min.js"></script>
-	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+				<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-	<!-- Core plugin JavaScript-->
-	<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+				<!-- Core plugin JavaScript-->
+				<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-	<!-- Custom scripts for all pages-->
-	<script src="/js/sb-admin-2.min.js"></script>
+				<!-- Custom scripts for all pages-->
+				<script src="/js/sb-admin-2.min.js"></script>
 
-	<!-- Page level plugins -->
-	<script src="/vendor/chart.js/Chart.min.js"></script>
+				<!-- Page level plugins -->
+				<script src="/vendor/chart.js/Chart.min.js"></script>
 
-	<!-- Page level custom scripts -->
-	<script src="/js/demo/chart-area-demo.js"></script>
-	<script src="/js/demo/chart-pie-demo.js"></script>
+				<!-- Page level custom scripts -->
+				<script src="/js/demo/chart-area-demo.js"></script>
+				<script src="/js/demo/chart-pie-demo.js"></script>
 
-	</script>
-
-
+				</script>
 </body>
 
 </html>

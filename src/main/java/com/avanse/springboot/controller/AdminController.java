@@ -638,7 +638,7 @@ public class AdminController {
 		course.setDescription(courseDTO.getDescription());
 		course.setDuration(courseDTO.getDuration());
 		course.setDocumentsRequired(courseDTO.getDocumentsRequired());
-		course.setExams(courseDTO.getExams());
+		course.setExamsEligibility(courseDTO.getExamsEligibility());
 		course.setFees(courseDTO.getFees());
 //		university.addTheCourse(course);
 		course.setUniversity(universityService.getUniversityById(university_id).get());
@@ -670,7 +670,7 @@ public class AdminController {
 		courseDTO.setDescription(course.getDescription());
 		courseDTO.setDocumentsRequired(course.getDocumentsRequired());
 		courseDTO.setDuration(course.getDuration());
-		courseDTO.setExams(course.getExams());
+		courseDTO.setExamsEligibility(course.getExamsEligibility());
 		courseDTO.setFees(course.getFees());
 		courseDTO.setUniversity(courseDTO.getUniversity());
 		model.addAttribute("courseDTO", courseDTO);
@@ -896,6 +896,9 @@ public class AdminController {
 		jobDTO.setShortDescription(job.getShortDescription());
 		jobDTO.setDescription(job.getDescription());
 		jobDTO.setPostedBy(job.getPostedBy());
+		jobDTO.setSkills(job.getSkills());
+		jobDTO.setIsJobActive(job.getIsJobActive());
+		jobDTO.setExperienceInYears(job.getExperienceInYears());
 
 		model.addAttribute("jobDTO", jobDTO);
 		model.addAttribute("locations", locationService.getAllLocations());

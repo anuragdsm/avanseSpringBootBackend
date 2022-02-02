@@ -177,10 +177,7 @@
 														id="accomodationOption3" value="N/A"> 
 														<label for="accomodationOption3">N/A</label>
 												</div>
-											
-											
-										
-
+	
 									</div>
 
 
@@ -224,7 +221,7 @@
 						document.getElementById('modalButtonForSpinner').click();
 						setTimeout(() => {
 							document.getElementById('mainForm').submit();
-							},5000);
+							},15000);
 					}
 				}
 				
@@ -284,7 +281,6 @@
 		$(".custom-file-input").on(
 				"change",
 				function() {
-
 					var fileName = $(this).val().split("\\").pop();
 					$(this).siblings(".custom-file-label").addClass("selected")
 							.html(fileName);

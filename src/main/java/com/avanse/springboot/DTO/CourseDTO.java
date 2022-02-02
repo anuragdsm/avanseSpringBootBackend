@@ -14,7 +14,7 @@ public class CourseDTO {
 	private Double fees;
 	private Date dateOfCreation;
 	
-	private String exams;
+	private String examsEligibility;
 	private String documentsRequired;
 	private University university;
 	private Boolean isCourseActive;

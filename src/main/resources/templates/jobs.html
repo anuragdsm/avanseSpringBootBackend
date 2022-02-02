@@ -174,7 +174,7 @@
 									<td>
 										<table>
 											<tr th:each="location, iStat : ${job.locationList}">
-												<td th:text="${location.city}" style="border-top: 0px;">Delhi</td>
+												<td style="border-top: 0px;"><a class="btn btn-outline-secondary" th:text="${location.city}"></a></td>
 											</tr>
 										</table>
 									</td>

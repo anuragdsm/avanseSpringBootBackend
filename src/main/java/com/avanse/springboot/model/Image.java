@@ -16,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "IMAGE")
+@Table(name = "IMAGES")
 @AllArgsConstructor
 public class Image implements Serializable {
 
@@ -31,10 +31,8 @@ public class Image implements Serializable {
 	private String fileName;
 	private String link;
 	private String altTag;
-	private int height;
-	private int width;
-	private Date uploadedOn;
-	private Double size;
+	
+	private Long size;
 	public Image() {
 		super();
 		// TODO Auto-generated constructor stub

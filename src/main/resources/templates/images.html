@@ -153,7 +153,6 @@
 								<th scope="col">Alt-Tag</th>
 								<th scope="col">Size</th>
 								<th scope="col">Uploaded on</th>
-								<th scope="col">Update</th>
 								<th scope="col">Delete</th>
 
 							</tr>
@@ -170,11 +169,6 @@
 
 								<td th:text="${image.size}">Image Size</td>
 								<td th:text="${image.uploadedOn}">Uploaded On</td>
-
-
-								<td><a href=""
-									th:href="@{/admin/image/update/{id}(id=${image.id})}"
-									class="btn btn-warning">Update</a></td>
 
 
 								<td><a href=""

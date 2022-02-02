@@ -44,11 +44,13 @@ public class Course implements Serializable{
 	@Basic
 	private String description;
 	private Double fees;
-	private String exams;
+	private String examsEligibility;
 	private Boolean isCourseActive = true;
 	
 	
 	private String documentsRequired;
+	private String academicDocumentsRequired;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "UNIVERSITY_ID")
 	private University university;
