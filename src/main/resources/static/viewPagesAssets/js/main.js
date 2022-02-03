@@ -185,7 +185,7 @@
         if (award_slider.length) {
             award_slider.owlCarousel({
                 loop: false,
-                margin: 55,
+                margin: 20,
                 items: 2,
                 autoplay: false,
                 smartSpeed: 2000,

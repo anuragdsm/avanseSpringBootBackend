@@ -20,8 +20,8 @@ public class CustomersCSVExporter extends AbstractExporter {
 		
 		ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
 		
-		String [] csvHeader = {"ID", "Name", "Email", "PhoneNumber", "City"};
-		String [] fieldMapping = {"id", "name","email","phoneNumber", "city"};
+		String [] csvHeader = {"ID", "Name", "Email", "Phone Number", "City", "Loan Account Number", "Loan Status"};
+		String [] fieldMapping = {"id", "name","email","phoneNumber", "city","loanAccountNumber", "loanStatus" };
 		
 		csvWriter.writeHeader(csvHeader);
 		
@@ -30,13 +30,10 @@ public class CustomersCSVExporter extends AbstractExporter {
 			customer.setEmail(customer.getEmail().replace("--", " "));
 			customer.setPhoneNumber(customer.getPhoneNumber().replace("--", " "));
 			customer.setCity(customer.getCity().replace("--", " "));
+			customer.setLoanAccountNumber(customer.getLoanAccountNumber().replace("--", " "));
+			customer.setLoanStatus(customer.getLoanStatus().replace("--", " "));
 			csvWriter.write(customer, fieldMapping);
 		}
-		
-		
-		
 		csvWriter.close();
-		
-		
 	}
 }

@@ -68,6 +68,7 @@
 
 a {
   text-decoration: none;
+  color: #1b8593;
 }
 a:hover, a:focus {
   color: #1b8593;
@@ -93,7 +94,7 @@ body {
   overflow-x: hidden;
   z-index: 0;
 }
-
+.mouse-dis{pointer-events: none;}
 .body_wrapper {
   z-index: 20;
   overflow: hidden;
@@ -401,7 +402,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .sec_pad {
-  padding: 120px 0px;
+  padding: 90px 0px;
 }
 
 /*====================================================*/
@@ -478,7 +479,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .slider_btn {
-  font: 500 14px/20px "Futura Bk BT", sans-serif;
+  font: 500 16px/20px "Futura Bk BT", sans-serif;
   border-radius: 45px;
   padding: 15px 35px;
   background: #fff;
@@ -488,7 +489,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .btn_three {
-  font: 500 14px "Futura Bk BT", sans-serif;
+  font: 500 16px "Futura Bk BT", sans-serif;
   color: #fff;
   background: #1cb1b1;
   border-radius: 3px;
@@ -1122,7 +1123,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .menu > .nav-item.submenu .dropdown-menu .nav-item .nav-link {
   padding: 0px;
   white-space: nowrap;
-  font: 400 14px/34px "Futura Bk BT", sans-serif;
+  font: 400 16px/34px "Futura Bk BT", sans-serif;
   color: #000000;
   -webkit-transition: color 0.2s linear;
   -o-transition: color 0.2s linear;
@@ -7076,9 +7077,9 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   padding-right: 30px;
 }
 .software_service_tab_content .software_service_item i {
-  font-size: 30px;
-  color: #fdc119;
-  line-height: 40px;
+  font-size:16px;
+  color: #02afb3;
+  line-height:24px;
 }
 .software_service_tab_content .software_service_item h5 {
   font: 600 17px/25px "Futura Bk BT", sans-serif;
@@ -7902,7 +7903,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .s_pricing-item .tag_label {
   font: 400 16px/22px "Futura Bk BT", sans-serif;
   color: #fff;
-  background: #5f2eed;
+  background: #1b8593;
   -webkit-transform: rotate(90deg);
       -ms-transform: rotate(90deg);
           transform: rotate(90deg);
@@ -7915,8 +7916,8 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .s_pricing-item .tag_label:before {
   content: "";
-  border-top: 20px solid #5f2eed;
-  border-bottom: 20px solid #5f2eed;
+  border-top: 20px solid #1b8593;
+  border-bottom: 20px solid #1b8593;
   border-right: 11px solid transparent;
   border-left: 11px solid transparent;
   position: absolute;
@@ -8138,7 +8139,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .price_tab_two .hover_bg {
-  background: #5f2eed;
+  background: #1b8593;
 }
 
 .price_content .fade {
@@ -8238,18 +8239,18 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .price_content_two .price_item .tag {
-  background: #5f2eed;
+  background: #1b8593;
 }
 .price_content_two .price_item .p_list li .ti-check {
-  color: #5f2eed;
+  color: #1b8593;
 }
 .price_content_two .price_item .price_btn {
-  border-color: #5f2eed;
-  color: #5f2eed;
+  border-color: #1b8593;
+  color: #1b8593;
   background: transparent;
 }
 .price_content_two .price_item .price_btn:hover {
-  background: #5f2eed;
+  background: #1b8593;
   color: #fff;
 }
 .price_content_two .price_item:hover {
@@ -9978,12 +9979,12 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   opacity: 0.302;
 }
 .feedback_slider .shap_one {
-  background-image: -o-linear-gradient(50deg, #290a59 0%, #17c7bd 100%);
-  background-image: linear-gradient(40deg, #290a59 0%, #17c7bd 100%);
+  background-image: -o-linear-gradient(40deg, #1b8593 0%, #17c7bd 100%);
+  background-image: linear-gradient(40deg, #1b8593 0%, #17c7bd 100%);
 }
 .feedback_slider .shap_two {
-  background-image: -o-linear-gradient(50deg, #290a59 0%, #17c7bd 100%);
-  background-image: linear-gradient(40deg, #290a59 0%, #17c7bd 100%);
+  background-image: -o-linear-gradient(40deg, #02afb3 0%, #228592 100%);
+  background-image: linear-gradient(40deg, #02afb3 0%, #228592 100%);
   right: -10px;
   bottom: -45px;
 }
@@ -9995,25 +9996,25 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .feedback_item {
-  border: 1px solid #131430;
+  border: 0px;
   border-radius: 4px;
-  background-color: #0f1029;
-  -webkit-box-shadow: 0px 30px 50px 0px rgba(12, 0, 46, 0.3);
-          box-shadow: 0px 30px 50px 0px rgba(12, 0, 46, 0.3);
-  padding: 45px;
+  background-color: #1b8593;
+  padding:23px;
   position: relative;
   overflow: hidden;
+  min-height:315px;
 }
 .feedback_item .feed_back_author {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  
 }
 .feedback_item .media .img {
-  border: 1px solid #44467b;
+  border:1px solid #1b8593;
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
+  width:85px;
+  height:85px;
   overflow: hidden;
   margin-right: 18px;
 }
@@ -10029,7 +10030,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .feedback_item .media .media-body h6 {
   margin-bottom: 0px;
   font-size: 14px;
-  color: #58596e;
+  color: #fdc119;
 }
 .feedback_item p {
   font-weight: 300;
@@ -11418,7 +11419,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   content: "";
   width: 0;
   height: 1px;
-  background: #5f2eed;
+  background: #1b8593;
   position: absolute;
   bottom: 0;
   left: auto;
@@ -11607,10 +11608,10 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   position: absolute;
   left: 0;
   top: 5px;
-  color: #5f2eed;
+  color: #1b8593;
 }
 .job_deatails_content:nth-child(4) {
-  border-bottom: 1px solid #eeebf6;
+  border-bottom: 1px solid #e1e1e1;
 }
 
 .job_info {
@@ -11621,13 +11622,13 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   padding: 50px;
 }
 .job_info .info_head {
-  border-bottom: 1px solid #eeebf6;
+  border-bottom: 1px solid #e1e1e1;
   padding-bottom: 18px;
 }
 .job_info .info_head i {
   font-size: 40px;
-  color: #9979f7;
-  text-shadow: 0px 14px 30px rgba(94, 44, 237, 0.4);
+  color: #1b8593;
+
   margin-bottom: 35px;
   display: inline-block;
 }
@@ -11637,7 +11638,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   margin-top: 25px;
 }
 .job_info .info_item i {
-  color: #9979f7;
+  color: #1b8593;
   font-size: 18px;
   position: absolute;
   left: 0;
@@ -11652,7 +11653,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .job_info .info_item p {
   margin-bottom: 0px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 300;
   color: #414042;
 }
@@ -11801,7 +11802,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   display: block;
   width: 100%;
   text-align: left;
-  font: 500 18px/26px "Futura Bk BT", sans-serif;
+  font:500 18px/26px "Futura Bk BT", sans-serif;
   padding: 20px 30px 20px 0px;
   position: relative;
   white-space: normal;
@@ -11820,7 +11821,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   display: block;
 }
 .faq_content .tab-pane .card .card-header .btn.collapsed {
-  color: #576370;
+  color: #000000;
 }
 .faq_content .tab-pane .card .card-header .btn.collapsed i {
   display: block;
@@ -11830,7 +11831,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .faq_content .tab-pane .card .card-body {
   padding: 0px 0px 45px;
-  font: 400 15px/26px "Futura Bk BT", sans-serif;
+  font: 400 16px/26px "Futura Bk BT", sans-serif;
   color: #414042;
 }
 
@@ -12382,7 +12383,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 
 /*================== contact_info_area css ================*/
 .contact_info_item {
-  border-bottom: 1px solid #eeebf6;
+  border-bottom: 1px solid #e1e1e1;
   padding-bottom: 25px;
 }
 .contact_info_item p {
@@ -12419,7 +12420,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .text_box input[type=text], .text_box textarea, .text_box input[type=password], .text_box input[type=email] {
   font: 400 15px/60px "Futura Bk BT", sans-serif;
   color: #222d39;
-  height: 60px;
+  height:51px;
   border-radius: 4px;
   background-color: white;
   -webkit-box-shadow: 0px 2px 4px 0px rgba(12, 0, 46, 0.04);
@@ -13257,7 +13258,7 @@ p {
   color: #414042;
 }
 p span {
-  padding: 3px 8px;
+  /* padding: 3px 8px; */
 }
 
 .bg-dark {
@@ -13645,12 +13646,12 @@ p span {
 }
 
 .box_s {
-  background: #5f2eed;
+  background: #1b8593;
   -webkit-box-shadow: 0 6px #8057f8;
           box-shadow: 0 6px #8057f8;
 }
 .box_s:hover {
-  background: #5f2eed;
+  background: #1b8593;
   color: #fff;
 }
 .box_s:hover:hover {
@@ -13662,7 +13663,7 @@ p span {
   position: relative;
   overflow: visible;
   z-index: auto;
-  background: #5f2eed;
+  background: #1b8593;
   -webkit-transition: all 0.1s linear;
   -o-transition: all 0.1s linear;
   transition: all 0.1s linear;
@@ -13681,7 +13682,7 @@ p span {
   transition: all 0.3s linear;
 }
 .btn-style2:hover {
-  background: #5f2eed;
+  background: #1b8593;
   margin-right: 0;
   margin-bottom: 0;
   color: #fff;
@@ -13701,7 +13702,7 @@ p span {
   right: 5px;
   bottom: 5px;
   top: 5px;
-  background: #5f2eed;
+  background: #1b8593;
   position: absolute;
   z-index: -1;
   -webkit-transition: all 0.2s linear;
@@ -13729,7 +13730,7 @@ p span {
   right: 2px;
   bottom: 2px;
   top: 2px;
-  background: #5f2eed;
+  background: #1b8593;
   position: absolute;
   z-index: -1;
   -webkit-transition: all 0.2s linear;
@@ -13881,11 +13882,11 @@ p span {
 }
 
 .btn_violte {
-  background: #5f2eed;
-  border-color: #5f2eed;
+  background: #1b8593;
+  border-color: #1b8593;
 }
 .btn_violte:hover {
-  background: #5f2eed;
+  background: #1b8593;
   color: #fff;
   -webkit-box-shadow: 0px 20px 34px 0px rgba(0, 11, 40, 0.1);
           box-shadow: 0px 20px 34px 0px rgba(0, 11, 40, 0.1);
@@ -14187,7 +14188,7 @@ p span {
   color: #414042;
 }
 .blog-sidebar .widget.widget_search .search-form .form-control:focus {
-  border-color: #ccc5fa;
+  border-color: #02afb3;
   border-radius: 3px;
 }
 .blog-sidebar .widget.widget_search .search-form button {
@@ -20533,7 +20534,7 @@ a .h_head:hover {
 .h_avaneses_content .er_btn_two:hover {
   color: #fff;
 }
-.home_avanse_banner_area .h_avanse_img img{margin-bottom: -25%;}
+.home_avanse_banner_area .h_avanse_img img{margin-bottom: -30%;margin-left: -35%;}
 
 /*============ top_avanse_banner_area css ============*/
 
@@ -28093,12 +28094,17 @@ a .h_head:hover {
 /*# sourceMappingURL=style.css.map */
 .bg_cyan{background:#1cb1b1 ;}
 .c_cyan{color:#1cb1b1 ;}
+.c_yellow{color:#fdc119 ;}
+.c_cyan_dark{color:#1b8593;}
 .c_dark{color:#000 ;}
 .bg_grey{
-  background: #fafbfb;
+  background: #f5f5f7;
 }
+.bg_yellow{background: #fdc119;}
 .testimonial_slider  .owl-dots { text-align: center; margin-top: 30px; }
 .pillars_icon{height:90px;max-height:90px;}
+.home_study_icon{max-height: 60px;}
+.home_study_icon_text{    line-height: 16px; margin-top:10px;}
 .emp_sp{
   background: url(../img/employees-speak.png) no-repeat;
   background-position: center center;
@@ -28253,7 +28259,7 @@ padding: 44px 0;
 }
 .course_abroad_form{
   background: #fff;
-    padding: 65px 30px;
+    padding: 15px 30px;
     text-align: center;
 }
 .course_abroad_form select.form-control:not([size]):not([multiple]) {
@@ -28261,6 +28267,14 @@ padding: 44px 0;
   border: 0;
   border-bottom: 1px solid;
   border-radius: 0;
+
+}
+select.form-control:not([size]):not([multiple]) {
+  height: calc(2.25rem + 15px);
+  border: 0;
+  border-bottom: 1px solid;
+  border-radius: 0;
+  background: transparent;
 }
 .form-control:focus {
   box-shadow: none;
@@ -28283,18 +28297,35 @@ padding: 44px 0;
   padding: 15px 15px;
   color: #fff;
   margin-top: -45%;
-  background: #1db1b1ed;
+  background: #1db1b1;
   z-index: 999999;
   display: inline-block;
-  height: 315px;
-  overflow: hidden;
+  min-height: 360px;
+  /* overflow: hidden; */
 }
 .team_leader:hover .team_info{
-  overflow: hidden;
-    overflow-y: auto;
+  /* overflow: hidden;
+    overflow-y: auto; */
 }
+.team_leader ::-webkit-scrollbar {width: 5px;}
+.team_leader ::-webkit-scrollbar-track {background:#fff;}
+.team_leader ::-webkit-scrollbar-thumb  {background-color:#fdc119;}
 .address_info{    padding-top: 30px;}
 .address_info .map{       padding-top: 50px;}
+.contact_form_home{max-width: 260px;}
+.contact_form_home select, .contact_form_home select:focus, .contact_form_home select:hover{background: #dbf0f0;border: 0px;}
+.home_tab .nav-item .nav-link {color: #878787; background: transparent; border: 0;  font-size:24px;}
+.home_tab .nav-item .nav-link.active {color: #222d39;  border-bottom: 2px solid #fec119;}
+.courses_item{background: #fff; -webkit-box-shadow: 0px 2px 7px 0px rgb(12 0 46 / 10%); box-shadow: 0px 2px 7px 0px rgb(12 0 46 / 10%);padding: 20px;min-height:175px;}
+.apply-now-form{max-width: 800px; margin: 0 auto;}
+.apply-now-form select{background: #fff !important;border-bottom: 0px !important;-webkit-box-shadow: 0px 2px 4px 0px rgb(12 0 46 / 4%); box-shadow: 0px 2px 4px 0px rgb(12 0 46 / 4%);}
+input[type=date]{color: #222d39; height:50px; background-color: white; -webkit-box-shadow: 0px 2px 4px 0px rgb(12 0 46 / 4%); box-shadow: 0px 2px 4px 0px rgb(12 0 46 / 4%); width: 100%; border: 1px solid #fff;padding-left: 30px;padding-right: 30px;}
+.award_section {background: url(../img/award-bg.png) no-repeat;    height: 250px;
+  background-size: contain;    max-width: 275px;}
+  .award_section .award_info{
+    padding: 40px 49px;
+    text-align: center;
+  }
 @media (min-width:1200px) {
   .bg_grey_light {
     background: #f8faf9 url(../img/gray-light-bg.jpg) no-repeat;
@@ -28302,7 +28333,15 @@ padding: 44px 0;
  
   }
 }
+@media (max-width:1381px) {
+  .home_avanse_banner_area .h_avanse_img img{margin-bottom: -10%;margin-left: -35%;}
+}
 @media (max-width:767px){
+  .home_avanse_banner_area{height: 105vh;}
+  .contact_form_home{max-width: 100%;}
+  .header_area_two + section, .header_area_three + section { margin-top: 20px; }
+  .home_avanse_banner_area .h_avanse_img img{margin-bottom:-25%; width: 100%;margin-left: 0;}
+  .h_avaneses_content h2{font-size: 36px;line-height: initial;}
   .emp_sp{
     background:transparent;
     background-position: center center;
@@ -28336,3 +28375,52 @@ padding: 44px 0;
   background: url(../img/career-bg.jpg);
 }
 .abroad_top_bg{background:url(../img/study-abroad-bg.jpg);}
+
+/* Expense Calculators By Digi */
+#step2, #step3, #stepmn1, #stepmn2{display: none;}
+.calculator_form input[type=text] {
+  height: calc(2.25rem + 15px);
+  border: 0;
+  border-bottom: 1px solid ;
+  border-radius: 0;
+  padding: 0.375rem 1.5rem;
+  background: transparent;
+}
+.calculator_form .btn_six {
+  cursor: pointer;
+}
+.emi-calculator .slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: auto;
+    height: 11px;
+    border-radius: 5px;
+    background: #fdc119;
+    outline: 0;
+    opacity: 1;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    
+}
+
+.emi-calculator .slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 25px;
+  border-radius: 15%;
+  background: #000;
+  cursor: pointer
+}
+
+.emi-calculator .slider::-moz-range-thumb {
+  width: 10px;
+  height: 25px;
+  border-radius: 15%;
+  background: #000;
+  cursor: pointer
+}
+.input-rupes-symbol{position: absolute;bottom: 12px;}
+.radio-hide1, .radio-hide2,.radio-hide3{display: none;}
+#larger, #extra, #quickly{display: none;}
+.benefits_box{box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;min-height: 265px; padding: 20px;margin-bottom: 30px;}

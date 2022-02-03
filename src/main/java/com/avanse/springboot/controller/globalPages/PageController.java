@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.avanse.springboot.DTO.forms.contactUs.CustomerDTO;
 import com.avanse.springboot.model.Page;
 import com.avanse.springboot.model.Post;
 import com.avanse.springboot.model.PostCategory;
@@ -55,6 +56,7 @@ public class PageController {
 		ModelAndView modelAndView = new ModelAndView("dynamicPages/"+extractedFileName);
 		model.addAttribute("postCategories", postCategoryService.getAllPostCategories());
 		model.addAttribute("posts", postService.getAllPosts());
+		model.addAttribute("customerDTO", new CustomerDTO());
 		return modelAndView;		
 	}
 	
