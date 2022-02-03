@@ -51,7 +51,7 @@ public class ContactUsController {
 		model.addAttribute("totalPages", page.getTotalPages());
 		model.addAttribute("endCount", endCount);
 		model.addAttribute("totalItems", page.getTotalElements());
-		model.addAttribute("customer", customers);
+		model.addAttribute("customers", customers);
 		return "customersPage";
 	}
 	

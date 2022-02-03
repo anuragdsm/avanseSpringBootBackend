@@ -162,16 +162,16 @@
 							<tr th:each="image, iStat : ${images}">
 								<th scope="row" th:text="${iStat.index + 1}">1</th>
 								<td th:text="${image.name}">My image</td>
-								<td><img src="" height="100px" width="100px"
-									th:src="@{${'/images/pageImages/' + picture.fileName}}"></td>
+								<td><img height="100px" width="100px"
+									th:src="@{/images/userAddedImages/}+${image.fileName}"></td>
 
 								<td th:text="${image.altTag}">imgAltTag</td>
 
 								<td th:text="${image.size}">Image Size</td>
-								<td th:text="${image.uploadedOn}">Uploaded On</td>
+								<!-- <td th:text="${image.uploadedOn}">Uploaded On</td> -->
 
 
-								<td><a href=""
+								<td><a
 									th:href="@{/admin/image/delete/{id}(id=${image.id})}"
 									class="btn btn-danger">Delete</a></td>
 							</tr>

@@ -24,7 +24,7 @@ public class ImageService {
 		imageRepository.deleteById(id);
 	}
 	
-	public void addImage(Image image) {
+	public synchronized void addImage(Image image) {
 		imageRepository.save(image);
 	}
 	

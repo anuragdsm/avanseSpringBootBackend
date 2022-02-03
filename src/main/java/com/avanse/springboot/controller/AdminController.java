@@ -1,8 +1,11 @@
 package com.avanse.springboot.controller;
 
 import java.io.File;
+
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FilenameUtils;
 import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -83,7 +87,6 @@ import com.avanse.springboot.service.forms.contactUs.CustomerService;
 import lombok.AllArgsConstructor;
 
 @Controller
-@AllArgsConstructor
 public class AdminController {
 
 //	public static String imageUploadDir = System.getProperty("user.dir") + "\\src\\mainresources\\static\\images";
@@ -107,6 +110,8 @@ public class AdminController {
 
 	public static String userAddedImagesDir = System.getProperty("user.dir")
 			+ "\\src\\main\\resources\\static\\images\\userAddedImages";
+	public static String userAddedImagesJustPath = 
+			"/images/userAddedImages";
 	public static String cssCodeFileDir = System.getProperty("user.dir")
 			+ "\\src\\main\\resources\\static\\viewPagesAssets\\css";
 	public static String jsCodeFileDir = System.getProperty("user.dir")
@@ -177,6 +182,9 @@ public class AdminController {
 
 	@Autowired
 	HeaderService headerService;
+	
+	@LocalServerPort
+	int activePortNumber;
 
 	/*
 	 * Method to show the admin home page.
@@ -716,20 +724,44 @@ public class AdminController {
 
 	@PostMapping(path = "/admin/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@CrossOrigin("*")
-	public String postImages(@RequestParam(name = "imageList") MultipartFile[] imageList) {
-
+	public String postImages(@RequestParam(name = "imageList") MultipartFile[] imageList) throws InterruptedException {
+		
+		
 		for (MultipartFile mFile : imageList) {
-			try {
+				try {
 
-				File newFile = new File(userAddedImagesDir + "\\" + mFile.getOriginalFilename());
-				newFile.createNewFile();
-				mFile.transferTo(newFile);
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-				e.printStackTrace();
-			}
+					File newFile = new File(userAddedImagesDir + "\\" + mFile.getOriginalFilename());
+					newFile.createNewFile();
+					mFile.transferTo(newFile);
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					e.printStackTrace();
+				}	
 		}
 
+//		Review To be Done for image
+		
+		List<Thread> threadListForSavingInDatabase = new ArrayList<Thread>();
+		for (MultipartFile mFile : imageList) {
+			Thread t1 = new Thread(()->{
+				try {
+					InetAddress inetAddress = InetAddress.getLocalHost();
+					Image image = new Image(mFile.getName(),mFile.getOriginalFilename(), "http://"+inetAddress.getHostAddress()+":"+activePortNumber+userAddedImagesJustPath+"/"+mFile.getOriginalFilename(), mFile.getName(), mFile.getSize()/1024);
+					System.out.println(image);
+					imageService.addImage(image);
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println(e.getMessage());
+				}
+			});
+			
+			threadListForSavingInDatabase.add(t1);
+		}
+		for(Thread t:threadListForSavingInDatabase) {t.start();}
+//		for(Thread t:threadListForSavingInDatabase) {t.join();}
+		
+		Thread.sleep(5000);
+		
 		return "redirect:/admin/images";
 	}
 

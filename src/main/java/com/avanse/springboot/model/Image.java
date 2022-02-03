@@ -41,6 +41,15 @@ public class Image implements Serializable {
 		super();
 		this.name = name;
 	}
+	public Image(String name, String fileName, String link, String altTag, Long size) {
+		super();
+		this.name = name;
+		this.fileName = fileName;
+		this.link = link;
+		this.altTag = altTag;
+		this.size = size;
+	}
+	
 	
 	
 	
