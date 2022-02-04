@@ -10,11 +10,11 @@ public class InstituteDTO {
 	
 	private Long id;
 	private String nameOfPerson;
-	private String institute;
+	private String nameOfInstitute;
 	private String phoneNumber;
 	private String email;
 	private String city;
 	private String subjectLine;
-	private Integer loanType;
+	private String loanType;
 
 }

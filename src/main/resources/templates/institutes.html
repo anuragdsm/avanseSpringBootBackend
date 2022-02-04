@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="_layout">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Investors</title>
+
+
+<body id="page-top">
+	<!-- Page Wrapper -->
+	<div layout:fragment="content">
+
+
+		<!-- Begin Page Content -->
+		<div class="container-fluid">
+
+			<!-- Page Heading -->
+			<div
+				class="d-sm-flex align-items-center justify-content-between mb-4">
+				<h1 class="h3 mb-0 text-gray-800">Investor Lead via Contact us</h1>
+				<h6 class="m-0 font-weight-bold text-primary">
+					<a href="javascript:history.back()"
+						class="btn btn-info btn-icon-split btn-sm float-right mr-3"> <span
+						class="icon text-white-50"> <i class="fas fa-arrow-left"></i>
+					</span> <span class="text">Back</span>
+					</a>
+				</h6>
+			</div>
+			
+						
+			
+			<!-- Content Row -->
+			<div class="row">
+				<div class="container-fluid">
+
+					<a th:href="@{/admin/customers/csv}" style="margin: 20px 0"
+						class="btn btn-primary">Download CSV</a>
+					<table class="table">
+						<thead class="thead-light">
+							<tr>
+								<th scope="col">SN</th>
+								<th scope="col">Name of Person</th>
+								<th scope="col">Institute</th>
+								<th scope="col">Phone Number</th>
+								<th scope="col">Email</th>
+								<th scope="col">City</th>						
+								<th scope="col">Subject Line</th>							
+								<th scope="col">Loan Type</th>							
+							</tr>
+						</thead>
+						<tbody>
+
+							<tr th:each="institute, iStat : ${institutes}">
+							
+								<th scope="row" th:text="${iStat.index + startCount}">1</th>						
+								<td th:text="${institute.nameOfPerson}">Amit</td>
+								<td th:text="${institute.nameOfInstitute}">Institute Name</td>
+								<td th:text="${institute.phoneNumber}">987654321</td>								
+								<td th:text="${institute.email}">amit@abc.com</td>
+								<td th:text="${institute.city}">Delhi</td>
+								<td th:text="${institute.subjectLine}">Subject</td>
+								<td th:text="${institute.loanType}">Loan Type</td>
+
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="text-center m-1" th:if="${totalItems>0}">
+				<span>Showing investors # [[${startCount}]] to
+					[[${endCount}]] of [[${totalItems}]]</span>
+			</div>
+			<div class="text-center m-1" th:unless="${totalItems>0}">
+				<span>No Investors Leads found</span>
+			</div>
+	 
+			<div>
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-center">
+						<li
+							th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}"><a
+							class="page-link" th:href="@{/admin/contactUs/institutes/page/1}">First</a></li>
+						<li
+							th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}"><a
+							class="page-link"
+							th:href="@{'/admin/contactUs/institutes/page/' + ${currentPage - 1}}">Previous</a></li>
+						<li
+							th:class="${currentPage != i ? 'page-item': 'page-item active' } "
+							th:each="i : ${#numbers.sequence(1, totalPages)}"><a
+							class="page-link"
+							th:href="@{'/admin/contactUs/institutes/page/' + ${i}} ">[[${i}]]</a></li>
+
+						<li
+							th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}"><a
+							class="page-link"
+							th:href="@{'/admin/contactUs/institutes/page/' + ${currentPage + 1}}">Next</a></li>
+						<li
+							th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}"><a
+							class="page-link"
+							th:href="@{'/admin/contactUs/institutes/page/' + ${totalPages}}">Last</a></li>
+					</ul>
+				</nav>
+			</div>
+			<!-- Content Row -->
+
+		</div>
+
+		<!-- End of Content Wrapper -->
+
+	</div>
+
+
+	<!-- End of Page Wrapper -->
+
+	
+	<!-- Bootstrap core JavaScript-->
+	<script src="/vendor/jquery/jquery.min.js"></script>
+	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script src="/js/sb-admin-2.min.js"></script>
+
+	<!-- Page level plugins -->
+	<script src="/vendor/chart.js/Chart.min.js"></script>
+
+	<!-- Page level custom scripts -->
+	<script src="/js/demo/chart-area-demo.js"></script>
+	<script src="/js/demo/chart-pie-demo.js"></script>
+	<script src="/js/demo/chart-bar-demo.js"></script>
+
+</body>
+
+</html>

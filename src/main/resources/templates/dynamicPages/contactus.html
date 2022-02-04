@@ -435,7 +435,7 @@
 								<div class="tab-pane fade active show" id="customer"
 									role="tabpanel" aria-labelledby="customer-tab">
 									<form th:action="@{/viewDynamicPages/contactus/add}"
-										th:object="${customerDTO}" class="contact_form_box"
+										th:object="${customerDTO}" class="contact_form_box" name = "leadType" value="customer"
 										method="post" id="customercontactForm" novalidate="novalidate">
 										<div class="row">
 											<div class="col-lg-4">
@@ -498,60 +498,63 @@
 								</div>
 								<div class="tab-pane fade" id="eduinst" role="tabpanel"
 									aria-labelledby="eduinst-tab">
-									<form action="#" class="contact_form_box" method="post"
+									<form th:action="@{/viewDynamicPages/contactus/add}" 
+									th:object = "${instituteDTO}" class="contact_form_box" method="post" name = "leadType" value="institute"
 										id="eduinstcontactForm" novalidate="novalidate">
 										<div class="row">
 											<div class="col-lg-4">
+											<input type="hidden" name="id" th:field="*{id}">
+	
 												<div class="form-group text_box">
-													<input type="radio" id="1" name="eduloan"
+													<input type="radio" id="loanTypeOption1" name="loanType"
 														value="Institutional Loan"> <label>Institutional
 														Loan</label>
 												</div>
 											</div>
 											<div class="col-lg-4">
 												<div class="form-group text_box">
-													<input type="radio" id="2" name="eduloan"
+													<input type="radio" id="loanTypeOption2" name="loanType"
 														value="Sponsorships"> <label>Sponsorships</label>
 												</div>
 											</div>
 											<div class="col-lg-4">
 												<div class="form-group text_box">
-													<input type="radio" id="3" name="eduloan" value="Others">
+													<input type="radio" id="loanTypeOption3" name="loanType" value="Others">
 													<label>Others</label>
 												</div>
 											</div>
 											<div class="col-lg-6">
 												<div class="form-group text_box">
-													<input type="text" id="name" name="name"
+													<input type="text" id="name" name="name" th:field = "*{nameOfPerson}"
 														placeholder="Your Name">
 												</div>
 											</div>
 											<div class="col-lg-6">
 												<div class="form-group text_box">
-													<input type="text" id="institution" name="institution"
+													<input type="text" id="institution" name="institution" th:field= "*{nameOfInstitute}"
 														placeholder="Name of the Institution">
 												</div>
 											</div>
 											<div class="col-lg-6">
 												<div class="form-group text_box">
-													<input type="text" id="number" name="number"
+													<input type="text" id="number" name="phoneNumber" th:field="*{phoneNumber}"
 														placeholder="Contact Number">
 												</div>
 											</div>
 											<div class="col-lg-6">
 												<div class="form-group text_box">
-													<input type="text" name="email" id="email"
+													<input type="text" name="email" th:field="*{email}" id="email"
 														placeholder="E-mail ID">
 												</div>
 											</div>
 											<div class="col-lg-6">
 												<div class="form-group text_box">
-													<input type="text" id="city" name="city" placeholder="City">
+													<input type="text" id="city" th:field="*{city}" name="city" placeholder="City">
 												</div>
 											</div>
 											<div class="col-lg-6">
 												<div class="form-group text_box">
-													<input type="text" id="subject" name="subject-line"
+													<input type="text" id="subject" name="subject-line" th:field="*{subjectLine}"
 														placeholder="Subject Line">
 												</div>
 											</div>

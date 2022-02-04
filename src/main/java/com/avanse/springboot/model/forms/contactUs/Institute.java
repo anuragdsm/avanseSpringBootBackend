@@ -22,14 +22,14 @@ public class Institute {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nameOfPerson;
-	private String institute;
+	private String nameOfInstitute;
 	private String phoneNumber;
 	private String email;
 	private String city;
 	@Lob
 	@Basic
 	private String subjectLine;
-	private Integer loanType;
+	private String loanType;
 	
 	
 

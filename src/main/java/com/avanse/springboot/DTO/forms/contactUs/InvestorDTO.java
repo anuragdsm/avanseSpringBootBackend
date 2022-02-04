@@ -7,7 +7,6 @@ public class InvestorDTO {
 
 	private Long id;
 	private String name;
-	private String mediaHouse;
 	private String phoneNumber;
 	private String emailId;
 	private String city;	
