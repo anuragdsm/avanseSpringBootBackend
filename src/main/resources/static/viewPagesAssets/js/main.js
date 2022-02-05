@@ -1825,3 +1825,15 @@
         }
     }
 })(jQuery);
+// Student Loan Refinancing form
+$(document).ready(function(){
+    $(".slrs1-click").click(function(){
+      $(".slr-s1").hide();
+      $(".slr-s2").show();
+    });
+  });
+
+  function myFunction() {
+    var x = document.getElementById("countrySelect").value;
+    document.getElementById("cityname").innerHTML = " " + x;
+  }

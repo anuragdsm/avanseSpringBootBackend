@@ -402,7 +402,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .sec_pad {
-  padding: 90px 0px;
+  padding: 80px 0px;
 }
 
 /*====================================================*/
@@ -1112,6 +1112,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
     visibility: hidden;
     display: block;
   }
+  .lg-border-right{border-right: 1px solid #02afb3;}
 }
 .menu > .nav-item.submenu .dropdown-menu .nav-item {
   display: block;
@@ -10070,7 +10071,12 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .feedback_item .ratting a:nth-child(1), .feedback_item .ratting a:nth-child(2), .feedback_item .ratting a:nth-child(3) {
   color: #17c7bd;
 }
-
+.testimonials-box{    max-height: 370px;overflow: hidden;}
+.testim_info{    height: 240px;}
+.testimonials-box:hover .testim_info{overflow: hidden;overflow-y: auto;}
+.testimonials-box ::-webkit-scrollbar {width: 5px;}
+.testimonials-boxr ::-webkit-scrollbar-track {background:#fff;}
+.testimonials-box ::-webkit-scrollbar-thumb  {background-color:#fdc119;}
 .owl-dots {
   text-align: center;
   margin-top: 75px;
@@ -17473,7 +17479,7 @@ input[type=text] {
 .domain_price li {
   font-size: 18px;
   font-weight: 500;
-  color: #7b7b93;
+  color: #231f20;
 }
 .domain_price li + li {
   margin-left: 50px;
@@ -17500,7 +17506,7 @@ input[type=text] {
   margin-bottom: 15px;
 }
 .hosting_title p {
-  color: #7b7b93;
+  color: #231f20;
   font-size: 16px;
   font-weight: 400;
   margin-bottom: 0;
@@ -17528,7 +17534,7 @@ input[type=text] {
   margin-bottom: 37px;
 }
 .hosting_service_item p {
-  color: #7b7b93;
+  color: #231f20;
   margin-bottom: 0;
   font-weight: 400;
 }
@@ -17656,7 +17662,7 @@ a .h_head:hover {
 }
 .h_blog_item .h_blog_content .post_time {
   font-size: 14px;
-  color: #7b7b93;
+  color: #231f20;
   font-weight: 500;
   text-transform: uppercase;
   margin-bottom: 10px;
@@ -17679,7 +17685,7 @@ a .h_head:hover {
   margin-top: 0;
   font-size: 14px;
   line-height: 16px;
-  color: #7b7b93;
+  color: #231f20;
   text-transform: uppercase;
   font-weight: 500;
   position: relative;
@@ -17712,7 +17718,7 @@ a .h_head:hover {
   transition: all 0.2s linear;
 }
 .h_blog_item .h_blog_content .post-info-bottom .post-info-comments {
-  color: #7b7b93;
+  color: #231f20;
   text-transform: uppercase;
   font-weight: 500;
   font-size: 14px;
@@ -17966,7 +17972,7 @@ a .h_head:hover {
 .h_footer_dark .company_widget .f_social_icon a {
   background: transparent;
   font-size: 14px;
-  color: #7b7b93;
+  color: #231f20;
   border: 1px solid #2c3445;
 }
 .h_footer_dark .company_widget .f_social_icon a:hover {
@@ -17975,7 +17981,7 @@ a .h_head:hover {
   border-color: #f8636b;
 }
 .h_footer_dark .f_widget.about-widget .f_list li a, .h_footer_dark .f_widget.company_widget p {
-  color: #7b7b93;
+  color: #231f20;
   font-weight: 400;
 }
 .h_footer_dark .f_widget.about-widget .f_list li {
@@ -18293,7 +18299,7 @@ a .h_head:hover {
   text-align: center;
   font-size: 16px;
   font-weight: 500;
-  color: #7b7b93;
+  color: #231f20;
   background: #faf7f8;
   border-radius: 0px;
   border: 0px;
@@ -18311,7 +18317,7 @@ a .h_head:hover {
 
 .h_price_tab p {
   font-size: 16px;
-  color: #7b7b93;
+  color: #231f20;
   padding: 50px;
   font-weight: 400;
   margin-bottom: 0;
@@ -18359,7 +18365,7 @@ a .h_head:hover {
 .h_price_body .h_p_list .h_price_item h5 {
   margin-bottom: 0;
   font-size: 16px;
-  color: #7b7b93;
+  color: #231f20;
   font-weight: 400;
 }
 .h_price_body .h_p_list .h_price_item h5 span {
@@ -18691,7 +18697,7 @@ a .h_head:hover {
 .erp_testimonial_item .content p {
   font-weight: 400;
   font-size: 20px;
-  color: #7b7b93;
+  color: #231f20;
   line-height: 36px;
 }
 .erp_testimonial_item .ratting {
@@ -18720,13 +18726,13 @@ a .h_head:hover {
   margin-bottom: 3px;
 }
 .erp_testimonial_item .media .media-body h5 span {
-  color: #7b7b93;
+  color: #231f20;
   font-weight: 400;
   font-size: 16px;
 }
 .erp_testimonial_item .media .media-body p {
   margin-bottom: 0;
-  color: #7b7b93;
+  color: #231f20;
   font-weight: 400;
 }
 
@@ -18774,7 +18780,7 @@ a .h_head:hover {
 }
 .erp_action_content p {
   font-size: 24px;
-  color: #7b7b93;
+  color: #231f20;
   font-weight: 400;
 }
 .erp_action_content p span {
@@ -19098,7 +19104,7 @@ a .h_head:hover {
 }
 .ticket_item h2 span {
   font-weight: 500;
-  color: #7b7b93;
+  color: #231f20;
   font-size: 18px;
   line-height: 30px;
   display: block;
@@ -19249,7 +19255,7 @@ a .h_head:hover {
 .pos_developer_product_area .developer_product_content p {
   font-size: 16px;
   line-height: 28px;
-  color: #7b7b93;
+  color: #231f20;
   margin-bottom: 0;
 }
 
@@ -19294,7 +19300,7 @@ a .h_head:hover {
   font-weight: 500;
 }
 .pos_features_content .h_features_item p {
-  color: #7b7b93;
+  color: #231f20;
 }
 
 .pos_features_img {
@@ -19560,7 +19566,7 @@ a .h_head:hover {
   font-size: 24px;
   line-height: 35px;
   font-weight: 400;
-  color: #7b7b93;
+  color: #231f20;
   margin-bottom: 52px;
 }
 .pos_action_area .pos_action_content .pos_btn {
@@ -20628,7 +20634,7 @@ a .h_head:hover {
 }
 .h_avanse_features_item .h_avanse_content p {
   font-size: 16px;
-  color: #7b7b93;
+  color: #231f20;
   line-height: 28px;
   font-weight: 400;
   margin-bottom: 40px;
@@ -20641,7 +20647,7 @@ a .h_head:hover {
 .h_avanse_features_item .h_avanse_content ul li {
   font-size: 16px;
   line-height: 28px;
-  color: #7b7b93;
+  color: #231f20;
   font-weight: 400;
   position: relative;
   padding-left: 20px;
@@ -20719,7 +20725,7 @@ a .h_head:hover {
   margin-bottom: 8px;
 }
 .h_action_area_three .h_action_content .author p {
-  color: #7b7b93;
+  color: #231f20;
   font-weight: 400;
   margin-bottom: 0;
 }
@@ -20733,7 +20739,7 @@ a .h_head:hover {
 }
 .avanse_title p {
   font-weight: 400;
-  color: #7b7b93;
+  color: #231f20;
   font-size: 16px;
   max-width: 700px;
   margin: 0 auto;
@@ -20803,7 +20809,7 @@ a .h_head:hover {
 }
 .setup_inner .setup_content p {
   font-size: 16px;
-  color: #7b7b93;
+  color: #231f20;
   font-weight: 400;
   margin-bottom: 0;
 }
@@ -20836,7 +20842,7 @@ a .h_head:hover {
 }
 .avanse_price_item .p_head h6 {
   font-size: 16px;
-  color: #7b7b93;
+  color: #231f20;
   font-weight: 400;
 }
 .avanse_price_item .p_head .tag {
@@ -20858,7 +20864,7 @@ a .h_head:hover {
       -ms-flex-pack: justify;
           justify-content: space-between;
   font-size: 16px;
-  color: #7b7b93;
+  color: #231f20;
   font-size: 400;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -20954,7 +20960,7 @@ a .h_head:hover {
 .avanse_list li {
   font-size: 16px;
   line-height: 20px;
-  color: #7b7b93;
+  color: #231f20;
   position: relative;
   padding-left: 30px;
   margin-top: 20px;
@@ -23104,7 +23110,7 @@ a .h_head:hover {
 }
 .h_security_item .media-body p {
   margin-bottom: 0;
-  color: #7b7b93;
+  color: #231f20;
 }
 
 /*=================== h_security_area css =============*/
@@ -23237,7 +23243,7 @@ a .h_head:hover {
   margin-top: 30px;
   font-size: 16px;
   font-weight: 500;
-  color: #7b7b93;
+  color: #231f20;
 }
 .security_app_btn i {
   color: #0e79de;
@@ -23505,7 +23511,7 @@ a .h_head:hover {
 .event_about_content p {
   font-size: 16px;
   line-height: 28px;
-  color: #7b7b93;
+  color: #231f20;
 }
 .event_about_content h6 {
   color: #2c2c51;
@@ -23648,7 +23654,7 @@ a .h_head:hover {
   color: #fd475d;
 }
 .event_team_slider .item p {
-  color: #7b7b93;
+  color: #231f20;
   margin-bottom: 0;
 }
 .event_team_slider .item:hover .e_team_img:before {
@@ -23714,7 +23720,7 @@ a .h_head:hover {
   color: #fd475d;
 }
 .event_features_item p {
-  color: #7b7b93;
+  color: #231f20;
 }
 .event_features_item .e_features_btn {
   font-size: 16px;
@@ -23871,13 +23877,13 @@ a .h_head:hover {
   margin-bottom: 3px;
 }
 .event_tab_content .media .media-body span {
-  color: #7b7b93;
+  color: #231f20;
 }
 .event_tab_content .media .media-body span a {
   color: #fba820;
 }
 .event_tab_content .media .media-body p {
-  color: #7b7b93;
+  color: #231f20;
   margin-bottom: 0;
   padding-top: 12px;
 }
@@ -23922,7 +23928,7 @@ a .h_head:hover {
   border-bottom: 0.5px dashed #cfcfdc;
 }
 .event_price_item .p_body li {
-  color: #7b7b93;
+  color: #231f20;
 }
 .event_price_item .p_body li .ti-check {
   color: #26da15;
@@ -23949,7 +23955,7 @@ a .h_head:hover {
   color: #fd475d;
 }
 .event_price_item.active .p_body li {
-  color: #7b7b93;
+  color: #231f20;
 }
 .event_price_item.active .event_btn {
   -webkit-box-shadow: 0px 10px 40px 0px rgba(195, 33, 52, 0.3);
@@ -24028,7 +24034,7 @@ a .h_head:hover {
 }
 .event_location p {
   font-size: 16px;
-  color: #7b7b93;
+  color: #231f20;
   margin-bottom: 0;
 }
 .event_location .contact_info_item {
@@ -24038,7 +24044,7 @@ a .h_head:hover {
   padding-top: 30px;
 }
 .event_location .f_social_icon_two a {
-  color: #7b7b93;
+  color: #231f20;
 }
 .event_location .f_social_icon_two a:hover {
   color: #fd475d;
@@ -24812,7 +24818,7 @@ a .h_head:hover {
 .section_title p {
   font-size: 18px;
   line-height: 30px;
-  color: #7b7b93;
+  color: #231f20;
   font-weight: 400;
   max-width: 900px;
   margin: 0 auto;
@@ -25411,7 +25417,7 @@ a .h_head:hover {
 }
 .shop_area .u_content ul li {
   font-size: 16px;
-  color: #7b7b93;
+  color: #231f20;
   font-weight: 500;
   position: relative;
   padding-left: 25px;
@@ -25601,7 +25607,7 @@ a .h_head:hover {
 .c_features_item h6 {
   margin-bottom: 0;
   font-size: 16px;
-  color: #7b7b93;
+  color: #231f20;
   font-weight: 400;
   margin-top: 25px;
 }
@@ -25764,7 +25770,7 @@ a .h_head:hover {
   margin-bottom: 5px;
 }
 .testimonial_slider_demo .slick-slide .content span {
-  color: #7b7b93;
+  color: #231f20;
   font-size: 16px;
   font-style: italic;
   font-weight: 400;
@@ -26519,7 +26525,7 @@ a .h_head:hover {
 }
 .blog_grid .entry_post_info {
   line-height: 1;
-  color: #7b7b93;
+  color: #231f20;
   display: block;
   font-size: 14px;
   font-weight: 500;
@@ -26576,7 +26582,7 @@ a .h_head:hover {
 }
 .blog_grid ul > li > a {
   line-height: 1;
-  color: #7b7b93;
+  color: #231f20;
   display: block;
   font-size: 14px;
   font-weight: 500;
@@ -28221,7 +28227,7 @@ padding: 44px 0;
 .check_list li{
   font-size: 16px;
     line-height: 20px;
-    color: #7b7b93;
+    color: #231f20;
     position: relative;
     padding-left: 30px;
     margin-top: 20px;
@@ -28259,9 +28265,10 @@ padding: 44px 0;
 }
 .course_abroad_form{
   background: #fff;
-    padding: 15px 30px;
+    padding: 0px 20px;
     text-align: center;
 }
+
 .course_abroad_form select.form-control:not([size]):not([multiple]) {
   height: calc(2.25rem + 15px);
   border: 0;
@@ -28269,6 +28276,7 @@ padding: 44px 0;
   border-radius: 0;
 
 }
+.search-button-home{position: absolute; right: 25px; top: 11px; background-color: #fff; color: #01b1b2;}
 select.form-control:not([size]):not([multiple]) {
   height: calc(2.25rem + 15px);
   border: 0;
@@ -28300,12 +28308,13 @@ select.form-control:not([size]):not([multiple]) {
   background: #1db1b1;
   z-index: 999999;
   display: inline-block;
-  min-height: 360px;
-  /* overflow: hidden; */
+  height: 370px;
+  max-height: 370px;
+  overflow: hidden;
 }
 .team_leader:hover .team_info{
-  /* overflow: hidden;
-    overflow-y: auto; */
+  overflow: hidden;
+    overflow-y: auto;
 }
 .team_leader ::-webkit-scrollbar {width: 5px;}
 .team_leader ::-webkit-scrollbar-track {background:#fff;}
@@ -28357,14 +28366,15 @@ input[type=date]{color: #222d39; height:50px; background-color: white; -webkit-b
     writing-mode: inherit;
     transform: inherit;
     padding-top: 70px;
-}
+  }
 .software_service_tab{
   overflow: hidden;
     overflow-x: scroll;
     height: 60px;
     margin-bottom: 30px;
     white-space: nowrap;
-}
+  }
+
 }
 .circel-bg{background: url(../img/circel-bg.png) no-repeat; position: absolute; left: -75px; margin-top: 25%; width: 200px; height: 200px;}
 .circel-yellow-bg{background: url(../img/circel-yellow-bg.png) no-repeat; position: absolute; right: 0; margin-top: 20%; width: 50px; height: 112px;}
@@ -28424,3 +28434,12 @@ input[type=date]{color: #222d39; height:50px; background-color: white; -webkit-b
 .radio-hide1, .radio-hide2,.radio-hide3{display: none;}
 #larger, #extra, #quickly{display: none;}
 .benefits_box{box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;min-height: 265px; padding: 20px;margin-bottom: 30px;}
+.home-offer-box {
+  -webkit-box-shadow: 0px 4px 6px 0px rgb(0 11 40 / 10%);
+    box-shadow: 0px 4px 6px 0px rgb(0 11 40 / 10%);
+}
+.home-offer-box:hover {
+  border-color: #c9ebfa;
+  -webkit-box-shadow: 0px 30px 60px 0px rgb(0 11 40 / 34%);
+  box-shadow: 0px 30px 60px 0px rgb(0 11 40 / 34%);
+}
