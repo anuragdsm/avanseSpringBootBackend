@@ -81,15 +81,14 @@ public class ContactUsController {
 	public String customersAddPost(@ModelAttribute("customerDTO") CustomerDTO customerDTO,
 									@ModelAttribute("investorDTO") InvestorDTO investorDTO,
 									@ModelAttribute("instituteDTO") InstituteDTO instituteDTO,
-									@ModelAttribute ("mdeiaDTO") MediaDTO mediaDTO,
+									@ModelAttribute ("mediaDTO") MediaDTO mediaDTO,
 									@RequestParam("leadType") String leadType) {
 		
-		
+		System.out.println(instituteDTO.toString());
 		switch (leadType) {
 		
 		case "customer" :
 			Customer customer = new Customer();
-			customer.setId(customerDTO.getId());
 			customer.setName(customerDTO.getName());
 			customer.setCity(customerDTO.getCity());
 			customer.setEmail(customerDTO.getEmail());
@@ -114,7 +113,6 @@ public class ContactUsController {
 			
 		case "institute" :
 			Institute institute = new Institute();
-			institute.setId(instituteDTO.getId());
 			institute.setNameOfPerson(instituteDTO.getNameOfPerson());
 			institute.setNameOfInstitute(instituteDTO.getNameOfInstitute());
 			institute.setPhoneNumber(instituteDTO.getPhoneNumber());

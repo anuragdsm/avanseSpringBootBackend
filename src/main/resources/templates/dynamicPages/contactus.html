@@ -435,11 +435,11 @@
 								<div class="tab-pane fade active show" id="customer"
 									role="tabpanel" aria-labelledby="customer-tab">
 									<form th:action="@{/viewDynamicPages/contactus/add}"
-										th:object="${customerDTO}" class="contact_form_box" name = "leadType" value="customer"
+										th:object="${customerDTO}" class="contact_form_box" name = "customerDTO" value="customer"
 										method="post" id="customercontactForm" novalidate="novalidate">
 										<div class="row">
 											<div class="col-lg-4">
-											<input type="hidden" name="id" th:field="*{id}">
+											<input type="text" name="leadType" value="customer">
 												<div class="form-group text_box">
 													 <input
 														type="radio" id="loanStatusOption1" name="loanStatus"
@@ -499,12 +499,11 @@
 								<div class="tab-pane fade" id="eduinst" role="tabpanel"
 									aria-labelledby="eduinst-tab">
 									<form th:action="@{/viewDynamicPages/contactus/add}" 
-									th:object = "${instituteDTO}" class="contact_form_box" method="post" name = "leadType" value="institute"
+									th:object = "${instituteDTO}" class="contact_form_box" method="post" 
 										id="eduinstcontactForm" novalidate="novalidate">
 										<div class="row">
 											<div class="col-lg-4">
-											<input type="hidden" name="id" th:field="*{id}">
-	
+											<input type="text" hidden name="leadType" value="institute">
 												<div class="form-group text_box">
 													<input type="radio" id="loanTypeOption1" name="loanType"
 														value="Institutional Loan"> <label>Institutional
@@ -572,6 +571,9 @@
 									<form action="#" class="contact_form_box" method="post"
 										id="eduinstcontactForm" novalidate="novalidate">
 										<div class="row">
+										
+										
+											<input type="text" hidden name="leadType" value="media">
 
 											<div class="col-lg-6">
 												<div class="form-group text_box">

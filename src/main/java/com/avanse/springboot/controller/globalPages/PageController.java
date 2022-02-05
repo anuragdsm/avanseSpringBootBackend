@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.avanse.springboot.DTO.forms.contactUs.CustomerDTO;
+import com.avanse.springboot.DTO.forms.contactUs.InstituteDTO;
+import com.avanse.springboot.DTO.forms.contactUs.InvestorDTO;
+import com.avanse.springboot.DTO.forms.contactUs.MediaDTO;
 import com.avanse.springboot.model.Page;
 import com.avanse.springboot.model.Post;
 import com.avanse.springboot.model.PostCategory;
@@ -57,6 +60,9 @@ public class PageController {
 		model.addAttribute("postCategories", postCategoryService.getAllPostCategories());
 		model.addAttribute("posts", postService.getAllPosts());
 		model.addAttribute("customerDTO", new CustomerDTO());
+		model.addAttribute("instituteDTO", new InstituteDTO());
+		model.addAttribute("investerDTO", new InvestorDTO());
+		model.addAttribute("mediaDTO", new MediaDTO());
 		return modelAndView;		
 	}
 	

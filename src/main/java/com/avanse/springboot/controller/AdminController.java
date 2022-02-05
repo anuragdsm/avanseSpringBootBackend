@@ -633,11 +633,25 @@ public class AdminController {
 
 	@PostMapping("/admin/courses/add")
 	public String coursesAddPost(@ModelAttribute("courseDTO") CourseDTO courseDTO,
-			@RequestParam("university_id") long university_id) {
+			@RequestParam("university_id") long university_id,
+			@RequestParam("examCheckBox") String [] exams) {
 
 		/*
 		 * Use the model attribute to transfer the data from course DTO to course object
 		 */
+		
+		String examsFromCheckBoxes = "";
+		
+		if(exams!=null) {
+		for(String ex: exams) {
+			System.out.println(ex);
+			examsFromCheckBoxes+=ex + " " ;
+		}
+		examsFromCheckBoxes.trim();
+		
+		examsFromCheckBoxes.replaceAll(". .", " ,");
+		}
+		courseDTO.setExamsEligibility(examsFromCheckBoxes);
 
 //		University university = new University();
 		Course course = new Course();
@@ -648,6 +662,9 @@ public class AdminController {
 		course.setDocumentsRequired(courseDTO.getDocumentsRequired());
 		course.setExamsEligibility(courseDTO.getExamsEligibility());
 		course.setFees(courseDTO.getFees());
+		
+	
+		
 //		university.addTheCourse(course);
 		course.setUniversity(universityService.getUniversityById(university_id).get());
 		courseService.addCourse(course);
@@ -726,7 +743,7 @@ public class AdminController {
 	@CrossOrigin("*")
 	public String postImages(@RequestParam(name = "imageList") MultipartFile[] imageList) throws InterruptedException {
 		
-		
+		System.out.println("Length -    "+imageList.length); //This Upload will work only if this statement is present
 		for (MultipartFile mFile : imageList) {
 				try {
 
@@ -758,9 +775,9 @@ public class AdminController {
 			threadListForSavingInDatabase.add(t1);
 		}
 		for(Thread t:threadListForSavingInDatabase) {t.start();}
-//		for(Thread t:threadListForSavingInDatabase) {t.join();}
+		for(Thread t:threadListForSavingInDatabase) {t.join();}
 		
-		Thread.sleep(5000);
+//		Thread.sleep(5000);
 		
 		return "redirect:/admin/images";
 	}
