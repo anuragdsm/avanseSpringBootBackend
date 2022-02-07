@@ -14,20 +14,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="E_TUTORINGLEADS")
-public class ETutoring {
-	
+@Table(name= "PARTNER_WITH_US_LEADS")
+public class PartnerWithUs {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long id;
+	private String nameOfFirm;
+	private String partnerType;
 	private String firstName;
 	private String lastName;
-	private String phoneNumber;
+	private String mobileNumber;
 	private String email;
 	private String city;
-	private String LoanAmount;
-	private String courseName;
-	private String courseProvider;
 	
 
 }

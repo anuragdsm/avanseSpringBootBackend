@@ -1,8 +1,5 @@
 package com.avanse.springboot.DTO;
-
-import java.util.Calendar;
 import java.util.Date;
-
 import lombok.Data;
 
 @Data

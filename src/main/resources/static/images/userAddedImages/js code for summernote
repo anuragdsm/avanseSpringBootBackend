@@ -1,3 +1,5 @@
+
+
 $('#summernote').summernote({
     height: ($(window).height() - 300),
     callbacks: {

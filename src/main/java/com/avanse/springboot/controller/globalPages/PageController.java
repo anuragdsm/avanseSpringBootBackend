@@ -61,7 +61,7 @@ public class PageController {
 		model.addAttribute("posts", postService.getAllPosts());
 		model.addAttribute("customerDTO", new CustomerDTO());
 		model.addAttribute("instituteDTO", new InstituteDTO());
-		model.addAttribute("investerDTO", new InvestorDTO());
+		model.addAttribute("investorDTO", new InvestorDTO());
 		model.addAttribute("mediaDTO", new MediaDTO());
 		return modelAndView;		
 	}

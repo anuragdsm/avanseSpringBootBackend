@@ -1,7 +1,6 @@
 package com.avanse.springboot.DTO.forms.contactUs;
 
-import javax.persistence.Basic;
-import javax.persistence.Lob;
+
 
 import lombok.Data;
 

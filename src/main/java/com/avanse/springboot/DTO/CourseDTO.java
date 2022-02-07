@@ -16,6 +16,8 @@ public class CourseDTO {
 	
 	private String examsEligibility;
 	private String documentsRequired;
+	private String academicDocumentsRequired;
+
 	private University university;
 	private Boolean isCourseActive;
 	

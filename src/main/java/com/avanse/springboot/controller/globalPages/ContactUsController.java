@@ -39,6 +39,7 @@ public class ContactUsController {
 	@Autowired
 	MediaService mediaService;
 	
+	
 	@GetMapping("/admin/contactUs/customers")
 	public String getFirstCustomersPage(Model model) {
 
@@ -74,8 +75,98 @@ public class ContactUsController {
 	}
 	
 	
+		
+	
+	@GetMapping("/admin/contactUs/institutes")
+	public String getFirstInstitutesPage(Model model) {
+		return listInstitutesByPage(1, model);
+	}
+	
+	@GetMapping("/admin/contactUs/institutes/page/{pageNum}")
+	public String listInstitutesByPage(@PathVariable(name = "pageNum") int pageNum, Model model) {
+		Page<Institute> page = instituteService.listInstituteByPage(pageNum);
+		List<Institute> institutes= page.getContent();
+		
+		
+		long startCount = (pageNum - 1) * instituteService.INSTITUTES_PER_PAGE + 1;
+		long endCount = startCount + instituteService.INSTITUTES_PER_PAGE - 1;
+		
+		if(endCount > page.getTotalElements()) {
+			endCount = page.getTotalElements();
+		}
+		
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("startCount", startCount);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("endCount", endCount);
+		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("institutes", institutes);
+		return "institutes";
+	}
+	
+	
+	@GetMapping("/admin/contactUs/investors")
+	public String getFirstInvestorsPage(Model model) {
+		return listInvestorsByPage(1, model);
+	}
+	
+
+	@GetMapping("/admin/contactUs/investors/page/{pageNum}")
+	public String listInvestorsByPage(@PathVariable(name = "pageNum") int pageNum, Model model) {
+		Page<Investor> page = investorService.listInvestorsByPage(pageNum);
+		List<Investor> investors= page.getContent();
+	
+		long startCount = (pageNum - 1) * investorService.INVESTORS_PER_PAGE + 1;
+		long endCount = startCount + investorService.INVESTORS_PER_PAGE - 1;
+		
+		if(endCount > page.getTotalElements()) {
+			endCount = page.getTotalElements();
+		}
+		
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("startCount", startCount);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("endCount", endCount);
+		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("investors", investors);
+		return "investors";
+	}
+	
+	@GetMapping("/admin/contactUs/mediaLeads")
+	public String getFirstMediaLeadsPage(Model model) {
+		return listMediaLeadsByPage(1, model);
+		
+	}
+	
+	@GetMapping("/admin/contactUs/mediaLeads/page/{pageNum}")
+	public String listMediaLeadsByPage(@PathVariable(name = "pageNum") int pageNum, Model model) {
+		Page<Media> page = mediaService.listMediaLeadsByPage(pageNum);
+		List<Media> mediaLeads= page.getContent();
+		
+		long startCount = (pageNum - 1) * mediaService.MEDIA_LEADS_PER_PAGE + 1;
+		long endCount = startCount + mediaService.MEDIA_LEADS_PER_PAGE - 1;
+		
+		if(endCount > page.getTotalElements()) {
+			endCount = page.getTotalElements();
+		}
+		
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("startCount", startCount);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("endCount", endCount);
+		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("mediaLeads", mediaLeads);
+		return "media";
+	}
+
+	
+	
+	
+	
+	
+	
 	/*
-	 * Common add method for all forms
+	 * Common post add method for all forms
 	*/
 	@PostMapping("/viewDynamicPages/contactus/add")
 	public String customersAddPost(@ModelAttribute("customerDTO") CustomerDTO customerDTO,
@@ -85,6 +176,8 @@ public class ContactUsController {
 									@RequestParam("leadType") String leadType) {
 		
 		System.out.println(instituteDTO.toString());
+		System.out.println(investorDTO.toString());
+		System.out.println(mediaDTO.toString());
 		switch (leadType) {
 		
 		case "customer" :
@@ -145,90 +238,7 @@ public class ContactUsController {
 
 		return "thankyou";
 	}
-	
-	
-	@GetMapping("/admin/contactUs/institutes")
-	public String getFirstInstitutesPage(Model model) {
-		return listInstitutesByPage(1, model);
-	}
-	
-	@GetMapping("/admin/contactUs/institutes/page/{pageNum}")
-	public String listInstitutesByPage(@PathVariable(name = "pageNum") int pageNum, Model model) {
-		Page<Institute> page = instituteService.listInstituteByPage(pageNum);
-		List<Institute> institutes= page.getContent();
-		
-		
-		long startCount = (pageNum - 1) * instituteService.INSTITUTES_PER_PAGE + 1;
-		long endCount = startCount + instituteService.INSTITUTES_PER_PAGE - 1;
-		
-		if(endCount > page.getTotalElements()) {
-			endCount = page.getTotalElements();
-		}
-		
-		model.addAttribute("currentPage", pageNum);
-		model.addAttribute("startCount", startCount);
-		model.addAttribute("totalPages", page.getTotalPages());
-		model.addAttribute("endCount", endCount);
-		model.addAttribute("totalItems", page.getTotalElements());
-		model.addAttribute("institutes", institutes);
-		return "institutes";
-	}
-	
-	
-	@GetMapping("/admin/contactUs/investors")
-	public String getFirstInvestorsPage(Model model) {
-		return listInvestorsByPage(1, model);
-	}
-	
 
-	@GetMapping("/admin/contactUs/investors/page/{pageNum}")
-	public String listInvestorsByPage(@PathVariable(name = "pageNum") int pageNum, Model model) {
-		Page<Investor> page = investorService.listInvestorsByPage(pageNum);
-		List<Investor> investors= page.getContent();
-	
-		long startCount = (pageNum - 1) * investorService.INVESTORS_PER_PAGE + 1;
-		long endCount = startCount + investorService.INVESTORS_PER_PAGE - 1;
-		
-		if(endCount > page.getTotalElements()) {
-			endCount = page.getTotalElements();
-		}
-		
-		model.addAttribute("currentPage", pageNum);
-		model.addAttribute("startCount", startCount);
-		model.addAttribute("totalPages", page.getTotalPages());
-		model.addAttribute("endCount", endCount);
-		model.addAttribute("totalItems", page.getTotalElements());
-		model.addAttribute("investors", investors);
-		return "institutes";
-	}
-	
-	@GetMapping("/admin/contactUs/mediaLeads")
-	public String getFirstMediaLeadsPage(Model model) {
-		return listMediaLeadsByPage(1, model);
-		
-	}
-	
-	@GetMapping("/admin/contactUs/mediaLeads/page/{pageNum}")
-	public String listMediaLeadsByPage(@PathVariable(name = "pageNum") int pageNum, Model model) {
-		Page<Media> page = mediaService.listMediaLeadsByPage(pageNum);
-		List<Media> mediaLeads= page.getContent();
-		
-		long startCount = (pageNum - 1) * mediaService.MEDIA_LEADS_PER_PAGE + 1;
-		long endCount = startCount + mediaService.MEDIA_LEADS_PER_PAGE - 1;
-		
-		if(endCount > page.getTotalElements()) {
-			endCount = page.getTotalElements();
-		}
-		
-		model.addAttribute("currentPage", pageNum);
-		model.addAttribute("startCount", startCount);
-		model.addAttribute("totalPages", page.getTotalPages());
-		model.addAttribute("endCount", endCount);
-		model.addAttribute("totalItems", page.getTotalElements());
-		model.addAttribute("mediaLeads", mediaLeads);
-		return "institutes";
-	}
-	
 	
 	
 	

@@ -59,7 +59,10 @@ import com.avanse.springboot.model.PostCategory;
 import com.avanse.springboot.model.Testimonial;
 import com.avanse.springboot.model.University;
 import com.avanse.springboot.model.forms.contactUs.Customer;
+import com.avanse.springboot.model.forms.contactUs.Institute;
+import com.avanse.springboot.model.forms.contactUs.Investor;
 import com.avanse.springboot.model.forms.contactUs.exports.CustomersCSVExporter;
+import com.avanse.springboot.model.forms.contactUs.exports.InstitutesCSVExporter;
 import com.avanse.springboot.repository.AwardRepository;
 import com.avanse.springboot.repository.CourseRepository;
 import com.avanse.springboot.repository.HeaderRepository;
@@ -83,6 +86,7 @@ import com.avanse.springboot.service.PostService;
 import com.avanse.springboot.service.TestimonialService;
 import com.avanse.springboot.service.UniversityService;
 import com.avanse.springboot.service.forms.contactUs.CustomerService;
+import com.avanse.springboot.service.forms.contactUs.InstituteService;
 
 import lombok.AllArgsConstructor;
 
@@ -660,6 +664,7 @@ public class AdminController {
 		course.setDescription(courseDTO.getDescription());
 		course.setDuration(courseDTO.getDuration());
 		course.setDocumentsRequired(courseDTO.getDocumentsRequired());
+		course.setAcademicDocumentsRequired(courseDTO.getAcademicDocumentsRequired());
 		course.setExamsEligibility(courseDTO.getExamsEligibility());
 		course.setFees(courseDTO.getFees());
 		
@@ -694,6 +699,7 @@ public class AdminController {
 		courseDTO.setTitle(course.getTitle());
 		courseDTO.setDescription(course.getDescription());
 		courseDTO.setDocumentsRequired(course.getDocumentsRequired());
+		courseDTO.setAcademicDocumentsRequired(course.getAcademicDocumentsRequired());
 		courseDTO.setDuration(course.getDuration());
 		courseDTO.setExamsEligibility(course.getExamsEligibility());
 		courseDTO.setFees(course.getFees());
@@ -2105,13 +2111,6 @@ public class AdminController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
 
 	/*
 	 * Method to add a university Need both get and post mapping for adding the
@@ -2268,10 +2267,23 @@ public class AdminController {
 	CustomerService customerService;
 	
 	@GetMapping("/admin/customers/csv")
-	public void exportToCSV(HttpServletResponse response) throws IOException{
+	public void exportCustomersToCSV(HttpServletResponse response) throws IOException{
 		List<Customer> listOfCustomers = customerService.getAllCustomers();
 		CustomersCSVExporter exporter = new CustomersCSVExporter();
 		exporter.export(listOfCustomers, response);
+	}
+
+	/*
+	 * function to export the list of institutes in CSV
+	 */
+	@Autowired
+	InstituteService instituteService;
+	
+	@GetMapping("/admin/institutes/csv")
+	public void exportInstitutesToCSV(HttpServletResponse response) throws IOException{
+		List<Institute> listOfInstitutes= instituteService.getAllInstitutes();
+		InstitutesCSVExporter  exporter = new InstitutesCSVExporter();
+		exporter.export(listOfInstitutes, response);
 	}
 	
 //	End of class

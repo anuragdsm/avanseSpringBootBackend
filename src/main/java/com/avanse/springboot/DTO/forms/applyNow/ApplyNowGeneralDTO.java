@@ -1,7 +1,11 @@
-package com.avanse.springboot.model.forms.applyNow;
-// This is the form that is apply-now html which will be generic in nature
-public class General {
+package com.avanse.springboot.DTO.forms.applyNow;
 
+import lombok.Data;
+
+@Data
+public class ApplyNowGeneralDTO {
+	
+	private Long id;
 	private String firstName;
 	private String lastName;
 	private String contactNumber;
@@ -10,8 +14,5 @@ public class General {
 	private String placeOfStudy;
 	private String loanAmount;
 	private String AdmissionStatus;
-	
-//	Date has to be implemented later
-	
-	
+
 }

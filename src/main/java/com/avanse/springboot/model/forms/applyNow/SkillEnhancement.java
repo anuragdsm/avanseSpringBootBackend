@@ -10,27 +10,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//For student-loan-refinancing.html
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "EDUCATION_LOAN_REFINANCING_LEADS")
-public class EducationLoanRefinancing {
-
+@Table(name = "SKILL_ENHACEMENT_DATA")
+public class SkillEnhancement {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
-	private String email;
+	private String firstName;
+	private String LastName;
 	private String phoneNumber;
-	private String location;
-	private Long balanceLoanAmount;	
-	private String universityAttending;
-	private String studyingPlace;
-	private String studyingCourse;
-	private String graduateMonthAndYear;
-	private Integer interestRate;
+	private String email;
+	private String city;
+	private String courseName;
+	private String courseProvider;
+	private String loanAmount;
 	
+
 }

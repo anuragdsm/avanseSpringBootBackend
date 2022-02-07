@@ -10,27 +10,28 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//For student-loan-refinancing.html
-
+// This is the form that is apply-now html which will be generic in nature
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "EDUCATION_LOAN_REFINANCING_LEADS")
-public class EducationLoanRefinancing {
+@Table ( name =  "APPLY_NOW_GERNERAL")
+public class ApplyNowGeneral {
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
-	private String email;
-	private String phoneNumber;
-	private String location;
-	private Long balanceLoanAmount;	
-	private String universityAttending;
-	private String studyingPlace;
-	private String studyingCourse;
-	private String graduateMonthAndYear;
-	private Integer interestRate;
+	private String firstName;
+	private String lastName;
+	private String contactNumber;
+	private String emailId;
+	private String city;
+	private String placeOfStudy;
+	private String loanAmount;
+	private String AdmissionStatus;
+	
+//	Date has to be implemented later
+	
 	
 }

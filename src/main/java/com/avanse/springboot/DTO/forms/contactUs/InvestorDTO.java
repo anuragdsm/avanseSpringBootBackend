@@ -11,5 +11,6 @@ public class InvestorDTO {
 	private String emailId;
 	private String city;	
 	private String subjectLine;
+	
 
 }
