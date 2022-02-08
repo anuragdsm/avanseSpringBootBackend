@@ -54,6 +54,12 @@ public class Course implements Serializable{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "UNIVERSITY_ID")
 	private University university;
+	
+	private String type; // to be made as multiple checkbox
+	
+	@Lob
+	@Basic
+	private String staticContent;
 
 
 	/*

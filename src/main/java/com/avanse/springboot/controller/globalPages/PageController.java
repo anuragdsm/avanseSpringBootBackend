@@ -51,6 +51,8 @@ public class PageController {
 	@GetMapping("/viewPages/{extractedFileName}")
 	public ModelAndView getAddedPage(@PathVariable("extractedFileName") String extractedFileName) {
 		ModelAndView modelAndView = new ModelAndView("addedPages/"+extractedFileName);
+		
+		
 		return modelAndView;		
 	}
 	

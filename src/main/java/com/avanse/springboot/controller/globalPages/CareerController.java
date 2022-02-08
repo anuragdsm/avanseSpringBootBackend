@@ -20,11 +20,9 @@ public class CareerController {
 	
 	@Autowired
 	private JobRespository jobRespository;
-	
-	
+		
 //	This was just an attempt will have to work on it
-	
-	
+
 	  @CrossOrigin(origins = "*")
 	  @GetMapping("/public/api/getAllJobs") 
 	  public List<Job> getAllJobs() { 

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.avanse.springboot.model.Award;
@@ -33,7 +34,12 @@ public class AwardService {
 		return awardRepository.findAll(pageable);
 	}
 	
-	
+	/*
+	 * public Page<Award> listAwardsByPageLatest(int pageNum){ Pageable pageable =
+	 * PageRequest.of(pageNum - 1, AWARDS_PER_PAGE).withSort(Direction.DESC); return
+	 * awardRepository.findAll(pageable); }
+	 * 
+	 */
 	
 	
 	@Transactional

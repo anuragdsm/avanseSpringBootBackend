@@ -59,8 +59,7 @@
 									<h3>File Names</h3>
 									<div id="fileNames" class="col-5" style="overflow: auto; max-height: 300px;">
 										<p>sdfsdf</p>
-										
-										
+													
 									</div>
 							
 									<script type="text/javascript">
@@ -73,12 +72,10 @@
 									            
 									            let fileNameDiv = document.getElementById('fileNames');
 									            
-									            
 									            console.log(imageElement.children);
 									            console.log(event);
 									            outerBox.innerHTML="";
 									            fileNameDiv.innerHTML="";
-									            
 									            
 									            count=0;
 									            for(let f of event.target.files) {
@@ -148,11 +145,10 @@
 						<thead class="thead-light">
 							<tr>
 								<th scope="col">SN</th>
-								<th scope="col">Image Name</th>
 								<th scope="col">Preview</th>
-								<th scope="col">Alt-Tag</th>
+								<th scope="col">Image Name</th>
+								<th scope="col">Link</th>
 								<th scope="col">Size</th>
-								<th scope="col">Uploaded on</th>
 								<th scope="col">Delete</th>
 
 							</tr>
@@ -161,15 +157,16 @@
 
 							<tr th:each="image, iStat : ${images}">
 								<th scope="row" th:text="${iStat.index + 1}">1</th>
-								<td th:text="${image.name}">My image</td>
-								<td><img height="100px" width="100px"
+
+							<td><img height="100px" width="100px"
 									th:src="@{/images/userAddedImages/}+${image.fileName}"></td>
+									
+								<td th:text="${image.fileName}">My image</td>
+								
+								<td th:text="${image.link}">link</td>
 
-								<td th:text="${image.altTag}">imgAltTag</td>
-
-								<td th:text="${image.size}">Image Size</td>
+								<td th:text="${image.size}+' KB' ">Image Size</td>
 								<!-- <td th:text="${image.uploadedOn}">Uploaded On</td> -->
-
 
 								<td><a
 									th:href="@{/admin/image/delete/{id}(id=${image.id})}"
@@ -201,53 +198,6 @@
 
 
 
-		<script th:inline="javascript" type="text/javascript">
-			let contextPath = 'http://localhost:8080';
-
-			function toggleUniversityStatus(id) {
-				console.log('toggling id = ' + id);
-
-				let customSwitch = 'customSwitch' + id;
-
-				console.log(document.getElementById(customSwitch));
-
-				console.log(document.getElementById(customSwitch).checked);
-
-				if (document.getElementById(customSwitch).checked == true
-						|| document.getElementById(customSwitch).checked == null) {
-
-					document.getElementById(customSwitch).checked = false;
-
-					/* deactivate in controller */
-					console.log('Deactivating..');
-
-					let http = new XMLHttpRequest();
-					let url = contextPath + '/' + 'admin/'
-							+ 'activateDeactivateUniversity' + '/' + id + '/'
-							+ 'DeactivateUniversity';
-
-					http.open("GET", url, false);
-					http.send(null);
-					console.log(http.responseText);
-					document.getElementById('universityStatus' + id).innerHTML = 'University Inactive';
-				}
-
-				else {
-
-					document.getElementById(customSwitch).checked = true;
-					let http = new XMLHttpRequest();
-					let url = contextPath + '/' + 'admin/'
-							+ 'activateDeactivateUniversity' + '/' + id + '/'
-							+ 'ActivateUniversity';
-					console.log('Activating..')
-					http.open("GET", url, false);
-					http.send(null);
-					console.log(http.responseText);
-					document.getElementById('universityStatus' + id).innerHTML = 'University Active';
-				}
-
-			}
-		</script>
 </body>
 
 </html>

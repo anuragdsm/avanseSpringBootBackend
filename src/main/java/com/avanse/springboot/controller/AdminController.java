@@ -114,8 +114,7 @@ public class AdminController {
 
 	public static String userAddedImagesDir = System.getProperty("user.dir")
 			+ "\\src\\main\\resources\\static\\images\\userAddedImages";
-	public static String userAddedImagesJustPath = 
-			"/images/userAddedImages";
+	public static String userAddedImagesJustPath = "/images/userAddedImages";
 	public static String cssCodeFileDir = System.getProperty("user.dir")
 			+ "\\src\\main\\resources\\static\\viewPagesAssets\\css";
 	public static String jsCodeFileDir = System.getProperty("user.dir")
@@ -186,7 +185,7 @@ public class AdminController {
 
 	@Autowired
 	HeaderService headerService;
-	
+
 	@LocalServerPort
 	int activePortNumber;
 
@@ -221,28 +220,24 @@ public class AdminController {
 //		model.addAttribute("awards", awardService.getAllAwards());
 		return listAwardsByPage(1, model);
 	}
-	
-	
-	
+
 	@GetMapping("/admin/awards/page/{pageNum}")
 	public String listAwardsByPage(@PathVariable(name = "pageNum") int pageNum, Model model) {
-		org.springframework.data.domain.Page<Award> page =awardService.listAwardsByPage(pageNum);
-	
-		List<Award>awards= page.getContent();
-		
-		
+		org.springframework.data.domain.Page<Award> page = awardService.listAwardsByPage(pageNum);
+
+		List<Award> awards = page.getContent();
+
 		System.out.println("PageNum =" + pageNum);
-		System.out.println("Total elements= "+page.getNumberOfElements());
-		System.out.println("Total Pages= "+page.getTotalPages());
-		
-		
+		System.out.println("Total elements= " + page.getNumberOfElements());
+		System.out.println("Total Pages= " + page.getTotalPages());
+
 		long startCount = (pageNum - 1) * awardService.AWARDS_PER_PAGE + 1;
 		long endCount = startCount + awardService.AWARDS_PER_PAGE - 1;
-		
-		if(endCount > page.getTotalElements()) {
+
+		if (endCount > page.getTotalElements()) {
 			endCount = page.getTotalElements();
 		}
-		
+
 		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("startCount", startCount);
 		model.addAttribute("totalPages", page.getTotalPages());
@@ -250,9 +245,8 @@ public class AdminController {
 		model.addAttribute("totalItems", page.getTotalElements());
 		model.addAttribute("awards", awards);
 		return "awards";
-		
+
 	}
-	
 
 	@GetMapping("/admin/awards/add")
 	public String awardsAddGet(Model model) {
@@ -313,27 +307,24 @@ public class AdminController {
 
 		return listByPage(1, model);
 	}
-	
-	
+
 	@GetMapping("/admin/universities/page/{pageNum}")
 	public String listByPage(@PathVariable(name = "pageNum") int pageNum, Model model) {
-		org.springframework.data.domain.Page<University> page =universityService.listByPage(pageNum);
-	
-		List<University>universities= page.getContent();
-		
-		
+		org.springframework.data.domain.Page<University> page = universityService.listByPage(pageNum);
+
+		List<University> universities = page.getContent();
+
 		System.out.println("PageNum =" + pageNum);
-		System.out.println("Total elements= "+page.getNumberOfElements());
-		System.out.println("Total Pages= "+page.getTotalPages());
-		
-		
+		System.out.println("Total elements= " + page.getNumberOfElements());
+		System.out.println("Total Pages= " + page.getTotalPages());
+
 		long startCount = (pageNum - 1) * universityService.UNIVERSITTIES_PER_PAGE + 1;
 		long endCount = startCount + universityService.UNIVERSITTIES_PER_PAGE - 1;
-		
-		if(endCount > page.getTotalElements()) {
+
+		if (endCount > page.getTotalElements()) {
 			endCount = page.getTotalElements();
 		}
-		
+
 		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("startCount", startCount);
 		model.addAttribute("totalPages", page.getTotalPages());
@@ -341,10 +332,8 @@ public class AdminController {
 		model.addAttribute("totalItems", page.getTotalElements());
 		model.addAttribute("universities", universities);
 		return "universities";
-		
+
 	}
-	
-	
 
 	/*
 	 * Method to add a university Need both get and post mapping for adding the
@@ -531,9 +520,8 @@ public class AdminController {
 		return "universitiesAdd";
 	}
 
-
 	public void preLoadUniversity(Model model) {
-	List<University> myUniversityList = universityService.getAllUniversity();
+		List<University> myUniversityList = universityService.getAllUniversity();
 		model.addAttribute("universityList", myUniversityList);
 	}
 
@@ -564,7 +552,7 @@ public class AdminController {
 	/*
 	 * Function to show the courses
 	 */
-	
+
 	@GetMapping("/admin/courses")
 	public String getFirstCoursePage(Model model) {
 
@@ -573,33 +561,31 @@ public class AdminController {
 
 		return listCoursesByPage(1, model);
 	}
-	
-	
+
 	@GetMapping("/admin/courses/page/{pageNum}")
 	public String listCoursesByPage(@PathVariable(name = "pageNum") int pageNum, Model model) {
-		
+
 		org.springframework.data.domain.Page<Course> page = courseService.listByPage(pageNum);
-		
+
 		List<Course> courses = page.getContent();
-		
-		System.out.println("PageNum = "+ pageNum);
-		System.out.println("Total elements= "+ page.getNumberOfElements());
-		
+
+		System.out.println("PageNum = " + pageNum);
+		System.out.println("Total elements= " + page.getNumberOfElements());
+
 		long startCount = (pageNum - 1) * courseService.COURSES_PER_PAGE + 1;
 		long endCount = startCount + courseService.COURSES_PER_PAGE - 1;
-		
-		if(endCount > page.getTotalElements()) {
+
+		if (endCount > page.getTotalElements()) {
 			endCount = page.getTotalElements();
 		}
-		
+
 		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("startCount", startCount);
 		model.addAttribute("totalPages", page.getTotalPages());
 		model.addAttribute("endCount", endCount);
 		model.addAttribute("totalItems", page.getTotalElements());
 		model.addAttribute("courses", courses);
-		
-		
+
 		return "courses";
 	}
 
@@ -637,23 +623,22 @@ public class AdminController {
 
 	@PostMapping("/admin/courses/add")
 	public String coursesAddPost(@ModelAttribute("courseDTO") CourseDTO courseDTO,
-			@RequestParam("university_id") long university_id,
-			@RequestParam("examCheckBox") String [] exams) {
+			@RequestParam("university_id") long university_id, @RequestParam("examCheckBox") String[] exams) {
 
 		/*
 		 * Use the model attribute to transfer the data from course DTO to course object
 		 */
-		
+
 		String examsFromCheckBoxes = "";
-		
-		if(exams!=null) {
-		for(String ex: exams) {
-			System.out.println(ex);
-			examsFromCheckBoxes+=ex + " " ;
-		}
-		examsFromCheckBoxes.trim();
-		
-		examsFromCheckBoxes.replaceAll(". .", " ,");
+
+		if (exams != null) {
+			for (String ex : exams) {
+				System.out.println(ex);
+				examsFromCheckBoxes += ex + " ";
+			}
+			examsFromCheckBoxes.trim();
+
+			examsFromCheckBoxes.replaceAll(". .", " ,");
 		}
 		courseDTO.setExamsEligibility(examsFromCheckBoxes);
 
@@ -667,9 +652,7 @@ public class AdminController {
 		course.setAcademicDocumentsRequired(courseDTO.getAcademicDocumentsRequired());
 		course.setExamsEligibility(courseDTO.getExamsEligibility());
 		course.setFees(courseDTO.getFees());
-		
-	
-		
+
 //		university.addTheCourse(course);
 		course.setUniversity(universityService.getUniversityById(university_id).get());
 		courseService.addCourse(course);
@@ -707,29 +690,25 @@ public class AdminController {
 		model.addAttribute("courseDTO", courseDTO);
 		return "coursesAdd";
 	}
-	
-	
-	
+
 	// Activate Deactivate course
-		@GetMapping("/admin/activateDeactivateCourse/{id}/{action}")
-		@ResponseBody
-		@CrossOrigin("*")
-		public String activateDeactivateCourse(@PathVariable(name = "id") long id, @PathVariable String action) {
-			System.out.println("Requested for Course action = " + action + " for Course id= " + id);
-			if (action.equals("ActivateCourse")) {
-				Course course= courseService.getCourseById(id).get();
-				course.setIsCourseActive(true);
-				courseService.addCourse(course);
-				return "Course Activated!!";
-			} else {
-				Course course= courseService.getCourseById(id).get();
-				course.setIsCourseActive(false);
-				courseService.addCourse(course);
-				return "Course De-Activated!!";
-			}
+	@GetMapping("/admin/activateDeactivateCourse/{id}/{action}")
+	@ResponseBody
+	@CrossOrigin("*")
+	public String activateDeactivateCourse(@PathVariable(name = "id") long id, @PathVariable String action) {
+		System.out.println("Requested for Course action = " + action + " for Course id= " + id);
+		if (action.equals("ActivateCourse")) {
+			Course course = courseService.getCourseById(id).get();
+			course.setIsCourseActive(true);
+			courseService.addCourse(course);
+			return "Course Activated!!";
+		} else {
+			Course course = courseService.getCourseById(id).get();
+			course.setIsCourseActive(false);
+			courseService.addCourse(course);
+			return "Course De-Activated!!";
 		}
-
-
+	}
 
 	/*
 	 * ===========All Function below are related to images================
@@ -748,28 +727,32 @@ public class AdminController {
 	@PostMapping(path = "/admin/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@CrossOrigin("*")
 	public String postImages(@RequestParam(name = "imageList") MultipartFile[] imageList) throws InterruptedException {
-		
-		System.out.println("Length -    "+imageList.length); //This Upload will work only if this statement is present
-		for (MultipartFile mFile : imageList) {
-				try {
 
-					File newFile = new File(userAddedImagesDir + "\\" + mFile.getOriginalFilename());
-					newFile.createNewFile();
-					mFile.transferTo(newFile);
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
-					e.printStackTrace();
-				}	
+		System.out.println("Length -    " + imageList.length); // This Upload will work only if this statement is
+																// present
+		for (MultipartFile mFile : imageList) {
+			try {
+
+				File newFile = new File(userAddedImagesDir + "\\" + mFile.getOriginalFilename());
+				newFile.createNewFile();
+				mFile.transferTo(newFile);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+			}
 		}
 
 //		Review To be Done for image
-		
+
 		List<Thread> threadListForSavingInDatabase = new ArrayList<Thread>();
 		for (MultipartFile mFile : imageList) {
-			Thread t1 = new Thread(()->{
+			Thread t1 = new Thread(() -> {
 				try {
 					InetAddress inetAddress = InetAddress.getLocalHost();
-					Image image = new Image(mFile.getName(),mFile.getOriginalFilename(), "http://"+inetAddress.getHostAddress()+":"+activePortNumber+userAddedImagesJustPath+"/"+mFile.getOriginalFilename(), mFile.getName(), mFile.getSize()/1024);
+					Image image = new Image(
+							mFile.getName(), mFile.getOriginalFilename(), "http://" + inetAddress.getHostAddress() + ":"
+									+ activePortNumber + userAddedImagesJustPath + "/" + mFile.getOriginalFilename(),
+							mFile.getName(), mFile.getSize() / 1024);
 					System.out.println(image);
 					imageService.addImage(image);
 				} catch (Exception e) {
@@ -777,40 +760,61 @@ public class AdminController {
 					System.out.println(e.getMessage());
 				}
 			});
-			
+
 			threadListForSavingInDatabase.add(t1);
 		}
-		for(Thread t:threadListForSavingInDatabase) {t.start();}
-		for(Thread t:threadListForSavingInDatabase) {t.join();}
-		
+		for (Thread t : threadListForSavingInDatabase) {
+			t.start();
+		}
+		for (Thread t : threadListForSavingInDatabase) {
+			t.join();
+		}
+
 //		Thread.sleep(5000);
-		
+
 		return "redirect:/admin/images";
 	}
+	/*
+	 * @GetMapping("/admin/images/add") public String imagesAddGet(Model model) {
+	 * model.addAttribute("imageDTO", new ImageDTO());
+	 * 
+	 * Image image = new Image(); model.addAttribute("image", image); List<Image>
+	 * images = imageService.getAllImages(); System.out.println(images.toString());
+	 * model.addAttribute("images", images);
+	 * 
+	 * return "imagesAdd"; }
+	 */
 
-	@GetMapping("/admin/images/add")
-	public String imagesAddGet(Model model) {
-		model.addAttribute("imageDTO", new ImageDTO());
-//		Course course = new Course();
+	// image delete
+	
+	@GetMapping("/admin/image/delete/{id}")
+	public String deleteImage(@PathVariable long id) {
 
-		/*
-		 * Pass the university list to the dropdown on courseAdd.html
-		 */
 
-		Image image = new Image();
-		model.addAttribute("image", image);
-		List<Image> images = imageService.getAllImages();
-		System.out.println(images.toString());
-		model.addAttribute("images", images);
+		if (imageRepository.findById(id).isPresent()) {
+			deleteImageFromUserAddedImagesFolder(id);
+			imageService.removeImageById(id);
+		}
 
-		/*
-		 * Now use the course service to actually add the object
-		 */
+		else {
+			System.out.println("Cannot Delete the object, Later to be displayed over the page");
 
-//		courseService.addCourse(course);
+		}
 
-		return "imagesAdd";
+		return "redirect:/admin/images";
 	}
+	
+	
+	
+	private void deleteImageFromUserAddedImagesFolder(@PathVariable long id) {
+
+		
+			Image imageFileToBeDeleted = imageService.getImagebyId(id).get();
+			String theFile = imageFileToBeDeleted.getFileName();
+			File file = new File(userAddedImagesDir + "/" + theFile);
+			if (file.exists())
+				file.delete();
+		}
 
 	/*
 	 * ===========All Function below are related to jobs ================
@@ -845,14 +849,14 @@ public class AdminController {
 		Job job = new Job();
 		job.setId(jobDTO.getId());
 		job.setTitle(jobDTO.getTitle());
-		
+
 		job.setShortDescription(jobDTO.getShortDescription());
 		job.setDescription(jobDTO.getDescription());
 		job.setPostedBy(jobDTO.getPostedBy());
 		job.setExperienceInYears(jobDTO.getExperienceInYears());
 		job.setSkills(jobDTO.getSkills());
-		Date date = new Date();
-		String dateOfJobCreated = new SimpleDateFormat("DD MMMM, YYYY").format(date);
+	
+		String dateOfJobCreated = new SimpleDateFormat("dd MMMM, yyyy").format(new Date());
 		job.setJobCreatedDate(dateOfJobCreated);
 
 		jobService.addJob(job);
@@ -911,7 +915,7 @@ public class AdminController {
 
 			}
 		}
-		
+
 		jobService.addJob(job);
 		return "redirect:/admin/jobs";
 
@@ -961,10 +965,7 @@ public class AdminController {
 
 		return "jobsAdd";
 	}
-	
-	
-	
-	
+
 	@GetMapping("/admin/activateDeactivateJob/{id}/{action}")
 	@ResponseBody
 	@CrossOrigin("*")
@@ -984,7 +985,7 @@ public class AdminController {
 			return "Job Deactivate/Unpublished";
 		}
 	}
-	
+
 	/*
 	 * ===========All Function below are related to office location ==============
 	 */
@@ -1055,8 +1056,6 @@ public class AdminController {
 	 * Method to show the pages.html
 	 * 
 	 */
-
-	
 
 	@GetMapping("/admin/pages")
 	public String getPages(Model model) {
@@ -1529,27 +1528,24 @@ public class AdminController {
 //		model.addAttribute("posts", postService.getAllPosts());
 		return listPostsByPage(1, model);
 	}
-	
-	
+
 	@GetMapping("/admin/posts/page/{pageNum}")
 	public String listPostsByPage(@PathVariable(name = "pageNum") int pageNum, Model model) {
-		org.springframework.data.domain.Page<Post> page =postService.listBlogsPostsByPage(pageNum);
-	
-		List<Post>posts= page.getContent();
-		
-		
+		org.springframework.data.domain.Page<Post> page = postService.listBlogsPostsByPage(pageNum);
+
+		List<Post> posts = page.getContent();
+
 		System.out.println("PageNum =" + pageNum);
-		System.out.println("Total elements= "+page.getNumberOfElements());
-		System.out.println("Total Pages= "+page.getTotalPages());
-		
-		
+		System.out.println("Total elements= " + page.getNumberOfElements());
+		System.out.println("Total Pages= " + page.getTotalPages());
+
 		long startCount = (pageNum - 1) * postService.BLOG_POSTS_PER_PAGE + 1;
 		long endCount = startCount + postService.BLOG_POSTS_PER_PAGE - 1;
-		
-		if(endCount > page.getTotalElements()) {
+
+		if (endCount > page.getTotalElements()) {
 			endCount = page.getTotalElements();
 		}
-		
+
 		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("startCount", startCount);
 		model.addAttribute("totalPages", page.getTotalPages());
@@ -1557,9 +1553,8 @@ public class AdminController {
 		model.addAttribute("totalItems", page.getTotalElements());
 		model.addAttribute("posts", posts);
 		return "posts";
-		
+
 	}
-	
 
 	@GetMapping("/admin/posts/add")
 	public String postsGet(Model model) {
@@ -1986,33 +1981,25 @@ public class AdminController {
 		return "postsAdd";
 
 	}
-	
-	
-	
-	
-	
-	
-	
+
 	// Activate Deactivate post
-		@GetMapping("/admin/activateDeactivatePost/{id}/{action}")
-		@ResponseBody
-		@CrossOrigin("*")
-		public String activateDeactivatePost(@PathVariable(name = "id") long id, @PathVariable String action) {
-			System.out.println("Requested for Post action = " + action + " for Post id= " + id);
-			if (action.equals("ActivatePost")) {
-				Post post= postService.getPostById(id).get();
-				post.setIsPostActive(true);
-				postService.addPost(post);
-				return "Post Activated!!";
-			} else {
-				Post post= postService.getPostById(id).get();
-				post.setIsPostActive(false);
-				postService.addPost(post);
-				return "Post De-Activated!!";
-			}
+	@GetMapping("/admin/activateDeactivatePost/{id}/{action}")
+	@ResponseBody
+	@CrossOrigin("*")
+	public String activateDeactivatePost(@PathVariable(name = "id") long id, @PathVariable String action) {
+		System.out.println("Requested for Post action = " + action + " for Post id= " + id);
+		if (action.equals("ActivatePost")) {
+			Post post = postService.getPostById(id).get();
+			post.setIsPostActive(true);
+			postService.addPost(post);
+			return "Post Activated!!";
+		} else {
+			Post post = postService.getPostById(id).get();
+			post.setIsPostActive(false);
+			postService.addPost(post);
+			return "Post De-Activated!!";
 		}
-
-
+	}
 
 	/*
 	 * POST CATEGORIES
@@ -2076,30 +2063,26 @@ public class AdminController {
 	@GetMapping("/admin/testimonials")
 	public String getTestimonials(Model model) {
 //		model.addAttribute("testimonials", testimonialService.getAllTestimonials());
-		return listTestimonialsByPage(1, model) ;
+		return listTestimonialsByPage(1, model);
 	}
-	
-	
-	
+
 	@GetMapping("/admin/testimonials/page/{pageNum}")
 	public String listTestimonialsByPage(@PathVariable(name = "pageNum") int pageNum, Model model) {
-		org.springframework.data.domain.Page<Testimonial> page =testimonialService.listTestimonialsByPage(pageNum);
-	
-		List<Testimonial>testimonials= page.getContent();
-		
-		
+		org.springframework.data.domain.Page<Testimonial> page = testimonialService.listTestimonialsByPage(pageNum);
+
+		List<Testimonial> testimonials = page.getContent();
+
 		System.out.println("PageNum =" + pageNum);
-		System.out.println("Total elements= "+page.getNumberOfElements());
-		System.out.println("Total Pages= "+page.getTotalPages());
-		
-		
+		System.out.println("Total elements= " + page.getNumberOfElements());
+		System.out.println("Total Pages= " + page.getTotalPages());
+
 		long startCount = (pageNum - 1) * testimonialService.TESTIMONIALS_PER_PAGE + 1;
 		long endCount = startCount + testimonialService.TESTIMONIALS_PER_PAGE - 1;
-		
-		if(endCount > page.getTotalElements()) {
+
+		if (endCount > page.getTotalElements()) {
 			endCount = page.getTotalElements();
 		}
-		
+
 		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("startCount", startCount);
 		model.addAttribute("totalPages", page.getTotalPages());
@@ -2107,10 +2090,8 @@ public class AdminController {
 		model.addAttribute("totalItems", page.getTotalElements());
 		model.addAttribute("testimonials", testimonials);
 		return "testimonials";
-		
+
 	}
-	
-	
 
 	/*
 	 * Method to add a university Need both get and post mapping for adding the
@@ -2258,16 +2239,15 @@ public class AdminController {
 	/*
 	 * -------Functions handelling testimonials ends here
 	 */
-	
-	
+
 	/*
 	 * function to export the list of customers in CSV
 	 */
 	@Autowired
 	CustomerService customerService;
-	
+
 	@GetMapping("/admin/customers/csv")
-	public void exportCustomersToCSV(HttpServletResponse response) throws IOException{
+	public void exportCustomersToCSV(HttpServletResponse response) throws IOException {
 		List<Customer> listOfCustomers = customerService.getAllCustomers();
 		CustomersCSVExporter exporter = new CustomersCSVExporter();
 		exporter.export(listOfCustomers, response);
@@ -2278,13 +2258,13 @@ public class AdminController {
 	 */
 	@Autowired
 	InstituteService instituteService;
-	
+
 	@GetMapping("/admin/institutes/csv")
-	public void exportInstitutesToCSV(HttpServletResponse response) throws IOException{
-		List<Institute> listOfInstitutes= instituteService.getAllInstitutes();
-		InstitutesCSVExporter  exporter = new InstitutesCSVExporter();
+	public void exportInstitutesToCSV(HttpServletResponse response) throws IOException {
+		List<Institute> listOfInstitutes = instituteService.getAllInstitutes();
+		InstitutesCSVExporter exporter = new InstitutesCSVExporter();
 		exporter.export(listOfInstitutes, response);
 	}
-	
+
 //	End of class
 }
