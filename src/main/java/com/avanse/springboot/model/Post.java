@@ -43,7 +43,7 @@ public class Post implements Serializable {
 		
 		private String dateOfPostCreation;
 		
-		private Date lastModified;
+//		private Date lastModified;
 		
 		@ManyToMany(mappedBy = "postList", fetch = FetchType.LAZY)
 		private List<PostCategory>postCategoryList;

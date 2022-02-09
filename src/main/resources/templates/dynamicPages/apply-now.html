@@ -17,37 +17,37 @@
                 <h2 class="f_p f_size_40  f_600 t_color text-center wow fadeInUp mb_10" style="visibility: visible; animation-name: fadeInUp;">Apply For Education Loan</h2>
                 <h4 class="f_p   text-center wow fadeInUp mb_60" >Fill in the details and help us connect with you.</h4>
                 <div class="apply-now-form pb-5">
-                    <form action="#" class="contact_form_box" method="post" id="customercontactForm" novalidate="novalidate">
+                    <form action="@{/viewDynamicPages/apply-now/add}" th:object = "${applyNowGeneralDTO}" class="contact_form_box" method="post" id="customercontactForm" novalidate="novalidate">
                         <div class="row">
                             
                             <div class="col-lg-6">
                                 <div class="form-group text_box">
-                                    <input type="text" id="fname" name="fname" placeholder="First Name">
+                                    <input type="text" id="fname" name="firstName" th:field = "*{firstName}" placeholder="First Name">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group text_box">
-                                    <input type="text" id="lname" name="lname" placeholder="Last Name">
+                                    <input type="text" id="lname" name="lname" th:field="*{lastName}" placeholder="Last Name">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group text_box">
-                                    <input type="text" id="number" name="number" placeholder="Contact Number">
+                                    <input type="text" id="number" name="number" th:field="*{contactNumber}" placeholder="Contact Number">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group text_box">
-                                    <input type="text" name="email" id="email" placeholder="E-mail ID">
+                                    <input type="text" name="email" id="email" th:field= "*{emailId}" placeholder="E-mail ID">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group text_box">
-                                    <input type="text" id="city" name="city" placeholder="City">
+                                    <input type="text" id="city" name="city" th:field= "*{city}" placeholder="City">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group text_box">
-                                    <input type="text" id="location" name="location" placeholder="Place of Study">
+                                    <input type="text" id="placeOfStudy" name="placeOfStudy" th:field= "*{placeOfStudy}" placeholder="Place of Study">
                                     
                                 </div>
                             </div>
@@ -56,9 +56,10 @@
                                     <input type="date" id="year" name="year" placeholder="Duration of Study">
                                 </div>
                             </div>
+                            
                             <div class="col-lg-6">
                                 <div class="form-group text_box ">
-                                    <select class="form-control" id="country_name">
+                                    <select class="form-control" th:field = "*{loanAmount}" id="country_name">
                                         <option value="--">Select Loan Amount</option>
                                         <option value="">₹ 5 Lacs to 10 Lacs</option>
                                         <option value="">₹ 10 Lacs to 20 Lacs</option>
@@ -70,6 +71,7 @@
                                     </select>
                                 </div>
                             </div>
+                            
                             <div class="col-lg-12">
                                 <p>Admission Status</p>
                                 <label class="pr_20"><input type="radio" id="applied1" name="applied" value="Not Applied">  Not Applied</label>
@@ -77,7 +79,7 @@
                                 <label class="pr_20"><input type="radio" id="applied3" name="applied" value="Applied">  Applied</label>
                             </div>
                             <div class="col-lg-12">
-                                <input type="checkbox" id="checkbox" name="checkbox"> <span class="f_size_14 c_cyan">I authorize Avanse Financial Services to connect with me over call and Whatsapp overriding my  registration with NDNC </span>
+                                <input type="checkbox" id="checkbox" name="checkbox" value = "Agreed To use data for communication"> <span class="f_size_14 c_cyan">I authorize Avanse Financial Services to connect with me over call and Whatsapp overriding my  registration with NDNC </span>
                             </div>
                             <div class="col-lg-12 text-center pt-5"><button type="submit" class="btn_three f_size_22">Submit</button></div>
                         </div>

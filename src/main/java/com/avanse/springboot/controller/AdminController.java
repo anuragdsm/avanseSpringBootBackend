@@ -351,16 +351,13 @@ public class AdminController {
 	 */
 	@PostMapping("/admin/universities/add")
 	public String universitiesAddPost(@ModelAttribute("universityDTO") UniversityDTO universityDTO,
-			@RequestParam("universityImage") MultipartFile file,
-			@RequestParam("imgName") String imgName,
+			@RequestParam("universityImage") MultipartFile file, @RequestParam("imgName") String imgName,
 			@RequestParam(value = "summer", required = false) String summer,
 			@RequestParam(value = "winter", required = false) String winter,
 			@RequestParam(value = "fall", required = false) String fall,
-			@RequestParam(value = "spring", required = false) String spring)
-			throws IOException {
+			@RequestParam(value = "spring", required = false) String spring) throws IOException {
 //		universityService.addUniversity(university);
-		
-		
+
 		/*
 		 * Creating a new university object and a university dto object so that we can
 		 * transfer the data from the dto to the main university model.
@@ -398,15 +395,23 @@ public class AdminController {
 		university.setApplicationProcess(universityDTO.getApplicationProcess());
 		university.setDescription(universityDTO.getDescription());
 		university.setImageName(universityDTO.getImageName());
-		
-		if(summer!=null || winter!=null || fall!=null || spring!=null) {
-		
-			String insummer=""; if(summer!=null) insummer=summer;
-			String inwinter=""; if(winter!=null) inwinter=winter;
-			String infall=""; if(fall!=null) infall=fall;
-			String inspring=""; if(spring!=null) inspring=spring;
-			
-			university.setIntakePeriod(insummer+","+inwinter+","+infall+","+inspring);
+
+		if (summer != null || winter != null || fall != null || spring != null) {
+
+			String insummer = "";
+			if (summer != null)
+				insummer = summer;
+			String inwinter = "";
+			if (winter != null)
+				inwinter = winter;
+			String infall = "";
+			if (fall != null)
+				infall = fall;
+			String inspring = "";
+			if (spring != null)
+				inspring = spring;
+
+			university.setIntakePeriod(insummer + "," + inwinter + "," + infall + "," + inspring);
 		}
 		/*
 		 * Create the imageUUID and using the nio package get the filename and the path
@@ -638,8 +643,7 @@ public class AdminController {
 
 	@PostMapping("/admin/courses/add")
 	public String coursesAddPost(@ModelAttribute("courseDTO") CourseDTO courseDTO,
-			@RequestParam("university_id") long university_id,
-			@RequestParam("typeCheckBox")String[] courseTypes ,  
+			@RequestParam("university_id") long university_id, @RequestParam("typeCheckBox") String[] courseTypes,
 			@RequestParam("examCheckBox") String[] exams) {
 
 		/*
@@ -805,10 +809,9 @@ public class AdminController {
 	 */
 
 	// image delete
-	
+
 	@GetMapping("/admin/image/delete/{id}")
 	public String deleteImage(@PathVariable long id) {
-
 
 		if (imageRepository.findById(id).isPresent()) {
 			deleteImageFromUserAddedImagesFolder(id);
@@ -822,18 +825,15 @@ public class AdminController {
 
 		return "redirect:/admin/images";
 	}
-	
-	
-	
+
 	private void deleteImageFromUserAddedImagesFolder(@PathVariable long id) {
 
-		
-			Image imageFileToBeDeleted = imageService.getImagebyId(id).get();
-			String theFile = imageFileToBeDeleted.getFileName();
-			File file = new File(userAddedImagesDir + "/" + theFile);
-			if (file.exists())
-				file.delete();
-		}
+		Image imageFileToBeDeleted = imageService.getImagebyId(id).get();
+		String theFile = imageFileToBeDeleted.getFileName();
+		File file = new File(userAddedImagesDir + "/" + theFile);
+		if (file.exists())
+			file.delete();
+	}
 
 	/*
 	 * ===========All Function below are related to jobs ================
@@ -874,7 +874,7 @@ public class AdminController {
 		job.setPostedBy(jobDTO.getPostedBy());
 		job.setExperienceInYears(jobDTO.getExperienceInYears());
 		job.setSkills(jobDTO.getSkills());
-	
+
 		String dateOfJobCreated = new SimpleDateFormat("dd MMMM, yyyy").format(new Date());
 		job.setJobCreatedDate(dateOfJobCreated);
 
@@ -1161,7 +1161,32 @@ public class AdminController {
 		 */
 		String preProcessFileName = pageDTO.getPageTitle().toLowerCase().strip();
 //		preProcessFileName.toLowerCase();
+
+		preProcessFileName = preProcessFileName.replaceAll("( )+", " ");
+
+		preProcessFileName = preProcessFileName.replaceAll("[^a-zA-Z0-9]", " ");
+
+		preProcessFileName = preProcessFileName.strip();
+
 		System.out.println("The Pre Process of file name " + preProcessFileName);
+		
+		
+		/*
+		 * String preProcessFileName = postDTO.getPostTitle().toLowerCase().strip();
+
+		preProcessFileName = preProcessFileName.replaceAll("( )+", " ");
+
+		preProcessFileName = preProcessFileName.replaceAll("[^a-zA-Z0-9]", " ");
+
+		preProcessFileName = preProcessFileName.strip();
+
+		System.out.println("The Pre Process of file name " + preProcessFileName);
+
+		String htmlFileName = preProcessFileName.replaceAll(" ", "-");
+		*/
+		
+
+		
 
 		String htmlFileName = preProcessFileName.replaceAll(" ", "-");
 		List<Page> allPages = pageRepository.findAll();
@@ -1232,7 +1257,8 @@ public class AdminController {
 
 		String codeInFile = htmlBoilerPlate(pageDTO.getMetaTitle(), pageDTO.getMetaKeyword(),
 				pageDTO.getBannerHeading(), pageDTO.getBannerSubHeading(), pageDTO.getMetaDescription(),
-				pageDTO.getMainSection(),pageDTO.getJsCode(), pageDTO.getCssCode(), bannerImageFile.getOriginalFilename());
+				pageDTO.getMainSection(), pageDTO.getJsCode(), pageDTO.getCssCode(),
+				bannerImageFile.getOriginalFilename());
 		System.out.println("The following code will be there in the file " + codeInFile);
 		pageDTO.setConsolidatedHTMLCode(codeInFile);
 		page.setConsolidatedHTMLCode(pageDTO.getConsolidatedHTMLCode());
@@ -1259,17 +1285,16 @@ public class AdminController {
 	}
 
 	private String htmlBoilerPlate(String metaTitle, String metaKeyword, String bannerHeading, String bannerSubheading,
-			String metaDescription, String mainSection,String jsCode,  String cSSCode, String bannerImageFileName) {
+			String metaDescription, String mainSection, String jsCode, String cSSCode, String bannerImageFileName) {
 		// TODO Auto-generated method stub
 		/*
 		 * initial code
 		 */
 		String boilerPlate = " <!DOCTYPE html>\r\n"
 				+ "<html lang=\"en\" xmlns:layout=\"http://www.ultraq.net.nz/thymeleaf/layout\"\r\n"
-				+ "	layout:decorate=\"_LivePagelayout\">\r\n" + "<head>\r\n"
-				+ "<title>"+metaTitle+"</title>\r\n"
-				+ "  <meta name=\"description\"  content=\" "+metaDescription +"  \" />"+"\r\n"
-				+ "  <meta name=\"keywords\"  content=\" "+metaKeyword +"  \" />"+"\r\n"
+				+ "	layout:decorate=\"_LivePagelayout\">\r\n" + "<head>\r\n" + "<title>" + metaTitle + "</title>\r\n"
+				+ "  <meta name=\"description\"  content=\" " + metaDescription + "  \" />" + "\r\n"
+				+ "  <meta name=\"keywords\"  content=\" " + metaKeyword + "  \" />" + "\r\n"
 //				+ header to be implemented later
 				+ "<script type=\"text/javascript\" src=\"/viewPagesAssets/js/customGlobalHeader/globalHeader.js\"></script>"
 				+ "<style>\r\n" + cSSCode + ".banner_bg_top{\r\n"
@@ -1291,8 +1316,7 @@ public class AdminController {
 
 				+ mainSection + "\r\n"
 
-				+ "    <!-- Optional JavaScript -->\r\n"
-				+ jsCode + " 	</body> ";
+				+ "    <!-- Optional JavaScript -->\r\n" + jsCode + " 	</body> ";
 
 		return boilerPlate;
 	}
@@ -1420,8 +1444,6 @@ public class AdminController {
 		return "redirect:/admin/globalHeader";
 	}
 
-
-
 	/*
 	 * Below functions will be used to create the posts
 	 */
@@ -1464,8 +1486,6 @@ public class AdminController {
 		model.addAttribute("postCategories", postCategoryService.getAllPostCategories());
 		return "postsAdd";
 	}
-
-	
 
 	@PostMapping(path = "/admin/posts/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public String blogPostsAddPostMap(@ModelAttribute("postDTO") PostDTO postDTO, HttpServletRequest request,
@@ -1535,10 +1555,17 @@ public class AdminController {
 		 */
 
 		String preProcessFileName = postDTO.getPostTitle().toLowerCase().strip();
-//		preProcessFileName.toLowerCase();
+
+		preProcessFileName = preProcessFileName.replaceAll("( )+", " ");
+
+		preProcessFileName = preProcessFileName.replaceAll("[^a-zA-Z0-9]", " ");
+
+		preProcessFileName = preProcessFileName.strip();
+
 		System.out.println("The Pre Process of file name " + preProcessFileName);
 
 		String htmlFileName = preProcessFileName.replaceAll(" ", "-");
+
 		List<Post> allPosts = postRepository.findAll();
 		Iterator<Post> iterator = allPosts.iterator();
 
@@ -1671,7 +1698,7 @@ public class AdminController {
 			e.printStackTrace();
 		}
 
-		post.setLastModified(postDTO.getLastModified());
+//		post.setLastModified(postDTO.getLastModified());
 		System.out.println("page Added sucessfully" + codeInFile);
 		postService.addPost(post);
 //		String pageToReturn = "redirect:/viewPages/"+htmlFileName;
@@ -1689,7 +1716,6 @@ public class AdminController {
 	private String htmlBlogLayout(String metaTitle, String heading, String subheading, String metaDescription,
 			String mainSection, String featuredImageFileName) {
 
-	
 		Date date = new Date();
 		LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		int day = localDate.getDayOfMonth();
@@ -1704,12 +1730,12 @@ public class AdminController {
 				+ "<!-- KEYWORDTOFINDGLOBALHEADERINSERTIONCODESPACESTART -->\r\n" + "\r\n"
 				+ "<!-- KEYWORDTOFINDGLOBALHEADERINSERTIONCODESPACEEND -->"
 //				+ header to be implemented later
-				+ "<title>"+metaTitle+"</title>\r\n"
-				+ "  <meta name=\"description\"  content=\" "+metaDescription +"  \" />"+"\r\n"
-				
+				+ "<title>" + metaTitle + "</title>\r\n" + "  <meta name=\"description\"  content=\" " + metaDescription
+				+ "  \" />" + "\r\n"
 
-				+ "<script type=\"text/javascript\" src=\"/viewPagesAssets/js/customGlobalHeader/globalHeader.js\"></script>"+"\r\n"
-								
+				+ "<script type=\"text/javascript\" src=\"/viewPagesAssets/js/customGlobalHeader/globalHeader.js\"></script>"
+				+ "\r\n"
+
 				+ "</head>\r\n" + "<body id=\"page-top\">\r\n" + "\r\n" + "	<!-- Content Wrapper -->\r\n"
 				+ "	<div layout:fragment=\"contentPlus\">"
 				+ "<section class=\" pt-3 pb-3\" style=\"background: #02afb3\">\r\n" + "           \r\n"

@@ -1,5 +1,7 @@
 package com.avanse.springboot.DTO.forms.applyNow;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -14,5 +16,8 @@ public class ApplyNowGeneralDTO {
 	private String placeOfStudy;
 	private String loanAmount;
 	private String AdmissionStatus;
+	private String permission;
 
+//	Date has to be implemented later
+//	private Date timeOfStudy;
 }

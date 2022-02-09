@@ -1,5 +1,7 @@
 package com.avanse.springboot.model.forms.applyNow;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,8 +32,12 @@ public class ApplyNowGeneral {
 	private String placeOfStudy;
 	private String loanAmount;
 	private String AdmissionStatus;
+	private String permission;
+	
 	
 //	Date has to be implemented later
+	
+//	private Date timeOfStudy;
 	
 	
 }

@@ -17,7 +17,6 @@ public class ApplyNowAllController {
 	
 	@PostMapping("/viewDynamicPages/apply-now/add")
 	public String ApplyNowGeneralAddPost(@ModelAttribute("applyNowGeneralDTO") ApplyNowGeneralDTO applyNowGeneralDTO) {
-		
 		ApplyNowGeneral applyNowGeneral = new ApplyNowGeneral();
 		applyNowGeneral.setFirstName(applyNowGeneralDTO.getFirstName());
 		applyNowGeneral.setLastName(applyNowGeneralDTO.getLastName());
@@ -27,6 +26,8 @@ public class ApplyNowAllController {
 		applyNowGeneral.setPlaceOfStudy(applyNowGeneralDTO.getPlaceOfStudy());
 		applyNowGeneral.setLoanAmount(applyNowGeneralDTO.getLoanAmount());
 		applyNowGeneral.setAdmissionStatus(applyNowGeneralDTO.getAdmissionStatus());
+		applyNowGeneral.setPermission(applyNowGeneralDTO.getPermission());
+		applyNowGeneralService.addApplyNowGeneral(applyNowGeneral);
 		
 		return "thankyou";
 	}

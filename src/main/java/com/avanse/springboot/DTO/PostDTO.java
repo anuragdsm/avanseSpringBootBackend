@@ -9,7 +9,7 @@ public class PostDTO {
 	private Date dateOfCreation;
 	private String dateOfPostCreation;
 
-	private Date lastModified;
+//	private Date lastModified;
 	private Boolean isPostActive;
 
 	private String fileName;
