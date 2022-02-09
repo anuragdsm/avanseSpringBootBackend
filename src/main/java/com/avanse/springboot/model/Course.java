@@ -20,6 +20,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -54,6 +56,8 @@ public class Course implements Serializable{
 	private String documentsRequired;
 	private String academicDocumentsRequired;
 	
+	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "UNIVERSITY_ID")
 	private University university;

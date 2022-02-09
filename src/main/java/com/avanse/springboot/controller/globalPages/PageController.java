@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.avanse.springboot.DTO.forms.applyNow.ApplyNowGeneralDTO;
 import com.avanse.springboot.DTO.forms.contactUs.CustomerDTO;
 import com.avanse.springboot.DTO.forms.contactUs.InstituteDTO;
 import com.avanse.springboot.DTO.forms.contactUs.InvestorDTO;
@@ -65,6 +66,7 @@ public class PageController {
 		model.addAttribute("instituteDTO", new InstituteDTO());
 		model.addAttribute("investorDTO", new InvestorDTO());
 		model.addAttribute("mediaDTO", new MediaDTO());
+		model.addAttribute("applyNowGeneralDTO", new ApplyNowGeneralDTO());
 		return modelAndView;		
 	}
 	

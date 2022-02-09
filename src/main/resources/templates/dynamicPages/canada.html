@@ -49,7 +49,7 @@
         </section>
         <section class="sec_pad">
             <div class="container">
-                <form action="#" class="contact_form_box" method="post" id="contactForm">
+                <!-- <form action="#" class="contact_form_box" method="post" id="contactForm"> -->
                     <div class="row justify-content-center mb_90">
                     <div class="col-lg-12 mb_50">
                         <div class="text-center"><h2 class="f_size_40 f_600">Search <span class="c_cyan">University </span>& <span class="c_cyan">Courses</span> Across the World</h2>
@@ -59,8 +59,8 @@
                         <div class="form-group ">
                             <div class="row">
                                 <div class="col-9">
-                                    <select class="form-control" id="university">
-                                        <option value="--">Selecte University</option>
+                                    <select id="universitySelected" onchange="universitySelectChanged()" class="form-control">
+                                        <option value="">Selecte University</option>
                                         <option value="">Acadia University</option>
                                         <option value="">Algoma University</option>
                                         <option value="">Algonquin College</option>
@@ -68,7 +68,7 @@
                                         <option value="">Cape Breton University</option>
                                     </select>
                                 </div>
-                                <div class="col-3"> <button class="btn btn-submit search-button-home" type="submit"><i class="ti-search f_size_24"></i></button></div>
+                                <div class="col-3"> <button class="btn btn-submit search-button-home" onclick="universitySearchClick()" type="submit"><i class="ti-search f_size_24"></i></button></div>
                             </div>
                         </div>
                         
@@ -77,8 +77,8 @@
                         <div class="form-group ">
                             <div class="row">
                                 <div class="col-9">
-                                    <select class="form-control" id="course">
-                                        <option value="--">Selecte Course</option>
+                                    <select id="courseSelected" class="form-control" disabled>
+                                        <option value="">Select Course</option>
                                         <option value="">Applied Psychology</option>
                                         <option value="">Associate of Science Diploma in Chemistry</option>
                                         <option value="">Associate of Science in Biology (BSc)</option>
@@ -92,7 +92,7 @@
                     </div>
                 
                 </div>
-            </form>
+            <!-- </form> -->
                 <div id="universityDetailSection" class="row mb-5">
                     <div id="universityTextInfo" class="col-lg-7">
                         <h4>Study in <span id="universityInfoUniversityName">Acadia University</span> - Colleges, Eligibility & Scholarship</h4>
@@ -103,13 +103,14 @@
                     </div>
                 </div>
                 <script type="text/javascript">
+                	let universityDetailSectionContent = document.getElementById('universityDetailSection').innerHTML;
                 	document.getElementById('universityDetailSection').innerHTML="";
                 </script>
                 
                 
-                <div id="universityCardsContainer" class="row mb-5">
+                <div id="courseCardsContainer" class="row mb-5">
                 	
-                    <div class="col-lg-4 mb-4">
+                    <div id="courseCard" class="col-lg-4 mb-4">
                         <div class="courses_item  bg-white">
                             <a href="#" class="text-left"><h5>Bachelor of Business Administration (BBA)</h5></a>
                             <hr>
@@ -190,16 +191,73 @@
                 
                 <script type="text/javascript">
 		                let request = new XMLHttpRequest();
+		                let mylistOfUniversities;
 		                let url="http://"+window.location.href.split('/',3)[2]+"/public/api/homePage/getUniversitesInfos";
 		                console.log(url);
-		                let form = new FormData();
-		                let country='Canada'
-		                form.append('universitiesForCountry',country);
-		                request.open('GET',url);
+		                let x = ['Canada'];
+		                console.log(JSON.stringify(x));
+		                request.open('POST',url);
+		                request.setRequestHeader('Content-Type','application/json');
 		                request.onloadend = () => {
 		                    console.log(request.responseText);
+		                    let listOfUniversities = JSON.parse(request.responseText);
+		                    mylistOfUniversities = listOfUniversities;
+		                    let courseCardData = '<div id="courseCard" class="col-lg-4 mb-4"><div class="courses_item  bg-white"><a href="#" class="text-left"><h5>Bachelor of Business Administration (BBA)</h5></a><hr><p class="mb-0"><span class="c_cyan">Acadia University   - Canada</span></p><p class="mb-0"><span>4 years</span></p></div></div>';
+		                    let courseContainer = document.getElementById('courseCardsContainer');
+		                    courseContainer.innerHTML="";
+		                    
+		                    for(let u of listOfUniversities) {
+		                    	for (let course of u.courses) {
+		                    		courseContainer.innerHTML=courseContainer.innerHTML+
+		                    		'<div id="courseCard'+course.id+'" class="col-lg-4 mb-4"><div class="courses_item  bg-white"><a href="#" class="text-left"><h5>'+course.title+'</h5></a><hr><p class="mb-0"><span class="c_cyan">'+u.name+' - '+u.location+'</span></p><p class="mb-0"><span>'+course.duration+'</span></p></div></div>';
+		                    	}
+		                    }
+		                    
+		                    let optionCount=document.getElementById('universitySelected').childElementCount;
+		                    for(let i=1;i<optionCount;i++) {
+		                    	document.getElementById('universitySelected').lastElementChild.remove();
+		                    }
+		                    for(let uni of listOfUniversities) {
+		                    	document.getElementById('universitySelected').innerHTML=document.getElementById('universitySelected').innerHTML+
+		                    	'<option id="UniversityID:'+uni.id+'" value="UniversityID:'+uni.id+'">'+uni.name+'</option>';
+		                    }
+		                    
 		                }
-		                request.send(form);
+		                request.send(JSON.stringify(x));
+		                
+		               function universitySelectChanged() {
+		            	  if(document.getElementById('universitySelected').value!="") {
+		            		  document.getElementById('courseSelected').disabled=false;
+		            		  for(let uni of mylistOfUniversities) {
+		            			  if(document.getElementById('universitySelected').value.split(':')[1]==uni.id) {
+		            				  let opCount = document.getElementById('courseSelected').childElementCount;
+		            				  for(let i=1;i<opCount;i++) {
+		  		                    	document.getElementById('courseSelected').lastElementChild.remove();
+		  		                    	}
+		            				  for(let course of uni.courses) {
+		  		                    	document.getElementById('courseSelected').innerHTML=document.getElementById('courseSelected').innerHTML+
+		  		                    	'<option id="CourseID:'+course.id+'" value="CourseID:'+course.id+'">'+course.title+'</option>';
+		  		                    	}
+		            			  }
+		            		  }
+		            		  
+		            	  } else {
+		            		  document.getElementById('courseSelected').disabled=true;
+		            	  }
+		               }
+		               
+		               function universitySearchClick() {
+		            	   if(document.getElementById('universitySelected').value!="") {
+		            		   for(let university of mylistOfUniversities) {
+		            			   if(university.id==document.getElementById('universitySelected').value.split(':')[1]) {
+		            				   document.getElementById('universityDetailSection').innerHTML = universityDetailSectionContent;
+		            				   document.getElementById('universityInfoUniversityName').innerHTML=university.name;
+		            				   document.getElementById('universityInfoUniversityDescription').innerHTML=university.description;
+		            				   document.getElementById('universityImage').src='http://'+window.location.href.split('/',3)[2]+'/images/universityImages/'+university.imageName;
+		            			   }
+		            		   }
+		            	   }
+		               }
                 
                 </script>
                 
