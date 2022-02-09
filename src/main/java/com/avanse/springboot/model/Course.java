@@ -2,8 +2,10 @@ package com.avanse.springboot.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -55,7 +58,8 @@ public class Course implements Serializable{
 	@JoinColumn(name = "UNIVERSITY_ID")
 	private University university;
 	
-	private String type; // to be made as multiple checkbox
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<TypeDetailsCourse> types; // to be made as multiple checkbox
 	
 	@Lob
 	@Basic

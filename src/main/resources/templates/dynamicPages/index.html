@@ -232,14 +232,14 @@
                         <div class="course_abroad_form shadow">
                                 <div class="row">
                                     <div class="col-lg-4 py-5 lg-border-right">
-                                        <form action="#" class="contact_form_box " method="post" id="contactForm">
+                                        <!-- <form th:action="@{/viewDynamicPages/}" class="contact_form_box " method="post" id="contactForm"> -->
                                         <div class="form-group ">
                                             <div class="row">
                                                 <div class="col-9">
                                                     <select class="form-control" id="country_name">
-                                                        <option value="--">Select Country</option>
+                                                        <option value="">Select Country</option>
                                                         <option value="australia">Australia</option>
-                                                        <option value="canada">Canada</option>
+                                                        <option value="Canada">Canada</option>
                                                         <option value="germany">Germany</option>
                                                         <option value="new-zealand">New Zealand</option>
                                                         <option value="singapore">Singapore</option>
@@ -247,11 +247,24 @@
                                                         <option value="usa">USA</option>
                                                     </select>
                                                 </div>
-                                                <div class="col-3"> <button class="btn btn-submit search-button-home" type="submit"><i class="ti-search f_size_24"></i></button></div>
+                                                <div class="col-3"> <button onclick="goToCountryPage()" class="btn btn-submit search-button-home"><i class="ti-search f_size_24"></i></button></div>
                                             </div>
                                         </div>
-                                    </form>
-                                    
+                                    <!-- </form> -->
+                                    <script type="text/javascript">
+                                    	function goToCountryPage() {
+                                    		if(document.getElementById('country_name').value!='') {
+                                    			let currentNav=window.location.href;
+                                    			console.log(currentNav.split('/'));
+                                    			let destUrl=currentNav.split('/')[0];
+                                    			for(let i=1;i<currentNav.split('/').length-1;i++) {
+                                    				destUrl=destUrl+'/'+currentNav.split('/')[i];
+                                    			}
+                                    			
+                                    			window.location.assign(destUrl+'/'+document.getElementById('country_name').value);
+                                    		}
+                                    	}
+                                    </script>
                                     </div>
                                     <div class="col-lg-4 py-5 lg-border-right">
                                         <form action="#" class="contact_form_box " method="post" id="contactForm">

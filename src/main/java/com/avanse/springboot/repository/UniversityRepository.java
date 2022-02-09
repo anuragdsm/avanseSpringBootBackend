@@ -5,5 +5,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.avanse.springboot.model.University;
 
-public interface UniversityRepository extends PagingAndSortingRepository<University, Long> {
+public interface UniversityRepository extends JpaRepository<University, Long> {
 }

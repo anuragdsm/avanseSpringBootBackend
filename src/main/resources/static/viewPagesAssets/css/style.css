@@ -7036,7 +7036,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .software_service_tab .nav-item .nav-link {
   display: block;
-  padding: 16px 32px 16px 40px;
+  padding: 16px 32px 16px 30px;
   -webkit-transition: border-left-color 0.25s linear;
   -o-transition: border-left-color 0.25s linear;
   transition: border-left-color 0.25s linear;
@@ -8762,7 +8762,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   -webkit-box-shadow: 0px 20px 40px 0px rgba(12, 0, 46, 0.14);
           box-shadow: 0px 20px 40px 0px rgba(12, 0, 46, 0.14);
   font-size: "Futura Bk BT", sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   color: #414042;
   line-height: 26px;
   width: 100%;
@@ -9683,15 +9683,14 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .partner_info .logo_item {
   width: calc(100% / 5);
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 }
 .partner_info .logo_item img {
   max-width: 100%;
-  -webkit-filter: contrast(0.3%);
-  filter: contrast(0.3%);
   -webkit-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
+  padding: 0 15px;
 }
 .partner_info .logo_item:hover img {
   -webkit-filter: contrast(100%);
@@ -11406,7 +11405,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .job_listing {
-  margin-top: 160px;
+  margin-top: 30px;
 }
 .job_listing .job_list_tab {
   border-bottom: 1px solid #e7e7f6;
@@ -11448,7 +11447,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .job_listing .listing_tab {
   margin-bottom: -30px;
   margin-top: 60px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .job_listing .listing_tab .list_item {
   display: table;
@@ -11465,9 +11464,9 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 .job_listing .listing_tab .list_item figure {
   float: left;
-  width: 70px;
+  width: 5px;
   margin-bottom: 0px;
-  margin-right: 20px;
+  margin-right: 0px;
 }
 .job_listing .listing_tab .list_item figure a, .job_listing .listing_tab .list_item figure img {
   float: left;
@@ -11476,9 +11475,9 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .job_listing .listing_tab .list_item .joblisting_text {
   display: table-cell;
   vertical-align: middle;
-  border-left: 1px solid #eeebf7;
+ 
   width: 100%;
-  padding-left: 25px;
+  padding-left:5px;
 }
 .job_listing .listing_tab .list_item .joblisting_text .job_list_table {
   display: table;
@@ -28211,6 +28210,10 @@ padding: 44px 0;
   background: #f8faf9 url(../img/gray-light-bg.jpg) no-repeat;
   background-size: contain;
 }
+.bg_grey_color {
+  background: #f8faf9 ;
+
+}
 .jobopening_carousel .job_opening_box{
   background: #fff;
     padding: 30px 15px;
@@ -28442,4 +28445,14 @@ input[type=date]{color: #222d39; height:50px; background-color: white; -webkit-b
   border-color: #c9ebfa;
   -webkit-box-shadow: 0px 30px 60px 0px rgb(0 11 40 / 34%);
   box-shadow: 0px 30px 60px 0px rgb(0 11 40 / 34%);
+}
+.coudetail{
+  width: 100%;
+  position: absolute;
+  left: 0px;
+  background: rgb(255, 255, 255);
+  padding: 20px;
+  display: block;
+  z-index: 1;
+  margin-top: 20px;
 }

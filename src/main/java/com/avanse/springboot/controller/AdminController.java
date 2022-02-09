@@ -351,10 +351,16 @@ public class AdminController {
 	 */
 	@PostMapping("/admin/universities/add")
 	public String universitiesAddPost(@ModelAttribute("universityDTO") UniversityDTO universityDTO,
-			@RequestParam("universityImage") MultipartFile file, @RequestParam("imgName") String imgName)
+			@RequestParam("universityImage") MultipartFile file,
+			@RequestParam("imgName") String imgName,
+			@RequestParam(value = "summer", required = false) String summer,
+			@RequestParam(value = "winter", required = false) String winter,
+			@RequestParam(value = "fall", required = false) String fall,
+			@RequestParam(value = "spring", required = false) String spring)
 			throws IOException {
 //		universityService.addUniversity(university);
-
+		
+		
 		/*
 		 * Creating a new university object and a university dto object so that we can
 		 * transfer the data from the dto to the main university model.
@@ -392,7 +398,16 @@ public class AdminController {
 		university.setApplicationProcess(universityDTO.getApplicationProcess());
 		university.setDescription(universityDTO.getDescription());
 		university.setImageName(universityDTO.getImageName());
-
+		
+		if(summer!=null || winter!=null || fall!=null || spring!=null) {
+		
+			String insummer=""; if(summer!=null) insummer=summer;
+			String inwinter=""; if(winter!=null) inwinter=winter;
+			String infall=""; if(fall!=null) infall=fall;
+			String inspring=""; if(spring!=null) inspring=spring;
+			
+			university.setIntakePeriod(insummer+","+inwinter+","+infall+","+inspring);
+		}
 		/*
 		 * Create the imageUUID and using the nio package get the filename and the path
 		 */
@@ -623,7 +638,9 @@ public class AdminController {
 
 	@PostMapping("/admin/courses/add")
 	public String coursesAddPost(@ModelAttribute("courseDTO") CourseDTO courseDTO,
-			@RequestParam("university_id") long university_id, @RequestParam("examCheckBox") String[] exams) {
+			@RequestParam("university_id") long university_id,
+			@RequestParam("typeCheckBox")String[] courseTypes ,  
+			@RequestParam("examCheckBox") String[] exams) {
 
 		/*
 		 * Use the model attribute to transfer the data from course DTO to course object
@@ -652,6 +669,7 @@ public class AdminController {
 		course.setAcademicDocumentsRequired(courseDTO.getAcademicDocumentsRequired());
 		course.setExamsEligibility(courseDTO.getExamsEligibility());
 		course.setFees(courseDTO.getFees());
+		course.setStaticContent(courseDTO.getStaticContent());
 
 //		university.addTheCourse(course);
 		course.setUniversity(universityService.getUniversityById(university_id).get());
@@ -687,6 +705,7 @@ public class AdminController {
 		courseDTO.setExamsEligibility(course.getExamsEligibility());
 		courseDTO.setFees(course.getFees());
 		courseDTO.setUniversity(courseDTO.getUniversity());
+		courseDTO.setStaticContent(course.getStaticContent());
 		model.addAttribute("courseDTO", courseDTO);
 		return "coursesAdd";
 	}

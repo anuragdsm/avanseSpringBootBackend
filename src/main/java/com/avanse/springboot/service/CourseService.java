@@ -24,7 +24,7 @@ public class CourseService {
 //	Return the list of courses
 	public List<Course> getAllCourses(){
 		
-		return (List<Course>)courseRepository.findAll();
+		return courseRepository.findAll();
 	}
 	
 	

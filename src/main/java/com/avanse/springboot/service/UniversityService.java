@@ -24,7 +24,7 @@ public class UniversityService {
 	
 //	Return the list of all the universities
 	public List<University> getAllUniversity(){
-		return (List<University>) universityRepository.findAll();
+		return universityRepository.findAll();
 	}
 	
 	public Page<University>listByPage(int pageNum){

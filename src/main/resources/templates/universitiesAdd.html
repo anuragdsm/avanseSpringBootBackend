@@ -179,13 +179,129 @@
 												</div>
 	
 									</div>
+									<style>
+										.my-vertical-center {
+															  margin: 0;
+															  position: absolute;
+															  top: 50%;
+															  -ms-transform: translateY(-50%);
+															  transform: translateY(-50%);
+															}
+									</style>
 
 
 									<div class="form-group">
-										<label for="intakePeriod">Intake Period</label> <input
-											type="text" class="form-control" required
-											th:field="*{intakePeriod}" name="intakePeriod"
-											id="intakePeriod" placeholder="intakePeriod">
+										
+										<!-- <div class="container">
+											<div id="rowsHolder">
+												<div id="RowData" class="row">
+												
+													<div class="col">
+														<label for="intakePeriodStart">Intake Period Start</label> 
+														<select class="form-control" id="intakePeriodStart" name="intakeFrom">
+															<option>January</option>
+															<option>Feburary</option>
+															<option>March</option>
+															<option>April</option>
+															<option>May</option>
+															<option>June</option>
+															<option>July</option>
+															<option>August</option>
+															<option>September</option>
+															<option>October</option>
+															<option>November</option>
+															<option>December</option>
+														</select>
+													</div>
+													<div class="col">
+														<label for="intakePeriodTo">Intake Period To</label>
+														<select class="form-control" id="intakePeriodTo" name="intakeTo">
+															<option>January</option>
+															<option>Feburary</option>
+															<option>March</option>
+															<option>April</option>
+															<option>May</option>
+															<option>June</option>
+															<option>July</option>
+															<option>August</option>
+															<option>September</option>
+															<option>October</option>
+															<option>November</option>
+															<option>December</option>
+														</select>
+													</div>
+													<div class="col">
+															<div class="my-vertical-center">
+																<a class="btn btn-secondary" onclick="addNewIntakeRow()" >Add Another Intake</a>
+															</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<script>
+											let initialRowData = document.getElementById('RowData').outerHTML;
+											function addNewIntakeRow() {
+												 document.getElementById('rowsHolder').lastElementChild.lastElementChild.outerHTML="";
+												/* let childlist=document.getElementById('rowsHolder').children;
+												console.log(childlist);
+									            childlist[childlist.length-1].children[2].outerHTML=""; */
+												/* document.getElementById('rowsHolder').lastChild.lastChild.remove(); */
+									            document.getElementById('rowsHolder').innerHTML=document.getElementById('rowsHolder').innerHTML+initialRowData; 
+											}
+										</script> -->
+										
+										<div class="container">
+											<div class="row">
+												<div class="col-3">
+													<input id="summerInput" onclick="checkBoxClickForIntake('summer')" type="checkbox">
+													<label for="summerInput">Summer Intake</label>
+												</div>
+												<div class="col">
+													<select disabled id="summer" name="summer"><option value="January">January</option><option value="February">February</option><option value="March">March</option><option value="April">April</option><option value="May">May</option><option value="June">June</option><option value="August">July</option><option value="">August</option><option value="September">September</option><option value="October">October</option><option value="November">November</option><option value="December">December</option></select>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-3">
+													<input id="winterInput" onclick="checkBoxClickForIntake('winter')" type="checkbox">
+													<label for="winterInput">Winter Intake</label>
+												</div>
+												<div class="col-3">
+													<select disabled id="winter" name="winter"><option value="January">January</option><option value="February">February</option><option value="March">March</option><option value="April">April</option><option value="May">May</option><option value="June">June</option><option value="August">July</option><option value="">August</option><option value="September">September</option><option value="October">October</option><option value="November">November</option><option value="December">December</option></select>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-3">
+													<input id="fallInput" onclick="checkBoxClickForIntake('fall')" type="checkbox">
+													<label for="fallInput">Fall Intake</label>
+												</div>
+												<div class="col">
+													<select disabled id="fall" name="fall"><option value="January">January</option><option value="February">February</option><option value="March">March</option><option value="April">April</option><option value="May">May</option><option value="June">June</option><option value="August">July</option><option value="">August</option><option value="September">September</option><option value="October">October</option><option value="November">November</option><option value="December">December</option></select>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-3">
+													<input id="springInput" onclick="checkBoxClickForIntake('spring')" type="checkbox">
+													<label for="springInput">Spring Intake</label>
+												</div>
+												<div class="col">
+													<select disabled id="spring" name="spring"><option value="January">January</option><option value="February">February</option><option value="March">March</option><option value="April">April</option><option value="May">May</option><option value="June">June</option><option value="August">July</option><option value="">August</option><option value="September">September</option><option value="October">October</option><option value="November">November</option><option value="December">December</option></select>
+												</div>
+											</div>
+										</div>
+										
+										<script type="text/javascript">
+												function checkBoxClickForIntake(typeOfClick) {
+													if(document.getElementById(typeOfClick+'Input').checked) {
+														document.getElementById(typeOfClick).disabled=false;
+													} else {
+														document.getElementById(typeOfClick).disabled=true;
+													}
+												}
+										</script>
+										
+										
+										
+										
 									</div>
 									<div class="form-group">
 										<label for="applicationProcess">Application Process</label> <input
