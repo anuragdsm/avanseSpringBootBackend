@@ -1232,7 +1232,7 @@ public class AdminController {
 
 		String codeInFile = htmlBoilerPlate(pageDTO.getMetaTitle(), pageDTO.getMetaKeyword(),
 				pageDTO.getBannerHeading(), pageDTO.getBannerSubHeading(), pageDTO.getMetaDescription(),
-				pageDTO.getMainSection(), pageDTO.getCssCode(), bannerImageFile.getOriginalFilename());
+				pageDTO.getMainSection(),pageDTO.getJsCode(), pageDTO.getCssCode(), bannerImageFile.getOriginalFilename());
 		System.out.println("The following code will be there in the file " + codeInFile);
 		pageDTO.setConsolidatedHTMLCode(codeInFile);
 		page.setConsolidatedHTMLCode(pageDTO.getConsolidatedHTMLCode());
@@ -1259,7 +1259,7 @@ public class AdminController {
 	}
 
 	private String htmlBoilerPlate(String metaTitle, String metaKeyword, String bannerHeading, String bannerSubheading,
-			String metaDescription, String mainSection, String cSSCode, String bannerImageFileName) {
+			String metaDescription, String mainSection,String jsCode,  String cSSCode, String bannerImageFileName) {
 		// TODO Auto-generated method stub
 		/*
 		 * initial code
@@ -1267,13 +1267,14 @@ public class AdminController {
 		String boilerPlate = " <!DOCTYPE html>\r\n"
 				+ "<html lang=\"en\" xmlns:layout=\"http://www.ultraq.net.nz/thymeleaf/layout\"\r\n"
 				+ "	layout:decorate=\"_LivePagelayout\">\r\n" + "<head>\r\n"
-				+ "<!-- KEYWORDTOFINDGLOBALHEADERINSERTIONCODESPACESTART -->\r\n" + "\r\n"
-				+ "<!-- KEYWORDTOFINDGLOBALHEADERINSERTIONCODESPACEEND -->"
+				+ "<title>"+metaTitle+"</title>\r\n"
+				+ "  <meta name=\"description\"  content=\" "+metaDescription +"  \" />"+"\r\n"
+				+ "  <meta name=\"keywords\"  content=\" "+metaKeyword +"  \" />"+"\r\n"
 //				+ header to be implemented later
 				+ "<script type=\"text/javascript\" src=\"/viewPagesAssets/js/customGlobalHeader/globalHeader.js\"></script>"
 				+ "<style>\r\n" + cSSCode + ".banner_bg_top{\r\n"
 				+ "				  background: url('/viewPagesAssets/img/userAddedBannerImages/" + bannerImageFileName
-				+ "'); max-width:100%; height:auto;; \r\n" + "				}\r\n" + "</style>\r\n" + "</head>\r\n" + ""
+				+ "'); max-width:100%; height:auto; \r\n" + "				}\r\n" + "</style>\r\n" + "</head>\r\n" + ""
 				+ "<body id=\"page-top\">\r\n" + "\r\n" + "	<!-- Content Wrapper -->\r\n"
 				+ "	<div layout:fragment=\"contentPlus\">"
 
@@ -1288,107 +1289,10 @@ public class AdminController {
 				+ "</h2>\r\n" + "                        </div>\r\n" + "                    </div>\r\n"
 				+ "                </div>\r\n" + "            </div>\r\n" + "        </section>"
 
-				+ mainSection + "<footer class=\"footer_area f_bg\">\r\n"
-				+ "        <div class=\"footer_cta fcta_bg\">\r\n" + "           <div class=\"container\">\r\n"
-				+ "                <div class=\"row\">\r\n"
-				+ "                    <div class=\"col-lg-3 text-lg-left text-sm-center\">\r\n"
-				+ "                        <img src=\"/viewPagesAssets/img/logo.png\">\r\n"
-				+ "                    </div>\r\n"
-				+ "                    <div class=\"col-lg-6 text-lg-center text-sm-center\">\r\n"
-				+ "                            <h2 class=\"\">Enroll to transform your Lives</h2>\r\n"
-				+ "                            <p class=\"f_size_22\"> Get a hassle free education loan is 3 days</p>\r\n"
-				+ "                    </div>\r\n"
-				+ "                    <div class=\"col-lg-3 text-lg-right text-sm-center\">\r\n"
-				+ "                        <a href=\"\" class=\"btn_yellow \">Apply Now</a>\r\n"
-				+ "                    </div>\r\n" + "                </div>\r\n" + "           </div>\r\n"
-				+ "        </div>\r\n" + "        <div class=\"footer_top\">\r\n"
-				+ "            <div class=\"container\">\r\n" + "                <div class=\"row\">\r\n"
-				+ "                    \r\n" + "                    <div class=\"col-lg-3 col-md-6\">\r\n"
-				+ "                        <div class=\"f_widget about-widget  wow fadeInLeft\" data-wow-delay=\"0.4s\"\r\n"
-				+ "                            style=\"visibility: visible; animation-delay: 0.4s; animation-name: fadeInLeft;\">\r\n"
-				+ "                            <h3 class=\"f-title f_500 text-white f_size_18 mb_40\">Education Loan </h3>\r\n"
-				+ "                            <ul class=\"list-unstyled f_list\">\r\n"
-				+ "                                <li><a href=\"#\">Avanse Education Loans</a></li>\r\n"
-				+ "                                <li><a href=\"#\">Study in India Education Loan</a></li>\r\n"
-				+ "                                <li><a href=\"#\">Study Abroad Education Loan</a></li>\r\n"
-				+ "                                <li><a href=\"#\">Executive Education Loan</a></li>\r\n"
-				+ "                                <li><a href=\"#\">Student Loan Refinancing</a></li>\r\n"
-				+ "                            </ul>\r\n" + "                        </div>\r\n"
-				+ "                    </div>\r\n" + "                    <div class=\"col-lg-3 col-md-6\">\r\n"
-				+ "                        <div class=\"f_widget about-widget  wow fadeInLeft\" data-wow-delay=\"0.4s\"\r\n"
-				+ "                            style=\"visibility: visible; animation-delay: 0.4s; animation-name: fadeInLeft;\">\r\n"
-				+ "                            <h3 class=\"f-title f_500 text-white f_size_18 mb_40\">Calculator</h3>\r\n"
-				+ "                            <ul class=\"list-unstyled f_list\">\r\n"
-				+ "                                <li><a href=\"#\">Course Expense Calculator</a></li>\r\n"
-				+ "                                <li><a href=\"#\">Eligibility Calculator</a></li>\r\n"
-				+ "                                <li><a href=\"#\">Eligibility Calculator</a></li>\r\n"
-				+ "                                <li><a href=\"#\">Education Loan Repayment Calculator</a></li>\r\n"
-				+ "                            </ul>\r\n" + "                        </div>\r\n"
-				+ "                    </div>\r\n" + "                    <div class=\"col-lg-3 col-md-6\">\r\n"
-				+ "                        <div class=\"f_widget about-widget  wow fadeInLeft\" data-wow-delay=\"0.6s\"\r\n"
-				+ "                            style=\"visibility: visible; animation-delay: 0.6s; animation-name: fadeInLeft;\">\r\n"
-				+ "                            <h3 class=\"f-title f_500 text-white f_size_18 mb_40\">Company</h3>\r\n"
-				+ "                            <ul class=\"list-unstyled f_list\">\r\n"
-				+ "                                    <li><a href=\"#\">About Avanse</a></li>\r\n"
-				+ "                                    <li><a href=\"#\">Career</a></li>\r\n"
-				+ "                                    <li><a href=\"#\">Investors</a></li>\r\n"
-				+ "                                    <li><a href=\"#\">Media Room</a></li>\r\n"
-				+ "                                    <li><a href=\"#\">Responsible Lending</a></li>\r\n"
-				+ "                                    <li><a href=\"#\">Sitemap</a></li>\r\n"
-				+ "                            </ul>\r\n" + "                        </div>\r\n"
-				+ "                    </div>\r\n" + "                    <div class=\"col-lg-3 col-md-6\">\r\n"
-				+ "                        <div class=\"f_widget about-widget  wow fadeInLeft\" data-wow-delay=\"0.8s\"\r\n"
-				+ "                            style=\"visibility: visible; animation-delay: 0.8s; animation-name: fadeInLeft;\">\r\n"
-				+ "                            <h3 class=\"f-title f_500 text-white f_size_18 mb_40\">Resources </h3>\r\n"
-				+ "                            <ul class=\"list-unstyled f_list\">\r\n"
-				+ "                                <li><a href=\"#\">Blog</a></li>\r\n"
-				+ "                                <li><a href=\"#\">Good Credit</a></li>\r\n"
-				+ "                                <li><a href=\"#\">FAQ</a></li>\r\n"
-				+ "                                <li><a href=\"#\">Pay Online</a></li>\r\n"
-				+ "                                <li><a href=\"#\">WhatsApp Communication</a></li>\r\n"
-				+ "                                <li><a href=\"#\">Ex-gratia FAQs</a></li>\r\n"
-				+ "                                <li><a href=\"#\">Sarfaesi Notice</a></li>\r\n"
-				+ "                            </ul>\r\n" + "                        </div>\r\n"
-				+ "                    </div>\r\n" + "                </div>\r\n" + "            </div>\r\n"
-				+ "        </div>\r\n" + "        <div class=\"footer_bottom\">\r\n"
-				+ "            <div class=\"container\">\r\n"
-				+ "                <div class=\"row align-items-center\">\r\n"
-				+ "                    <div class=\"col-lg-8 col-md-8 col-sm-12\">\r\n"
-				+ "                        <p class=\"mb-2 f_300\">Copyright © 2021 Avanse Financial Services Ltd. All Rights Reserved .       <a class=\"ml-4\" href=\"https://www.digistreetmedia.com/\" target=\"_blank\">Site Credits</a></p>\r\n"
-				+ "                        <p class=\"mb-2 f_300\">CIN : U67120MH1992PLC068060</p>\r\n"
-				+ "                    </div>\r\n" + "                    \r\n"
-				+ "                    <div class=\"col-lg-4 col-md-4 col-sm-12\">\r\n"
-				+ "                        <div class=\"f_social_icon_two text-right mb-2\">\r\n"
-				+ "                            <a href=\"#\"><i class=\"ti-facebook\"></i></a>\r\n"
-				+ "                            <a href=\"#\"><i class=\"ti-twitter-alt\"></i></a>\r\n"
-				+ "                            <a href=\"#\"><i class=\"ti-linkedin\"></i></a>\r\n"
-				+ "                            <a href=\"#\"><i class=\"ti-instagram\"></i></a>\r\n"
-				+ "                        </div>\r\n"
-				+ "                        <p class=\"mb-2 f_300 text-lg-right\">Phone support: 1800-266-0200</p>\r\n"
-				+ "                    </div>\r\n" + "                    <div class=\"col-lg-12\">\r\n"
-				+ "                        <p>Disclaimer | Base Lending Rate | Privacy Policy | Terms & Conditions | Ombudsman Scheme | Customer Complaints | Moratorium Policy | WhatsApp T&C | Communication Policy | Digital Partners</p>\r\n"
-				+ "                    </div>\r\n" + "                </div>\r\n" + "            </div>\r\n"
-				+ "        </div>\r\n" + "    </footer>\r\n" + "    "
+				+ mainSection + "\r\n"
 
 				+ "    <!-- Optional JavaScript -->\r\n"
-
-				+ "    <!-- jQuery first, then Popper.js, then Bootstrap JS -->\r\n"
-				+ "    <script src=\"/viewPagesAssets/js/jquery-3.6.0.min.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/js/propper.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/js/bootstrap.min.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/vendors/wow/wow.min.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/vendors/sckroller/jquery.parallax-scroll.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/vendors/owl-carousel/owl.carousel.min.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/vendors/imagesloaded/imagesloaded.pkgd.min.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssetsvendors/isotope/isotope-min.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/vendors/magnify-pop/jquery.magnific-popup.min.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/vendors/counterup/jquery.counterup.min.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/vendors/counterup/jquery.waypoints.min.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/vendors/counterup/appear.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/vendors/circle-progress/circle-progress.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/vendors/scroll/jquery.mCustomScrollbar.concat.min.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/js/plugins.js\"></script>\r\n"
-				+ "    <script src=\"/viewPagesAssets/js/main.js\"></script>\r\n" + " 	</body> ";
+				+ jsCode + " 	</body> ";
 
 		return boilerPlate;
 	}
@@ -1504,20 +1408,7 @@ public class AdminController {
 
 		File globalHeaderFile = new File(globalHeaderFilePath);
 		System.out.println("InputCode----->" + globalHeaderCode);
-//		try {
-//			FileReader fr = new FileReader(globalHeaderFile);
-//			int x=0;
-//			String fileText="";
-//			while(x!=-1) {
-//				x=fr.read();
-//				char c=(char)x;
-//				fileText=fileText.concat(String.valueOf(c));
-//			}
-//			System.out.println("FILE CONTENT ------>"+fileText);
-//		} catch(IOException e) {
-//			System.out.println(e.getMessage());
-//			e.printStackTrace();
-//		}
+
 		try {
 			FileWriter fwr = new FileWriter(globalHeaderFile);
 			fwr.write(globalHeaderCode);
@@ -1529,14 +1420,7 @@ public class AdminController {
 		return "redirect:/admin/globalHeader";
 	}
 
-//	@PostMapping("/admin/globalHeader/edit/{id}")
-//	public String globalHeaderAddPost(Model model, @PathVariable long id) {
-//		Header header = headerService.getHeaderById(id).get();
-//		model.addAttribute("header",header);
-//		System.out.println(header.toString());
-//		return "redirect:/admin/globalHeader";
-//	}
-//	
+
 
 	/*
 	 * Below functions will be used to create the posts
@@ -1544,7 +1428,6 @@ public class AdminController {
 
 	@GetMapping("/admin/posts")
 	public String getPosts(Model model) {
-//		model.addAttribute("posts", postService.getAllPosts());
 		return listPostsByPage(1, model);
 	}
 
@@ -1582,11 +1465,7 @@ public class AdminController {
 		return "postsAdd";
 	}
 
-	/*
-	 * @PostMapping("/admin/posts/add") public String
-	 * postAddPostMethod(@ModelAttribute("post") Post post) {
-	 * postService.addPost(post); return "redirect:/admin/posts"; }
-	 */
+	
 
 	@PostMapping(path = "/admin/posts/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public String blogPostsAddPostMap(@ModelAttribute("postDTO") PostDTO postDTO, HttpServletRequest request,
@@ -1626,7 +1505,7 @@ public class AdminController {
 		}
 
 		Date date = new Date();
-		String tempDate = new SimpleDateFormat("DD MMMM, YYYY").format(date);
+		String tempDate = new SimpleDateFormat("dd MMMM, yyyy").format(date);
 		System.out.println("TESTING ------------> " + isUpdating);
 		post.setId(postDTO.getId());
 		post.setPostTitle(postDTO.getPostTitle().strip());
@@ -1810,18 +1689,14 @@ public class AdminController {
 	private String htmlBlogLayout(String metaTitle, String heading, String subheading, String metaDescription,
 			String mainSection, String featuredImageFileName) {
 
-		// TODO Auto-generated method stub
-		/*
-		 * initial code
-		 * 
-		 */
+	
 		Date date = new Date();
 		LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		int day = localDate.getDayOfMonth();
 
 		Calendar cal = Calendar.getInstance();
 		String month = new SimpleDateFormat("MMMM").format(cal.getTime());
-		String dateOfBlogPost = new SimpleDateFormat("DD MMMM, YYYY").format(date);
+		String dateOfBlogPost = new SimpleDateFormat("dd MMMM, YYYY").format(date);
 
 		String layoutCode = "<!DOCTYPE html>\r\n"
 				+ "<html lang=\"en\" xmlns:layout=\"http://www.ultraq.net.nz/thymeleaf/layout\"\r\n"
@@ -1829,7 +1704,12 @@ public class AdminController {
 				+ "<!-- KEYWORDTOFINDGLOBALHEADERINSERTIONCODESPACESTART -->\r\n" + "\r\n"
 				+ "<!-- KEYWORDTOFINDGLOBALHEADERINSERTIONCODESPACEEND -->"
 //				+ header to be implemented later
-				+ "<script type=\"text/javascript\" src=\"/viewPagesAssets/js/customGlobalHeader/globalHeader.js\"></script>"
+				+ "<title>"+metaTitle+"</title>\r\n"
+				+ "  <meta name=\"description\"  content=\" "+metaDescription +"  \" />"+"\r\n"
+				
+
+				+ "<script type=\"text/javascript\" src=\"/viewPagesAssets/js/customGlobalHeader/globalHeader.js\"></script>"+"\r\n"
+								
 				+ "</head>\r\n" + "<body id=\"page-top\">\r\n" + "\r\n" + "	<!-- Content Wrapper -->\r\n"
 				+ "	<div layout:fragment=\"contentPlus\">"
 				+ "<section class=\" pt-3 pb-3\" style=\"background: #02afb3\">\r\n" + "           \r\n"
@@ -1989,7 +1869,7 @@ public class AdminController {
 		postDTO.setMainSection(post.getMainSection());
 		postDTO.setConsolidatedHTMLCode(post.getConsolidatedHTMLCode());
 		postDTO.setMetaTitle(post.getMetaTitle());
-		postDTO.setMetaDescription(post.getMetaTitle());
+//		postDTO.setMetaDescription(post.getMetaTitle());
 		postDTO.setMetaDescription(post.getMetaDescription());
 
 		model.addAttribute("postDTO", postDTO);

@@ -72,7 +72,6 @@
 					</div>
 				</div>
 
-
 				<!-- Content Row -->
 				<div class="row">
 					<div class="container-fluid">
@@ -84,12 +83,12 @@
 								<div class="col-sm-5">
 									<input type="hidden" name="id" th:field="*{id}">
 									<div class="form-group">
-										<label for="name">University Name</label> <input type="text"
+										<label for="name"><h5>University Name</h5></label> <input type="text"
 											class="form-control" required th:field="*{name}" name="name"
 											id="name" placeholder="Enter University name">
 									</div>
 									<div class="form-group">
-										<label for="location">Country</label>
+										<label for="location"><h5>Country</h5></label>
 
 										<!-- <input type="text"
 											class="form-control" required th:field="*{location}"
@@ -123,7 +122,7 @@
 									</div>
 
 									<div class="form-group">
-										<label for="establishedYear">Established Year</label> <select
+										<label for="establishedYear"><h5>Established Year</h5></label> <select
 											class="form-control" required th:field="*{establishedYear}"
 											name="establishedYear" id="establishedYear"
 											placeholder="Year">
@@ -142,56 +141,55 @@
 										</script>
 									</div>
 									<div class="form-group">
-										<label for="description">University Description</label>
+										<label for="description"><h5>University Description</h5></label>
 										<textarea class="form-control" rows="5"
 											th:field="*{description}" name="description" id="description"></textarea>
 									</div>
-								</div>
-								<div class="col-sm-5">
-
-									<!-- <div class="form-group">
-										<label for="accomodation">Accommodation Available</label> <input
-											type="text" class="form-control" required
-											th:field="*{accomodation}" name="accomodation"
-											id="accomodation" placeholder="">
-									</div> -->
-
 
 									<div class="form-group">
-										<label for="accomodation">Accommodation Availability </label> 
+										<label for="accomodation"><h5>Accommodation
+												Availability</h5></label>
 
+										<div class="input-group-radio">
+											<input name="accomodation" id="accomodationOption1"
+												value="Yes" type="radio"> <label
+												for="accomodationOption1">Yes</label>
+										</div>
+										<div class="input-group-radio">
+											<input name="accomodation" id="accomodationOption2"
+												type="radio" value="No"> <label
+												for="accomodationOption2">No</label>
+										</div>
+										<div class="input-group-radio">
+											<input name="accomodation" type="radio"
+												id="accomodationOption3" value="N/A"> <label
+												for="accomodationOption3">N/A</label>
+										</div>
 
-										
-											
-												<div class="input-group-radio">
-													<input name="accomodation" id="accomodationOption1" value="Yes" type="radio"
-														>
-														<label for="accomodationOption1">Yes</label>
-												</div>
-												<div class="input-group-radio">
-													<input name="accomodation" id="accomodationOption2" type="radio" value="No"> 
-													<label for="accomodationOption2">No</label>
-												</div>
-												<div class="input-group-radio">
-													<input name="accomodation" type="radio"
-														id="accomodationOption3" value="N/A"> 
-														<label for="accomodationOption3">N/A</label>
-												</div>
-	
 									</div>
+
+
+								</div>
+
+
+								<div class="col-sm-5">
+
+									
+
+
 									<style>
-										.my-vertical-center {
-															  margin: 0;
-															  position: absolute;
-															  top: 50%;
-															  -ms-transform: translateY(-50%);
-															  transform: translateY(-50%);
-															}
+									.my-vertical-center {
+									margin: 0;
+									position: absolute;
+									top: 50%;
+									-ms-transform: translateY(-50%);
+									transform: translateY(-50%);
+									}
 									</style>
 
 
 									<div class="form-group">
-										
+
 										<!-- <div class="container">
 											<div id="rowsHolder">
 												<div id="RowData" class="row">
@@ -249,47 +247,106 @@
 									            document.getElementById('rowsHolder').innerHTML=document.getElementById('rowsHolder').innerHTML+initialRowData; 
 											}
 										</script> -->
-										
-										<div class="container">
-											<div class="row">
-												<div class="col-3">
-													<input id="summerInput" onclick="checkBoxClickForIntake('summer')" type="checkbox">
-													<label for="summerInput">Summer Intake</label>
+										<div class="form-group">
+											<label for="accomodation"><h5>Intakes</h5></label>
+											<div class="container">
+
+
+
+												<div class="row">
+													<div class="col-4">
+														<input id="summerInput"
+															onclick="checkBoxClickForIntake('summer')"
+															type="checkbox"> <label for="summerInput">Summer
+															Intake</label>
+													</div>
+													<div class="col">
+														<select disabled id="summer" name="summer"><option
+																value="January">January</option>
+															<option value="February">February</option>
+															<option value="March">March</option>
+															<option value="April">April</option>
+															<option value="May">May</option>
+															<option value="June">June</option>
+															<option value="August">July</option>
+															<option value="">August</option>
+															<option value="September">September</option>
+															<option value="October">October</option>
+															<option value="November">November</option>
+															<option value="December">December</option></select>
+													</div>
 												</div>
-												<div class="col">
-													<select disabled id="summer" name="summer"><option value="January">January</option><option value="February">February</option><option value="March">March</option><option value="April">April</option><option value="May">May</option><option value="June">June</option><option value="August">July</option><option value="">August</option><option value="September">September</option><option value="October">October</option><option value="November">November</option><option value="December">December</option></select>
+												<div class="row">
+													<div class="col-4">
+														<input id="winterInput"
+															onclick="checkBoxClickForIntake('winter')"
+															type="checkbox"> <label for="winterInput">Winter
+															Intake</label>
+													</div>
+													<div class="col-4">
+														<select disabled id="winter" name="winter"><option
+																value="January">January</option>
+															<option value="February">February</option>
+															<option value="March">March</option>
+															<option value="April">April</option>
+															<option value="May">May</option>
+															<option value="June">June</option>
+															<option value="August">July</option>
+															<option value="">August</option>
+															<option value="September">September</option>
+															<option value="October">October</option>
+															<option value="November">November</option>
+															<option value="December">December</option></select>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-4">
+														<input id="fallInput"
+															onclick="checkBoxClickForIntake('fall')" type="checkbox">
+														<label for="fallInput">Fall Intake</label>
+													</div>
+													<div class="col-4">
+														<select disabled id="fall" name="fall"><option
+																value="January">January</option>
+															<option value="February">February</option>
+															<option value="March">March</option>
+															<option value="April">April</option>
+															<option value="May">May</option>
+															<option value="June">June</option>
+															<option value="August">July</option>
+															<option value="">August</option>
+															<option value="September">September</option>
+															<option value="October">October</option>
+															<option value="November">November</option>
+															<option value="December">December</option></select>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-4">
+														<input id="springInput"
+															onclick="checkBoxClickForIntake('spring')"
+															type="checkbox"> <label for="springInput">Spring
+															Intake</label>
+													</div>
+													<div class="col-4">
+														<select disabled id="spring" name="spring"><option
+																value="January">January</option>
+															<option value="February">February</option>
+															<option value="March">March</option>
+															<option value="April">April</option>
+															<option value="May">May</option>
+															<option value="June">June</option>
+															<option value="August">July</option>
+															<option value="">August</option>
+															<option value="September">September</option>
+															<option value="October">October</option>
+															<option value="November">November</option>
+															<option value="December">December</option></select>
+													</div>
 												</div>
 											</div>
-											<div class="row">
-												<div class="col-3">
-													<input id="winterInput" onclick="checkBoxClickForIntake('winter')" type="checkbox">
-													<label for="winterInput">Winter Intake</label>
-												</div>
-												<div class="col-3">
-													<select disabled id="winter" name="winter"><option value="January">January</option><option value="February">February</option><option value="March">March</option><option value="April">April</option><option value="May">May</option><option value="June">June</option><option value="August">July</option><option value="">August</option><option value="September">September</option><option value="October">October</option><option value="November">November</option><option value="December">December</option></select>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-3">
-													<input id="fallInput" onclick="checkBoxClickForIntake('fall')" type="checkbox">
-													<label for="fallInput">Fall Intake</label>
-												</div>
-												<div class="col">
-													<select disabled id="fall" name="fall"><option value="January">January</option><option value="February">February</option><option value="March">March</option><option value="April">April</option><option value="May">May</option><option value="June">June</option><option value="August">July</option><option value="">August</option><option value="September">September</option><option value="October">October</option><option value="November">November</option><option value="December">December</option></select>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-3">
-													<input id="springInput" onclick="checkBoxClickForIntake('spring')" type="checkbox">
-													<label for="springInput">Spring Intake</label>
-												</div>
-												<div class="col">
-													<select disabled id="spring" name="spring"><option value="January">January</option><option value="February">February</option><option value="March">March</option><option value="April">April</option><option value="May">May</option><option value="June">June</option><option value="August">July</option><option value="">August</option><option value="September">September</option><option value="October">October</option><option value="November">November</option><option value="December">December</option></select>
-												</div>
-											</div>
-										</div>
-										
-										<script type="text/javascript">
+
+											<script type="text/javascript">
 												function checkBoxClickForIntake(typeOfClick) {
 													if(document.getElementById(typeOfClick+'Input').checked) {
 														document.getElementById(typeOfClick).disabled=false;
@@ -298,36 +355,36 @@
 													}
 												}
 										</script>
-										
-										
-										
-										
+
+
+
+
+										</div>
+										<div class="form-group">
+											<label for="applicationProcess"><h5>Application
+													Process</h5></label> <input type="text" class="form-control" required
+												th:field="*{applicationProcess}" name="applicationProcess"
+												id="applicationProcess" placeholder="">
+										</div>
+										<h5>University Image</h5>
+										<div class="custom-file">
+											<input type="file" class="custom-file-input"
+												name="universityImage" accept="image/jpeg, image/png"
+												id="universityImage" /> <label class="custom-file-label"
+												for="universityImage">Choose file</label>
+										</div>
+										<div class="form-group">
+											<img type="hidden" src="#" id="imgPreview" height="100px"
+												width="100px"
+												th:src="@{${'/universityImages/' + universityDTO.imageName}}"
+												style="margin-top: 20px" alt=" ">
+										</div>
+										<input type="hidden" name="imgName"
+											th:value="${universityDTO.imageName}">
+										<button type="submit" class="btn btn-primary"
+											onclick="onSubmit()">Submit</button>
 									</div>
-									<div class="form-group">
-										<label for="applicationProcess">Application Process</label> <input
-											type="text" class="form-control" required
-											th:field="*{applicationProcess}" name="applicationProcess"
-											id="applicationProcess" placeholder="">
-									</div>
-									<p>University Image</p>
-									<div class="custom-file">
-										<input type="file" class="custom-file-input"
-											name="universityImage" accept="image/jpeg, image/png"
-											id="universityImage" /> <label class="custom-file-label"
-											for="universityImage">Choose file</label>
-									</div>
-									<div class="form-group">
-										<img type="hidden" src="#" id="imgPreview" height="100px"
-											width="100px"
-											th:src="@{${'/universityImages/' + universityDTO.imageName}}"
-											style="margin-top: 20px" alt=" ">
-									</div>
-									<input type="hidden" name="imgName"
-										th:value="${universityDTO.imageName}">
-									<button type="submit" class="btn btn-primary"
-										onclick="onSubmit()">Submit</button>
 								</div>
-							</div>
 						</form>
 					</div>
 				</div>
