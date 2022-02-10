@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="_LivePagelayout">
+
+<head>
+<title>Apply Now</title>
+<meta charset="utf-8">
+<style type="text/css">
+
+
+
+</style>
+<body id="page-top" onload="createCaptcha()">
+
+
+	<!-- Content Wrapper -->
+	<div layout:fragment="contentPlus">
+
+        <section class="bg_grey_light support_help_area sec_pad pt-5">
+            <div class="container">
+                <h2 class="f_p f_size_40  f_600 t_color text-center wow fadeInUp mb_10" style="visibility: visible; animation-name: fadeInUp;">Executive Education Loan</h2>
+                <h4 class="f_p   text-center wow fadeInUp mb_60" >Fill in the details and help us connect with you.</h4>
+                <div class="apply-now-form py-5 shadow pr-5 pl-5" >
+                    <form onsubmit="validateCaptcha()" th:action="@{/viewDynamicPages/executive-education-loan/add}" th:object = "${executiveEducationLoanDTO}" class="contact_form_box" method="post" id="myForm" novalidate="novalidate">
+                        <div class="row">
+                            
+                            <div class="col-lg-6">
+                                <div class="form-group text_box">
+                                    <input type="text" id="firstName" name="firstName" th:field="*{firstName}" placeholder="First Name">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group text_box">
+                                    <input type="text" id="lastName" name="lastName" th:field="*{lastName}" placeholder="Last Name">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group text_box">
+                                    <input type="text" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}" placeholder="Mobile No.">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group text_box">
+                                    <input type="text" name="email" id="email" th:field="*{email}" placeholder="Email Id">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group text_box">
+                                    <input type="text" id="courseName" name="courseName" th:field="*{courseName}" placeholder="Course Name">
+                                </div>
+                            </div>
+                           
+                            <div class="col-lg-6">
+                                <div class="form-group text_box ">
+                                    <select class="form-control" th:field="*{loanAmount}" id="asd">
+                                        <option value="--">Loan Amount ₹</option>
+                                        <option value="50000">₹ 50000</option>
+                                        <option value="50,000 to ₹ 1 lacs">₹ 50,000 to ₹ 1 lacs</option>
+                                        <option value="1 lacs to ₹ 2 lacs">₹ 1 lacs to ₹ 2 lacs</option>
+                                        <option value="2 lacs +">₹ 2 lacs +</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                            <div class="col-lg-12  text-center ">
+								<div id="captcha"></div>
+								<input  type="text" placeholder="Captcha" id="cpatchaTextBox" />
+							</div>
+                            
+                             
+                            <div class="col-lg-12 text-center pt-5"><button type="submit" class="btn_three f_size_22">Submit</button></div>
+                        </div>
+                </form>
+                </div>
+               
+               <div class="row pt-5 mt_100">
+                    <div class="col-lg-6">
+                        <h2 class="f_size_40 f_500 t_color3 l_height45 ">About  <span class="c_cyan">Avanse</span></h2>
+                        <p>Avanse Financial Services was established in 2013 with the sole purpose of helping students achieve all their academic aspirations. We’re a new-age, education focused, technologically advanced NBFC that provides hyper-personalised education financing solutions for every deserving Indian student. We are committed towards democratizing education and education financing.</p>
+                        <p>Our range of solutions covers the entire life cycle of a student from kindergarten to post-graduation. Additionally, we also provide finance for working and growth capital needs of educational institutes in India.</p>
+                        <p>Warburg Pincus, a leading global equity firm, holds 80% of the equity stake in Avanse Financial Services Limited. The global growth investor is known for its highly diversified portfolio and has over 67 billion USD in private equity assets under management across 215 companies. The International Finance Corporation (IFC), an arm of the World Bank, holds the balance 20% equity stake.</p>
+                    </div>
+                    <div class="col-lg-5 ml-auto my-auto">
+                       <img src="/viewPagesAssets/img/educational-institution-loan.png" class="img-fluid">
+                    </div>
+               </div>
+            </div>
+        </section>
+        <section class="recognitionaward-section bg_color sec_pad">
+            <div class="container">
+                <div class="sec_title text-center mb_50 wow fadeInUp">
+                    <h2 class="f_size_40 f_500  t_color3 l_height45">Awards & Accolades</h2>
+                   <p >Have a look at some of our achievements! We’re proud to count the following awards <br/>and certifications among our achievements.</p>
+                </div>
+                <div class="row py-5">
+                    <div class="col-lg-12">
+                        <div class="recognition_carousel owl-carousel">
+                            <div class="item">
+                                <div class="award_section">
+                                    <div class="award_info">
+                                        <span>"Great Place to Work®" 2021 a prestigious recognition based on employees experience</span>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class="item">
+                                <div class="award_section">
+                                    <div class="award_info">
+                                        <span>"Great Place to Work®" 2021 a prestigious recognition based on employees experience</span>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class="item">
+                                <div class="award_section">
+                                    <div class="award_info">
+                                        <span>"Great Place to Work®" 2021 a prestigious recognition based on employees experience</span>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class="item">
+                                <div class="award_section">
+                                    <div class="award_info">
+                                        <span>"Great Place to Work®" 2021 a prestigious recognition based on employees experience</span>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class="item">
+                                <div class="award_section">
+                                    <div class="award_info">
+                                        <span>"Great Place to Work®" 2021 a prestigious recognition based on employees experience</span>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class="item">
+                                <div class="award_section">
+                                    <div class="award_info">
+                                        <span>"Great Place to Work®" 2021 a prestigious recognition based on employees experience</span>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+       
+
+        
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker9').datetimepicker({
+                    viewMode: 'years'
+                });
+            });
+         </script>
+</div>

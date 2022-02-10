@@ -15,8 +15,9 @@ public class ApplyNowGeneralDTO {
 	private String city;
 	private String placeOfStudy;
 	private String loanAmount;
-	private String AdmissionStatus;
+	private String admissionStatus;
 	private String permission;
+	private String timeOfStudy;
 
 //	Date has to be implemented later
 //	private Date timeOfStudy;

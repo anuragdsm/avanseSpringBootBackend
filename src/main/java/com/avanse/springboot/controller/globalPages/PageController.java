@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.avanse.springboot.DTO.forms.applyNow.ApplyNowGeneralDTO;
+import com.avanse.springboot.DTO.forms.applyNow.ExecutiveEducationLoanDTO;
 import com.avanse.springboot.DTO.forms.contactUs.CustomerDTO;
 import com.avanse.springboot.DTO.forms.contactUs.InstituteDTO;
 import com.avanse.springboot.DTO.forms.contactUs.InvestorDTO;
@@ -51,9 +52,7 @@ public class PageController {
 
 	@GetMapping("/viewPages/{extractedFileName}")
 	public ModelAndView getAddedPage(@PathVariable("extractedFileName") String extractedFileName) {
-		ModelAndView modelAndView = new ModelAndView("addedPages/"+extractedFileName);
-		
-		
+		ModelAndView modelAndView = new ModelAndView("addedPages/"+extractedFileName);	
 		return modelAndView;		
 	}
 	
@@ -67,6 +66,7 @@ public class PageController {
 		model.addAttribute("investorDTO", new InvestorDTO());
 		model.addAttribute("mediaDTO", new MediaDTO());
 		model.addAttribute("applyNowGeneralDTO", new ApplyNowGeneralDTO());
+		model.addAttribute("executiveEducationLoanDTO", new ExecutiveEducationLoanDTO());
 		return modelAndView;		
 	}
 	

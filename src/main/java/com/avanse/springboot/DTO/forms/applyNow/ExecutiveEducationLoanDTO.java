@@ -11,5 +11,5 @@ public class ExecutiveEducationLoanDTO {
 	private String phoneNumber;
 	private String email;
 	private String courseName;
-	private Long loanAmount;
+	private String loanAmount;
 }
