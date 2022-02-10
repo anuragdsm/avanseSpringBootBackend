@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.avanse.springboot.DTO.forms.applyNow.ApplyNowGeneralDTO;
+import com.avanse.springboot.DTO.forms.applyNow.EducationInstitutionLoanDTO;
 import com.avanse.springboot.DTO.forms.applyNow.ExecutiveEducationLoanDTO;
 import com.avanse.springboot.DTO.forms.contactUs.CustomerDTO;
 import com.avanse.springboot.DTO.forms.contactUs.InstituteDTO;
@@ -67,13 +68,15 @@ public class PageController {
 		model.addAttribute("mediaDTO", new MediaDTO());
 		model.addAttribute("applyNowGeneralDTO", new ApplyNowGeneralDTO());
 		model.addAttribute("executiveEducationLoanDTO", new ExecutiveEducationLoanDTO());
+		model.addAttribute("educationInstitutionLoanDTO", new EducationInstitutionLoanDTO());
 		return modelAndView;		
 	}
 	
-	private String code(String pageName) {
-		Page page = pageService.findPageByFilename(pageName);
-		String consolidateCode = page.getConsolidatedHTMLCode();	
-		System.out.println("THE CONSOLIDATED CODE IS " + consolidateCode); 
-		return consolidateCode;
-	}	
+	/*
+	 * private String code(String pageName) { Page page =
+	 * pageService.findPageByFilename(pageName); String consolidateCode =
+	 * page.getConsolidatedHTMLCode();
+	 * System.out.println("THE CONSOLIDATED CODE IS " + consolidateCode); return
+	 * consolidateCode; }
+	 */
 }

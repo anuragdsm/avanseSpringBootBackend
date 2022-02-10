@@ -12,7 +12,7 @@ public class EducationInstitutionLoanDTO {
 	private String email;
 	private String city;
 	private String loanType;
-	private Long loanAmount;
+	private String loanAmount;
 	private String loanUsage;
 	private String institutionType;
 	private String CurriculumBoard;

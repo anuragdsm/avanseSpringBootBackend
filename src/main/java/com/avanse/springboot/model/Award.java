@@ -1,11 +1,14 @@
 package com.avanse.springboot.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,5 +29,8 @@ public class Award implements Serializable{
 	private Long id;
 	private String title;
 	private String description;
+	
+	@CreationTimestamp
+	private Date dateOfCreation;
 	
 }

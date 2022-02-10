@@ -6,10 +6,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.avanse.springboot.DTO.forms.applyNow.ApplyNowGeneralDTO;
+import com.avanse.springboot.DTO.forms.applyNow.EducationInstitutionLoanDTO;
 import com.avanse.springboot.DTO.forms.applyNow.ExecutiveEducationLoanDTO;
 import com.avanse.springboot.model.forms.applyNow.ApplyNowGeneral;
+import com.avanse.springboot.model.forms.applyNow.EducationInstitutionLoan;
 import com.avanse.springboot.model.forms.applyNow.ExecutiveEducationLoan;
 import com.avanse.springboot.service.applyNow.ApplyNowGeneralService;
+import com.avanse.springboot.service.applyNow.EducationInstitutionLoanService;
 import com.avanse.springboot.service.applyNow.ExecutiveEducationLoanService;
 
 @Controller
@@ -20,6 +23,11 @@ public class ApplyNowAllController {
 	
 	@Autowired
 	ExecutiveEducationLoanService executiveEducationLoanService;
+	
+	@Autowired
+	EducationInstitutionLoanService educationInstitutionLoanService;
+	
+	
 	
 	@PostMapping("/viewDynamicPages/apply-now/add")
 	public String applyNowGeneralAddPost(@ModelAttribute("applyNowGeneralDTO") ApplyNowGeneralDTO applyNowGeneralDTO) {
@@ -49,6 +57,26 @@ public class ApplyNowAllController {
 		executiveEducationLoan.setCourseName(executiveEducationLoanDTO.getCourseName());
 		executiveEducationLoan.setLoanAmount(executiveEducationLoanDTO.getLoanAmount());
 		executiveEducationLoanService.addExecutiveEducationLoan(executiveEducationLoan);
+		return "thankyou";
+	}
+	@PostMapping("/viewDynamicPages/education-institution-loan/add")
+	public String educationInstitutionLoanAddPost(@ModelAttribute("educationInstitutionLoanDTO") EducationInstitutionLoanDTO educationInstitutionLoanDTO) {
+		EducationInstitutionLoan educationInstitutionLoan= new EducationInstitutionLoan();
+		educationInstitutionLoan.setFirstName(educationInstitutionLoanDTO.getFirstName());
+		educationInstitutionLoan.setLastName(educationInstitutionLoanDTO.getLastName());
+		educationInstitutionLoan.setPhoneNumber(educationInstitutionLoanDTO.getPhoneNumber());
+		educationInstitutionLoan.setEmail(educationInstitutionLoanDTO.getEmail());
+		educationInstitutionLoan.setCity(educationInstitutionLoanDTO.getCity());
+		educationInstitutionLoan.setLoanType(educationInstitutionLoanDTO.getLoanType());
+		educationInstitutionLoan.setLoanAmount(educationInstitutionLoanDTO.getLoanAmount());
+		educationInstitutionLoan.setLoanUsage(educationInstitutionLoanDTO.getLoanUsage());
+		educationInstitutionLoan.setInstitutionType(educationInstitutionLoanDTO.getInstitutionType());
+		educationInstitutionLoan.setCurriculumBoard(educationInstitutionLoanDTO.getCurriculumBoard());
+		educationInstitutionLoan.setVintage(educationInstitutionLoanDTO.getVintage());
+		educationInstitutionLoan.setStudentStrength(educationInstitutionLoanDTO.getStudentStrength());
+		educationInstitutionLoanService.addEducationInstitutionLoan(educationInstitutionLoan);
+		
+//		executiveEducationLoanService.addExecutiveEducationLoan(executiveEducationLoan);
 		return "thankyou";
 	}
 	
