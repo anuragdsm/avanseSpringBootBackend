@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.avanse.springboot.model.Course;
 import com.avanse.springboot.model.University;
+import com.avanse.springboot.repository.CourseRepository;
 import com.avanse.springboot.repository.UniversityRepository;
+import com.avanse.springboot.service.CourseService;
 import com.avanse.springboot.service.UniversityService;
 
 @Controller
@@ -31,11 +34,17 @@ public class HomePageController {
 	@Autowired
 	UniversityService universityService;
 	
+	@Autowired
+	CourseService courseService;
+	
+	@Autowired
+	CourseRepository courseRepository;
+	
 	@ResponseBody
 	@PostMapping(value = "/getUniversitesInfos",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getUniversityInfo(
 			@RequestBody String[] country) {
-		System.out.println("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"+country[0]);
+		System.out.println("REST API IS CALLED HOMEPAGECONTROLLER GETUNIVERSITYINFOS()"+country[0]);
 		List<University> filterList =universityService.getAllUniversity().stream()
 		.filter(uni -> 
 			uni.getLocation().toLowerCase().equals(country[0].toLowerCase())
@@ -46,5 +55,18 @@ public class HomePageController {
 			return ResponseEntity.ok(filterList);
 		}
 		
+	}
+	
+	@ResponseBody
+	@PostMapping(value = "/getAllCourses")
+	public ResponseEntity<?> getAllCourses() {
+		ResponseEntity<List<Course>> ok = ResponseEntity.ok(courseService.getAllCourses());
+		return ok;
+	}
+	@ResponseBody
+	@PostMapping(value = "/getAllUniversites")
+	public ResponseEntity<?> getAllUniversities() {
+		ResponseEntity<List<University>> ok = ResponseEntity.ok(universityService.getAllUniversity());
+		return ok;
 	}
 }

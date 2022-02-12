@@ -44,7 +44,7 @@ public class ApplyNowAllController {
 		applyNowGeneral.setTimeOfStudy(applyNowGeneralDTO.getTimeOfStudy());
 		applyNowGeneralService.addApplyNowGeneral(applyNowGeneral);
 		
-		return "thankyou";
+		return "dynamicPages/thankyou";
 	}
 	
 	@PostMapping("/viewDynamicPages/executive-education-loan/add")
@@ -57,7 +57,7 @@ public class ApplyNowAllController {
 		executiveEducationLoan.setCourseName(executiveEducationLoanDTO.getCourseName());
 		executiveEducationLoan.setLoanAmount(executiveEducationLoanDTO.getLoanAmount());
 		executiveEducationLoanService.addExecutiveEducationLoan(executiveEducationLoan);
-		return "thankyou";
+		return "dynamicPages/thankyou";
 	}
 	@PostMapping("/viewDynamicPages/education-institution-loan/add")
 	public String educationInstitutionLoanAddPost(@ModelAttribute("educationInstitutionLoanDTO") EducationInstitutionLoanDTO educationInstitutionLoanDTO) {
@@ -77,7 +77,7 @@ public class ApplyNowAllController {
 		educationInstitutionLoanService.addEducationInstitutionLoan(educationInstitutionLoan);
 		
 //		executiveEducationLoanService.addExecutiveEducationLoan(executiveEducationLoan);
-		return "thankyou";
+		return "dynamicPages/thankyou";
 	}
 	
 	

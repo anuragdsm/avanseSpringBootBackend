@@ -24,9 +24,11 @@ import com.avanse.springboot.DTO.forms.contactUs.MediaDTO;
 import com.avanse.springboot.model.Page;
 import com.avanse.springboot.model.Post;
 import com.avanse.springboot.model.PostCategory;
+import com.avanse.springboot.service.CourseService;
 import com.avanse.springboot.service.PageService;
 import com.avanse.springboot.service.PostCategoryService;
 import com.avanse.springboot.service.PostService;
+import com.avanse.springboot.service.UniversityService;
 
 @Controller
 
@@ -41,16 +43,60 @@ public class PageController {
 	@Autowired
 	PostService postService;
 	
-	@GetMapping("/careers")
+	@Autowired
+	CourseService courseService;
+	
+	@Autowired
+	UniversityService universityService;
+	
+	@GetMapping("/index")
+	public String homePage() {
+		return "dynamicPages/index";
+	}
+	@GetMapping("/career")
 	public String careerPage() {
-		return "careers";
+		return "dynamicPages/career";
+	}
+	@GetMapping("/career/apply")
+	public String jobApplyPage() {
+		return "dynamicPages/career";
 	}
 	
 	@GetMapping("/about")
 	public String aboutPage() {
 		return "about";
 	}
-
+	
+	@GetMapping("/courseDetail/{courseId}")
+	public String courseDetailsPage(@PathVariable long courseId, Model model) {
+		model.addAttribute("course", courseService.getCourseById(courseId).get());
+		return "dynamicPages/courseDetail";
+	}
+	
+	
+	  @GetMapping(value =
+	  {"/Country/{country}","/Country/{country}/{courseId}","/Country/{country}/UID={universityId}",
+	  "/Country/{country}/{courseId}/{universityId}"}) public String
+	  countryPage(@PathVariable("country") String countryName, Model model,
+	  @PathVariable(name = "courseId",required = false) Long courseId,
+	  @PathVariable(name = "universityId",required = false) Long universityId) {
+	  
+	  System.out.println("Testing Country --- > "+countryName);
+	  System.out.println("Testing CourseId --- > "+courseId);
+	  System.out.println("Testing UniversityID --- > "+universityId);
+	  
+	  if(courseId!=null) {
+		  model.addAttribute("courseIdCheck", "courseIdIsPresent");
+		  model.addAttribute("incomingCourseModel", courseService.getCourseById(courseId).get());
+	  }
+	  if(universityId!=null) {
+		  model.addAttribute("universityIdCheck", "universityIdIsPresent");
+		  model.addAttribute("incomingUniversityModel", universityService.getUniversityById(universityId).get());
+	  }
+	  
+	  return "dynamicPages/"+countryName; 
+	  }
+	 
 	@GetMapping("/viewPages/{extractedFileName}")
 	public ModelAndView getAddedPage(@PathVariable("extractedFileName") String extractedFileName) {
 		ModelAndView modelAndView = new ModelAndView("addedPages/"+extractedFileName);	
@@ -60,8 +106,13 @@ public class PageController {
 	@GetMapping("/viewDynamicPages/{extractedFileName}")
 	public ModelAndView getDynamicPage(@PathVariable("extractedFileName") String extractedFileName, Model model) {
 		ModelAndView modelAndView = new ModelAndView("dynamicPages/"+extractedFileName);
-		model.addAttribute("postCategories", postCategoryService.getAllPostCategories());
+		
+		if(extractedFileName.equals("blog")) {
+			model.addAttribute("postCategories", postCategoryService.getAllPostCategories());
 		model.addAttribute("posts", postService.getAllPosts());
+		}
+			
+		
 		model.addAttribute("customerDTO", new CustomerDTO());
 		model.addAttribute("instituteDTO", new InstituteDTO());
 		model.addAttribute("investorDTO", new InvestorDTO());

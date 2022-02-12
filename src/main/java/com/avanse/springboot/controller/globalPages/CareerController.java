@@ -30,5 +30,6 @@ public class CareerController {
 		   return jobService.getAllJobs();
 	  
 	  }
-	 
+	  
+	
 }

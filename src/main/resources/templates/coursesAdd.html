@@ -110,6 +110,34 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 									<textarea class="form-control" rows="5"
 										th:field="*{description}" name="description" id="description"></textarea>
 								</div>
+								
+								<div class="form-group">
+										<label for="documentsRequired">Course Type
+											</label> </br>
+										<div class="row">
+											<div class="col">
+
+												<input type="checkbox" name="typeCheckBox" value="Masters">
+												<label for="Masters"> Masters</label><br> <input
+													type="checkbox" name="typeCheckBox" value="Bachelors">
+												<label for="Bachelors"> Bachelors</label><br> <input
+													type="checkbox" name="typeCheckBox" value="B.tech"> <label
+													for=" B.tech"> B.tech</label><br> <input type="checkbox"
+													name="typeCheckBox" value="MS"> <label for="MS">
+													MS</label><br>
+											</div>
+											<div class="col">
+												<input type="checkbox" name="typeCheckBox" value="Computers">
+												<label for="Computers"> Computers</label><br> <input
+													type="checkbox" name="typeCheckBox" value="BBA"> <label
+													for="BBA"> BBA</label><br> 
+											</div>
+										</div>
+
+			
+
+									</div>
+								
 							</div>
 
 
@@ -169,13 +197,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 									</select>
 
-
 								</div>
-
-
-
-
-
 
 
 								<div class="container">
@@ -201,72 +223,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 										</div>
 									</div>
 
-									<div class="container">
-										<label for="documentsRequired">Course Type
-											</label> </br>
-										<div class="row">
-											<div class="col">
-
-												<input type="checkbox" name="typeCheckBox" value="Masters">
-												<label for="Masters"> Masters</label><br> <input
-													type="checkbox" name="typeCheckBox" value="Bachelors">
-												<label for="Bachelors"> Bachelors</label><br> <input
-													type="checkbox" name="typeCheckBox" value="B.tech"> <label
-													for=" B.tech"> B.tech</label><br> <input type="checkbox"
-													name="typeCheckBox" value="MS"> <label for="MS">
-													MS</label><br>
-											</div>
-											<div class="col">
-												<input type="checkbox" name="typeCheckBox" value="Computers">
-												<label for="Computers"> Computers</label><br> <input
-													type="checkbox" name="typeCheckBox" value="BBA"> <label
-													for="BBA"> BBA</label><br> 
-											</div>
-										</div>
-
-
-
-
-
-
-
-
-
-
-
-								
-
-										<!-- 
-                
-                <div class="form-group">
-                    <label for="intakePeriod">Intake Period</label>
-                    <input type="number" class="form-control" required th:field="*{intakePeriod}" name="intakePeriod" id="intakePeriod"
-                           placeholder="intakePeriod">
-                </div>
-                <div class="form-group">
-                    <label for="applicationProcess">Application Process</label>
-                    <input type="text" class="form-control" required th:field="*{applicationProcess}" name="applicationProcess" id="applicationProcess"
-                           placeholder="">
-                </div>
-                
-                 -->
-
-
-										<!-- 
-                
-                
-                <p>course Image</p>
-                <div class="custom-file">
-                    <input type="file"  class="custom-file-input" name="courseImage" accept="image/jpeg, image/png"  id="courseImage"/>
-                    <label class="custom-file-label" for="courseImage">Choose file</label>
-                </div>
-                <div class="form-group">
-                    <img src="#" id="imgPreview" height="100px" width="100px" th:src="@{${'/courseImages/' + courseDTO.imageName}}" style="margin-top: 20px" alt=" ">
-                </div>         
-                <input type="hidden" name="imgName" th:value="${courseDTO.imageName}"> 
-             -->
-
-									</div>
+									
 								</div>
 
 								<div class="form-group">

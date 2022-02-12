@@ -237,7 +237,6 @@
                                             <div class="row">
                                                 <div class="col-9">
                                                     <select class="form-control" id="country_name">
-                                                        <option value="">Select Country</option>
                                                         <option value="australia">Australia</option>
                                                         <option value="Canada">Canada</option>
                                                         <option value="germany">Germany</option>
@@ -261,52 +260,158 @@
                                     				destUrl=destUrl+'/'+currentNav.split('/')[i];
                                     			}
                                     			
-                                    			window.location.assign(destUrl+'/'+document.getElementById('country_name').value);
+                                    			window.location.assign(destUrl+'/Country/'+document.getElementById('country_name').value);
                                     		}
                                     	}
                                     </script>
                                     </div>
                                     <div class="col-lg-4 py-5 lg-border-right">
-                                        <form action="#" class="contact_form_box " method="post" id="contactForm">
+                                        <!-- <form action="#" class="contact_form_box " method="post" id="contactForm"> -->
                                         <div class="form-group ">
                                             <div class="row">
                                                 <div class="col-9">
-                                                    <select class="form-control" id="country_name">
-                                                        <option value="--">Selecte Course</option>
+                                                    <select class="form-control" id="course_id">
+                                                        <option value="">Selecte Course</option>
                                                         <option value="">Advanced Diploma of Business</option>
                                                         <option value="">B.Eng in Computer Systems Engineering</option>
                                                         <option value="">Bachelor of Arts (Sociology)</option>
                                                     </select>
                                                 </div>
-                                                <div class="col-3"> <button class="btn btn-submit search-button-home" type="submit"><i class="ti-search f_size_24"></i></button></div>
+                                                <div class="col-3"> <button onclick="onCourseSearchButtonClick()" class="btn btn-submit search-button-home" type="submit"><i class="ti-search f_size_24"></i></button></div>
                                             </div>
                                             
                                            
                                         </div>
-                                    </form>
+                                   <!--  </form> -->
+                                    <script type="text/javascript">
+			                                    let http= new XMLHttpRequest();
+			                                    let fullCourseList;
+			                                    http.open('POST','http://'+window.location.href.split('/',3)[2]+'/public/api/homePage/getAllCourses');
+			                                    http.onloadend= () => {
+			                                       let allCourseList=JSON.parse(http.responseText);
+			                                       fullCourseList=allCourseList;
+			                                       let count=document.getElementById('course_id').childElementCount;
+			                                       for(let i=1;i<count;i++) {
+			                                    	   document.getElementById('course_id').lastElementChild.remove();
+			                                       }
+			                                       for(let course of allCourseList) {
+			                                    	   document.getElementById('course_id').innerHTML=document.getElementById('course_id').innerHTML + 
+			                                    	   '<option id="CourseID:'+course.id+'" value="CourseID:'+course.id+'">'+course.title+'</option>';
+			                                       }
+			                                       
+			                                    }
+			                                    http.send();
+			                                   function onCourseSearchButtonClick() {
+			                                	   if(document.getElementById('course_id').value!='') {
+			                                		   if(document.getElementById('university_id').value!='') {
+			                                			   /* Go to Country Page with Course Id and University Id */
+			                                			   let currenturlinpieces=window.location.href.split('/');
+			                                			   let selUniId = document.getElementById('university_id').value.split('UniversityID:')[1];
+					                                	   currenturlinpieces[currenturlinpieces.length-1]
+					                                	   ='Country/'+document.getElementById('country_name').value
+					                                	   +'/'+document.getElementById('course_id').value.split('CourseID:')[1]
+					                                	   +'/'+selUniId;
+					                                	   console.log(currenturlinpieces);
+					                                	   let targeturl=currenturlinpieces[0]+'/';
+					                                	   for(let i=1;i<currenturlinpieces.length;i++) {
+					                                		   targeturl=targeturl+'/'+currenturlinpieces[i];
+					                                	   }
+					                                	   window.location.assign(targeturl);
+			                                		   } else {
+			                                			   /* Go to Country Page with Course Id only */
+			                                			   let currenturlinpieces=window.location.href.split('/');
+					                                	   currenturlinpieces[currenturlinpieces.length-1]='Country/'+document.getElementById('country_name').value+'/'+document.getElementById('course_id').value.split('CourseID:')[1];
+					                                	   console.log(currenturlinpieces);
+					                                	   let targeturl=currenturlinpieces[0]+'/';
+					                                	   for(let i=1;i<currenturlinpieces.length;i++) {
+					                                		   targeturl=targeturl+'/'+currenturlinpieces[i];
+					                                	   }
+					                                	   window.location.assign(targeturl);
+			                                		   }
+				                                	   
+				                                   }
+			                                   }
+                                    </script>
+                                    
+                                    
                                     </div>
                                     <div class="col-lg-4 py-5">
-                                        <form action="#" class="contact_form_box " method="post" id="contactForm">
+                                       <!-- <form action="#" class="contact_form_box " method="post" id="contactForm">  -->
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-9">
-                                                    <select class="form-control" id="country_name">
-                                                        <option value="--">Selecte University</option>
+                                                    <select class="form-control" id="university_id">
+                                                        <option value="">Select University</option>
                                                         <option value="">Academies Australasia Polytechnic</option>
                                                         <option value="">Asia Pacific International College</option>
                                                         <option value="">Australian National University</option>
                                                     </select>
                                                 </div>
-                                                <div class="col-3"> <button class="btn btn-submit search-button-home" type="submit"><i class="ti-search f_size_24"></i></button></div>
+                                                <div class="col-3"> <button onclick="universitySearchClicked()" class="btn btn-submit search-button-home" type="submit"><i class="ti-search f_size_24"></i></button></div>
                                             </div>
                                             
                                            
                                         </div>
-                                    </form>
+                                    <!-- </form> -->
                                     </div>
+                                    <script type="text/javascript">
+		                                    let http2= new XMLHttpRequest();
+		                                    let fullUniversityList;
+		                                    http2.open('POST','http://'+window.location.href.split('/',3)[2]+'/public/api/homePage/getAllUniversites');
+		                                    http2.onloadend = () => {
+		                                       let allUniversityList=JSON.parse(http2.responseText);
+		                                       fullUniversityList=allUniversityList;
+		                                       let countUniOps=document.getElementById('university_id').childElementCount;
+		                                       for(let i=1;i<countUniOps;i++) {
+		                                    	   document.getElementById('university_id').lastElementChild.remove();
+		                                       }
+		                                       for(let university of allUniversityList) {
+		                                    	   document.getElementById('university_id').innerHTML=document.getElementById('university_id').innerHTML + 
+		                                    	   '<option id="UniversityID:'+university.id+'" value="UniversityID:'+university.id+'">'+university.name+'</option>';
+		                                       }
+		                                    }
+		                                    http2.send();
+		                                    
+		                                    function universitySearchClicked() {
+		                                    	if(document.getElementById('university_id').value!='') {
+		                                    		if(document.getElementById('course_id').value!='') {
+			                                    		/* Go to Country Page with University Id And Course Id */
+			                                    		let selcourseId = document.getElementById('course_id').value.split('CourseID:')[1];
+			                                    		let selUniId = document.getElementById('university_id').value.split('UniversityID:')[1];
+			                                    		let selcountry = document.getElementById('country_name').value;
+			                                    		let currenturlinpieces=window.location.href.split('/');
+					                                	   currenturlinpieces[currenturlinpieces.length-1]
+					                                	   	='Country/'+selcountry+'/'+selcourseId+'/'+selUniId;
+					                                	   console.log(currenturlinpieces);
+					                                	   let targeturl=currenturlinpieces[0]+'/';
+					                                	   for(let i=1;i<currenturlinpieces.length;i++) {
+					                                		   targeturl=targeturl+'/'+currenturlinpieces[i];
+					                                	   }
+					                                	   window.location.assign(targeturl);
+			                                    		
+			                                    	} else {
+			                                    		/* Go to Country Page with University Id Only */
+			                                    		let selUniId = document.getElementById('university_id').value.split('UniversityID:')[1];
+			                                    		let selcountry = document.getElementById('country_name').value;
+			                                    		let currenturlinpieces=window.location.href.split('/');
+					                                	   currenturlinpieces[currenturlinpieces.length-1]
+					                                	   	='Country/'+selcountry
+					                                	  	+'/UID='+selUniId;
+					                                	   console.log(currenturlinpieces);
+					                                	   let targeturl=currenturlinpieces[0]+'/';
+					                                	   for(let i=1;i<currenturlinpieces.length;i++) {
+					                                		   targeturl=targeturl+'/'+currenturlinpieces[i];
+					                                	   }
+					                                	   window.location.assign(targeturl);
+			                                    	}
+		                                    	}
+		                                    }
+		                                    
+                                    </script>
+                                    
                                 </div>
                                 
-                            </form>
+                            <!-- </form> -->
                         </div>
 
                     </div>

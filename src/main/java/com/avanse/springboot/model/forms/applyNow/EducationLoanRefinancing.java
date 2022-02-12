@@ -1,10 +1,14 @@
 package com.avanse.springboot.model.forms.applyNow;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,5 +36,8 @@ public class EducationLoanRefinancing {
 	private String studyingCourse;
 	private String graduateMonthAndYear;
 	private Integer interestRate;
+	
+	@CreationTimestamp
+	private Date dateOfCreation;
 	
 }
