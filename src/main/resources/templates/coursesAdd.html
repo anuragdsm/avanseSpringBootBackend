@@ -110,49 +110,126 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 									<textarea class="form-control" rows="5"
 										th:field="*{description}" name="description" id="description"></textarea>
 								</div>
-								
+
 								<div class="form-group">
-										<label for="documentsRequired">Course Type
-											</label> </br>
-										<div class="row">
-											<div class="col">
-
-												<input type="checkbox" name="typeCheckBox" value="Masters">
-												<label for="Masters"> Masters</label><br> <input
-													type="checkbox" name="typeCheckBox" value="Bachelors">
-												<label for="Bachelors"> Bachelors</label><br> <input
-													type="checkbox" name="typeCheckBox" value="B.tech"> <label
-													for=" B.tech"> B.tech</label><br> <input type="checkbox"
-													name="typeCheckBox" value="MS"> <label for="MS">
-													MS</label><br>
-											</div>
-											<div class="col">
-												<input type="checkbox" name="typeCheckBox" value="Computers">
-												<label for="Computers"> Computers</label><br> <input
-													type="checkbox" name="typeCheckBox" value="BBA"> <label
-													for="BBA"> BBA</label><br> 
-											</div>
+									<label for="documentsRequired">Course Type </label> </br>
+									<div class="row">
+										<div th:if="${updateCourseCheck=='true'}">
+												<div class="col">
+													
+													<span th:if="${#lists.contains(currentCourseTypes,'Masters')}">
+														<input type="checkbox" name="typeCheckBox" value="Masters" checked>
+														<label for="Masters"> Masters</label><br> 
+													</span>
+													<span th:if="${!(#lists.contains(currentCourseTypes,'Masters'))}">
+														<input type="checkbox" name="typeCheckBox" value="Masters">
+														<label for="Masters"> Masters</label><br> 
+													</span>
+													<span th:if="${#lists.contains(currentCourseTypes,'Bachelors')}">
+														<input type="checkbox" name="typeCheckBox" value="Bachelors" checked>
+														<label for="Bachelors"> Bachelors</label><br> 
+													</span>
+													<span th:if="${!(#lists.contains(currentCourseTypes,'Bachelors'))}">
+														<input type="checkbox" name="typeCheckBox" value="Bachelors">
+														<label for="Bachelors"> Bachelors</label><br> 
+													</span>
+													<span th:if="${#lists.contains(currentCourseTypes,'B.tech')}">
+														<input type="checkbox" name="typeCheckBox" value="B.tech" checked>
+														<label for="B.tech"> B.tech</label><br> 
+													</span>
+													<span th:if="${!(#lists.contains(currentCourseTypes,'B.tech'))}">
+														<input type="checkbox" name="typeCheckBox" value="B.tech">
+														<label for="B.tech"> B.tech</label><br> 
+													</span>
+													
+													<span th:if="${#lists.contains(currentCourseTypes,'MS')}">
+														<input type="checkbox" name="typeCheckBox" value="MS" checked>
+														<label for="MS"> MS</label><br> 
+													</span>
+													<span th:if="${!(#lists.contains(currentCourseTypes,'MS'))}">
+														<input type="checkbox" name="typeCheckBox" value="MS">
+														<label for="MS"> MS</label><br> 
+													</span>
+													
+												</div>
+												<div class="col">
+													<span th:if="${#lists.contains(currentCourseTypes,'Computers')}">
+															<input type="checkbox" name="typeCheckBox" value="Computers" checked>
+															<label for="Computers"> Computers</label><br> 
+													</span>
+													<span th:if="${!(#lists.contains(currentCourseTypes,'Computers'))}">
+															<input type="checkbox" name="typeCheckBox" value="Computers">
+															<label for="Computers"> Computers</label><br> 
+													</span>
+													
+													<span th:if="${#lists.contains(currentCourseTypes,'BBA')}">
+															<input type="checkbox" name="typeCheckBox" value="BBA" checked> <label
+																for="BBA"> BBA</label><br>
+													</span>
+													<span th:if="${!(#lists.contains(currentCourseTypes,'BBA'))}">
+															<input type="checkbox" name="typeCheckBox" value="BBA"> <label
+																for="BBA"> BBA</label><br>
+													</span>
+												</div>
+												
 										</div>
-
-			
-
+										<div th:if="${updateCourseCheck!='true'}">
+												<div class="col">
+		
+													<input type="checkbox" name="typeCheckBox" value="Masters">
+													<label for="Masters"> Masters</label><br> <input
+														type="checkbox" name="typeCheckBox" value="Bachelors">
+													<label for="Bachelors"> Bachelors</label><br> <input
+														type="checkbox" name="typeCheckBox" value="B.tech">
+													<label for=" B.tech"> B.tech</label><br> <input
+														type="checkbox" name="typeCheckBox" value="MS"> <label
+														for="MS"> MS</label><br>
+												</div>
+												<div class="col">
+													<input type="checkbox" name="typeCheckBox" value="Computers">
+													<label for="Computers"> Computers</label><br> <input
+														type="checkbox" name="typeCheckBox" value="BBA"> <label
+														for="BBA"> BBA</label><br>
+												</div>
+										</div>
 									</div>
-								
+
+
+
+								</div>
+
 							</div>
 
 
 							<div class="col-sm-5">
 
 
-								<div class="form-group">
-									<label for="university">University:</label> <select
-										class="form-control" name="university_id">
-										<option value="">--</option>
-										<option th:each="university : ${universities}"
-											th:value="${university.id}" th:utext="${university.name}"
-											th:selected="${lastselected eq university}" />
-									</select>
+								<div th:if="${updateCourseCheck=='true'}">
+									<div class="form-group">
+										<label for="university">University:</label> <select
+											class="form-control" name="university_id">
+											<option value="">--</option>
+											<option th:each="university : ${universities}"
+												th:value="${university.id}" th:utext="${university.name}"
+												th:selected="${#lists.contains(universities,courseDTO.university)}" />
+										</select>
+									</div>
 								</div>
+								
+								
+								<div th:if = "${updateCourseCheck!='true'}">
+								<div class="form-group">
+										<label for="university">University:</label> <select
+											class="form-control" name="university_id">
+											<option value="">--</option>
+											<option th:each="university : ${universities}"
+												th:value="${university.id}" th:utext="${university.name}"
+												/>
+										</select>
+									</div>
+								
+								</div>
+
 
 								<div class="form-group">
 
@@ -223,7 +300,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 										</div>
 									</div>
 
-									
+
 								</div>
 
 								<div class="form-group">
@@ -240,6 +317,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 									<button type="submit" class="btn btn-primary">Submit</button>
 
 								</div>
+							</div>
 					</form>
 				</div>
 			</div>

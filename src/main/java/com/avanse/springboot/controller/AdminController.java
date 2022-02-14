@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
@@ -57,6 +58,7 @@ import com.avanse.springboot.model.Page;
 import com.avanse.springboot.model.Post;
 import com.avanse.springboot.model.PostCategory;
 import com.avanse.springboot.model.Testimonial;
+import com.avanse.springboot.model.TypeDetailsCourse;
 import com.avanse.springboot.model.University;
 import com.avanse.springboot.model.forms.contactUs.Customer;
 import com.avanse.springboot.model.forms.contactUs.Institute;
@@ -73,6 +75,7 @@ import com.avanse.springboot.repository.PageRepository;
 import com.avanse.springboot.repository.PostCategoryRepository;
 import com.avanse.springboot.repository.PostRepository;
 import com.avanse.springboot.repository.TestimonialRepository;
+import com.avanse.springboot.repository.TypeDetailsCourseRepository;
 import com.avanse.springboot.repository.UniversityRepository;
 import com.avanse.springboot.service.AwardService;
 import com.avanse.springboot.service.CourseService;
@@ -84,6 +87,7 @@ import com.avanse.springboot.service.PageService;
 import com.avanse.springboot.service.PostCategoryService;
 import com.avanse.springboot.service.PostService;
 import com.avanse.springboot.service.TestimonialService;
+import com.avanse.springboot.service.TypeDetailsCourseService;
 import com.avanse.springboot.service.UniversityService;
 import com.avanse.springboot.service.forms.contactUs.CustomerService;
 import com.avanse.springboot.service.forms.contactUs.InstituteService;
@@ -185,6 +189,12 @@ public class AdminController {
 
 	@Autowired
 	HeaderService headerService;
+	
+	@Autowired
+	TypeDetailsCourseRepository typeDetailsCourseRepository;
+	
+	@Autowired
+	TypeDetailsCourseService typeDetailsCourseService;
 
 	@LocalServerPort
 	int activePortNumber;
@@ -674,6 +684,13 @@ public class AdminController {
 		course.setExamsEligibility(courseDTO.getExamsEligibility());
 		course.setFees(courseDTO.getFees());
 		course.setStaticContent(courseDTO.getStaticContent());
+		List<TypeDetailsCourse> tList = new ArrayList<>();
+		for(String s:courseTypes) {
+			TypeDetailsCourse tdc = new TypeDetailsCourse();tdc.setName(s);
+			typeDetailsCourseService.addTypeDetailsCourse(tdc);
+			tList.add(tdc);
+		}
+		course.setTypes(tList);
 
 //		university.addTheCourse(course);
 		course.setUniversity(universityService.getUniversityById(university_id).get());
@@ -708,9 +725,26 @@ public class AdminController {
 		courseDTO.setDuration(course.getDuration());
 		courseDTO.setExamsEligibility(course.getExamsEligibility());
 		courseDTO.setFees(course.getFees());
-		courseDTO.setUniversity(courseDTO.getUniversity());
+		courseDTO.setUniversity(course.getUniversity());
 		courseDTO.setStaticContent(course.getStaticContent());
 		model.addAttribute("courseDTO", courseDTO);
+		model.addAttribute("updateCourseCheck", "true");
+		List<TypeDetailsCourse> types = course.getTypes();
+		List<String> currentCoursesTypesString = new ArrayList<>();
+		for(TypeDetailsCourse cour : types) {currentCoursesTypesString.add(cour.getName());}
+		model.addAttribute("currentCourseTypes",currentCoursesTypesString);		
+		/*
+		 * Pass the university list to the dropdown on courseAdd.html
+		 */
+		University university = new University();
+		model.addAttribute("university", university);
+		List<University> universities = universityService.getAllUniversity();
+		System.out.println(universities.toString());
+		model.addAttribute("universities", universities);
+
+		/*
+		 * Now use the course service to actually add the object
+		 */
 		return "coursesAdd";
 	}
 

@@ -58,7 +58,7 @@ public class Course implements Serializable{
 	
 	
 	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "UNIVERSITY_ID")
 	private University university;
 	
