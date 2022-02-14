@@ -44,7 +44,8 @@ public class LocationService{
 	}
 	
 	public Location findLocationByCityName(String city) {
-		return locationRepository.findLocationByCity(city);
+		
+		return locationRepository. findLocationByCity(city);
 	}
 	
 

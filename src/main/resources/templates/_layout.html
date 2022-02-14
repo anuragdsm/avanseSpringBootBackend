@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content = "">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
 <meta name="author" content="">
 <title>Avanse Dashboard</title>
 <!-- Custom fonts for this template-->
@@ -15,15 +16,21 @@
 	rel="stylesheet">
 <!-- Custom styles for this template-->
 <link href="/css/sb-admin-2.min.css" rel="stylesheet">
-<link href="/vendor/summernote/summernote/summernote-bs4.min.css" rel="stylesheet">
-<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-<link href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="/vendor/summernote/summernote/summernote-bs4.min.css"
+	rel="stylesheet">
+<link href="vendor/datatables/dataTables.bootstrap4.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"
+	rel="stylesheet">
 
 </head>
 <body id="page-top">
 
-<script type="text/javascript" src = "https://code.jquery.com/jquery-3.5.1.js"></script>
-<script type="text/javascript" src = "https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script type="text/javascript"
+		src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 
 	<!-- Page Wrapper -->
 	<div id="wrapper">
@@ -32,8 +39,9 @@
 			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
 			id="accordionSidebar">
 			<!-- Sidebar - Brand -->
-			<a href="#" th:href="@{/admin}" class="sidebar-brand d-flex align-items-center justify-content-center"
-				> <img id="avanseLogo" src="/images/logo.png">
+			<a href="#" th:href="@{/admin}"
+				class="sidebar-brand d-flex align-items-center justify-content-center">
+				<img id="avanseLogo" src="/images/logo.png">
 			</a>
 			<!-- Nav Item - Dashboard -->
 
@@ -41,30 +49,28 @@
 			<li class="nav-item active"><a class="nav-link collapsed"
 				href="#" data-toggle="collapse" data-target="#collapseTwo"
 				aria-expanded="true" aria-controls="collapseTwo">
-					<hr class="sidebar-divider">
-					<i class="fas fa-headset"></i> <span>Forms Data</span>
+					<hr class="sidebar-divider"> <i class="fas fa-headset"></i> <span>Forms
+						Data</span>
 			</a>
 
 				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
 					data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Contact Us:</h6>
-						<a class="collapse-item active" th:href="@{/admin/contactUs/customers}">Customer</a>
-						<a class="collapse-item" th:href="@{/admin/contactUs/institutes}">Education Institution</a>
-						<a class="collapse-item" href="cards.html">Media</a>
-						<a class="collapse-item" href="cards.html">Investor</a>
-						<a class="collapse-item" href="cards.html">Partner With Us</a>
+						<a class="collapse-item active"
+							th:href="@{/admin/contactUs/customers}">Customer</a> <a
+							class="collapse-item" th:href="@{/admin/contactUs/institutes}">Education
+							Institution</a> <a class="collapse-item" href="cards.html">Media</a>
+						<a class="collapse-item" href="cards.html">Investor</a> <a
+							class="collapse-item" href="cards.html">Partner With Us</a>
 					</div>
-				</div>
-				
-				</li>
+				</div></li>
 
 
 			<!-- Nav Item - Utilities Collapse Menu -->
 			<li class="nav-item"><a class="nav-link collapsed" href="#"
 				data-toggle="collapse" data-target="#collapseUtilities1"
-				aria-expanded="true" aria-controls="collapseUtilities">
-					<!-- <hr class="sidebar-divider"> -->
+				aria-expanded="true" aria-controls="collapseUtilities"> <!-- <hr class="sidebar-divider"> -->
 					<i class="fas fa-paperclip"></i> <span>Page</span>
 			</a>
 				<div id="collapseUtilities1" class="collapse"
@@ -73,51 +79,53 @@
 						<h6 class="collapse-header">Manage Pages:</h6>
 						<a class="collapse-item  active" th:href="@{/admin/pages/add}"><strong>Add
 								New Page</strong></a> <a class="collapse-item" th:href="@{/admin/pages}">View
-							Pages</a> 
-							
+							Pages</a>
+
 					</div>
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Other:</h6>
 						<a class="collapse-item" th:href="@{/admin/awards}"><strong>
 								Awards</strong></a> <a class="collapse-item" th:href="@{/admin/testimonials}">
-							Testimonials</a> 
-							
+							Testimonials</a>
+
 					</div>
 				</div></li>
 			<!-- Nav Item - Utilities Collapse Menu -->
 			<li class="nav-item"><a class="nav-link collapsed" href="#"
 				data-toggle="collapse" data-target="#collapseUtilities2"
-				aria-expanded="true" aria-controls="collapseUtilities"> <i class="fas fa-blog"></i> <span>Post/Blog</span>
+				aria-expanded="true" aria-controls="collapseUtilities"> <i
+					class="fas fa-blog"></i> <span>Post/Blog</span>
 			</a>
 				<div id="collapseUtilities2" class="collapse"
 					aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Manage Posts:</h6>
-						
-						<a class="collapse-item  active" href="#" th:href = "@{/admin/posts/add}"><b>New Post</b></a>
-						<a class="collapse-item" href="#" th:href = "@{/admin/posts}">View
+
+						<a class="collapse-item  active" href="#"
+							th:href="@{/admin/posts/add}"><b>New Post</b></a> <a
+							class="collapse-item" href="#" th:href="@{/admin/posts}">View
 							Posts</a>
 					</div>
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Manage Category:</h6>
 						<a class="collapse-item" th:href="@{/admin/postCategories/add}"><strong>
-								Add Category</strong></a>
-						<a class="collapse-item" href="#" th:href = "@{/admin/postCategories}">View Categories</a>
+								Add Category</strong></a> <a class="collapse-item" href="#"
+							th:href="@{/admin/postCategories}">View Categories</a>
 					</div>
 				</div></li>
 
 			<!-- Nav Item - Utilities Collapse Menu -->
-			<li class="nav-item"><a class="nav-link" href="#" th:href="@{/admin/images}"
-			 data-target="#collapseUtilities4" aria-controls="collapseUtilities"> <i class="far fa-images"></i> <span>Upload Images</span>
-			</a>
-			
-			
-				</li>
+			<li class="nav-item"><a class="nav-link" href="#"
+				th:href="@{/admin/images}" data-target="#collapseUtilities4"
+				aria-controls="collapseUtilities"> <i class="far fa-images"></i>
+					<span>Upload Images</span>
+			</a></li>
 
 			<!-- Nav Item - Utilities Collapse Menu -->
 			<li class="nav-item"><a class="nav-link collapsed" href="#"
 				data-toggle="collapse" data-target="#collapseUtilities6"
-				aria-expanded="true" aria-controls="collapseUtilities"> <i class="fas fa-university"></i> <span>Universities</span>
+				aria-expanded="true" aria-controls="collapseUtilities"> <i
+					class="fas fa-university"></i> <span>Universities</span>
 			</a>
 				<div id="collapseUtilities6" class="collapse"
 					aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
@@ -125,8 +133,7 @@
 						<h6 class="collapse-header">Manage Universities:</h6>
 						<a class="collapse-item  active" a href="#"
 							th:href="@{/admin/universities/add}"><b>Add new</b></a> <a
-							class="collapse-item" a href="#"
-							th:href="@{/admin/universities}">View</a>
+							class="collapse-item" a href="#" th:href="@{/admin/universities}">View</a>
 
 					</div>
 				</div></li>
@@ -134,7 +141,8 @@
 			<!-- Nav Item - Utilities Collapse Menu -->
 			<li class="nav-item"><a class="nav-link collapsed" href="#"
 				data-toggle="collapse" data-target="#collapseUtilities7"
-				aria-expanded="true" aria-controls="collapseUtilities"> <i class="fas fa-user-graduate"></i> <span>Courses</span>
+				aria-expanded="true" aria-controls="collapseUtilities"> <i
+					class="fas fa-user-graduate"></i> <span>Courses</span>
 			</a>
 				<div id="collapseUtilities7" class="collapse"
 					aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
@@ -157,10 +165,11 @@
 					aria-labelledby="headingPages" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Edit Header:</h6>
-											
-						<a class="collapse-item" href="#" th:href="@{/admin/globalHeader}"><b>Global Header</b></a>
-					
-					
+
+						<a class="collapse-item" href="#" th:href="@{/admin/globalHeader}"><b>Global
+								Header</b></a>
+
+
 					</div>
 				</div></li>
 
@@ -168,54 +177,62 @@
 			<li class="nav-item"><a class="nav-link collapsed" href="#"
 				data-toggle="collapse" data-target="#collapsePages1"
 				aria-expanded="true" aria-controls="collapsePages"> <!-- Divider -->
-					<hr class="sidebar-divider"> <i class="far fa-building"></i>
-					<span>Careers</span>
+					<hr class="sidebar-divider"> <i class="far fa-building"></i> <span>Careers</span>
 			</a>
 				<div id="collapsePages1" class="collapse"
 					aria-labelledby="headingPages" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Applications:</h6>
-						<a class="collapse-item" href="#" th:href = "@{/admin/jobApplications}"><b>View Applications</b></a>
+						<a class="collapse-item" href="#"
+							th:href="@{/admin/jobApplications}"><b>View Applications</b></a>
 					</div>
-					
+
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Job Posting:</h6>
-						<a class="collapse-item" href="#" th:href="@{/admin/jobs/add}"><b>Post Job</b></a> <a
-							class="collapse-item" href="#" th:href="@{/admin/jobs}">View Jobs</a>
+						<a class="collapse-item" href="#" th:href="@{/admin/jobs/add}"><b>Post
+								Job</b></a> <a class="collapse-item" href="#" th:href="@{/admin/jobs}">View
+							Jobs</a>
 					</div>
-					
+
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Cities:</h6>
-						<a class="collapse-item" href="#" th:href = "@{/admin/locations/add}"><b>Add new Location</b></a> <a
-							class="collapse-item" href="#" th:href = "@{/admin/locations}">View Locations</a>
+						<a class="collapse-item" href="#"
+							th:href="@{/admin/locations/add}"><b>Add new Location</b></a> <a
+							class="collapse-item" href="#" th:href="@{/admin/locations}">View
+							Locations</a>
 					</div>
 				</div></li>
 
 			<script>
-			let x=0;
-			function changeLogo(){
-				if(x==0) {
-					x=1;
-					document.getElementById('avanseLogo').src="http://"+window.location.href.split('/',3)[2]+"/images/avanseLogoSmallWhite.png";
-					document.getElementById('avanseLogo').style.height="30px";
-					document.getElementById('avanseLogo').style.width="30px";
-				} else {
-					x=0;
-					document.getElementById('avanseLogo').src="http://"+window.location.href.split('/',3)[2]+"/images/logo.png";
-					document.getElementById('avanseLogo').style.height="auto";
-					document.getElementById('avanseLogo').style.width="auto";
+				let x = 0;
+				function changeLogo() {
+					if (x == 0) {
+						x = 1;
+						document.getElementById('avanseLogo').src = "http://"
+								+ window.location.href.split('/', 3)[2]
+								+ "/images/avanseLogoSmallWhite.png";
+						document.getElementById('avanseLogo').style.height = "30px";
+						document.getElementById('avanseLogo').style.width = "30px";
+					} else {
+						x = 0;
+						document.getElementById('avanseLogo').src = "http://"
+								+ window.location.href.split('/', 3)[2]
+								+ "/images/logo.png";
+						document.getElementById('avanseLogo').style.height = "auto";
+						document.getElementById('avanseLogo').style.width = "auto";
+					}
+
 				}
-				
-			}
-			
 			</script>
 
 			<!-- Sidebar Toggler (Sidebar) -->
 			<div class="text-center d-none d-md-inline">
-				<button type="button"  onclick="changeLogo()" class="rounded-circle border-0" id="sidebarToggle" aria-controls="accordionSidebar" aria-expanded="true"></button>
+				<button type="button" onclick="changeLogo()"
+					class="rounded-circle border-0" id="sidebarToggle"
+					aria-controls="accordionSidebar" aria-expanded="true"></button>
 			</div>
-			
-			
+
+
 
 		</ul>
 		<!-- End of Sidebar -->
@@ -282,7 +299,7 @@
 								</form>
 							</div></li>
 
-						
+
 						<!-- Nav Item - Messages -->
 						<div class="topbar-divider d-none d-sm-block"></div>
 						<!-- Nav Item - User Information -->
@@ -297,7 +314,7 @@
 							<div
 								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 								aria-labelledby="userDropdown">
-								
+
 								<a class="dropdown-item" href="#" th:href="@{/logout}"
 									data-toggle="modal" data-target="#logoutModal"> <i
 									class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -311,7 +328,7 @@
 				<div layout:fragment="content">
 					<p>Changing contents</p>
 				</div>
-				
+
 			</div>
 			<!-- End of Main Content -->
 
@@ -358,7 +375,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- Scroll to Top Button-->
 	<a class="scroll-to-top rounded" href="#page-top"> <i
 		class="fas fa-angle-up"></i>
@@ -375,29 +392,30 @@
 	<script src="/js/sb-admin-2.min.js"></script>
 
 	<!-- Page level plugins -->
-	
-	
-	
-	
-	
-<!-- 	<script src="/vendor/chart.js/Chart.min.js"></script>
+
+
+
+
+
+	<!-- 	<script src="/vendor/chart.js/Chart.min.js"></script>
  -->
-	<!-- Page level custom scripts layout --><!-- 
+	<!-- Page level custom scripts layout -->
+	<!-- 
 	<script src="/js/demo/chart-area-demo.js"></script>
 	<script src="/js/demo/chart-pie-demo.js"></script>
 	<script src="/js/demo/chart-bar-demo.js"></script> -->
-	
-<!-- for data Tables  -->
-	<script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
+	<!-- for data Tables  -->
+	<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+	<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+	<!-- Page level custom scripts -->
+	<script src="js/demo/datatables-demo.js"></script>
 
 	<script src="/vendor/summernote/summernote/summernote-bs4.min.js"></script>
-	
-	
-<!-- 	<script type="text/javascript">
+
+
+	<!-- 	<script type="text/javascript">
 	
 	$('#summernote').summernote({
 	    height: ($(window).height() - 300),
@@ -432,8 +450,8 @@
 	
 	
 	</script> -->
-	
-	
+
+
 	<script>
 		$('.summernote').summernote(
 				{
@@ -449,7 +467,7 @@
 							[ 'view', [ 'fullscreen', 'codeview', 'help' ] ] ]
 				});
 	</script>
-	
+
 	<script>
 		function readURL(input) {
 			if (input.files && input.files[0]) {
@@ -472,7 +490,7 @@
 							.html(fileName);
 				});
 	</script>
-	
+
 	<!-- Image Preview in testimonials -->
 	<script>
 		function readURL(input) {
@@ -498,8 +516,8 @@
 
 				});
 	</script>
-	
-	
-	
+
+
+
 </body>
 </html>

@@ -83,9 +83,9 @@
 								<div class="col-sm-5">
 									<input type="hidden" name="id" th:field="*{id}">
 									<div class="form-group">
-										<label for="name"><h5>University Name</h5></label> <input type="text"
-											class="form-control" required th:field="*{name}" name="name"
-											id="name" placeholder="Enter University name">
+										<label for="name"><h5>University Name</h5></label> <input
+											type="text" class="form-control" required th:field="*{name}"
+											name="name" id="name" placeholder="Enter University name">
 									</div>
 									<div class="form-group">
 										<label for="location"><h5>Country</h5></label>
@@ -94,7 +94,12 @@
 											class="form-control" required th:field="*{location}"
 											name="location" id="location" placeholder="Enter Location"> -->
 
+										<div th:if="${updateUniversityCheck=='true'}">
+											<input hidden id="updateUniversityAlreadySelectedLocationId"
+												type="text" th:value="${universityDTO.location}" />
 
+
+										</div>
 										<select required class="form-control" id="countryListSelect"
 											name="location">
 											<option value="">Select Country</option>
@@ -110,9 +115,24 @@
 												        	 countryApiList = data;
 												        	 countryApiList.sort((a,b)=>{if(a.name>b.name) return 1; else if(a.name==b.name) return 0; else return -1;});
 												        	 console.log(countryApiList[0].name);
-												        	 for(let i=0;i<countryApiList.length;i++) {
-												        		 cSelect.innerHTML=cSelect.innerHTML+'<option value="'+countryApiList[i].name+'">'+countryApiList[i].name+'</option>';
+												        	 
+												        	 if(document.getElementById('updateUniversityAlreadySelectedLocationId').value){
+												        		 for(let i=0;i<countryApiList.length;i++) {
+												        			 if(document.getElementById('updateUniversityAlreadySelectedLocationId').value== countryApiList[i].name)
+													        		 cSelect.innerHTML=cSelect.innerHTML+'<option value="'+countryApiList[i].name+'" selected>'+countryApiList[i].name+'</option>';
+													        		 cSelect.innerHTML=cSelect.innerHTML+'<option value="'+countryApiList[i].name+'">'+countryApiList[i].name+'</option>';
+													        	 }
 												        	 }
+												        	 
+												        	 else{
+												        		 
+												        		 for(let i=0;i<countryApiList.length;i++) {
+													        		 cSelect.innerHTML=cSelect.innerHTML+'<option value="'+countryApiList[i].name+'">'+countryApiList[i].name+'</option>';
+													        	 }
+												        		 
+												        	 }
+												        	 
+												        	 
 												          });
 												        })
 										        .catch((error) => {
@@ -122,10 +142,22 @@
 									</div>
 
 									<div class="form-group">
-										<label for="establishedYear"><h5>Established Year</h5></label> <select
-											class="form-control" required th:field="*{establishedYear}"
-											name="establishedYear" id="establishedYear"
-											placeholder="Year">
+										<div th:if="${updateUniversityCheck=='true'}">
+											<input hidden id="updateUniversityAlreadySelectedEstablishedId"
+												type="text" th:value="${universityDTO.EstablishedYear}" />
+
+
+										</div>
+										
+										
+										<label for="establishedYear"><h5>Established Year</h5></label>
+										
+										
+										
+										
+										<select class="form-control" required
+											th:field="*{establishedYear}" name="establishedYear"
+											id="establishedYear" placeholder="Year">
 											<option value="">Select Year of Establishment</option>
 										</select>
 										<script type="text/javascript">
@@ -141,7 +173,8 @@
 										</script>
 									</div>
 									<div class="form-group">
-										<label for="description"><h5>University Description</h5></label>
+										<label for="description"><h5>University
+												Description</h5></label>
 										<textarea class="form-control" rows="5"
 											th:field="*{description}" name="description" id="description"></textarea>
 									</div>
@@ -150,20 +183,68 @@
 										<label for="accomodation"><h5>Accommodation
 												Availability</h5></label>
 
-										<div class="input-group-radio">
-											<input name="accomodation" id="accomodationOption1"
-												value="Yes" type="radio"> <label
-												for="accomodationOption1">Yes</label>
+										<div th:if="${updateUniversityCheck=='true'}">
+											<div class="input-group-radio">
+												<div th:if="${universityDTO.accomodation == 'Yes'}">
+													<input name="accomodation" id="accomodationOption1"
+														value="Yes" type="radio" checked> <label
+														for="accomodationOption1">Yes</label>
+												</div>
+												<div th:if="${universityDTO.accomodation != 'Yes'}">
+													<input name="accomodation" id="accomodationOption1"
+														value="Yes" type="radio"> <label
+														for="accomodationOption1">Yes</label>
+												</div>
+											</div>
+											<div class="input-group-radio">
+
+												<div th:if="${universityDTO.accomodation == 'No'}">
+													<input name="accomodation" id="accomodationOption2"
+														type="radio" value="No" checked> <label
+														for="accomodationOption2">No</label>
+												</div>
+
+												<div th:if="${universityDTO.accomodation != 'No'}">
+													<input name="accomodation" id="accomodationOption2"
+														type="radio" value="No"> <label
+														for="accomodationOption2">No</label>
+												</div>
+
+											</div>
+
+											<div class="input-group-radio">
+												<div th:if="${universityDTO.accomodation == 'N/A'}">
+													<input name="accomodation" type="radio"
+														id="accomodationOption3" value="N/A" checked> <label
+														for="accomodationOption3">N/A</label>
+												</div>
+
+												<div th:if="${universityDTO.accomodation != 'N/A'}">
+													<input name="accomodation" type="radio"
+														id="accomodationOption3" value="N/A"> <label
+														for="accomodationOption3">N/A</label>
+												</div>
+											</div>
+
+
+
 										</div>
-										<div class="input-group-radio">
-											<input name="accomodation" id="accomodationOption2"
-												type="radio" value="No"> <label
-												for="accomodationOption2">No</label>
-										</div>
-										<div class="input-group-radio">
-											<input name="accomodation" type="radio"
-												id="accomodationOption3" value="N/A"> <label
-												for="accomodationOption3">N/A</label>
+										<div th:if="${updateUniversityCheck!='true'}">
+											<div class="input-group-radio">
+												<input name="accomodation" id="accomodationOption1"
+													value="Yes" type="radio"> <label
+													for="accomodationOption1">Yes</label>
+											</div>
+											<div class="input-group-radio">
+												<input name="accomodation" id="accomodationOption2"
+													type="radio" value="No"> <label
+													for="accomodationOption2">No</label>
+											</div>
+											<div class="input-group-radio">
+												<input name="accomodation" type="radio"
+													id="accomodationOption3" value="N/A"> <label
+													for="accomodationOption3">N/A</label>
+											</div>
 										</div>
 
 									</div>
@@ -174,18 +255,18 @@
 
 								<div class="col-sm-5">
 
-									
+
 
 
 									<style>
-									.my-vertical-center {
-									margin: 0;
-									position: absolute;
-									top: 50%;
-									-ms-transform: translateY(-50%);
-									transform: translateY(-50%);
-									}
-									</style>
+.my-vertical-center {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+</style>
 
 
 									<div class="form-group">

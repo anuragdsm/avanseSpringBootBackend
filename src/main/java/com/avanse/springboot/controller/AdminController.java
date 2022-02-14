@@ -546,6 +546,7 @@ public class AdminController {
 		universityDTO.setImageName(university.getImageName());
 
 		model.addAttribute("universityDTO", universityDTO);
+		model.addAttribute("updateUniversityCheck", "true");
 		deleteImageFromStaticFolder(id);
 		return "universitiesAdd";
 	}
@@ -895,11 +896,18 @@ public class AdminController {
 		return "jobsAdd";
 	}
 
-	@PostMapping("/admin/jobs/add")
+	@PostMapping(path = "/admin/jobs/add")
 	public String jobsAddPost(@ModelAttribute("jobDTO") JobDTO jobDTO,
 			@RequestParam("selectedLocations") String[] locationsIds,
 			@RequestParam(value = "updateOperation", required = false) String isUpdating) {
-		Job job = new Job();
+		Job job ;
+		if(jobDTO.getId()==null) {
+			job = new Job();
+		}
+		
+		else {
+			job = jobService.getJobById(jobDTO.getId()).get();
+		}
 		job.setId(jobDTO.getId());
 		job.setTitle(jobDTO.getTitle());
 
@@ -911,6 +919,11 @@ public class AdminController {
 
 		String dateOfJobCreated = new SimpleDateFormat("dd MMMM, yyyy").format(new Date());
 		job.setJobCreatedDate(dateOfJobCreated);
+		
+		List<Job> allJobs = jobRespository.findAll();
+		Iterator<Job> iterator = allJobs.iterator();
+		
+	
 
 		jobService.addJob(job);
 
@@ -927,22 +940,18 @@ public class AdminController {
 
 			for (Location loc : currentLocationList) {
 				boolean isPresent = false;
-
 				for (String s : locationsIds) {
 					if (loc.getId() == Long.valueOf(s))
 						isPresent = true;
-
 					if (isPresent)
 						jobNotInLocation.add(loc.getId());
 					else
 						jobAlreadyInLocation.add(loc.getId());
-
 				}
 				for (long locationId : jobNotInLocation) {
 					Location locationForJobRemoval = locationRepository.getById(locationId);
 					List<Job> jobList = locationForJobRemoval.getJobs();
 					List<Integer> idsToBeRemoved = new ArrayList<>();
-
 					int x = 0;
 					for (Job jb : jobList) {
 						if (jb.getId() == jobDTO.getId())
@@ -954,18 +963,14 @@ public class AdminController {
 						locationForJobRemoval.getJobs().remove(y);
 					}
 					locationRepository.save(locationForJobRemoval);
-
 				}
 
 				for (String s : locationsIds) {
-
 					Location location = locationRepository.getById(Long.valueOf(s));
 					if (!jobAlreadyInLocation.contains(Long.valueOf(s)))
 						location.getJobs().add(job);
 					locationRepository.save(location);
-
 				}
-
 			}
 		}
 
@@ -2224,6 +2229,18 @@ public class AdminController {
 		InstitutesCSVExporter exporter = new InstitutesCSVExporter();
 		exporter.export(listOfInstitutes, response);
 	}
+	
+	
+	
+	
+	
+	
+	
+	/*Test
+	 * 
+	 * */
+
+	
 
 //	End of class
 }

@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -29,25 +30,27 @@ import lombok.Setter;
 @Table(name="locations")
 @Getter
 @Setter
-@NoArgsConstructor
+
 public class Location implements Serializable{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7200482023017202972L;
+	
+	@Column(name = "location_id")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String city;
 	
 	@JsonIgnore
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	@JoinTable(name = "Locations_Jobs", 
-				joinColumns = {@JoinColumn(name="location_id")},
-				inverseJoinColumns = {@JoinColumn(name = "job_id")}
-	)
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Job> jobs;
+	
+	public Location() {
+		
+	}
 	
 	public Location(String city) {
 		super();

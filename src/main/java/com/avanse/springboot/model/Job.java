@@ -50,7 +50,7 @@ public class Job implements Serializable {
 	@Basic
 	private String description;
 	private String postedBy;
-	@ManyToMany(mappedBy = "jobs", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER )
-	private List<Location> locationList = new ArrayList<Location>();
+	@ManyToMany(mappedBy = "jobs", fetch = FetchType.LAZY )
+	private List<Location> locationList;
 		
 }

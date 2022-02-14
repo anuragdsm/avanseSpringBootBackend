@@ -14,7 +14,7 @@ public class JobDTO {
 	private String postedBy;
 	private String skills;
 	
-	private Boolean isJobActive=true;
+	private Boolean isJobActive;
 
 	private String experienceInYears;
 
