@@ -320,7 +320,7 @@ public class AdminController {
 
 	@GetMapping("/admin/universities/page/{pageNum}")
 	public String listByPage(@PathVariable(name = "pageNum") int pageNum, Model model) {
-		org.springframework.data.domain.Page<University> page = universityService.listByPage(pageNum);
+		org.springframework.data.domain.Page<University> page = universityService.listByPageInDescending(pageNum);
 
 		List<University> universities = page.getContent();
 
@@ -410,19 +410,23 @@ public class AdminController {
 
 			String insummer = "";
 			if (summer != null)
-				insummer = summer;
+				insummer = "summerIntake-"+summer;
 			String inwinter = "";
 			if (winter != null)
-				inwinter = winter;
+				inwinter = "winterIntake-"+winter;
 			String infall = "";
 			if (fall != null)
-				infall = fall;
+				infall = "fallIntake-"+fall;
 			String inspring = "";
 			if (spring != null)
-				inspring = spring;
-
-			university.setIntakePeriod(insummer + "," + inwinter + "," + infall + "," + inspring);
-		}
+				inspring = "springIntake-"+spring;
+			String finalIntakeString=insummer + "," + inwinter + "," + infall + "," + inspring;
+			while(finalIntakeString.endsWith(",")) {finalIntakeString=finalIntakeString.substring(0, finalIntakeString.length()-1);}
+			while (finalIntakeString.startsWith(",")) {finalIntakeString=finalIntakeString.substring(1, finalIntakeString.length()-1);}
+			while(finalIntakeString.matches(".*?,,+.*")) {finalIntakeString=finalIntakeString.replaceAll("[,][,]", ",");}
+			
+			university.setIntakePeriod(finalIntakeString);
+		}	
 		/*
 		 * Create the imageUUID and using the nio package get the filename and the path
 		 */
@@ -530,11 +534,6 @@ public class AdminController {
 		University university = universityService.getUniversityById(id).get();
 		UniversityDTO universityDTO = new UniversityDTO();
 
-		/*
-		 * While update, the old image is to be removed... Hence calling deleteimage
-		 * from static method
-		 */
-
 		universityDTO.setId(university.getId());
 		universityDTO.setName(university.getName());
 		universityDTO.setLocation(university.getLocation());
@@ -547,7 +546,6 @@ public class AdminController {
 
 		model.addAttribute("universityDTO", universityDTO);
 		model.addAttribute("updateUniversityCheck", "true");
-		deleteImageFromStaticFolder(id);
 		return "universitiesAdd";
 	}
 

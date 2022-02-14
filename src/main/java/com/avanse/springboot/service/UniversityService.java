@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +30,10 @@ public class UniversityService {
 	
 	public Page<University>listByPage(int pageNum){
 		Pageable pageable = PageRequest.of(pageNum -1, UNIVERSITTIES_PER_PAGE);		
+		return universityRepository.findAll(pageable);
+	}
+	public Page<University>listByPageInDescending(int pageNum){
+		Pageable pageable = PageRequest.of(pageNum -1, UNIVERSITTIES_PER_PAGE,Sort.by("dateOfCreation").descending());		
 		return universityRepository.findAll(pageable);
 	}
 	
