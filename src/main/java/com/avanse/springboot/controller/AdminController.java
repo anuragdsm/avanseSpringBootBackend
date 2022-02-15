@@ -1295,7 +1295,7 @@ public class AdminController {
 		String codeInFile = htmlBoilerPlate(pageDTO.getMetaTitle(), pageDTO.getMetaKeyword(),
 				pageDTO.getBannerHeading(), pageDTO.getBannerSubHeading(), pageDTO.getMetaDescription(),
 				pageDTO.getMainSection(), pageDTO.getJsCode(), pageDTO.getCssCode(),
-				bannerImageFile.getOriginalFilename());
+				bannerImageFile.getOriginalFilename(), pageDTO.getBannerImageAlt());
 		System.out.println("The following code will be there in the file " + codeInFile);
 		pageDTO.setConsolidatedHTMLCode(codeInFile);
 		page.setConsolidatedHTMLCode(pageDTO.getConsolidatedHTMLCode());
@@ -1322,43 +1322,53 @@ public class AdminController {
 	}
 
 	private String htmlBoilerPlate(String metaTitle, String metaKeyword, String bannerHeading, String bannerSubheading,
-			String metaDescription, String mainSection, String jsCode, String cSSCode, String bannerImageFileName) {
+			String metaDescription, String mainSection, String jsCode, String cSSCode, String bannerImageFileName, String bannerAltText) {
 		// TODO Auto-generated method stub
 		/*
 		 * initial code
 		 */
-		String boilerPlate = " <!DOCTYPE html>\r\n"
+		
+		
+		String boilerPlate = "<!DOCTYPE html>\r\n"
 				+ "<html lang=\"en\" xmlns:layout=\"http://www.ultraq.net.nz/thymeleaf/layout\"\r\n"
-				+ "	layout:decorate=\"_LivePagelayout\">\r\n" + "<head>\r\n" + "<title>" + metaTitle + "</title>\r\n"
-				+ "  <meta name=\"description\"  content=\" " + metaDescription + "  \" />" + "\r\n"
-				+ "  <meta name=\"keywords\"  content=\" " + metaKeyword + "  \" />" + "\r\n"
-//				+ header to be implemented later
-				+ "<script type=\"text/javascript\" src=\"/viewPagesAssets/js/customGlobalHeader/globalHeader.js\"></script>"
-				+ "<style>\r\n" + cSSCode + ".banner_bg_top{\r\n"
-				+ "				  background: url('/viewPagesAssets/img/userAddedBannerImages/" + bannerImageFileName
-				+ "'); max-width:100%; height:auto; \r\n" + "				}\r\n" + "</style>\r\n" + "</head>\r\n" + ""
-				+ "<body id=\"page-top\">\r\n" + "\r\n" + "	<!-- Content Wrapper -->\r\n"
-				+ "	<div layout:fragment=\"contentPlus\">"
-
-				+ "<section class=\"top_avanse_banner_area banner_bg_top \">\r\n" + "            \r\n"
+				+ "	layout:decorate=\"_LivePagelayout\">\r\n"
+				+ "<head>\r\n" + "<title>" + metaTitle + "</title>\r\n"
+						+ "  <meta name=\"description\"  content=\" " + metaDescription + "  \" />" + "\r\n"
+						+ "  <meta name=\"keywords\"  content=\" " + metaKeyword + "  \" />" + "\r\n"
+						+ "<script type=\"text/javascript\" src=\"/viewPagesAssets/js/customGlobalHeader/globalHeader.js\"></script>"
+						+ "<style>\r\n" + cSSCode + "</style>\r\n"
+				+ "<body id=\"page-top\">\r\n"
+				+ "\r\n"
+				+ "	<!-- Content Wrapper -->\r\n"
+				+ "	<div layout:fragment=\"contentPlus\">\r\n"
+				+ "  <section class=\"top_avanse_banner_area abroad_top_bg\">\r\n"
+				+ "            \r\n"
 				+ "            <div class=\"container\">\r\n"
 				+ "                <div class=\"row align-items-center\">\r\n"
 				+ "                    <div class=\"col-lg-7\">\r\n"
 				+ "                        <div class=\"h_avaneses_content\">\r\n"
-				+ "                            <h2 class=\"wow fadeInLeft\" data-wow-delay=\"0.4s\"><span>"
-				+ bannerHeading + "</span></h2>\r\n"
-				+ "                            <h2 class=\"wow fadeInLeft\" data-wow-delay=\"0.6s\">" + bannerSubheading
-				+ "</h2>\r\n" + "                        </div>\r\n" + "                    </div>\r\n"
-				+ "                </div>\r\n" + "            </div>\r\n" + "        </section>"
+				+ "                            <h2 class=\"wow fadeInLeft\" data-wow-delay=\"0.4s\"> "+bannerHeading+"</h2>\r\n"
+				+ "                            <h3 class=\"wow fadeInLeft\" data-wow-delay=\"0.6s\"> "+bannerSubheading+"</h3>\r\n"
+				+ "                        </div>\r\n"
+				+ "                    </div>\r\n"
+				+ "                    <div class=\"col-lg-5\">\r\n"
+				+ "                        <div class=\"h_avanse_img\">\r\n"
+				+ "                            <img src=\"/viewPagesAssets/img/userAddedBannerImages/"+bannerImageFileName+"\" alt=\"" +bannerAltText+ "\">\r\n"
+				+ "                        </div>\r\n"
+				+ "                    </div>\r\n"
+				+ "                </div>\r\n"
+				+ "            </div>\r\n"
+				+ "        </section>"
 
 				+ mainSection + "\r\n"
 
-				+ "    <!-- Optional JavaScript -->\r\n" + jsCode + " 	</body> ";
+				+ "    <!-- Optional JavaScript -->\r\n" + jsCode + "\r\n"
+				+" 	</body> " + "\r\n" ;
 
 		return boilerPlate;
 	}
 	/*
-	 * Funtion to delete a page from the database and the server
+	 * Function to delete a page from the database and the server
 	 * 
 	 */
 
