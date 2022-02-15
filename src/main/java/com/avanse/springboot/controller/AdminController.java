@@ -204,15 +204,19 @@ public class AdminController {
 	 */
 	@GetMapping("/admin")
 	public String adminDashboard(Model model) {
+		
 		Long noOfUniversities = universityService.numberOfUniversities();
 		Long noOfCourses = courseService.numberOfCourses();
 		Long noOfPages = pageService.numberOfPages();
+		Long noOfPosts = postService.numberOfPosts();		
 		System.out.println("Number of University is " + noOfUniversities);
 		model.addAttribute("numOfUniversities", noOfUniversities);
 		model.addAttribute("numOfCourses", noOfCourses);
 		model.addAttribute("numOfPages", noOfPages);
+		model.addAttribute("numOfPosts", noOfPosts);
 		System.out.println("User Added Image Directory is " + userAddedImagesDir);
 		return "adminDashboard";
+		
 	}
 
 	@GetMapping("/admin/manage")
