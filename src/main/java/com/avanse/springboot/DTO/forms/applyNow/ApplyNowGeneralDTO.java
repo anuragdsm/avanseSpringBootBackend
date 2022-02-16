@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class ApplyNowGeneralDTO {
 	
-	private Long id;
+	private Integer id;
 	private String firstName;
 	private String lastName;
 	private String contactNumber;

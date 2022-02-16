@@ -36,6 +36,7 @@ public class Page implements Serializable {
 	@UpdateTimestamp
 	private Date lastModified;
 	private Boolean isPageActive=true;	
+	private String customURL;
 	private String fileName;
 	private String extractedFileName;
 	private String pageLink;

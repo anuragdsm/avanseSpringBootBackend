@@ -115,82 +115,84 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 									<label for="documentsRequired">Course Type </label> </br>
 									<div class="row">
 										<div th:if="${updateCourseCheck=='true'}">
-												<div class="col">
-													
-													<span th:if="${#lists.contains(currentCourseTypes,'Masters')}">
-														<input type="checkbox" name="typeCheckBox" value="Masters" checked>
-														<label for="Masters"> Masters</label><br> 
-													</span>
-													<span th:if="${!(#lists.contains(currentCourseTypes,'Masters'))}">
-														<input type="checkbox" name="typeCheckBox" value="Masters">
-														<label for="Masters"> Masters</label><br> 
-													</span>
-													<span th:if="${#lists.contains(currentCourseTypes,'Bachelors')}">
-														<input type="checkbox" name="typeCheckBox" value="Bachelors" checked>
-														<label for="Bachelors"> Bachelors</label><br> 
-													</span>
-													<span th:if="${!(#lists.contains(currentCourseTypes,'Bachelors'))}">
-														<input type="checkbox" name="typeCheckBox" value="Bachelors">
-														<label for="Bachelors"> Bachelors</label><br> 
-													</span>
-													<span th:if="${#lists.contains(currentCourseTypes,'B.tech')}">
-														<input type="checkbox" name="typeCheckBox" value="B.tech" checked>
-														<label for="B.tech"> B.tech</label><br> 
-													</span>
-													<span th:if="${!(#lists.contains(currentCourseTypes,'B.tech'))}">
-														<input type="checkbox" name="typeCheckBox" value="B.tech">
-														<label for="B.tech"> B.tech</label><br> 
-													</span>
-													
-													<span th:if="${#lists.contains(currentCourseTypes,'MS')}">
-														<input type="checkbox" name="typeCheckBox" value="MS" checked>
-														<label for="MS"> MS</label><br> 
-													</span>
-													<span th:if="${!(#lists.contains(currentCourseTypes,'MS'))}">
-														<input type="checkbox" name="typeCheckBox" value="MS">
-														<label for="MS"> MS</label><br> 
-													</span>
-													
-												</div>
-												<div class="col">
-													<span th:if="${#lists.contains(currentCourseTypes,'Computers')}">
-															<input type="checkbox" name="typeCheckBox" value="Computers" checked>
-															<label for="Computers"> Computers</label><br> 
-													</span>
-													<span th:if="${!(#lists.contains(currentCourseTypes,'Computers'))}">
-															<input type="checkbox" name="typeCheckBox" value="Computers">
-															<label for="Computers"> Computers</label><br> 
-													</span>
-													
-													<span th:if="${#lists.contains(currentCourseTypes,'BBA')}">
-															<input type="checkbox" name="typeCheckBox" value="BBA" checked> <label
-																for="BBA"> BBA</label><br>
-													</span>
-													<span th:if="${!(#lists.contains(currentCourseTypes,'BBA'))}">
-															<input type="checkbox" name="typeCheckBox" value="BBA"> <label
-																for="BBA"> BBA</label><br>
-													</span>
-												</div>
-												
+											<div class="col">
+
+												<span
+													th:if="${#lists.contains(currentCourseTypes,'Masters')}">
+													<input type="checkbox" name="typeCheckBox" value="Masters"
+													checked> <label for="Masters"> Masters</label><br>
+												</span> <span
+													th:if="${!(#lists.contains(currentCourseTypes,'Masters'))}">
+													<input type="checkbox" name="typeCheckBox" value="Masters">
+													<label for="Masters"> Masters</label><br>
+												</span> <span
+													th:if="${#lists.contains(currentCourseTypes,'Bachelors')}">
+													<input type="checkbox" name="typeCheckBox"
+													value="Bachelors" checked> <label for="Bachelors">
+														Bachelors</label><br>
+												</span> <span
+													th:if="${!(#lists.contains(currentCourseTypes,'Bachelors'))}">
+													<input type="checkbox" name="typeCheckBox"
+													value="Bachelors"> <label for="Bachelors">
+														Bachelors</label><br>
+												</span> <span
+													th:if="${#lists.contains(currentCourseTypes,'B.tech')}">
+													<input type="checkbox" name="typeCheckBox" value="B.tech"
+													checked> <label for="B.tech"> B.tech</label><br>
+												</span> <span
+													th:if="${!(#lists.contains(currentCourseTypes,'B.tech'))}">
+													<input type="checkbox" name="typeCheckBox" value="B.tech">
+													<label for="B.tech"> B.tech</label><br>
+												</span> <span th:if="${#lists.contains(currentCourseTypes,'MS')}">
+													<input type="checkbox" name="typeCheckBox" value="MS"
+													checked> <label for="MS"> MS</label><br>
+												</span> <span
+													th:if="${!(#lists.contains(currentCourseTypes,'MS'))}">
+													<input type="checkbox" name="typeCheckBox" value="MS">
+													<label for="MS"> MS</label><br>
+												</span>
+
+											</div>
+											<div class="col">
+												<span
+													th:if="${#lists.contains(currentCourseTypes,'Computers')}">
+													<input type="checkbox" name="typeCheckBox"
+													value="Computers" checked> <label for="Computers">
+														Computers</label><br>
+												</span> <span
+													th:if="${!(#lists.contains(currentCourseTypes,'Computers'))}">
+													<input type="checkbox" name="typeCheckBox"
+													value="Computers"> <label for="Computers">
+														Computers</label><br>
+												</span> <span th:if="${#lists.contains(currentCourseTypes,'BBA')}">
+													<input type="checkbox" name="typeCheckBox" value="BBA"
+													checked> <label for="BBA"> BBA</label><br>
+												</span> <span
+													th:if="${!(#lists.contains(currentCourseTypes,'BBA'))}">
+													<input type="checkbox" name="typeCheckBox" value="BBA">
+													<label for="BBA"> BBA</label><br>
+												</span>
+											</div>
+
 										</div>
 										<div th:if="${updateCourseCheck!='true'}">
-												<div class="col">
-		
-													<input type="checkbox" name="typeCheckBox" value="Masters">
-													<label for="Masters"> Masters</label><br> <input
-														type="checkbox" name="typeCheckBox" value="Bachelors">
-													<label for="Bachelors"> Bachelors</label><br> <input
-														type="checkbox" name="typeCheckBox" value="B.tech">
-													<label for=" B.tech"> B.tech</label><br> <input
-														type="checkbox" name="typeCheckBox" value="MS"> <label
-														for="MS"> MS</label><br>
-												</div>
-												<div class="col">
-													<input type="checkbox" name="typeCheckBox" value="Computers">
-													<label for="Computers"> Computers</label><br> <input
-														type="checkbox" name="typeCheckBox" value="BBA"> <label
-														for="BBA"> BBA</label><br>
-												</div>
+											<div class="col">
+
+												<input type="checkbox" name="typeCheckBox" value="Masters">
+												<label for="Masters"> Masters</label><br> <input
+													type="checkbox" name="typeCheckBox" value="Bachelors">
+												<label for="Bachelors"> Bachelors</label><br> <input
+													type="checkbox" name="typeCheckBox" value="B.tech">
+												<label for=" B.tech"> B.tech</label><br> <input
+													type="checkbox" name="typeCheckBox" value="MS"> <label
+													for="MS"> MS</label><br>
+											</div>
+											<div class="col">
+												<input type="checkbox" name="typeCheckBox" value="Computers">
+												<label for="Computers"> Computers</label><br> <input
+													type="checkbox" name="typeCheckBox" value="BBA"> <label
+													for="BBA"> BBA</label><br>
+											</div>
 										</div>
 									</div>
 
@@ -215,19 +217,18 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 										</select>
 									</div>
 								</div>
-								
-								
-								<div th:if = "${updateCourseCheck!='true'}">
-								<div class="form-group">
+
+
+								<div th:if="${updateCourseCheck!='true'}">
+									<div class="form-group">
 										<label for="university">University:</label> <select
 											class="form-control" name="university_id">
 											<option value="">--</option>
 											<option th:each="university : ${universities}"
-												th:value="${university.id}" th:utext="${university.name}"
-												/>
+												th:value="${university.id}" th:utext="${university.name}" />
 										</select>
 									</div>
-								
+
 								</div>
 
 
@@ -257,9 +258,9 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 									<label for="documentsRequired">Academic Documents
 										Multiple Required</label> <select class="form-control"
-										name="documentsRequired"
-										th:field="*{academicDocumentsRequired}" id="documentsRequired"
-										placeholder="Documents Required">
+										name="academicDocumentsRequired"
+										th:field="*{academicDocumentsRequired}" id="academicDocumentsRequired"
+										placeholder="Academic Documents Required">
 
 										<option value="">Select Academic Documents Multiple
 											Required</option>
@@ -278,7 +279,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 
 								<div class="container">
-									<label for="documentsRequired">Exam Elibility Multiple
+									<label for="examsEligibility">Exam Elibility Multiple
 										Required</label> </br>
 									<div class="row">
 										<div class="col">
@@ -308,10 +309,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 									<div class="col-lg-12">
 										<label class="col-lg-12 control-label">Static Content</label>
 										<textarea class="form-control summernote" id="summernote"
-											name="jobDescription" th:field="*{description}"></textarea>
-
-
-
+											name="staticContent" th:field="*{staticContent}"></textarea>
 										​
 									</div>
 									<button type="submit" class="btn btn-primary">Submit</button>

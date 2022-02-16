@@ -11,6 +11,7 @@ public class PageDTO {
 	private Date dateOfCreation;
 	private Date lastModified;
 	private Boolean isPageActive;
+	private String customURL;
 
 	private String fileName;
 	private String extractedFileName;

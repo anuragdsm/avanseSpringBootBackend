@@ -168,7 +168,7 @@ public class ContactUsController {
 	/*
 	 * Common post add method for all forms
 	*/
-	@PostMapping("/viewDynamicPages/contactus/add")
+	@PostMapping("/viewDynamicPages/thankyou")
 	public String customersAddPost(@ModelAttribute("customerDTO") CustomerDTO customerDTO,
 									@ModelAttribute("investorDTO") InvestorDTO investorDTO,
 									@ModelAttribute("instituteDTO") InstituteDTO instituteDTO,
@@ -236,7 +236,7 @@ public class ContactUsController {
 		
 		}
 
-		return "thankyou";
+		return "dynamicPages/thankyou";
 	}
 
 	

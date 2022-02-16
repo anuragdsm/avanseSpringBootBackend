@@ -32,8 +32,8 @@ public class ApplyNowAllController {
 	@PostMapping("/viewDynamicPages/apply-now/add")
 	public String applyNowGeneralAddPost(@ModelAttribute("applyNowGeneralDTO") ApplyNowGeneralDTO applyNowGeneralDTO) {
 		ApplyNowGeneral applyNowGeneral = new ApplyNowGeneral();
-		applyNowGeneral.setFirstName(applyNowGeneralDTO.getFirstName());
-		applyNowGeneral.setLastName(applyNowGeneralDTO.getLastName());
+		String name = applyNowGeneralDTO.getFirstName() + " " + applyNowGeneralDTO.getLastName();
+		applyNowGeneral.setName(name);
 		applyNowGeneral.setCity(applyNowGeneralDTO.getCity());
 		applyNowGeneral.setEmailId(applyNowGeneralDTO.getEmailId());
 		applyNowGeneral.setContactNumber(applyNowGeneralDTO.getContactNumber());

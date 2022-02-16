@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="_LivePagelayout">
+<head>
+<meta charset="utf-8">
+<body id="page-top">
+
+	<!-- Content Wrapper -->
+	<div layout:fragment="contentPlus">
+
+
+
+
+		<section class="job_listing_area  sec_pad bg_grey">
+			<div class="container">
+				<div class="job_listing Cus_jobli">
+
+					<div class="listing_tab" id="tab_filter">
+						<div class="item bc bac bba new">
+							<div class="list_item">
+								<figure></figure>
+								<div class="joblisting_text">
+									<div class="job_list_table">
+										<div class="jobsearch-table-cell">
+											<h4 th:text="${course.title}">Bachelor of Business
+												Administration (BBA)</h4>
+											<ul class="list-unstyled">
+												<li class="p_color">Duration- <span
+													th:text="${course.duration}">4 years</span></li>
+												<li>1st Year Tuition Fees- INR <span
+													th:text="${course.fees}">1000000</span></li>
+												<li><span class="c_yellow">Exams Accepted- <span
+														th:text="${course.examsEligibility}">TOEFL IELTS</span></span></li>
+											</ul>
+										</div>
+
+										<div class="jobsearch-table-cell">
+											<div class="jobsearch-job-userlist">
+												<!-- <a  class="apply_btn course_detail">View Detail</a> -->
+												<div class="coudetail shadow"
+													style="display: fixed; top: 100px">
+													<h4>
+														Some points you should remember while applying for
+														admission at <b><span
+															th:text="${course.university.name}">Acadia
+																University</span></b> are as listed below:>
+													</h4>
+													<table width="100%"
+														class="table table-bordered table-strip">
+														<tbody>
+															<tr>
+																<td><strong> Eligibility </strong></td>
+																<td id="eligibility"
+																	th:text="${course.examsEligibility}">TOEFL: 90,
+																	IELTS: 6.5</td>
+															</tr>
+															<tr>
+																<td><strong> Documents Required </strong></td>
+																<td th:text="${course.documentsRequired}">
+																	Transcripts, essay, passport, LOR, Resume, medical
+																	insurance</td>
+															</tr>
+															<tr>
+																<td><strong> Application Process </strong></td>
+																<td id="eligibility"
+																	th:text="${course.university.applicationProcess}">
+																	online application, INR 2,510 non-refundable fee</td>
+															</tr>
+															<tr>
+																<td><strong> Accommodation </strong></td>
+																<!-- <td th:if="${course.university.accomodation == 'Yes'}"  id="eligibility">
+                                                                    Available
+                                                                </td>
+                                                                <td th:if="${course.university.accomodation == 'No'}"  id="eligibility">
+                                                                   Not Available
+                                                                </td> -->
+																<td th:text="${course.university.accomodation}"
+																	id="eligibility">Not Available</td>
+															</tr>
+															<tr>
+																<td><strong> Intakes </strong></td>
+																<td th:text="${course.university.intakePeriod}"
+																	id="eligibility">February, June</td>
+															</tr>
+														</tbody>
+													</table>
+													
+													<div class="container">
+				<div class="row mb-5">
+						<div class="col-lg-12">
+							<h4 class="border-bottom ">Entry Criteria</h4>
+							<div th:utext="${course.staticContent}"
+														id="staticContentContainer">
+							
+							<table width="100%" class="table table-bordered table-strip mt-5">
+								<thead>
+									<tr>
+										<th>Courses</th>
+										<th>Exams</th>
+	
+										<th>&nbsp;</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><strong>MS</strong>(1 Course)</td>
+	
+										<td><strong>TOEFL </strong> : 93</td>
+										<td><strong> IELTS </strong> : 6.5</td>
+									</tr>
+	
+									<tr>
+										<td><strong>BBA</strong>(1 Course)</td>
+	
+										<td><strong>TOEFL </strong> : 90</td>
+										<td><strong> IELTS </strong> : 6.5</td>
+									</tr>
+	
+									<tr>
+										<td><strong>BE/Btech</strong>(1 Course)</td>
+	
+										<td><strong>TOEFL </strong> : 90</td>
+										<td><strong> IELTS </strong> : 6.5</td>
+									</tr>
+	
+									<tr>
+										<td><strong>Other Courses</strong>(1 Course)</td>
+	
+										<td><strong>TOEFL </strong> : 93</td>
+										<td><strong> IELTS </strong> : 6.5</td>
+	
+									</tr>
+								</tbody>
+							</table>
+	
+						</div>
+	
+					</div>
+				</div>
+			</div>
+
+												</div>
+											</div>
+
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						
+						
+					</div>
+
+				</div>
+			</div>
+			
+		</section>
+
+	</div>

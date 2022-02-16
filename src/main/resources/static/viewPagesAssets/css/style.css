@@ -28448,7 +28448,7 @@ input[type=date]{color: #222d39; height:50px; background-color: white; -webkit-b
 }
 .coudetail{
   width: 100%;
-  position: absolute;
+ /*  position: absolute; */
   left: 0px;
   background: rgb(255, 255, 255);
   padding: 20px;

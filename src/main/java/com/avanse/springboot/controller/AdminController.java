@@ -2251,6 +2251,12 @@ public class AdminController {
 	/*Test
 	 * 
 	 * */
+	
+	
+	@GetMapping("/admin/tables")
+	public String tablesView() {
+		return "tables";
+	}
 
 	
 
