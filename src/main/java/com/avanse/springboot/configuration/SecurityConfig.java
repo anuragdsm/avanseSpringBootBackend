@@ -24,16 +24,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 		.authorizeRequests()
 		.antMatchers("/admin/**").hasRole("ADMIN")
-		.antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
-		.antMatchers("/","/viewPages/**","/viewDynamicPages/**","/index",  "/register" , "/public/api/**", "/career/**").permitAll()
-		.antMatchers("/resources/**", "/static/**", "/images/**","/css/**","/scss/**","/vendor/**", "/js/**").permitAll()
-		.antMatchers("/resources/**", "/static/**","/viewPagesAssets/**", "/img/**","/css/**","/scss/**","/vendors/**", "/js/**").permitAll()
-		.antMatchers("/addManualUser").permitAll() //this on to be deleted later, Only for testing
-		.antMatchers("/blog/**").permitAll() //this on to be deleted later, Only for testing
-		.antMatchers("/landing/**").permitAll() //this on to be deleted later, Only for testing
-		.antMatchers("/apply-now/**").permitAll() //this on to be deleted later, Only for testing
-		.antMatchers("/courseDetail/**").permitAll() //this on to be deleted later, Only for testing
-		.antMatchers("/Country/**").permitAll() //this on to be deleted later, Only for testing
+		
+		.antMatchers("/**").permitAll()
+
+//		.antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
+//		.antMatchers("/","/viewPages/**","/viewDynamicPages/**","/index",  "/register" , "/public/api/**", "/career/**").permitAll()
+//		.antMatchers("/resources/**", "/static/**", "/images/**","/css/**","/scss/**","/vendor/**", "/js/**").permitAll()
+//		.antMatchers("/resources/**", "/static/**","/viewPagesAssets/**", "/img/**","/css/**","/scss/**","/vendors/**", "/js/**").permitAll()
+//		.antMatchers("/addManualUser").permitAll() //this on to be deleted later, Only for testing
+//		.antMatchers("/blog/**").permitAll() //this on to be deleted later, Only for testing
+//		.antMatchers("/landing/**").permitAll() //this on to be deleted later, Only for testing
+//		.antMatchers("/apply-now/**").permitAll() //this on to be deleted later, Only for testing
+//		.antMatchers("/courseDetail/**").permitAll() //this on to be deleted later, Only for testing
+//		.antMatchers("/Country/**").permitAll() //this on to be deleted later, Only for testing
 		.anyRequest()
 		.authenticated()
 		.and()

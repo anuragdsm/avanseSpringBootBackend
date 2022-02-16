@@ -111,8 +111,7 @@ public class PageController {
 			model.addAttribute("postCategories", postCategoryService.getAllPostCategories());
 		model.addAttribute("posts", postService.getAllPosts());
 		}
-			
-		
+	
 		model.addAttribute("customerDTO", new CustomerDTO());
 		model.addAttribute("instituteDTO", new InstituteDTO());
 		model.addAttribute("investorDTO", new InvestorDTO());
