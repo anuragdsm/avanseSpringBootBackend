@@ -116,7 +116,7 @@ public class PageController {
 		model.addAttribute("instituteDTO", new InstituteDTO());
 		model.addAttribute("investorDTO", new InvestorDTO());
 		model.addAttribute("mediaDTO", new MediaDTO());
-		model.addAttribute("applyNowGeneralDTO", new ApplyNowGeneralDTO());
+//		model.addAttribute("applyNowGeneralDTO", new ApplyNowGeneralDTO());
 		model.addAttribute("executiveEducationLoanDTO", new ExecutiveEducationLoanDTO());
 		model.addAttribute("educationInstitutionLoanDTO", new EducationInstitutionLoanDTO());
 		return modelAndView;		

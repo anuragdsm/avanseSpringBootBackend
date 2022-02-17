@@ -2,8 +2,11 @@ package com.avanse.springboot.controller.globalPages;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.avanse.springboot.DTO.forms.applyNow.ApplyNowGeneralDTO;
 import com.avanse.springboot.DTO.forms.applyNow.EducationInstitutionLoanDTO;
@@ -27,9 +30,15 @@ public class ApplyNowAllController {
 	@Autowired
 	EducationInstitutionLoanService educationInstitutionLoanService;
 	
+	@GetMapping("/apply-now")
+	public String applyNowGeneralGet(Model model){
+		ModelAndView modelAndView = new ModelAndView("dynamicPages/apply-now");
+		model.addAttribute("applyNowGeneralDTO", new ApplyNowGeneralDTO());
+
+		return "dynamicPages/apply-now";
+	}
 	
-	
-	@PostMapping("/viewDynamicPages/apply-now/add")
+	@PostMapping("/apply-now/add")
 	public String applyNowGeneralAddPost(@ModelAttribute("applyNowGeneralDTO") ApplyNowGeneralDTO applyNowGeneralDTO) {
 		ApplyNowGeneral applyNowGeneral = new ApplyNowGeneral();
 		String name = applyNowGeneralDTO.getFirstName() + " " + applyNowGeneralDTO.getLastName();
@@ -47,7 +56,7 @@ public class ApplyNowAllController {
 		return "dynamicPages/thankyou";
 	}
 	
-	@PostMapping("/viewDynamicPages/executive-education-loan/add")
+	@PostMapping("/executive-education-loan/add")
 	public String executiveEducationLoanAddPost(@ModelAttribute("executiveEducationLoanDTO") ExecutiveEducationLoanDTO executiveEducationLoanDTO) {
 		ExecutiveEducationLoan executiveEducationLoan = new ExecutiveEducationLoan();
 		executiveEducationLoan.setFirstName(executiveEducationLoanDTO.getFirstName());
@@ -59,7 +68,7 @@ public class ApplyNowAllController {
 		executiveEducationLoanService.addExecutiveEducationLoan(executiveEducationLoan);
 		return "dynamicPages/thankyou";
 	}
-	@PostMapping("/viewDynamicPages/education-institution-loan/add")
+	@PostMapping("/education-institution-loan/add")
 	public String educationInstitutionLoanAddPost(@ModelAttribute("educationInstitutionLoanDTO") EducationInstitutionLoanDTO educationInstitutionLoanDTO) {
 		EducationInstitutionLoan educationInstitutionLoan= new EducationInstitutionLoan();
 		educationInstitutionLoan.setFirstName(educationInstitutionLoanDTO.getFirstName());

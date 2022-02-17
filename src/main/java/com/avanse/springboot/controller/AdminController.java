@@ -1158,7 +1158,9 @@ public class AdminController {
 
 		page.setId(pageDTO.getId());
 		page.setPageTitle(pageDTO.getPageTitle().strip());
-		page.setCustomURL(pageDTO.getCustomURL().strip());
+		page.setCustomUri1(pageDTO.getCustomUri1().strip());
+		page.setCustomUri2(pageDTO.getCustomUri2().strip());
+		page.setCustomUri3(pageDTO.getCustomUri3().strip());
 		page.setBannerHeading(pageDTO.getBannerHeading());
 		page.setBannerSubHeading(pageDTO.getBannerSubHeading());
 		page.setMainSection(pageDTO.getMainSection());
@@ -1397,10 +1399,14 @@ public class AdminController {
 	}
 
 	/*
+	 * 
+	 * 
 	 * Write a function to write the code into the html file This function will be
 	 * called in both add and edit function... We Dont need to call the write to
 	 * file using edit becuase edit will eventually be called from only pages add...
 	 * But keeping it in a function is a better idea, any day...
+	 * 
+	 * 
 	 */
 
 	@GetMapping("/admin/page/edit/{id}")
@@ -1409,7 +1415,9 @@ public class AdminController {
 		PageDTO pageDTO = new PageDTO();
 		pageDTO.setId(page.getId());
 		pageDTO.setPageTitle(page.getPageTitle());
-		pageDTO.setCustomURL(page.getCustomURL());
+		pageDTO.setCustomUri1(page.getCustomUri1());
+		pageDTO.setCustomUri2(page.getCustomUri2());
+		pageDTO.setCustomUri3(page.getCustomUri3());
 		pageDTO.setBannerHeading(page.getBannerHeading());
 		pageDTO.setBannerSubHeading(page.getBannerSubHeading());
 		pageDTO.setPageLink(page.getPageLink());
@@ -2203,13 +2211,7 @@ public class AdminController {
 	 * 
 	 * */
 	
-	
-	@GetMapping("/admin/tables")
-	public String tablesView() {
-		return "tables";
-	}
 
-	
 
 //	End of class
 }
