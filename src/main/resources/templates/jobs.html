@@ -12,17 +12,6 @@
 
 <title>Jobs</title>
 
-<!-- Custom fonts for this template-->
-<link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
-	type="text/css">
-<link
-	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-	rel="stylesheet">
-
-<!-- Custom styles for this template-->
-<link href="/css/sb-admin-2.min.css" rel="stylesheet">
-<link href="/vendor/summernote/summernote/summernote-bs4.min.css"
-	rel="stylesheet">
 
 </head>
 
@@ -37,64 +26,64 @@
 			<div class="container-fluid">
 
 				<!-- Page Heading -->
-				
+
 				<h6 class="m-0 font-weight-bold text-primary">
-							<a href="javascript:history.back()"
-								class="btn btn-info btn-icon-split btn-sm float-right mr-3">
-								<span class="icon text-white-50"> <i
-									class="fas fa-arrow-left"></i>
-							</span> <span class="text">Back</span>
-							</a>
-						</h6>
-						
-			<script th:inline="javascript" type="text/javascript">
-		let contextPath = 'http://localhost:8080';
+					<a href="javascript:history.back()"
+						class="btn btn-info btn-icon-split btn-sm float-right mr-3"> <span
+						class="icon text-white-50"> <i class="fas fa-arrow-left"></i>
+					</span> <span class="text">Back</span>
+					</a>
+				</h6>
 
-		function toggleJobStatus(id) {
-			console.log('toggling id = ' + id);
+				<script th:inline="javascript" type="text/javascript">
+					let contextPath = 'http://localhost:8080';
 
-			let customSwitch = 'customSwitch' + id;
+					function toggleJobStatus(id) {
+						console.log('toggling id = ' + id);
 
-			console.log(document.getElementById(customSwitch));
+						let customSwitch = 'customSwitch' + id;
 
-			console.log(document.getElementById(customSwitch).checked);
+						console.log(document.getElementById(customSwitch));
 
-			if (document.getElementById(customSwitch).checked == true
-					|| document.getElementById(customSwitch).checked == null) {
+						console
+								.log(document.getElementById(customSwitch).checked);
 
-				document.getElementById(customSwitch).checked = false;
+						if (document.getElementById(customSwitch).checked == true
+								|| document.getElementById(customSwitch).checked == null) {
 
-				/* deactivate in controller */
-				console.log('Deactivating..');
+							document.getElementById(customSwitch).checked = false;
 
-				let http = new XMLHttpRequest();
-				let url = contextPath + '/' + 'admin/'
-						+ 'activateDeactivateJob' + '/' + id + '/'
-						+ 'DeactivateJob';
+							/* deactivate in controller */
+							console.log('Deactivating..');
 
-				http.open("GET", url, false);
-				http.send(null);
-				console.log(http.responseText);
-				document.getElementById('jobStatus' + id).innerHTML = 'Job Inactive';
-			}
+							let http = new XMLHttpRequest();
+							let url = contextPath + '/' + 'admin/'
+									+ 'activateDeactivateJob' + '/' + id + '/'
+									+ 'DeactivateJob';
 
-			else {
+							http.open("GET", url, false);
+							http.send(null);
+							console.log(http.responseText);
+							document.getElementById('jobStatus' + id).innerHTML = 'Job Inactive';
+						}
 
-				document.getElementById(customSwitch).checked = true;
-				let http = new XMLHttpRequest();
-				let url = contextPath + '/' + 'admin/'
-						+ 'activateDeactivateJob' + '/' + id + '/'
-						+ 'ActivateJob';
-				console.log('Activating..')
-				http.open("GET", url, false);
-				http.send(null);
-				console.log(http.responseText);
-				document.getElementById('jobStatus' + id).innerHTML = 'Job Active';
-			}
+						else {
 
-		}
-	</script>
-				
+							document.getElementById(customSwitch).checked = true;
+							let http = new XMLHttpRequest();
+							let url = contextPath + '/' + 'admin/'
+									+ 'activateDeactivateJob' + '/' + id + '/'
+									+ 'ActivateJob';
+							console.log('Activating..')
+							http.open("GET", url, false);
+							http.send(null);
+							console.log(http.responseText);
+							document.getElementById('jobStatus' + id).innerHTML = 'Job Active';
+						}
+
+					}
+				</script>
+
 				<div
 					class="d-sm-flex align-items-center justify-content-between mb-4">
 					<h1 class="h3 mb-0 text-gray-800">Job Management</h1>
@@ -108,124 +97,119 @@
 
 						<a th:href="@{/admin/jobs/add}" style="margin: 20px 0"
 							class="btn btn-primary">Post Job</a>
-						<table class="table">
-							<thead class="thead-light">
-								<tr>
-									<th scope="col">SN</th>
-									<th scope="col">Job Id</th>
-									<th scope="col">Job Title</th>
-									<th scope="col">Experience</th>
-									<th scope="col">Skills</th>
-									<th scope="col">Post Date</th>
-									<th scope="col">Short Description</th>
-									<th scope="col">Description</th>
-									<th scope="col">Location</th>
-									<th scope="col">Posted By</th>
-									<th scope="col">Status</th>
-									<th scope="col">Update</th>
-									<th scope="col">Delete</th>
-								</tr>
-							</thead>
-							<tbody>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-bordered" id="dataTable" width="100%"
+									cellspacing="0">
+									<thead class="thead-light">
+										<tr>
+											<th scope="col">SN</th>
+											<th scope="col">Job Id</th>
+											<th scope="col">Job Title</th>
+											<th scope="col">Experience</th>
+											<th scope="col">Skills</th>
+											<th scope="col">Post Date</th>
+											<th scope="col">Short Description</th>
+											<th scope="col">Description</th>
+											<th scope="col">Location</th>
+											<th scope="col">Posted By</th>
+											<th scope="col">Status</th>
+											<th scope="col">Update</th>
+											<th scope="col">Delete</th>
+										</tr>
+									</thead>
+									<tbody>
 
-								<tr th:each="job, iStat : ${jobs}">
-									<th scope="row" th:text="${iStat.index + 1}">1</th>
-									<td th:text="${job.id}">1</td>
-									<td th:text="${job.title}">Software Engineer</td>
-									<td th:text="${job.experienceInYears}+' years'" >2+Years</td>
-									<td th:text="${job.skills}" >Skills</td>
-									<td th:text="${job.jobCreatedDate}">2021-12-12</td>
-									<td th:text="${job.shortDescription}">Short Description</td>
+										<tr th:each="job, iStat : ${jobs}">
+											<th scope="row" th:text="${iStat.index + 1}">1</th>
+											<td th:text="${job.id}">1</td>
+											<td th:text="${job.title}">Software Engineer</td>
+											<td th:text="${job.experienceInYears}+' years'">2+Years</td>
+											<td th:text="${job.skills}">Skills</td>
+											<td th:text="${job.jobCreatedDate}">2021-12-12</td>
+											<td th:text="${job.shortDescription}">Short Description</td>
 
-									<!-- 
+											<!-- 
 									<td class="col-sm-4" th:text="${job.description}">Lorm
 										ipsism</td> -->
 
 
-									<td><a href="#" data-toggle="modal"
-										th:data-target="'#myModal'+${job.id}">Job Description</a> <!-- Modal -->
-										<div class="modal fade" th:id="'myModal'+${job.id}"
-											role="dialog">
-											<div class="modal-dialog modal-xl">
+											<td><a href="#" data-toggle="modal"
+												th:data-target="'#myModal'+${job.id}">Job Description</a> <!-- Modal -->
+												<div class="modal fade" th:id="'myModal'+${job.id}"
+													role="dialog">
+													<div class="modal-dialog modal-xl">
 
-												<!-- Modal content-->
-												<div class="modal-content">
-													<div class="modal-header">
-														<h4 class="modal-title" th:text="${job.title}">Job
-															Description Heading</h4>
-														<button type="button" class="close" data-dismiss="modal">&times;</button>
+														<!-- Modal content-->
+														<div class="modal-content">
+															<div class="modal-header">
+																<h4 class="modal-title" th:text="${job.title}">Job
+																	Description Heading</h4>
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+
+															</div>
+															<div class="modal-body">
+
+																<p th:utext="${job.description}">Some text in the
+																	modal.</p>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-default"
+																	data-dismiss="modal">Close</button>
+															</div>
+														</div>
 
 													</div>
-													<div class="modal-body">
+												</div></td>
 
-														<p th:utext="${job.description}">Some text in the
-															modal.</p>
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-default"
-															data-dismiss="modal">Close</button>
-													</div>
+
+											<td>
+												<table>
+													<tr th:each="location, iStat : ${job.locationList}">
+														<td style="border-top: 0px;"><a
+															class="btn btn-outline-secondary"
+															th:text="${location.city}"></a></td>
+													</tr>
+												</table>
+											</td>
+											<td th:text="${job.postedBy}">Posted By</td>
+
+
+
+											<td>
+												<div class="custom-control custom-switch"
+													th:onclick="'toggleJobStatus('+${job.id}+')'">
+													<input th:inline="text" type="checkbox"
+														th:if="${job.isJobActive==true}" checked
+														class="custom-control-input"
+														th:id="'customSwitch'+${job.id}"> <input
+														type="checkbox" th:if="${job.isJobActive==false}"
+														class="custom-control-input"
+														th:id="'customSwitch'+${job.id}"> <label
+														class="custom-control-label"
+														th:for="'customSwitch'+${job.id}"><span
+														th:id="'jobStatus'+${job.id}"
+														th:text="${job.isJobActive==true ?'Job Active':'Job Inactive'}"></span></label>
 												</div>
-
-											</div>
-										</div></td>
+											</td>
 
 
-									<td>
-										<table>
-											<tr th:each="location, iStat : ${job.locationList}">
-												<td style="border-top: 0px;"><a class="btn btn-outline-secondary" th:text="${location.city}"></a></td>
-											</tr>
-										</table>
-									</td>
-									<td th:text="${job.postedBy}">Posted By</td>
-									
-									
-									
-									<td>
-									<div class="custom-control custom-switch"
-										th:onclick="'toggleJobStatus('+${job.id}+')'">
-										<input th:inline="text" type="checkbox"
-											th:if="${job.isJobActive==true}" checked
-											class="custom-control-input"
-											th:id="'customSwitch'+${job.id}"> <input
-											type="checkbox"
-											th:if="${job.isJobActive==false}"
-											class="custom-control-input"
-											th:id="'customSwitch'+${job.id}"> <label
-											class="custom-control-label"
-											th:for="'customSwitch'+${job.id}"><span
-											th:id="'jobStatus'+${job.id}"
-											th:text="${job.isJobActive==true ?'Job Active':'Job Inactive'}"></span></label>
-									</div>
-								</td>
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
 
-									<td><a href=""
-										th:href="@{/admin/job/update/{id}(id=${job.id})}"
-										class="btn btn-warning">Update</a></td>
+											<td><a href=""
+												th:href="@{/admin/job/update/{id}(id=${job.id})}"
+												class="btn btn-warning">Update</a></td>
 
-									<td><a href=""
-										th:href="@{/admin/job/delete/{id}(id=${job.id})}"
-										class="btn btn-danger">Delete</a></td>
-								</tr>
-							</tbody>
-						</table>
+											<td><a href=""
+												th:href="@{/admin/job/delete/{id}(id=${job.id})}"
+												class="btn btn-danger">Delete</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
 
 					</div>
 				</div>
-
 				<!-- Content Row -->
 
 			</div>
@@ -236,10 +220,6 @@
 	</div>
 	<!-- End of Page Wrapper -->
 
-	<!-- Scroll to Top Button-->
-	<a class="scroll-to-top rounded" href="#page-top"> <i
-		class="fas fa-angle-up"></i>
-	</a>
 
 
 </body>

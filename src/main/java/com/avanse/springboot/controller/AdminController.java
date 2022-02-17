@@ -317,37 +317,42 @@ public class AdminController {
 	public String getFirstUniversityPage(Model model) {
 
 //		List<University>universities = universityService.getAllUniversity();
-//		model.addAttribute("universities", universityService.getAllUniversity());
+		model.addAttribute("universities", universityService.getAllUniversity());
 
-		return listByPage(1, model);
-	}
-
-	@GetMapping("/admin/universities/page/{pageNum}")
-	public String listByPage(@PathVariable(name = "pageNum") int pageNum, Model model) {
-		org.springframework.data.domain.Page<University> page = universityService.listByPageInDescending(pageNum);
-
-		List<University> universities = page.getContent();
-
-		System.out.println("PageNum =" + pageNum);
-		System.out.println("Total elements= " + page.getNumberOfElements());
-		System.out.println("Total Pages= " + page.getTotalPages());
-
-		long startCount = (pageNum - 1) * universityService.UNIVERSITTIES_PER_PAGE + 1;
-		long endCount = startCount + universityService.UNIVERSITTIES_PER_PAGE - 1;
-
-		if (endCount > page.getTotalElements()) {
-			endCount = page.getTotalElements();
-		}
-
-		model.addAttribute("currentPage", pageNum);
-		model.addAttribute("startCount", startCount);
-		model.addAttribute("totalPages", page.getTotalPages());
-		model.addAttribute("endCount", endCount);
-		model.addAttribute("totalItems", page.getTotalElements());
-		model.addAttribute("universities", universities);
 		return "universities";
-
 	}
+	
+	
+
+	/*
+	 * Pagination code disabled
+	*/
+//	@GetMapping("/admin/universities/page/{pageNum}")
+//	public String listByPage(@PathVariable(name = "pageNum") int pageNum, Model model) {
+//		org.springframework.data.domain.Page<University> page = universityService.listByPageInDescending(pageNum);
+//
+//		List<University> universities = page.getContent();
+//
+//		System.out.println("PageNum =" + pageNum);
+//		System.out.println("Total elements= " + page.getNumberOfElements());
+//		System.out.println("Total Pages= " + page.getTotalPages());
+//
+//		long startCount = (pageNum - 1) * universityService.UNIVERSITTIES_PER_PAGE + 1;
+//		long endCount = startCount + universityService.UNIVERSITTIES_PER_PAGE - 1;
+//
+//		if (endCount > page.getTotalElements()) {
+//			endCount = page.getTotalElements();
+//		}
+//
+//		model.addAttribute("currentPage", pageNum);
+//		model.addAttribute("startCount", startCount);
+//		model.addAttribute("totalPages", page.getTotalPages());
+//		model.addAttribute("endCount", endCount);
+//		model.addAttribute("totalItems", page.getTotalElements());
+//		model.addAttribute("universities", universities);
+//		return "universities";
+//
+//	}
 
 	/*
 	 * Method to add a university Need both get and post mapping for adding the
@@ -589,36 +594,9 @@ public class AdminController {
 	@GetMapping("/admin/courses")
 	public String getFirstCoursePage(Model model) {
 
-//		List<University>universities = universityService.getAllUniversity();
-//		model.addAttribute("universities", universityService.getAllUniversity());
-
-		return listCoursesByPage(1, model);
-	}
-
-	@GetMapping("/admin/courses/page/{pageNum}")
-	public String listCoursesByPage(@PathVariable(name = "pageNum") int pageNum, Model model) {
-
-		org.springframework.data.domain.Page<Course> page = courseService.listByPage(pageNum);
-
-		List<Course> courses = page.getContent();
-
-		System.out.println("PageNum = " + pageNum);
-		System.out.println("Total elements= " + page.getNumberOfElements());
-
-		long startCount = (pageNum - 1) * courseService.COURSES_PER_PAGE + 1;
-		long endCount = startCount + courseService.COURSES_PER_PAGE - 1;
-
-		if (endCount > page.getTotalElements()) {
-			endCount = page.getTotalElements();
-		}
-
-		model.addAttribute("currentPage", pageNum);
-		model.addAttribute("startCount", startCount);
-		model.addAttribute("totalPages", page.getTotalPages());
-		model.addAttribute("endCount", endCount);
-		model.addAttribute("totalItems", page.getTotalElements());
-		model.addAttribute("courses", courses);
-
+		List<University>universities = universityService.getAllUniversity();
+		model.addAttribute("universities", universityService.getAllUniversity());
+		model.addAttribute("courses", courseService.getAllCourses());
 		return "courses";
 	}
 
@@ -1503,35 +1481,11 @@ public class AdminController {
 
 	@GetMapping("/admin/posts")
 	public String getPosts(Model model) {
-		return listPostsByPage(1, model);
-	}
-
-	@GetMapping("/admin/posts/page/{pageNum}")
-	public String listPostsByPage(@PathVariable(name = "pageNum") int pageNum, Model model) {
-		org.springframework.data.domain.Page<Post> page = postService.listBlogsPostsByPage(pageNum);
-
-		List<Post> posts = page.getContent();
-
-		System.out.println("PageNum =" + pageNum);
-		System.out.println("Total elements= " + page.getNumberOfElements());
-		System.out.println("Total Pages= " + page.getTotalPages());
-
-		long startCount = (pageNum - 1) * postService.BLOG_POSTS_PER_PAGE + 1;
-		long endCount = startCount + postService.BLOG_POSTS_PER_PAGE - 1;
-
-		if (endCount > page.getTotalElements()) {
-			endCount = page.getTotalElements();
-		}
-
-		model.addAttribute("currentPage", pageNum);
-		model.addAttribute("startCount", startCount);
-		model.addAttribute("totalPages", page.getTotalPages());
-		model.addAttribute("endCount", endCount);
-		model.addAttribute("totalItems", page.getTotalElements());
-		model.addAttribute("posts", posts);
+		model.addAttribute("posts", postService.getAllPosts());
 		return "posts";
-
 	}
+
+
 
 	@GetMapping("/admin/posts/add")
 	public String postsGet(Model model) {
@@ -2244,12 +2198,7 @@ public class AdminController {
 		exporter.export(listOfInstitutes, response);
 	}
 	
-	
-	
-	
-	
-	
-	
+
 	/*Test
 	 * 
 	 * */

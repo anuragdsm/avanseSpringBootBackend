@@ -55,7 +55,7 @@
 					
 				</div>
 				
-					<div class="card shadow mb-4">
+				
 					
 				
 
@@ -77,7 +77,7 @@
 									<div class="form-group">
 										<label for="name">Message</label> <input type="text"
 											class="form-control" required th:field="*{description}" name="description"
-											id="message" placeholder="Enter description">
+											id="message" placeholder="Enter description (80 characters Max)" maxlength=80 data-max-length=80>
 									</div>
 									
 									<button type="submit" class="btn btn-primary" onClick = "onSubmit()">Submit</button>
@@ -104,7 +104,7 @@
 
 
 
-			</div>
+		
 			<!-- End of Content Wrapper -->
 
 		</div>

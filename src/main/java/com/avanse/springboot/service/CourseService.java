@@ -16,7 +16,7 @@ import com.avanse.springboot.repository.CourseRepository;
 @Service
 public class CourseService {
 	
-	public static final int COURSES_PER_PAGE=4;
+//	public static final int COURSES_PER_PAGE=4;
 
 	@Autowired
 	CourseRepository courseRepository;
@@ -28,11 +28,11 @@ public class CourseService {
 	}
 	
 	
-	public Page<Course> listByPage(int pageNum){
-		Pageable pageable = PageRequest.of(pageNum-1, COURSES_PER_PAGE);
-		return courseRepository.findAll(pageable);
-	}
-	
+//	public Page<Course> listByPage(int pageNum){
+//		Pageable pageable = PageRequest.of(pageNum-1, COURSES_PER_PAGE);
+//		return courseRepository.findAll(pageable);
+//	}
+//	
 	
 //	Function to add a course
 	

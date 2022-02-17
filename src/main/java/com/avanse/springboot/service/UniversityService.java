@@ -28,14 +28,18 @@ public class UniversityService {
 		return universityRepository.findAll();
 	}
 	
-	public Page<University>listByPage(int pageNum){
-		Pageable pageable = PageRequest.of(pageNum -1, UNIVERSITTIES_PER_PAGE);		
-		return universityRepository.findAll(pageable);
-	}
-	public Page<University>listByPageInDescending(int pageNum){
-		Pageable pageable = PageRequest.of(pageNum -1, UNIVERSITTIES_PER_PAGE,Sort.by("dateOfCreation").descending());		
-		return universityRepository.findAll(pageable);
-	}
+	
+	/*
+	 * // Manual Pagination to be disable as we are going to use via template
+	 */
+//	public Page<University>listByPage(int pageNum){
+//		Pageable pageable = PageRequest.of(pageNum -1, UNIVERSITTIES_PER_PAGE);		
+//		return universityRepository.findAll(pageable);
+//	}
+//	public Page<University>listByPageInDescending(int pageNum){
+//		Pageable pageable = PageRequest.of(pageNum -1, UNIVERSITTIES_PER_PAGE,Sort.by("dateOfCreation").descending());		
+//		return universityRepository.findAll(pageable);
+//	}
 	
 	
 
