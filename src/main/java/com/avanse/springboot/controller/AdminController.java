@@ -28,6 +28,7 @@ import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -1429,6 +1430,7 @@ public class AdminController {
 		pageDTO.setMetaKeyword(page.getMetaKeyword());
 		pageDTO.setMetaDescription(page.getMetaDescription());
 		model.addAttribute("pageDTO", pageDTO);
+		model.addAttribute("isPageUpdate", "true");
 		return "pagesAdd";
 	}
 
@@ -2203,6 +2205,16 @@ public class AdminController {
 		InstitutesCSVExporter exporter = new InstitutesCSVExporter();
 		exporter.export(listOfInstitutes, response);
 	}
+	
+	
+	
+	@ResponseBody
+	@GetMapping("/admin/api/getAllPagesUrls")
+	public ResponseEntity<?> getAllAddedPageUrls(){
+		List<String[]> allUrisForPages = pageService.getAllUrisForPages();
+		return ResponseEntity.ok(allUrisForPages);
+	}
+	
 	
 
 	/*Test

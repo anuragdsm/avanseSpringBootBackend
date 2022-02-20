@@ -49,7 +49,7 @@ public class PageController {
 	@Autowired
 	UniversityService universityService;
 	
-	@GetMapping("/index")
+	@GetMapping(value={"/index","/"})
 	public String homePage() {
 		return "dynamicPages/index";
 	}

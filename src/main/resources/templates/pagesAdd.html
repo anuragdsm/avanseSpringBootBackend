@@ -68,18 +68,63 @@
 										name="page_title">
 								</div>
 							</div>
+
+
+
+
+
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">Custom
 									URI (Required)</label>
 								<div class="row">
-									<div class="col-sm-3">
-										<input type="text" required th:field="*{customUri}"
+									<div class="col-sm-5">
+										<input onkeyup="checkUriForAvailability()" type="text"
+											required th:field="*{customUri}"
 											class="form-control get_url_name" id="customURL"
-											name="page_title">
+											name="page_title"> <span hidden
+											id="duplicateUriWarning" style="color: red;">URI
+											Already In Use</span>
 									</div>
-									
+
 								</div>
 							</div>
+
+
+							<script type="text/javascript">
+							
+							function checkUriForAvailability() {
+								console.log("Current Value in Box = ", document.getElementById('customURL').value);
+								let http = new XMLHttpRequest();
+								
+								let allPageUris;
+								
+								http.open('GET', "http://"+window.location.href.split('/',3)[2] + "/admin/api/getAllPagesUrls")
+								http.onloadend=()=>{
+									
+									allPageUris = JSON.parse(http.responseText);
+									console.log()
+									let check=false;
+									for(let pageUri of allPageUris) {
+										if(pageUri[1]==document.getElementById('customURL').value) {
+											console.log('Repeated URL Entered');
+											document.getElementById('duplicateUriWarning').hidden=false;
+											document.getElementById('saveButton').disabled=true;
+											check=true;
+										}
+									}
+									if(check==false) {document.getElementById('duplicateUriWarning').hidden=true;document.getElementById('saveButton').disabled=false;}									
+								}
+								
+								http.send();
+								
+								
+							}
+							
+							
+							
+							
+							
+							</script>
 							​
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">Heading
@@ -102,18 +147,74 @@
 								<h6 class="m-0 font-weight-bold text-primary">Banner Image
 									Desktop</h6>
 							</div>
+							<style>
+									.myInnerDiv {
+										position: absolute;
+										top: 50%;
+										left: 50%;
+										transform: translate(-50%, -50%);
+										width: 80%;
+									}
+							</style>
 							​
 							<div class="form-group">
-								<div class="col-sm-10">
+								<div class="col-sm-8">
+									<h5>Banner Image</h5>
+									<div class="custom-file">
+										<div class="row">
+											<div class="col-7">
+												<div class="myInnerDiv">
+												<input type="file" class="custom-file-input"
+													name="bannerImageFile" id="bannerImage"
+													onchange="bannerImageChange(event)"
+													accept="image/jpeg,image/gif,image/x-png,video/*" /> 
+													
+													<label th:if="${isPageUpdate == 'true'}"
+													for="bannerImage" class="custom-file-label">
+														Current Image
+														<span style="color: green;" th:text="${pageDTO.bannerImageName}">
+														</span>
+													</label>
+													<label th:if="${isPageUpdate != 'true'}"
+													for="bannerImage" class="custom-file-label">Choose
+													File</label>
+												</div>
+											</div>
+											<div class="col-5">
+												<img id="bannerImagePreview"
+													th:if="${isPageUpdate == 'true'}"
+													th:src="'/viewPagesAssets/img/userAddedBannerImages/'+${pageDTO.bannerImageName}"
+													height="100px" width="150px"> 
+												<img
+													id="bannerImagePreview" th:if="${isPageUpdate != 'true'}"
+													src="" height="100px" width="150px">
+											</div>
+										</div>
 
-									<img src="" height="100px"> <br /> Delete <input
-										th:field="*{bannerImageName}" type="checkbox"
-										name="image_delete" value="1"> <input type="file"
-										name="bannerImageFile" id="image"
-										accept="image/jpeg,image/gif,image/x-png,video/*">
-									<p class="help-block">Size (width and height) :1920 X 500</p>
+
+										<p class="help-block">Size (width and height) :1920 X 500</p>
+									</div>
 								</div>
+
 							</div>
+							<script type="text/javascript">
+									function bannerImageChange(event) {
+										console.log(event);
+										let fr = new FileReader();
+										fr.readAsDataURL(event.target.files[0]);
+										fr.onloadend=()=>{
+											document.getElementById('bannerImagePreview').src=fr.result;
+										}
+										
+										
+									}
+							
+							
+							</script>
+							
+							
+							
+							
 							​ ​ ​
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">Banner
@@ -227,7 +328,7 @@
 								value="1">
 							<div class="box-footer pull-right">
 								<button type="submit" class="btn btn-success btn-icon-split"
-									onclick="">
+									onclick="" id="saveButton">
 									<span class="icon text-white-50"> <i
 										class="fas fa-check"></i>
 									</span> <span class="text">Save</span>

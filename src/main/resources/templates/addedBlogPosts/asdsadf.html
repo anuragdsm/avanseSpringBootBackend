@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="_LivePagelayout">
+<head>
+<!-- KEYWORDTOFINDGLOBALHEADERINSERTIONCODESPACESTART -->
+
+<!-- KEYWORDTOFINDGLOBALHEADERINSERTIONCODESPACEEND --><title>asdfsadf</title>
+  <meta name="description"  content="   " />
+<script type="text/javascript" src="/viewPagesAssets/js/customGlobalHeader/globalHeader.js"></script>
+</head>
+<body id="page-top">
+
+	<!-- Content Wrapper -->
+	<div layout:fragment="contentPlus"><section class=" pt-3 pb-3" style="background: #02afb3">
+           
+            <div class="container">
+                <div class="breadcrumb_content text-center">
+                    <h1 class="f_p f_500 f_size_40 w_color l_height50 mb_20">asdfasdf</h1>
+                    <p class="f_400 w_color f_size_21 l_height28">sadfasdf</p>
+                </div>
+            </div>
+        </section>
+      
+
+        <section class="blog_area sec_pad">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 blog_sidebar_left">
+                        <div class=" mb_50">
+                            <img id="myFeaturedImage" class="img-fluid" src="/viewPagesAssets/img/userAddedFeaturedImages/2021-08-05.png" alt="">
+                            <div class="blog_content">
+                                <div class="post_date">
+                                    <h2>20 <span>February</span></h2>
+                                </div>
+                                <!-- <div class="entry_post_info">
+                                    By: <a href="#">Admin</a>
+                                    <a href="#">2 Comments</a>
+                                    <a href="#">SaasLand</a>
+                                </div> -->
+                                <!-- <a href="#">
+                                    <h5 class="f_p f_size_20 f_500 t_color mb-30">Lorem Ipsum is simply dummy text of the printing and typesetting</h5>
+                                </a> -->
+                                <p class="f_400 mb-30"><p>asddfasdf</p></p>                                <!--<blockquote class="blockquote mb_40">
+                                    <h6 class="mb-0 f_size_18 l_height30 f_p f_400">Elizabeth ummm I'm telling bodge
+                                        spend a penny say wellies say James Bond, bubble and squeak a such a fibber you
+                                        mug quaint cack what.!</h6>
+                                </blockquote>-->
+                                <div class="post_share">
+                                    <div class="post-nam"> Share: </div>
+                                    <div class="flex">
+                                        <a href="https://www.facebook.com/AvanseEducationLoan"><i class="ti-facebook"></i>Facebook</a>
+                                        <a href="https://twitter.com/AvanseEduLoan"><i class="ti-twitter"></i>Twitter</a>
+                                    </div>
+                                </div>
+                                <!-- <div class="post_tag d-flex">
+                                    <div class="post-nam"> Tags: </div>
+                                    <a href="#">Wheels</a>
+                                    <a href="#">Saasland</a>
+                                    <a href="#">UX/Design</a>
+                                </div>
+                                <div class="media post_author mt_60">
+                                    <img class="rounded-circle" src="img/blog-grid/author_img.png" alt="">
+                                    <div class="media-body">
+                                        <h5 class="f_p t_color3 f_size_18 f_500">Bodrum Salvador</h5>
+                                        <h6 class="f_p f_size_15 f_400 mb_20">Editor</h6>
+                                        <p>Tinkety tonk old fruit Harry gormless morish Jeffrey what a load of rubbish
+                                            burke what a plonker hunky-dory cor blimey guvnor.!</p>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="blog_post">
+                            <div class="widget_title">
+					<h3 class="f_p f_size_20 t_color3">Related Post</h3>
+                                <div class="border_bottom"></div>
+                            </div>
+                            <div class="row">
+                                <div th:each="relatedPost, iStat: ${relatedThreePosts} "  class="col-lg-4 col-sm-6">
+                                   <a th:href="'/viewPost/'+${relatedPost.extractedFileName}">
+                                    <div class="blog_post_item">
+                                        <div class="blog_img">
+                                            <img th:src="'/viewPagesAssets/img/userAddedFeaturedImages/'+${relatedPost.featuredImageName}" alt="">
+                                        </div>
+                                        <div class="blog_content">
+                                            <div class="entry_post_info">
+                                                <h5 th:text="${relatedPost.dateOfPostCreation}">March 14, 2020</h5>
+                                            </div>
+                                                <h5 th:text="${relatedPost.heading}" class="f_p f_size_16 f_500 t_color">Why I say old chap that.</h5>
+                                            <p th:text="${relatedPost.subHeading}" class="f_400 mb-0">Harry bits and bleeding crikey argy-bargy...</p>
+                                        </div>
+                                    </div>
+                                   </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="blog-sidebar">
+                            <div class="widget sidebar_widget widget_categorie mt_60">
+                                <div class="widget_title">
+                                    <h3 class="f_p f_size_20 t_color3">Categories</h3>
+                                    <div class="border_bottom"></div>
+                                </div>
+									<ul th:each ="postCategory, iStat : ${postCategories}" class="list-unstyled">
+                                    <li> <a href="#"><span th:href="${postCategory.name}"th:text="${postCategory.name}">Education</span></a> </li>
+                                    
+                                </ul>                            </div>
+                            <div class="widget sidebar_widget widget_recent_post mt_60">
+                                <div class="widget_title">
+                                    <h3 class="f_p f_size_20 t_color3">Recent posts</h3>
+                                    <div class="border_bottom"></div>
+                                </div>
+								<div class="media post_item" th:each = "post , iStat : ${posts}">
+                                    <!-- <img src="/viewPagesAssets/img/blog-grid/post_1.jpg" alt=""> -->
+                                    <img width = "90px" height = "80" th:src="@{/viewPagesAssets/img/userAddedFeaturedImages/{featuredImageName}(featuredImageName=${post.featuredImageName})}" alt="">
+                                    
+                                    <div class="media-body">
+                                        <a href="#" th:href="@{/viewPost/{extractedFileName}(extractedFileName=${post.extractedFileName})}" >
+                                            <h3 class="f_size_16 f_p f_400"  th:text="${post.postTitle}">Pro</h3>
+                                        </a>
+                                        <div class="entry_post_info">
+                                           
+                                            <a th:href="@{/viewPost/{extractedFileName}(extractedFileName=${post.extractedFileName})}" th:text="${post.dateOfPostCreation}">March 14, 2020</a>
+                                        </div>
+                                    </div>
+                                </div>                            </div>
+                            
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
