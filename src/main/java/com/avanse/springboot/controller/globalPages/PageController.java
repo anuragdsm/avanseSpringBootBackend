@@ -97,7 +97,7 @@ public class PageController {
 	  return "dynamicPages/"+countryName; 
 	  }
 	 
-	@GetMapping("/viewPages/{extractedFileName}")
+	@GetMapping("/admin/viewPages/{extractedFileName}")
 	public ModelAndView getAddedPage(@PathVariable("extractedFileName") String extractedFileName) {
 		ModelAndView modelAndView = new ModelAndView("addedPages/"+extractedFileName);	
 		return modelAndView;		

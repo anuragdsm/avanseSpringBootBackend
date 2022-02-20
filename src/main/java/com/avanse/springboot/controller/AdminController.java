@@ -1158,9 +1158,8 @@ public class AdminController {
 
 		page.setId(pageDTO.getId());
 		page.setPageTitle(pageDTO.getPageTitle().strip());
-		page.setCustomUri1(pageDTO.getCustomUri1().strip());
-		page.setCustomUri2(pageDTO.getCustomUri2().strip());
-		page.setCustomUri3(pageDTO.getCustomUri3().strip());
+		page.setCustomUri(pageDTO.getCustomUri().strip());
+	
 		page.setBannerHeading(pageDTO.getBannerHeading());
 		page.setBannerSubHeading(pageDTO.getBannerSubHeading());
 		page.setMainSection(pageDTO.getMainSection());
@@ -1415,9 +1414,8 @@ public class AdminController {
 		PageDTO pageDTO = new PageDTO();
 		pageDTO.setId(page.getId());
 		pageDTO.setPageTitle(page.getPageTitle());
-		pageDTO.setCustomUri1(page.getCustomUri1());
-		pageDTO.setCustomUri2(page.getCustomUri2());
-		pageDTO.setCustomUri3(page.getCustomUri3());
+		pageDTO.setCustomUri(page.getCustomUri());
+
 		pageDTO.setBannerHeading(page.getBannerHeading());
 		pageDTO.setBannerSubHeading(page.getBannerSubHeading());
 		pageDTO.setPageLink(page.getPageLink());

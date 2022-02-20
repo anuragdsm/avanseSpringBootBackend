@@ -38,9 +38,8 @@ public class Page implements Serializable {
 	
 	private Boolean isPageActive=true;	
 	
-	private String customUri1;
-	private String customUri2;
-	private String customUri3;
+	private String customUri;
+
 	
 	private String fileName;
 	private String extractedFileName;

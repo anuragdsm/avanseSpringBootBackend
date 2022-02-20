@@ -11,9 +11,8 @@ public class PageDTO {
 	private Date dateOfCreation;
 	private Date lastModified;
 	private Boolean isPageActive;
-	private String customUri1;
-	private String customUri2;
-	private String customUri3;
+	private String customUri;
+
 	
 
 	private String fileName;

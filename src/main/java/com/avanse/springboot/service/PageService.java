@@ -63,4 +63,15 @@ public class PageService {
 	 * Auto-generated method stub return pageRepository.findPageBytitle(pageTitle);
 	 * }
 	 */	
+	
+	
+	
+	
+	public List<String[]> getAllUrisForPages() {
+		return pageRepository.getAllUrisForPages();
+	}
+	
+	
+	
+	
 }
