@@ -24,10 +24,12 @@ import com.avanse.springboot.DTO.forms.contactUs.MediaDTO;
 import com.avanse.springboot.model.Page;
 import com.avanse.springboot.model.Post;
 import com.avanse.springboot.model.PostCategory;
+import com.avanse.springboot.service.AwardService;
 import com.avanse.springboot.service.CourseService;
 import com.avanse.springboot.service.PageService;
 import com.avanse.springboot.service.PostCategoryService;
 import com.avanse.springboot.service.PostService;
+import com.avanse.springboot.service.TestimonialService;
 import com.avanse.springboot.service.UniversityService;
 
 @Controller
@@ -49,8 +51,17 @@ public class PageController {
 	@Autowired
 	UniversityService universityService;
 	
+	@Autowired
+	AwardService awardService;
+	
+	@Autowired
+	TestimonialService testimonialService;
+	
+	
 	@GetMapping(value={"/index","/"})
-	public String homePage() {
+	public String homePage(Model model) {
+		model.addAttribute("awards", awardService.getAllAwards() );
+		model.addAttribute("testimonials", testimonialService.getAllTestimonials());
 		return "dynamicPages/index";
 	}
 	@GetMapping("/career")

@@ -113,6 +113,8 @@
 									<tr>
 										<th scope="col">SN</th>
 										<th scope="col">Page Title</th>
+										<th scope ="col">URI</th>
+									
 										<th scope="col">Created on</th>
 										<th scope="col">Last Modified</th>
 
@@ -126,9 +128,10 @@
 
 									<tr th:each="page, iStat : ${pages}">
 										<th scope="row" th:text="${iStat.index + 1}">1</th>
+										<td	th:text="${page.pageTitle}">Home </a></td>
 										<td><a href="#"
-											th:href="@{/viewPages/{extractedFileName}(extractedFileName=${page.extractedFileName})}"
-											th:text="${page.pageTitle}">Home </a></td>
+											th:href="@{${page.customUri}}"
+											th:text="${page.customUri}">Home </a></td>
 
 										<!-- 
 										<td><img src="" height="100px" width="100px"

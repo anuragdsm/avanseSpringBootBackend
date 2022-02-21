@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="_LivePagelayout">
+<head>
+<title></title>
+  <meta name="description"  content="   " />
+  <meta name="keywords"  content="   " />
+<script type="text/javascript" src="/viewPagesAssets/js/customGlobalHeader/globalHeader.js"></script><style>
+* {
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box;
+  font-family: Orbitron; 
+}
+
+body {
+  background-color: #000; 
+}
+
+.clock{
+  color: #58ff25; 
+  font-size: 100px; 
+  letter-spacing: 5px;  
+  display: flex; 
+  justify-content: center; 
+  align-items: center;  
+  height: 100vh; 
+}</style>
+<body id="page-top">
+
+	<!-- Content Wrapper -->
+	<div layout:fragment="contentPlus">
+  <section class="top_avanse_banner_area abroad_top_bg">
+            
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-7">
+                        <div class="h_avaneses_content">
+                            <h2 class="wow fadeInLeft" data-wow-delay="0.4s"> </h2>
+                            <h3 class="wow fadeInLeft" data-wow-delay="0.6s"> </h3>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="h_avanse_img">
+                            <img src="/viewPagesAssets/img/userAddedBannerImages/" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><div class="clock"></div>
+    <!-- Optional JavaScript -->
+<script>"use strict"; 
+
+// arrow function to get clock info 
+let digitalClock = () => {
+  let date = new Date(); 
+  let hrs = date.getHours();
+  let min = date.getMinutes(); 
+  let sec = date.getSeconds(); 
+  let meridiam = 'AM'; 
+  
+  // conditon statement created to determne AM/ PM
+  if(hrs=== 0){
+    hrs = 12; 
+  }else if(hrs > 12) {
+    hrs = hrs - 12; 
+    meridiam = 'PM'; 
+  } 
+  
+  // ternary operator used for time display 0 infront of number
+  hrs = hrs < 10 ? `0${hrs}` : hrs;
+  min = min < 10 ? `0${min}` : min;
+  sec = sec < 10 ? `0${sec}` : sec;
+  
+  let time = `${hrs}:${min}:${sec}${meridiam}`
+document.querySelector('.clock').textContent = time; 
+  setInterval(digitalClock, 1000); // interval set to 1000 mili seconds
+}
+
+digitalClock(); </script>
+ 	</body> 

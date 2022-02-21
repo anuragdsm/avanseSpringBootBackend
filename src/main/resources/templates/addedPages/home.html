@@ -1,148 +1,234 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="_LivePagelayout">
 <head>
-<!-- KEYWORDTOFINDGLOBALHEADERINSERTIONCODESPACESTART -->
+<title></title>
+  <meta name="description"  content="   " />
+  <meta name="keywords"  content="   " />
+<script type="text/javascript" src="/viewPagesAssets/js/customGlobalHeader/globalHeader.js"></script><style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
 
-<!-- KEYWORDTOFINDGLOBALHEADERINSERTIONCODESPACEEND --><script type="text/javascript" src="/viewPagesAssets/js/customGlobalHeader/globalHeader.js"></script><style>
-.banner_bg_top{
-				  background: url('/viewPagesAssets/img/userAddedBannerImages/eGaI0hptma4.jpg'); max-width:100%; height:auto;; 
-				}
+$bg-color: #091921;
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	width: 100vw;
+	background-color: $bg-color;
+}
+
+.container {
+	border-radius: 50%;
+	box-shadow: 100px 100px 300px 100px rgba(0, 0, 0, 0.05);
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	position: relative;
+
+	.pendulum {
+		position: absolute;
+		bottom: 20%;
+		transform: translateY(100%);
+		width: 10px;
+		height: 200px;
+
+		.pendulum-hand {
+			width: 100%;
+			height: 100%;
+			background-color: #ff105e;
+			transform-origin: 0 -50%;
+			animation: pendulum 2s ease-in-out infinite;
+			transition: all 2s;
+			background-size: cover;
+			background-position: center;
+
+			&::before {
+				content: "";
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+
+			&::after {
+				content: "";
+				width: 40px;
+				height: 40px;
+				border-radius: 50%;
+				position: absolute;
+				background-color: #ff105e;
+				bottom: 0;
+				left: 50%;
+				transform: translate(-50%, calc(100% - 5px));
+			}
+		}
+	}
+}
+
+@keyframes pendulum {
+	0% {
+		transform: rotateZ(4deg);
+	}
+
+	50% {
+		transform: rotateZ(-4deg);
+	}
+
+	100% {
+		transform: rotateZ(4deg);
+	}
+}
+
+.clock {
+	background-image: url("https://user-images.githubusercontent.com/5783354/152565076-708e01fd-f639-4713-ab43-d4f019c8ffa7.png");
+	background-color: $bg-color;
+	background-size: cover;
+	width: 350px;
+	height: 350px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 4px solid $bg-color;
+	box-shadow: 0 -15px 15px rgba(255, 255, 255, 0.05), inset 0 -15px 15px rgba(255, 255, 255, 0.05),
+		0 15px 15px rgba(0, 0, 0, 0.3), inset 0 15px 15px rgba(0, 0, 0, 0.3);
+	z-index: 10;
+
+	&::before {
+		content: "";
+		width: 15px;
+		height: 15px;
+		background-color: #fff;
+		position: absolute;
+		border-radius: 50%;
+		z-index: 999999;
+	}
+
+	:is(.hour, .minute, .second) {
+		position: absolute;
+		display: flex;
+		justify-content: center;
+	}
+
+	:is(.hour .hour-hand, .minute .minute-hand, .second .second-hand) {
+		position: relative;
+		display: flex;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+	}
+
+	:is(.hour .hour-hand, .minute .minute-hand, .second .second-hand)::before {
+		content: "";
+		position: absolute;
+		border-radius: 6px 6px 0 0;
+	}
+
+	.hour {
+		width: 160px;
+		height: 160px;
+
+		.hour-hand {
+			&::before {
+				width: 8px;
+				height: 80px;
+				background-color: #ff105e;
+				z-index: 10;
+			}
+		}
+	}
+
+	.minute {
+		width: 190px;
+		height: 190px;
+
+		.minute-hand {
+			width: 4px;
+			height: 90px;
+			background-color: #fff;
+			z-index: 11;
+		}
+	}
+
+	.second {
+		width: 230px;
+		height: 230px;
+
+		.second-hand {
+			width: 2px;
+			height: 150px;
+			background-color: #fff;
+			z-index: 12;
+		}
+	}
+}
 </style>
-</head>
 <body id="page-top">
 
 	<!-- Content Wrapper -->
-	<div layout:fragment="contentPlus"><section class="top_avanse_banner_area banner_bg_top ">
+	<div layout:fragment="contentPlus">
+  <section class="top_avanse_banner_area abroad_top_bg">
             
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-7">
                         <div class="h_avaneses_content">
-                            <h2 class="wow fadeInLeft" data-wow-delay="0.4s"><span>sdfgdfsg </span></h2>
-                            <h2 class="wow fadeInLeft" data-wow-delay="0.6s">dsfg dfsg dfg </h2>
+                            <h2 class="wow fadeInLeft" data-wow-delay="0.4s"> erte</h2>
+                            <h3 class="wow fadeInLeft" data-wow-delay="0.6s"> erterte</h3>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="h_avanse_img">
+                            <img src="/viewPagesAssets/img/userAddedBannerImages/" alt="">
                         </div>
                     </div>
                 </div>
             </div>
-        </section><p>asdfsf sadfa sfds asd asfd&nbsp;</p><footer class="footer_area f_bg">
-        <div class="footer_cta fcta_bg">
-           <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 text-lg-left text-sm-center">
-                        <img src="/viewPagesAssets/img/logo.png">
-                    </div>
-                    <div class="col-lg-6 text-lg-center text-sm-center">
-                            <h2 class="">Enroll to transform your Lives</h2>
-                            <p class="f_size_22"> Get a hassle free education loan is 3 days</p>
-                    </div>
-                    <div class="col-lg-3 text-lg-right text-sm-center">
-                        <a href="" class="btn_yellow ">Apply Now</a>
-                    </div>
-                </div>
-           </div>
-        </div>
-        <div class="footer_top">
-            <div class="container">
-                <div class="row">
-                    
-                    <div class="col-lg-3 col-md-6">
-                        <div class="f_widget about-widget  wow fadeInLeft" data-wow-delay="0.4s"
-                            style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInLeft;">
-                            <h3 class="f-title f_500 text-white f_size_18 mb_40">Education Loan </h3>
-                            <ul class="list-unstyled f_list">
-                                <li><a href="#">Avanse Education Loans</a></li>
-                                <li><a href="#">Study in India Education Loan</a></li>
-                                <li><a href="#">Study Abroad Education Loan</a></li>
-                                <li><a href="#">Executive Education Loan</a></li>
-                                <li><a href="#">Student Loan Refinancing</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="f_widget about-widget  wow fadeInLeft" data-wow-delay="0.4s"
-                            style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInLeft;">
-                            <h3 class="f-title f_500 text-white f_size_18 mb_40">Calculator</h3>
-                            <ul class="list-unstyled f_list">
-                                <li><a href="#">Course Expense Calculator</a></li>
-                                <li><a href="#">Eligibility Calculator</a></li>
-                                <li><a href="#">Eligibility Calculator</a></li>
-                                <li><a href="#">Education Loan Repayment Calculator</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="f_widget about-widget  wow fadeInLeft" data-wow-delay="0.6s"
-                            style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInLeft;">
-                            <h3 class="f-title f_500 text-white f_size_18 mb_40">Company</h3>
-                            <ul class="list-unstyled f_list">
-                                    <li><a href="#">About Avanse</a></li>
-                                    <li><a href="#">Career</a></li>
-                                    <li><a href="#">Investors</a></li>
-                                    <li><a href="#">Media Room</a></li>
-                                    <li><a href="#">Responsible Lending</a></li>
-                                    <li><a href="#">Sitemap</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="f_widget about-widget  wow fadeInLeft" data-wow-delay="0.8s"
-                            style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInLeft;">
-                            <h3 class="f-title f_500 text-white f_size_18 mb_40">Resources </h3>
-                            <ul class="list-unstyled f_list">
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">Good Credit</a></li>
-                                <li><a href="#">FAQ</a></li>
-                                <li><a href="#">Pay Online</a></li>
-                                <li><a href="#">WhatsApp Communication</a></li>
-                                <li><a href="#">Ex-gratia FAQs</a></li>
-                                <li><a href="#">Sarfaesi Notice</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer_bottom">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-8 col-md-8 col-sm-12">
-                        <p class="mb-2 f_300">Copyright © 2021 Avanse Financial Services Ltd. All Rights Reserved .       <a class="ml-4" href="https://www.digistreetmedia.com/" target="_blank">Site Credits</a></p>
-                        <p class="mb-2 f_300">CIN : U67120MH1992PLC068060</p>
-                    </div>
-                    
-                    <div class="col-lg-4 col-md-4 col-sm-12">
-                        <div class="f_social_icon_two text-right mb-2">
-                            <a href="#"><i class="ti-facebook"></i></a>
-                            <a href="#"><i class="ti-twitter-alt"></i></a>
-                            <a href="#"><i class="ti-linkedin"></i></a>
-                            <a href="#"><i class="ti-instagram"></i></a>
-                        </div>
-                        <p class="mb-2 f_300 text-lg-right">Phone support: 1800-266-0200</p>
-                    </div>
-                    <div class="col-lg-12">
-                        <p>Disclaimer | Base Lending Rate | Privacy Policy | Terms & Conditions | Ombudsman Scheme | Customer Complaints | Moratorium Policy | WhatsApp T&C | Communication Policy | Digital Partners</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-        <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="/viewPagesAssets/js/jquery-3.6.0.min.js"></script>
-    <script src="/viewPagesAssets/js/propper.js"></script>
-    <script src="/viewPagesAssets/js/bootstrap.min.js"></script>
-    <script src="/viewPagesAssets/vendors/wow/wow.min.js"></script>
-    <script src="/viewPagesAssets/vendors/sckroller/jquery.parallax-scroll.js"></script>
-    <script src="/viewPagesAssets/vendors/owl-carousel/owl.carousel.min.js"></script>
-    <script src="/viewPagesAssets/vendors/imagesloaded/imagesloaded.pkgd.min.js"></script>
-    <script src="/viewPagesAssetsvendors/isotope/isotope-min.js"></script>
-    <script src="/viewPagesAssets/vendors/magnify-pop/jquery.magnific-popup.min.js"></script>
-    <script src="/viewPagesAssets/vendors/counterup/jquery.counterup.min.js"></script>
-    <script src="/viewPagesAssets/vendors/counterup/jquery.waypoints.min.js"></script>
-    <script src="/viewPagesAssets/vendors/counterup/appear.js"></script>
-    <script src="/viewPagesAssets/vendors/circle-progress/circle-progress.js"></script>
-    <script src="/viewPagesAssets/vendors/scroll/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="/viewPagesAssets/js/plugins.js"></script>
-    <script src="/viewPagesAssets/js/main.js"></script>
+        </section><div class="container">
+			<div class="clock">
+				<div class="hour">
+					<div class="hour-hand"></div>
+				</div>
+				<div class="minute">
+					<div class="minute-hand"></div>
+				</div>
+				<div class="second">
+					<div class="second-hand"></div>
+				</div>
+			</div>
+
+			<div class="pendulum">
+				<div class="pendulum-hand"></div>
+			</div>
+		</div>
+    <!-- Optional JavaScript -->
+<script>
+const deg = 6;
+const hour = document.querySelector(".hour");
+const minute = document.querySelector(".minute");
+const second = document.querySelector(".second");
+
+function rotate() {
+    const date = new Date();
+
+    let hh = date.getHours() * 30;
+    let mm = date.getMinutes() * deg;
+    let ss = date.getSeconds() * deg;
+
+    hour.style.transform = `rotateZ(${hh + mm / 12}deg)`;
+    minute.style.transform = `rotateZ(${mm}deg)`;
+    second.style.transform = `rotateZ(${ss}deg)`;
+}
+
+setInterval(rotate, 1000);
+
+
+</script>
  	</body> 

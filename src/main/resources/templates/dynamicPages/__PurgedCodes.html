@@ -1,0 +1,61 @@
+<script>
+		
+		let urlForAllAwards = "http://"+window.location.href.split('/',3)[2]+ "/public/api/getAllAwards";
+		console.log(urlForAllAwards);
+		let httpForAward = new XMLHttpRequest();
+		let listOfAwards;
+		let itemContainer = document.getElementById('items');
+		itemContainer.innerHTML="";
+		httpForAward.open('GET', urlForAllAwards);
+		console.log('Hi');
+		
+		httpForAward.onloadend = () =>{
+			console.log('CL~Onload Starting');
+			listOfAwards= JSON.parse(httpForAward.responseText);
+			console.log(listOfAwards);
+			
+			for(let award of listOfAwards){
+				itemContainer.innerHTML+=
+					'<div class="item" >	<div class="award_section">	<div class="award_info"><span>'+award.description+'</span></div></div></div>';
+			}
+			
+			
+			
+		}
+		
+		httpForAward.send();
+		
+		
+		</script>
+		
+		
+<!-- Index Footer  -->
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script
+		src="/viewPagesAssets/https://unpkg.com/react@16.14.0/umd/react.production.min.js"></script>
+	<script src="/viewPagesAssets/js/jquery-3.6.0.min.js"></script>
+	<script src="/viewPagesAssets/js/propper.js"></script>
+	<script src="/viewPagesAssets/js/bootstrap.min.js"></script>
+	<script src="/viewPagesAssets/vendors/wow/wow.min.js"></script>
+	<script
+		src="/viewPagesAssets/vendors/sckroller/jquery.parallax-scroll.js"></script>
+	<script src="/viewPagesAssets/vendors/owl-carousel/owl.carousel.min.js"></script>
+	<script
+		src="/viewPagesAssets/vendors/imagesloaded/imagesloaded.pkgd.min.js"></script>
+	<script src="/viewPagesAssets/vendors/isotope/isotope-min.js"></script>
+	<script
+		src="/viewPagesAssets/vendors/magnify-pop/jquery.magnific-popup.min.js"></script>
+	<script
+		src="/viewPagesAssets/vendors/bootstrap-selector/js/bootstrap-select.min.js"></script>
+	<script
+		src="/viewPagesAssets/vendors/nice-select/jquery.nice-select.min.js"></script>
+	<script
+		src="/viewPagesAssets/vendors/scroll/jquery.mCustomScrollbar.concat.min.js"></script>
+	<script src="/viewPagesAssets/js/plugins.js"></script>
+	<script src="/viewPagesAssets/js/main.js"></script>
+	<script src="/viewPagesAssets/js/calculators.js"></script>
+</body>
+
+</html>		
