@@ -499,7 +499,7 @@
 								</div>
 								<div class="tab-pane fade" id="eduinst" role="tabpanel"
 									aria-labelledby="eduinst-tab">
-									<form th:action="@{/viewDynamicPages/contactus/add}"
+									<form th:action="@{/viewDynamicPages/thankyou}"
 										th:object="${instituteDTO}" class="contact_form_box"
 										method="post" id="eduinstcontactForm" novalidate="novalidate">
 										<div class="row">
@@ -571,7 +571,7 @@
 								</div>
 								<div class="tab-pane fade" id="media" role="tabpanel"
 									aria-labelledby="media-tab">
-									<form action="#" class="contact_form_box" method="post"
+									<form th:action="@{/viewDynamicPages/thankyou}" th:object="${mediaDTO}" class="contact_form_box" method="post"
 										id="mediacontactForm" novalidate="novalidate">
 										<div class="row">
 											<div class="col-lg-6">
@@ -579,36 +579,36 @@
 											
 												<div class="form-group text_box">
 													<input 
-													type="text" id="name" name="name" 
+													type="text" id="name" name="name" th:field = "*{name}"
 														placeholder="Your Name">
 												</div>
 											</div>
 											<div class="col-lg-6">
 												<div class="form-group text_box">
-													<input type="text" id="mediahouse" name="mediahouse" 
+													<input type="text" id="mediahouse" name="mediahouse" th:field="*{mediaHouse}"
 														placeholder="Name of the Media House You Represent">
 												</div>
 											</div>
 											<div class="col-lg-6">
 												<div class="form-group text_box">
-													<input type="text" id="number" name="number" 
+													<input type="text" id="number" name="number"  th:field="*{phoneNumber}"
 														placeholder="Contact Number">
 												</div>
 											</div>
 											<div class="col-lg-6">
 												<div class="form-group text_box">
-													<input type="text" name="email" id="email" 
+													<input type="text" name="email" id="email" th:field= "*{emailId}" 
 														placeholder="E-mail ID">
 												</div>
 											</div>
 											<div class="col-lg-6">
 												<div class="form-group text_box">
-													<input type="text" id="city"  name="city" placeholder="City">
+													<input type="text" id="city"  name="city" th:field="*{city}" placeholder="City">
 												</div>
 											</div>
 											<div class="col-lg-6">
 												<div class="form-group text_box">
-													<input type="text" id="subject" name="subject-line" 
+													<input type="text" id="subject" th:field= "*{subjectLine}" name="subject-line" 
 														placeholder="Subject Line">
 												</div>
 											</div>
@@ -625,8 +625,11 @@
 								
 								<div class="tab-pane " id="investors" role="tabpanel"
 									aria-labelledby="investors-tab">
-									<form action="#" class="contact_form_box" method="post"
+									<form th:action="@{/viewDynamicPages/thankyou}" class="contact_form_box" method="post"
 										id="investorscontactForm" novalidate="novalidate">
+										
+									<input type="text" hidden name="leadType" value="institute">
+										
 										<div class="row">
 
 											<div class="col-lg-6">

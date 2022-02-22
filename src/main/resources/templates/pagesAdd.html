@@ -57,8 +57,8 @@
 						<form th:action="@{/admin/pages/add}" class="form-horizontal"
 							method="post" th:object="${pageDTO}"
 							enctype="multipart/form-data">
-							<input type="hidden" name="id" th:field="*{id}"> <input
-								type="hidden" required="" name="old_slug" value=""> ​
+							<input type="hidden" name="id" th:field="*{id}">
+								<input hidden name="pageUpdateCheck" th:if="${isPageUpdate == 'true'}" type="text" value="true">​
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">Page
 									Title (Required)</label>

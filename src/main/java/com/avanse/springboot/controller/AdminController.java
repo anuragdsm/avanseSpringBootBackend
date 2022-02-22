@@ -1124,6 +1124,7 @@ public class AdminController {
 //	@ResponseBody
 	@PostMapping(path = "/admin/pages/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public String pagesAddPost(@ModelAttribute("pageDTO") PageDTO pageDTO, HttpServletRequest request,
+			@RequestParam(value = "pageUpdateCheck",required = false) String pageUpdateCheck,
 			@RequestParam(name = "bannerImageFile", required = false) MultipartFile bannerImageFile) {
 
 		/*
@@ -1164,9 +1165,13 @@ public class AdminController {
 		page.setBannerHeading(pageDTO.getBannerHeading());
 		page.setBannerSubHeading(pageDTO.getBannerSubHeading());
 		page.setMainSection(pageDTO.getMainSection());
-		if (bannerImageFile != null) {
+		if (bannerImageFile != null && !bannerImageFile.isEmpty()) {
 			page.setBannerImageName(bannerImageFile.getOriginalFilename());
-		}
+		} 
+//		else if(bannerImageFile == null && pageUpdateCheck != null && pageUpdateCheck.equals("true")) {
+//			System.out.println("Check 2 ----------------------------------------->");
+//			page.setBannerImageName(pageService.getPageById(pageDTO.getId()).get().getBannerImageName());
+//		}
 		page.setBannerImageAlt(pageDTO.getBannerImageAlt());
 		page.setCssCode(pageDTO.getCssCode());
 		page.setJsCode(pageDTO.getJsCode());
@@ -1516,7 +1521,7 @@ public class AdminController {
 
 		Post post;
 
-		if (featuredImageFile != null) {
+		if (featuredImageFile != null && !featuredImageFile.isEmpty()) {
 			try {
 				File myFeaturedImageFile = new File(
 						newFeaturedImageAddDir + "\\" + featuredImageFile.getOriginalFilename());
@@ -1547,14 +1552,15 @@ public class AdminController {
 		post.setHeading(postDTO.getHeading());
 		post.setSubHeading(postDTO.getSubHeading());
 		post.setMainSection(postDTO.getMainSection());
-		if (featuredImageFile != null) {
+		if (featuredImageFile != null && !featuredImageFile.isEmpty()) {
 			post.setFeaturedImageName(featuredImageFile.getOriginalFilename());
-		} else if (isUpdating != null) {
-			System.out.println(
-					"Image test edit ---> " + postService.getPostById(postDTO.getId()).get().getFeaturedImageName()
-							+ "PostDTO id = " + postDTO.getId());
-			post.setFeaturedImageName(postService.getPostById(postDTO.getId()).get().getFeaturedImageName());
-		}
+		} 
+//		else if (isUpdating != null) {
+//			System.out.println(
+//					"Image test edit ---> " + postService.getPostById(postDTO.getId()).get().getFeaturedImageName()
+//							+ "PostDTO id = " + postDTO.getId());
+//			post.setFeaturedImageName(postService.getPostById(postDTO.getId()).get().getFeaturedImageName());
+//		}
 //		post.setFeaturedImageName(postDTO.getFeaturedImageName());
 		post.setFeaturedImageAltText(postDTO.getFeaturedImageAltText());
 		post.setMetaTitle(postDTO.getMetaTitle());
@@ -1912,6 +1918,8 @@ public class AdminController {
 		postDTO.setMetaTitle(post.getMetaTitle());
 //		postDTO.setMetaDescription(post.getMetaTitle());
 		postDTO.setMetaDescription(post.getMetaDescription());
+		
+		model.addAttribute("isPostUpdate", "true");
 
 		model.addAttribute("postDTO", postDTO);
 		model.addAttribute("postCategories", postCategoryService.getAllPostCategories());
