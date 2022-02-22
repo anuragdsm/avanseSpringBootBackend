@@ -9,14 +9,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.avanse.springboot.DTO.forms.applyNow.ApplyNowGeneralDTO;
+import com.avanse.springboot.DTO.forms.applyNow.ETutoringDTO;
 import com.avanse.springboot.DTO.forms.applyNow.EducationInstitutionLoanDTO;
 import com.avanse.springboot.DTO.forms.applyNow.ExecutiveEducationLoanDTO;
+import com.avanse.springboot.DTO.forms.applyNow.PartnerWithUsDTO;
 import com.avanse.springboot.model.forms.applyNow.ApplyNowGeneral;
+import com.avanse.springboot.model.forms.applyNow.ETutoring;
 import com.avanse.springboot.model.forms.applyNow.EducationInstitutionLoan;
 import com.avanse.springboot.model.forms.applyNow.ExecutiveEducationLoan;
+import com.avanse.springboot.model.forms.applyNow.PartnerWithUs;
 import com.avanse.springboot.service.applyNow.ApplyNowGeneralService;
+import com.avanse.springboot.service.applyNow.ETutoringService;
 import com.avanse.springboot.service.applyNow.EducationInstitutionLoanService;
 import com.avanse.springboot.service.applyNow.ExecutiveEducationLoanService;
+import com.avanse.springboot.service.applyNow.PartnerWithUsService;
 
 @Controller
 public class ApplyNowAllController {
@@ -29,6 +35,13 @@ public class ApplyNowAllController {
 	
 	@Autowired
 	EducationInstitutionLoanService educationInstitutionLoanService;
+	
+	@Autowired
+	ETutoringService eTutoringService;
+	
+	@Autowired
+	PartnerWithUsService partnerWithUsService;
+	
 	
 	@GetMapping("/apply-now")
 	public String applyNowGeneralGet(Model model){
@@ -52,6 +65,23 @@ public class ApplyNowAllController {
 		applyNowGeneral.setPermission(applyNowGeneralDTO.getPermission());
 		applyNowGeneral.setTimeOfStudy(applyNowGeneralDTO.getTimeOfStudy());
 		applyNowGeneralService.addApplyNowGeneral(applyNowGeneral);
+		
+		return "dynamicPages/thankyou";
+	}
+	
+	
+	@PostMapping("/apply-for-e-tutoring/add")
+	public String eTutoringAddPost(@ModelAttribute("eTutoringDTO") ETutoringDTO eTutoringDTO) {
+		ETutoring eTutoring = new ETutoring();
+		eTutoring.setFirstName(eTutoringDTO.getFirstName());
+		eTutoring.setLastName(eTutoringDTO.getLastName());
+		eTutoring.setCity(eTutoringDTO.getCity());
+		eTutoring.setCourseName(eTutoringDTO.getCourseName());
+		eTutoring.setCourseProvider(eTutoringDTO.getCourseProvider());
+		eTutoring.setEmail(eTutoringDTO.getEmail());
+		eTutoring.setLoanAmount(eTutoringDTO.getLoanAmount());
+		eTutoring.setPhoneNumber(eTutoringDTO.getPhoneNumber());
+		eTutoringService.addETutoring(eTutoring);
 		
 		return "dynamicPages/thankyou";
 	}
@@ -87,6 +117,24 @@ public class ApplyNowAllController {
 		
 //		executiveEducationLoanService.addExecutiveEducationLoan(executiveEducationLoan);
 		return "dynamicPages/thankyou";
+	}
+	
+	
+	@PostMapping("/apply-for-partner-with-us/add")
+	public String partnerWithUssAddPost(@ModelAttribute("partnerWithUsDTO") PartnerWithUsDTO partnerWithUsDTO) {
+		
+		PartnerWithUs partnerWithUs = new PartnerWithUs();
+		partnerWithUs.setFirstName(partnerWithUsDTO.getFirstName());
+		partnerWithUs.setLastName(partnerWithUsDTO.getLastName());
+		partnerWithUs.setEmail(partnerWithUsDTO.getEmail());
+		partnerWithUs.setCity(partnerWithUsDTO.getCity());
+		partnerWithUs.setMobileNumber(partnerWithUsDTO.getMobileNumber());
+		partnerWithUs.setNameOfFirm(partnerWithUsDTO.getNameOfFirm());
+		partnerWithUs.setPartnerType(partnerWithUsDTO.getPartnerType());
+		
+		partnerWithUsService.addPartnerWithUsLead(partnerWithUs);
+		return "dynamicPages/thankyou";
+		
 	}
 	
 	

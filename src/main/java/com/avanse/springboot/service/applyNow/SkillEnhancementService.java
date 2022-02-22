@@ -19,10 +19,7 @@ public class SkillEnhancementService {
 	public static final int SKILL_ENHANCEMENT_LEADS_PER_PAGE = 4;
 	
 	public List<SkillEnhancement> getAllSkillEnhancementsLeads(){
-		
 		return skillEnhancementRepository.findAll();
-		
-		
 	}
 	
 	public Page<SkillEnhancement> listSkillEnhancementLeadsByPage(int pageNum){

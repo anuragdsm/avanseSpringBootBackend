@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.avanse.springboot.DTO.forms.applyNow.ApplyNowGeneralDTO;
+import com.avanse.springboot.DTO.forms.applyNow.ETutoringDTO;
 import com.avanse.springboot.DTO.forms.applyNow.EducationInstitutionLoanDTO;
 import com.avanse.springboot.DTO.forms.applyNow.ExecutiveEducationLoanDTO;
+import com.avanse.springboot.DTO.forms.applyNow.PartnerWithUsDTO;
 import com.avanse.springboot.DTO.forms.contactUs.CustomerDTO;
 import com.avanse.springboot.DTO.forms.contactUs.InstituteDTO;
 import com.avanse.springboot.DTO.forms.contactUs.InvestorDTO;
@@ -114,30 +116,77 @@ public class PageController {
 		return modelAndView;		
 	}
 	
-	@GetMapping("/viewDynamicPages/{extractedFileName}")
-	public ModelAndView getDynamicPage(@PathVariable("extractedFileName") String extractedFileName, Model model) {
-		ModelAndView modelAndView = new ModelAndView("dynamicPages/"+extractedFileName);
-		
-		if(extractedFileName.equals("blog")) {
-			model.addAttribute("postCategories", postCategoryService.getAllPostCategories());
+	@GetMapping("/blog")
+	public ModelAndView getBlogPage(Model model) {
+		ModelAndView modelAndView = new ModelAndView("dynamicPages/blog");
+		model.addAttribute("postCategories", postCategoryService.getAllPostCategories());
 		model.addAttribute("posts", postService.getAllPosts());
-		}
+		return modelAndView;
+	}
 	
+	
+	@GetMapping("/contact-us")
+	public ModelAndView getContactUsCustomer(Model model) {
+		ModelAndView modelAndView = new ModelAndView("dynamicPages/contactus");
 		model.addAttribute("customerDTO", new CustomerDTO());
 		model.addAttribute("instituteDTO", new InstituteDTO());
 		model.addAttribute("investorDTO", new InvestorDTO());
 		model.addAttribute("mediaDTO", new MediaDTO());
-//		model.addAttribute("applyNowGeneralDTO", new ApplyNowGeneralDTO());
-		model.addAttribute("executiveEducationLoanDTO", new ExecutiveEducationLoanDTO());
-		model.addAttribute("educationInstitutionLoanDTO", new EducationInstitutionLoanDTO());
-		return modelAndView;		
+		return modelAndView;
 	}
 	
+	@GetMapping("/apply-for-education-institution-loan")
+	public ModelAndView getEducationInstitutionLoan(Model model) {
+		ModelAndView modelAndView =  new ModelAndView("dynamicPages/education-institution-loan");
+		model.addAttribute("educationInstitutionLoanDTO", new EducationInstitutionLoanDTO());
+		return modelAndView;
+		
+	}
+	
+	
+	@GetMapping("/apply-for-executive-education-loan")
+	public ModelAndView getExecutiveEducationLoan(Model model) {
+		ModelAndView modelAndView = new ModelAndView("dynamicPages/executive-education-loan");
+		model.addAttribute("executiveEducationLoanDTO", new ExecutiveEducationLoanDTO());
+		return modelAndView;
+	}
+	
+	
+	
+	@GetMapping("/apply-for-e-tutoring")
+	public ModelAndView getApplyForEtutoringPage(Model model) {
+		ModelAndView modelAndView = new ModelAndView("dynamicPages/apply-for-e-tutoring");
+		model.addAttribute("eTutoringDTO", new ETutoringDTO());
+		return modelAndView;
+	}
+	
+	
+	@GetMapping("/apply-for-partner-with-us")
+	public ModelAndView getPartnerWithUsPage(Model model) {
+		ModelAndView modelAndView = new ModelAndView("dynamicPages/apply-for-partner-with-us");
+		model.addAttribute("partnerWithUsDTO", new PartnerWithUsDTO());
+		return modelAndView;
+	}
+	
+	
+	
+	
+	
+	
+	
 	/*
-	 * private String code(String pageName) { Page page =
-	 * pageService.findPageByFilename(pageName); String consolidateCode =
-	 * page.getConsolidatedHTMLCode();
-	 * System.out.println("THE CONSOLIDATED CODE IS " + consolidateCode); return
-	 * consolidateCode; }
+	 * @GetMapping("/viewDynamicPages/{extractedFileName}") public ModelAndView
+	 * getDynamicPage(@PathVariable("extractedFileName") String extractedFileName,
+	 * Model model) { ModelAndView modelAndView = new
+	 * ModelAndView("dynamicPages/"+extractedFileName);
+	 * 
+	 * // model.addAttribute("applyNowGeneralDTO", new ApplyNowGeneralDTO());
+	 * model.addAttribute("executiveEducationLoanDTO", new
+	 * ExecutiveEducationLoanDTO()); //
+	 * model.addAttribute("educationInstitutionLoanDTO", new
+	 * EducationInstitutionLoanDTO()); return modelAndView;
+	 * 
+	 * }
+	 * 
 	 */
 }

@@ -223,8 +223,9 @@
 								class="learn_btn_two c_violet">Read More <i
 								class="ti-arrow-right"></i></a>
 						</div>
-
 					</div>
+					
+					
 					<div class="col-lg-4 mb-5 text-center">
 						<div class=" home-offer-box py-5 pl-3 pr-3">
 							<img src="/viewPagesAssets/img/icon/loan-home.png">
@@ -237,10 +238,8 @@
 								class="learn_btn_two c_violet">Read More <i
 								class="ti-arrow-right"></i></a>
 						</div>
-
 					</div>
-
-
+					
 				</div>
 
 			</div>
@@ -567,7 +566,7 @@
 									<div class="media">
 										<div class="img">
 											<img
-												src="/viewPagesAssets/img/testimonials/Nikhil-Walimbe.jpg"
+												th:src="@{${'/images/testimonialImages/' + testimonial.picFileName}}"
 												alt="">
 										</div>
 										<div class="media-body">
@@ -588,8 +587,6 @@
 							</div>
 						</div>
 					</div>
-
-
 				</div>
 				<div class="text-center">
 					<a href="testimonials.html"
@@ -612,9 +609,7 @@
 				<div class="row py-5">
 					<div class="col-lg-12">
 						<div class="recognition_carousel owl-carousel">
-
 							<div th:each="award, iStat : ${awards}">
-
 								<div class="item">
 									<div class="award_section">
 										<div class="award_info">
@@ -623,45 +618,11 @@
 												experience</span>
 										</div>
 									</div>
-
 								</div>
 							</div>
-
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
-
-
-		<!-- My Awards API Test-->
-
-
-
-
-
-		<section class="recognitionaward-section bg_color sec_pad">
-			<div class="container">
-				<div class="sec_title text-center mb_50 wow fadeInUp">
-					<h2 class="f_size_40 f_500  t_color3 l_height45">Awards &
-						Accolades</h2>
-					<p>
-						Have a look at some of our achievements! We’re proud to count the
-						following awards <br />and certifications among our achievements.
-					</p>
-				</div>
-				<div class="row py-5">
-					<div class="col-lg-12">
-						<div id="items" class="recognition_carousel owl-carousel"></div>
-					</div>
-				</div>
-			</div>
-
-
-
-
-		</section>
-
-
-
 	</div>
